@@ -1,8 +1,8 @@
 angular.module('vHackersModule').controller('calificacionCtrl', calificacionCtrl);
 
-calificacionCtrl.$inject = ['$scope','NgTableParams','herramientaEvaluacionServicio'];
+calificacionCtrl.$inject = ['$scope','$state','NgTableParams','herramientaEvaluacionServicio'];
 
-function calificacionCtrl ($scope, NgTableParams,herramientaEvaluacionServicio){
+function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServicio){
   var ctrl = this;
   ctrl.titulo = "Exposición de Arquitectura de microservicios";
   ctrl.retroalimentacion = "";
@@ -37,7 +37,26 @@ function calificacionCtrl ($scope, NgTableParams,herramientaEvaluacionServicio){
   *================================================
   */
   ctrl.enviarCalificacion = function() {
-    herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+    swal({
+      title: "¿Está seguro de que quieres guardar la configuración actual?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        $state.go('principal');
+        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+      }
+    });
   };
 
   /*===============================================
