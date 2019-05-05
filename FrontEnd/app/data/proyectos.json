@@ -1,0 +1,18 @@
+[
+  {
+    "id": "123455",
+    "nombre": "Proyecto Sistema de Ventas",
+    "fechaCreacion": 1555822800000,
+    "fechaInicio": 1555822800000,
+    "fechaFin": 1555822800000,
+    "ponderacion": 5
+  },
+  {
+    "id": "123456",
+    "nombre": "Proyecto Web Scraper",
+    "fechaCreacion": 1555822800000,
+    "fechaInicio": 1555822800000,
+    "fechaFin": 1555822800000,
+    "ponderacion": 5
+  }
+]

@@ -1,0 +1,70 @@
+<section id="main">
+  <div ng-controller="profesorCursoCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2> {{ctrl.nombreCurso}} </h2>
+      </div>
+      <div class="col-md-4">
+        <div class="card ">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-8">
+                <h2> Acciones </h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="col-md-12">
+              <div class="<col-md-12 m-t-50>">
+                <div class="row">
+                  <div class="col-md-12">
+                    <button ng-click = "ctrl.swalProyecto()" ><i class="fa fa-plus"></i> Crear Proyecto</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 m-t-30">
+                    <button ng-click = "ctrl.swalEntregable()" ><i class="fa fa-plus"></i> Crear Entregable</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+          <div class="card ">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-md-12">
+                  <h2> Proyectos </h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li ng-repeat="proyecto in ctrl.proyectosLista">
+                  {{proyecto}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card ">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-md-12">
+                  <h2> Entregables </h2>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li ng-repeat="entregable in ctrl.entregablesLista">
+                  {{entregable}}
+                </li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>

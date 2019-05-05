@@ -1,0 +1,28 @@
+[
+  {
+    "id": "",
+    "nombres": "Carlos Guillermo",
+    "codigo": "20101652",
+    "apellidos": "Carrillo Agollo",
+    "correo": "carlosg.carrillo@pucp.pe",
+    "especialidad": {
+      "id": "",
+      "codigo": "",
+      "nombre": "Ingenieria Informatica",
+      "facultad": {
+        "id": "",
+        "codigo": "",
+        "nombre": "Ciencias e Ingenieria"
+      }
+    },
+    "rolUsuario": {
+      "id": "",
+      "descripcion": "",
+      "rol": {
+        "id": "",
+        "descripcion": "Alumno",
+        "fechaCreacion": ""
+      }
+    }
+  }
+]

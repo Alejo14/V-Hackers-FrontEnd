@@ -1,0 +1,16 @@
+[
+  {
+    "id": "123458",
+    "nombre": "Exposición Microservicios",
+    "fechaEntrega": 15565142000000,
+    "tieneAlarma": 1,
+    "ponderacion": 5
+  },
+  {
+    "id": "123459",
+    "nombre": "Exposición Integración continua",
+    "fechaEntrega": 15565142000000,
+    "tieneAlarma": 1,
+    "ponderacion": 5
+  }
+]

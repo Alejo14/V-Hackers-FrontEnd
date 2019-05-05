@@ -1,0 +1,55 @@
+<section id="main">
+  <div ng-controller="gestionUsuariosCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2>Gestionar Usuarios</h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>{{ctrl.mensaje}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="pull-right">
+                <button class="btn btn-primary" ng-click = "ctrl.agregarUsuario()"><i class="fa fa-plus-circle"></i> Agregar Usuario</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table ng-table="ctrl.tablaUsuarios" class="table table-bordered">
+                  <tr ng-repeat="usuario in ctrl.usuariosLista">
+                    <td data-title="'Rol'">
+                      {{usuario.rolUsuario.rol.descripcion}}
+                    </td>
+                    <td data-title="'Código'">
+                      {{usuario.codigo}}
+                    </td>
+                    <td data-title="'Nombre'">
+                      {{usuario.nombres + ' ' + usuario.apellidos}}
+                    </td>
+                    <td data-title="'Unidad académica'">
+                      {{usuario.especialidad.facultad.nombre}}
+                    </td>
+                    <td data-title="'Correo'">
+                      {{usuario.correo}}
+                    </td>
+                    <td data-title="'Detalle'">
+                      <a ng-click = "ctrl.verDetalleUsuario(usuario)">Ver detalle</a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
