@@ -39,17 +39,17 @@ function ($urlRouterProvider,stateHelperProvider) {
         {
           name: 'curso',
           url: '/curso',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaCurso.html'
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
         },
         {
           name:'gestion-proyecto',
           url: '/gestion-proyecto',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaGestiónProyecto.html'
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
         },
         {
             name: 'evaluacion-herramienta',
             url: '/evaluacion-herramienta',
-            templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaCrearEntregable.html'
+            templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaCrearEntregable.html'
         },
         {
           name: 'gestion-usuarios',
