@@ -55,6 +55,11 @@ function ($urlRouterProvider,stateHelperProvider) {
           name: 'gestion-usuarios',
           url: '/gestion-usuarios',
           templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/gestionUsuarios.html'
+        },
+        {
+          name: 'evaluacion-herramienta-modificar',
+          url: '/evaluacion-herramienta-modificar',
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
         }
       ]
     }, { keepOriginalNames: true });

@@ -20,8 +20,8 @@ function($scope, entregableService, $uibModal){
   $scope.init = function () {
     entregableService.entregableAlumno().then(function (entregableData) {
       ctrl.entregableM = entregableData[0];
-      ctrl.entregableM[0].fechaEntrega=new Date(Date.now());
-      ctrl.entregableM[0].descripcion="Entregable recibido con éxito";
+      ctrl.entregableM.fechaEntrega=new Date(entregableData[0].fechaEntrega);
+      ctrl.entregableM.fechaFin=new Date(entregableData[0].fechaFin);
     });
   };
 
@@ -30,9 +30,9 @@ function($scope, entregableService, $uibModal){
 
 
   ctrl.swalEntregable = function (entregable) {
+    console.log(angular.toJson(entregable));//Envio el json para crear el entregable
     entregable.id=0;
     entregable.tieneAlarma=1;
-    console.log(angular.toJson(entregable));//Envio el json para crear el entregable
     entregable.nombre="";
     entregable.fechaEntrega="";
     entregable.horaEntrega="";
@@ -54,19 +54,25 @@ function($scope, entregableService, $uibModal){
       "nombre": entregableM.nombre,
       "fechaEntrega": entregableM.fechaEntrega,
       "tieneAlarma": 1,
-      "ponderacion": entregableM.ponderacion
+      "ponderacion": entregableM.ponderacion,
+      "fechaFin": entregableM.fechaFin,
+      "descripcion": entregableM.descripcion,
+      "puntajeMaximo": entregableM.puntajeMaximo
       }]
+
+      entregableM.nombre="";
+      entregableM.fechaEntrega="";
+      entregableM.horaEntrega="";
+      entregableM.fechaFin="";
+      entregableM.horaFin="";
+      entregableM.descripcion="";
+      entregableM.ponderacion="";
+      swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
+
     entregableService.registroentregableAlumno(data).then(function () {
       ctrl.exitoso="Entregable enviado con éxito";
     });
-    entregableM.nombre="";
-    entregableM.fechaEntrega="";
-    entregableM.horaEntrega="";
-    entregableM.fechaFin="";
-    entregableM.horaFin="";
-    entregableM.descripcion="";
-    entregableM.ponderacion="";
-    swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
+
   };
 
 
