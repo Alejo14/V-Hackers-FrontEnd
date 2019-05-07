@@ -6,7 +6,7 @@ function($q, $http) {
 
   servicio.entregableAlumno = function(){
 
-    var urlEntregableAlumno = 'data/entregables.json';
+    var urlEntregableAlumno = 'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',

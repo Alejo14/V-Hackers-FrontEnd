@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('gestiónProyectoCtrl', ['$scope', 'gestiónProyectoService', '$uibModal',
-function($scope, hackersService, $uibModal){
+angular.module('vHackersModule').controller('gestiónProyectoCtrl', ['$scope', '$state', 'gestiónProyectoService', '$uibModal',
+function($scope, $state, hackersService, $uibModal){
   var ctrl = this;
   ctrl.nuevo = "Nuevo Proyecto";
   ctrl.alumnosLista = [];
@@ -33,11 +33,54 @@ function($scope, hackersService, $uibModal){
     });
   };
 
-  ctrl.swalProyecto = function () {
-    swal("¡Bien hecho!", "El proyecto se creo exitosamente", "success");
+  ctrl.volverCurso = function () {
+    swal({
+      title: "¿Está seguro de que quieres volver?",
+      text: "Los cambios no se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        $state.go('curso');
+        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+      }
+    });
   };
 
-  ctrl.swalEntregable = function () {
-    swal("¡Bien hecho!", "El entregable se creo exitosamente", "success");
-  };
+  ctrl.proyectoNuevo = {};
+  ctrl.guardarProyecto = function () {
+    swal({
+      title: "¿Esta seguro de que desea agregar este Proyecto?",
+      text: "",
+      icon: "warning",
+      //buttons: ["Cancelar", "Sí, agregar"],
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, agregar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        ctrl.usuarioNuevo.especialidad = ctrl.especialidad;
+        ctrl.usuarioNuevo.especialidad.facultad = ctrl.facultad;
+        $uibModalInstance.close(ctrl.usuarioNuevo);
+      }
+    });
+  }
+
 }]);

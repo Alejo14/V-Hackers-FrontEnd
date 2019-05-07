@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', 'profesorCursoService', '$uibModal',
+angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' ,'profesorCursoService', '$uibModal',
 
-function($scope, profesorCursoService, $uibModal){
+function($scope, $state, profesorCursoService, $uibModal){
   var ctrl = this;
   ctrl.nombreCurso = "Ingeniería de Software";
   ctrl.mensajeNuevo = "Go V-Hackers";
@@ -10,8 +10,12 @@ function($scope, profesorCursoService, $uibModal){
       ctrl.proyectosLista = proyectosListaData;
     });
   };
+  ctrl.verEntregable = function(entregable){
+
+    $state.go('evaluacion-herramienta-modificar');
+  }
   ctrl.swalProyecto = function () {
-    swal("¡Bien hecho!", "El proyecto se creo exitosamente", "success");
+    $state.go('gestion-proyecto');
   };
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
