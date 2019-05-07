@@ -4,6 +4,7 @@ function($scope, entregableService, $uibModal){
   var ctrl = this;
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
+  ctrl.tituloVer="Entregables";
   ctrl.filas=[1,2,3,4];
   ctrl.dias=['D','L','M','Mi','J','V','S'];
   ctrl.columnas=[1,2,3,4,5,6,7];
@@ -75,5 +76,16 @@ function($scope, entregableService, $uibModal){
 
   };
 
+  ctrl.entregablesLista = [];
+  ctrl.cargarEntregables = function () {
+    entregableService.listarEntregables().then(function (entregablesListaData) {
+      ctrl.entregablesLista = entregablesListaData;
+    });
+  };
 
+  ctrl.init = function (){
+    ctrl.cargarEntregables();
+  }
+
+  ctrl.init();
 }]);

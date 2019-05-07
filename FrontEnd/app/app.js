@@ -60,6 +60,11 @@ function ($urlRouterProvider,stateHelperProvider) {
           name: 'evaluacion-herramienta-modificar',
           url: '/evaluacion-herramienta-modificar',
           templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
+        },
+        {
+          name: 'evaluacion-herramienta-listar',
+          url: '/evaluacion-herramienta-listar',
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
         }
       ]
     }, { keepOriginalNames: true });
