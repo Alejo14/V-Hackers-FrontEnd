@@ -10,9 +10,9 @@ function($scope, $state, profesorCursoService, $uibModal){
       ctrl.proyectosLista = proyectosListaData;
     });
   };
-  ctrl.verEntregable = function(entregable){
+  ctrl.crearEntregable = function(entregable){
 
-    $state.go('evaluacion-herramienta-modificar');
+    $state.go('evaluacion-herramienta');
   }
   ctrl.swalProyecto = function () {
     $state.go('gestion-proyecto');

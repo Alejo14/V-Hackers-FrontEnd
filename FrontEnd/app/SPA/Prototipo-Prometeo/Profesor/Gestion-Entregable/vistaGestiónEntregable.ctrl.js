@@ -1,6 +1,6 @@
 //-- Anderson
-angular.module('vHackersModule').controller('entregableCtrl', ['$scope', 'entregableService', '$uibModal',
-function($scope, entregableService, $uibModal){
+angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state' , 'entregableService', '$uibModal',
+function($scope, $state, entregableService, $uibModal){
   var ctrl = this;
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
@@ -18,20 +18,48 @@ function($scope, entregableService, $uibModal){
 
 
 
-  $scope.init = function () {
-    entregableService.entregableAlumno().then(function (entregableData) {
-      ctrl.entregableM = entregableData[0];
-      ctrl.entregableM.fechaEntrega=new Date(entregableData[0].fechaEntrega);
-      ctrl.entregableM.fechaFin=new Date(entregableData[0].fechaFin);
-    });
-  };
+  // $scope.init = function () {
+  //   entregableService.entregableAlumno().then(function (entregableData) {
+  //     ctrl.entregableM = entregableData[0];
+  //     ctrl.entregableM.fechaEntrega=new Date(entregableData[0].fechaEntrega);
+  //     ctrl.entregableM.fechaFin=new Date(entregableData[0].fechaFin);
+  //   });
+  // };
 
   // ctrl.entregableM =function() { entregableService.entregableAlumno() };
 
+  function uuid() {
+      function randomDigit() {
+          if (crypto && crypto.getRandomValues) {
+              var rands = new Uint8Array(1);
+              crypto.getRandomValues(rands);
+              return (rands[0] % 16).toString(16);
+          } else {
+              return ((Math.random() * 16) | 0).toString(16);
+          }
+      }
+      var crypto = window.crypto || window.msCrypto;
+      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+  }
 
 
-  ctrl.swalEntregable = function (entregable) {
+  ctrl.crearEntregable = function (entregable) {
     console.log(angular.toJson(entregable));//Envio el json para crear el entregable
+    year=entregable.fechaEntrega.getFullYear();
+    month=entregable.fechaEntrega.getMonth();
+    date=entregable.fechaEntrega.getDate();
+    hours=entregable.horaEntrega.getHours();
+    minutes=entregable.horaEntrega.getMinutes();
+    data={
+      "id": uuid(), //Defecto
+      "nombre": entregable.nombre,
+      "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+      "tieneAlarma": 1,
+      "ponderacion": 1
+      }
+    entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
+        swal("¡Bien hecho!", "El entregable se creo exitosamente" , "success");
+    });
     entregable.id=0;
     entregable.tieneAlarma=1;
     entregable.nombre="";
@@ -41,7 +69,15 @@ function($scope, entregableService, $uibModal){
     entregable.horaFin="";
     entregable.descripcion="";
     entregable.ponderacion="";
-    swal("¡Bien hecho!", "El entregable se creo exitosamente" , "success");
+  };
+
+
+  ctrl.regresarProyectos = function () {
+    $state.go('curso');
+  };
+
+  ctrl.crearEntregable = function () {
+    $state.go('evaluacion-herramienta');
   };
 
   ctrl.swalEntregableM = function (entregableM) {

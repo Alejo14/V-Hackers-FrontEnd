@@ -37,7 +37,7 @@ function($q, $http) {
 
     servicio.listarEntregables = function(){
 
-      var urlListarEntregables = './data/entregables.json'; //'http://localhost:7002/entregables';
+      var urlListarEntregables = 'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
       var $defer = $q.defer();
       $http({
           method: 'GET',
