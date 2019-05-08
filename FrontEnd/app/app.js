@@ -43,7 +43,7 @@ function ($urlRouterProvider,stateHelperProvider) {
         },
         {
           name:'gestion-proyecto',
-          url: '/gestion-proyecto',
+          url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
           templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
         },
         {

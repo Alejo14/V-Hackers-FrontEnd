@@ -19,4 +19,18 @@ function($q, $http) {
     return $defer.promise;
   }
 
+  servicio.modificarProyecto = function(data){
+    var urlModifProyecto = 'http://localhost:7001/proyectos/modificar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModifProyecto,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 }]);

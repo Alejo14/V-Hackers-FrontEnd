@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' ,'profesorCursoService', '$uibModal',
+angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams' ,'profesorCursoService', '$uibModal',
 
-function($scope, $state, profesorCursoService, $uibModal){
+function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   var ctrl = this;
   ctrl.nombreCurso = "Ingeniería de Software";
   ctrl.mensajeNuevo = "Go V-Hackers";
@@ -15,7 +15,7 @@ function($scope, $state, profesorCursoService, $uibModal){
     $state.go('evaluacion-herramienta');
   }
   ctrl.swalProyecto = function () {
-    $state.go('gestion-proyecto');
+    $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0});
   };
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
@@ -25,6 +25,10 @@ function($scope, $state, profesorCursoService, $uibModal){
   };
   ctrl.swalEntregable = function () {
     swal("¡Bien hecho!", "El entregable se creo exitosamente", "success");
+  };
+
+  ctrl.verProyecto = function (proyecto) {
+    $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion, fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion});
   };
 
   ctrl.init = function (){

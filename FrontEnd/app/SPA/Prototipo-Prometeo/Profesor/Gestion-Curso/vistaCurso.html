@@ -3,7 +3,6 @@
     <div class="container">
       <div class="block-container">
         <h2> {{ctrl.nombreCurso}} </h2>
-        <h2> prueba </h2>
       </div>
       <div class="col-md-4">
         <div class="card ">
@@ -44,7 +43,9 @@
             <div class="card-body">
               <ul>
                 <li ng-repeat="proyecto in ctrl.proyectosLista">
-                  {{proyecto.nombre}}
+                  <a ng-click="ctrl.verProyecto(proyecto)">
+                    {{proyecto.nombre}}
+                  </a>
                 </li>
               </ul>
             </div>
