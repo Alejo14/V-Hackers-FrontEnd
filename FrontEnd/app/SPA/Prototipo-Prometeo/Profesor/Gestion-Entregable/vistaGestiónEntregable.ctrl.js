@@ -50,16 +50,17 @@ function($scope, entregableService, $uibModal){
     }
     entregableM.tieneAlarma=1;
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    data=[{
-      "id": entregableM.id,
+    data={
+      "id": "419d9b58-04d0-4732-a64d-450ebafd18f8",
       "nombre": entregableM.nombre,
-      "fechaEntrega": entregableM.fechaEntrega,
+      "fechaEntrega": 1555822800000,
       "tieneAlarma": 1,
-      "ponderacion": entregableM.ponderacion,
-      "fechaFin": entregableM.fechaFin,
-      "descripcion": entregableM.descripcion,
-      "puntajeMaximo": entregableM.puntajeMaximo
-      }]
+      "ponderacion": 5
+      }
+
+      entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
+        ctrl.exitoso="Entregable enviado con éxito";
+      });
 
       entregableM.nombre="";
       entregableM.fechaEntrega="";
@@ -70,9 +71,7 @@ function($scope, entregableService, $uibModal){
       entregableM.ponderacion="";
       swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
 
-    entregableService.registroentregableAlumno(data).then(function () {
-      ctrl.exitoso="Entregable enviado con éxito";
-    });
+
 
   };
 

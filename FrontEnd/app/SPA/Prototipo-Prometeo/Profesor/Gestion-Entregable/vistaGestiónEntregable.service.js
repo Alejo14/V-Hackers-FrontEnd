@@ -6,7 +6,7 @@ function($q, $http) {
 
   servicio.entregableAlumno = function(){
 
-    var urlEntregableAlumno =  './data/entregables.json'; //'http://localhost:7002/entregables';
+    var urlEntregableAlumno =  'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -21,12 +21,12 @@ function($q, $http) {
 
 
     servicio.registroentregableAlumno = function(data){
-      var urlEnviarCalificacion = './data/entregable.json';
+      var urlEnviarCalificacion = 'http://localhost:7002/entregables/crear';
       var $defer = $q.defer();
       $http({
           method: 'POST',
           url: urlEnviarCalificacion,
-          data: evaluacion
+          data: data
        }).then(function (respuesta) {
          $defer.resolve(respuesta.data);
        }).catch(function (error) {
