@@ -79,14 +79,14 @@ function($scope, $state, gestiónProyectoService, $uibModal){
         proyectoNuevo.id="8ec4885e-3627-4ec8-aa3d-545ffb9e8bec";
         proyectoNuevo.fechaCreacion=
         console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
-        data=[{
+        data={
           "id": proyectoNuevo.id,
           "nombre": proyectoNuevo.nombre,
           "fechaCreacion": 1555822800000,
           "fechaInicio": 1555822800000,
           "fechaFin": 1555822800000,
           "ponderacion": parseInt(proyectoNuevo.ponderacion)
-          }]
+          }
           console.log(angular.toJson(data));
           gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
