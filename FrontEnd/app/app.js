@@ -43,7 +43,7 @@ function ($urlRouterProvider,stateHelperProvider) {
         },
         {
           name:'gestion-proyecto',
-          url: '/gestion-proyecto',
+          url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
           templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
         },
         {
@@ -55,6 +55,16 @@ function ($urlRouterProvider,stateHelperProvider) {
           name: 'gestion-usuarios',
           url: '/gestion-usuarios',
           templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/gestionUsuarios.html'
+        },
+        {
+          name: 'evaluacion-herramienta-modificar',
+          url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
+        },
+        {
+          name: 'evaluacion-herramienta-listar',
+          url: '/evaluacion-herramienta-listar',
+          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
         }
       ]
     }, { keepOriginalNames: true });

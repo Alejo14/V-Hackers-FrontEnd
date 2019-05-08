@@ -6,7 +6,7 @@ function($q, $http) {
 
   servicio.entregableAlumno = function(){
 
-    var urlEntregableAlumno = 'data/entregables.json';
+    var urlEntregableAlumno =  'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -20,21 +20,49 @@ function($q, $http) {
   }
 
 
-  servicio.registroentregableAlumno = function(data){
+    servicio.registroentregableAlumno = function(data){
+      var urlEnviarCalificacion = 'http://localhost:7002/entregables/crear';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
 
-    var urlRegistroEntregableAlumno = 'http://127.0.0.1:5000/';
-    var data=JSON.stringify(data);
-    var $defer = $q.defer();
-    $http({
-        method: 'POST',
-        url: urlRegistroEntregableAlumno,
-        data: data
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  }
+    servicio.modificarentregableAlumno = function(data){
+      var urlEnviarCalificacion = 'http://localhost:7002/entregables/modificar';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
+    servicio.listarEntregables = function(){
+
+      var urlListarEntregables = 'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlListarEntregables
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
 
 }]);

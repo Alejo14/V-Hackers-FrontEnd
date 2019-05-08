@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableM.horaEntrega" placeholder="e.g: 11/04/2019">
+                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableM.fechaEntrega" placeholder="e.g: 11/04/2019">
                           </div>
                         </div>
                       </div>
@@ -43,12 +43,12 @@
                         <label class="col-sm-4 control-label">Fecha y Hora Fin:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableM.fechaFin"  placeholder="e.g: 11/04/2019">
+                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableM.fechaFin" placeholder="e.g: 20/04/2019">
                           </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableM.horaFin"  placeholder="e.g: 11/04/2019">
+                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableM.fechaFin"  placeholder="e.g: 11/04/2019">
                           </div>
                         </div>
                       </div>
@@ -64,7 +64,7 @@
                         <label class="col-sm-4 control-label">Puntaje Máximo:</label>
                         <div class="col-sm-8">
                           <div class="fg-line">
-                              <input type="number" ng-model="ctrl.entregableM.ponderacion" class="form-control input-sm">
+                              <input type="number" ng-model="ctrl.entregableM.puntajeMaximo" class="form-control input-sm">
                           </div>
                         </div>
                       </div>
@@ -110,8 +110,8 @@
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.swalEntregableM(ctrl.entregableM)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
-              <button type="button" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-click = "ctrl.modificarEntregable(ctrl.entregableM)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Modificar</button>
+              <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
               <!--<button type="button" class="btn btn-primary waves-effect" ng-click = "ctrl.probar()"><i class="fa fa-file"></i> Probar Swal</button>-->
             </div>
 

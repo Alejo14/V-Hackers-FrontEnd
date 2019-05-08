@@ -109,8 +109,8 @@
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
-              <button type="submit" ng-click = "ctrl.swalEntregable(entregable)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
-              <button type="button" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-click = "ctrl.crearEntregable(entregable)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
               <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
             </div>
 
@@ -123,11 +123,17 @@
               </ul>
             </div> -->
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <ul>
               <li ng-repeat="alumno in ctrl.alumnosLista">{{alumno}}</li>
             </ul>
-               </div>
+               </div> -->
+
+               <!-- <a ng-click="ctrl.verEntregable(entregable)">
+                 {{entregable.nombre}}
+               </a> -->
+
+
         </div>
       </div>
     </div>
