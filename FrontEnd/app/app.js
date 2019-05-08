@@ -58,7 +58,7 @@ function ($urlRouterProvider,stateHelperProvider) {
         },
         {
           name: 'evaluacion-herramienta-modificar',
-          url: '/evaluacion-herramienta-modificar',
+          url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
           templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
         },
         {

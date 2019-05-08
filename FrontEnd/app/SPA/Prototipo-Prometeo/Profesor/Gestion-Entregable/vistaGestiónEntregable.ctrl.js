@@ -1,6 +1,6 @@
 //-- Anderson
-angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state' , 'entregableService', '$uibModal',
-function($scope, $state, entregableService, $uibModal){
+angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal',
+function($scope, $state,$stateParams, entregableService, $uibModal){
   var ctrl = this;
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
@@ -9,6 +9,7 @@ function($scope, $state, entregableService, $uibModal){
   ctrl.dias=['D','L','M','Mi','J','V','S'];
   ctrl.columnas=[1,2,3,4,5,6,7];
   ctrl.entregableM=[];
+  ctrl.id=0;
   // var d=new Date("5/11/2020");
   // $scope.entregable={nombEntrg: 'Entregable 1', fechaI:new Date("2/05/2019"), horaI:new Date("2/05/2019 20:08"),
   //                     descrEntrg: 'Entregable 1', fechaF:new Date("2/05/2019"),horaF:new Date("2/05/2019 20:08"),
@@ -73,42 +74,96 @@ function($scope, $state, entregableService, $uibModal){
 
 
   ctrl.regresarProyectos = function () {
-    $state.go('curso');
+    swal({
+      title: "¿Está seguro de que quieres volver?",
+      text: "Los cambios no se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        $state.go('curso');
+        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+      }
+    });
   };
 
-  ctrl.crearEntregable = function () {
+  ctrl.regresarEntregables = function () {
+    swal({
+      title: "¿Está seguro de que quieres volver?",
+      text: "Los cambios no se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        $state.go('evaluacion-herramienta-listar');
+        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+      }
+    });
+  };
+
+  ctrl.regresarEntregable = function () {
     $state.go('evaluacion-herramienta');
   };
 
-  ctrl.swalEntregableM = function (entregableM) {
-    if (entregableM.id==0) {
-      entregableM.id=0;
-    }
-    entregableM.tieneAlarma=1;
+  ctrl.verEntregable = function (entregable) {
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega});
+
+  };
+
+
+  if ($stateParams.nombre){
+    ctrl.entregableM.nombre=$stateParams.nombre;
+    ctrl.entregableM.id=$stateParams.id;
+    ctrl.entregableM.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
+
+  }
+
+
+
+
+  ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+    year=entregableM.fechaEntrega.getFullYear();
+    month=entregableM.fechaEntrega.getMonth();
+    date=entregableM.fechaEntrega.getDate();
     data={
-      "id": "419d9b58-04d0-4732-a64d-450ebafd18f8",
+      "id": entregableM.id, //Defecto
       "nombre": entregableM.nombre,
-      "fechaEntrega": 1555822800000,
+      "fechaEntrega": (new Date(year, month, date))*1,//Se da formato a la fecha para que se registre con hora y fecha
       "tieneAlarma": 1,
-      "ponderacion": 5
+      "ponderacion": 1
       }
-
-      entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
-        ctrl.exitoso="Entregable enviado con éxito";
-      });
-
-      entregableM.nombre="";
-      entregableM.fechaEntrega="";
-      entregableM.horaEntrega="";
-      entregableM.fechaFin="";
-      entregableM.horaFin="";
-      entregableM.descripcion="";
-      entregableM.ponderacion="";
-      swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
-
-
-
+      console.log(angular.toJson(data));
+    entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
+        swal("¡Bien hecho!", "El entregable se modifico exitosamente" , "success");
+    });
+    entregableM.id=0;
+    entregableM.tieneAlarma=1;
+    entregableM.nombre="";
+    entregableM.fechaEntrega="";
+    entregableM.horaEntrega="";
+    entregableM.fechaFin="";
+    entregableM.horaFin="";
+    entregableM.descripcion="";
+    entregableM.ponderacion="";
   };
 
   ctrl.entregablesLista = [];
