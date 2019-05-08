@@ -17,7 +17,7 @@
                     <label class="col-sm-3 control-label">Nombre:</label>
                     <div class="col-sm-7">
                       <div class="fg-line">
-                        <textarea class="form-control" rows="1" placeholder="Proyecto ejemplo..."></textarea>
+                        <input class="form-control input-sm" rows="1" placeholder="Proyecto ejemplo..." ng-model = "ctrl.proyectoNuevo.nombre">
                       </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <label class="col-sm-3 control-label">Fecha Inicio:</label>
                     <div class="col-sm-5">
                       <div class="fg-line">
-                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoNuevo.fechaInicio">
                       </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <label class="col-sm-3 control-label">Fecha Fin:</label>
                     <div class="col-sm-5">
                       <div class="fg-line">
-                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoNuevo.fechaFin">
                       </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                       <label class="control-label">Ponderado:</label>
                     </div>
                     <div class="col-md-4 m-t-30">
-                      <textarea class="form-control" rows="1"></textarea>
+                      <input class="form-control input-sm" rows="1" ng-model = "ctrl.proyectoNuevo.ponderacion">
                     </div>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
           </div>
           <div class="row">
             <div class="col-md-12 m-t-20" align="right">
-              <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.guardarProyecto()"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.guardarProyecto(ctrl.proyectoNuevo)"><i class="fa fa-save"></i> Guardar</button>
               <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
               <!-- <button ng-click = "ctrl.probarSwal()"><i class="fa fa-file"></i> Probar Swal</button> -->
             </div>

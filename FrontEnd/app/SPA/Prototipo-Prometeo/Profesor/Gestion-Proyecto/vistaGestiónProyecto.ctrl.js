@@ -1,5 +1,5 @@
 angular.module('vHackersModule').controller('gestiónProyectoCtrl', ['$scope', '$state', 'gestiónProyectoService', '$uibModal',
-function($scope, $state, hackersService, $uibModal){
+function($scope, $state, gestiónProyectoService, $uibModal){
   var ctrl = this;
   ctrl.nuevo = "Nuevo Proyecto";
   ctrl.alumnosLista = [];
@@ -57,7 +57,7 @@ function($scope, $state, hackersService, $uibModal){
   };
 
   ctrl.proyectoNuevo = {};
-  ctrl.guardarProyecto = function () {
+  ctrl.guardarProyecto = function (proyectoNuevo) {
     swal({
       title: "¿Esta seguro de que desea agregar este Proyecto?",
       text: "",
@@ -74,11 +74,31 @@ function($scope, $state, hackersService, $uibModal){
         }
       },
       closeModal: false
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
-        ctrl.usuarioNuevo.especialidad = ctrl.especialidad;
-        ctrl.usuarioNuevo.especialidad.facultad = ctrl.facultad;
-        $uibModalInstance.close(ctrl.usuarioNuevo);
+    }).then(function (proyectoNuevoConfirmado) {
+      if (proyectoNuevoConfirmado !== "cancelar") {
+        proyectoNuevo.id="8ec4885e-3627-4ec8-aa3d-545ffb9e8bec";
+        proyectoNuevo.fechaCreacion=
+        console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
+        data=[{
+          "id": proyectoNuevo.id,
+          "nombre": proyectoNuevo.nombre,
+          "fechaCreacion": 1555822800000,
+          "fechaInicio": 1555822800000,
+          "fechaFin": 1555822800000,
+          "ponderacion": parseInt(proyectoNuevo.ponderacion)
+          }]
+          console.log(angular.toJson(data));
+          gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
+            ctrl.exitoso="Proyecto enviado con éxito";
+          });
+
+          proyectoNuevo.nombre="";
+          proyectoNuevo.fechaCreacion="";
+          proyectoNuevo.fechaInicio="";
+          proyectoNuevo.fechaFin="";
+          proyectoNuevo.ponderacion="";
+
+          swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
     });
   }

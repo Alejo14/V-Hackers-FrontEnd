@@ -4,13 +4,13 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.listarAlumnos = function(){
-
-    var urlListarAlumnos = '';
+  servicio.registroProyecto = function(data){
+    var urlCrearProyecto = 'http://localhost:7001/proyectos/crear';
     var $defer = $q.defer();
     $http({
-        method: 'GET',
-        url: urlListarAlumnos
+        method: 'POST',
+        url: urlCrearProyecto,
+        data: data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
