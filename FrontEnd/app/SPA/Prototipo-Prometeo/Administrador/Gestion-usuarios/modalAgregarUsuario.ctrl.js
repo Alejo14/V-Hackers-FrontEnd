@@ -1,12 +1,12 @@
 angular.module('vHackersModule').controller('modalAgregarUsuarioCtrl', modalAgregarUsuarioCtrl);
 
-modalAgregarUsuarioCtrl.$inject = ['$scope', '$uibModalInstance'];
+modalAgregarUsuarioCtrl.$inject = ['$scope', '$uibModalInstance', 'gestionUsuariosService'];
 
-function modalAgregarUsuarioCtrl ($scope, $uibModalInstance){
+function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosService){
 
   var ctrl = this;
   ctrl.usuarioNuevo = {};
-  ctrl.facultades = [
+  ctrl.facultadesLista = [
     {
       id: '',
       nombre: 'Ciencias e ingeniería'
@@ -16,7 +16,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance){
       nombre: 'Estudios Generales Ciencias'
     }
   ];
-  ctrl.especialidades = [
+  ctrl.especialidadesLista = [
     {
       id: '',
       nombre: 'Ingenieria Informatica'
@@ -26,7 +26,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance){
       nombre: 'Ingenieria Industrial'
     }
   ];
-  ctrl.tiposUsuario = [
+  ctrl.rolesUsuario = [
     {
       id: "",
       descripcion: "Alumno",
@@ -37,8 +37,19 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance){
       descripcion: "Profesor",
       fechaCreacion: ""
     }
-  ]
+  ];
 
+  ctrl.obtenerFacultades = function () {
+    gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
+      ctrl.facultadesLista = facultadesListaData;
+    });
+  };
+
+  ctrl.obtenerEspecialidades = function () {
+    gestionUsuariosService.obtenerEspecialidades($scope.facultad.id).then(function (especialidadesListaData) {
+      ctrl.especialidadesLista = especialidadesListaData;
+    });
+  };
   ctrl.guardarUsuario = function () {
     swal({
       title: "¿Esta seguro de que desea agregar a este usuario?",
@@ -58,14 +69,23 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance){
       closeModal: false
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        ctrl.usuarioNuevo.especialidad = ctrl.especialidad;
-        ctrl.usuarioNuevo.especialidad.facultad = ctrl.facultad;
+        ctrl.usuarioNuevo.especialidad = $scope.especialidad;
+        ctrl.usuarioNuevo.especialidad.facultad = $scope.facultad;
+        ctrl.usuarioNuevo.rolesUsuario = [];
+        var numRoles = $scope.rolesUsuarioNuevo.length;
+        for (var i = 0; i < numRoles; i++) {
+          var usuarioRol = {rol: $scope.rolesUsuarioNuevo[i]};
+          ctrl.usuarioNuevo.rolesUsuario.push(usuarioRol);
+        }
         $uibModalInstance.close(ctrl.usuarioNuevo);
       }
     });
-  }
-
+  };
+  ctrl.init = function(){
+    ctrl.obtenerFacultades();
+  };
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);
-  }
+  };
+  ctrl.init();
 };

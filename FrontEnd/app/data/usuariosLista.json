@@ -15,14 +15,15 @@
         "nombre": "Ciencias e Ingenieria"
       }
     },
-    "rolUsuario": {
-      "id": "",
-      "descripcion": "",
-      "rol": {
+    "rolesUsuario": [
+      {
         "id": "",
-        "descripcion": "Alumno",
-        "fechaCreacion": ""
+        "rol":{
+          "id": "",
+          "descripcion": "Alumno",
+          "fechaCreacion": ""
+        }
       }
-    }
+    ]
   }
 ]

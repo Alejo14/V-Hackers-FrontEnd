@@ -23,20 +23,30 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
     //Recibo parametro de retorno
     modalInstance.result.then( function (parametroRetorno) {
       if (parametroRetorno) {
-        ctrl.usuariosLista.push(parametroRetorno);
-        swal("¡Listo!", "Usuario agregado con éxito", "success");
-        swal({
-          title: "¡Listo!",
-          text: "Usuario agregado con éxito",
-          icon: "success",
-          //buttons: ["Cancelar", "Sí, agregar"],
-          buttons: {
-            confirm: {
-              text: "ok",
-              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        var usuarioRegistro = {
+          "id": parametroRetorno.id,
+          "idEspecialidad": parametroRetorno.especialidad.id,
+          "codigo": parametroRetorno.codigo,
+          "nombres": parametroRetorno.nombres,
+          "apellidos": parametroRetorno.apellidos,
+          "correo": parametroRetorno.correo
+        };
+        gestionUsuariosService.regitstrarUsuario(usuarioRegistro).then(function (resultadoRegistro) {
+          ctrl.usuariosLista.push(parametroRetorno);
+          swal({
+            title: "¡Listo!",
+            text: "Usuario agregado con éxito",
+            icon: "success",
+            //buttons: ["Cancelar", "Sí, agregar"],
+            buttons: {
+              confirm: {
+                text: "ok",
+                className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+              }
             }
-          }
-        })
+          });
+        });
+
       }
     });
   };
