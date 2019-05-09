@@ -18,7 +18,7 @@ function($q, $http) {
   }
 
   servicio.enviarCalificacion = function(evaluacion){
-    var urlEnviarCalificacion = './data/calificacion.json';
+    var urlEnviarCalificacion = 'http://localhost:7007/calificacion';
     var $defer = $q.defer();
     $http({
         method: 'POST',
