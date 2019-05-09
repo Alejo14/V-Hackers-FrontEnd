@@ -85,13 +85,13 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual": ctrl.puntajeDado[1],"numCasilla":2,"nivel":{"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual":ctrl.puntajeDado[1]}},
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual": ctrl.puntajeDado[2],"numCasilla":3,"nivel":{"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual":ctrl.puntajeDado[2]}},
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual": ctrl.puntajeDado[3],"numCasilla":4,"nivel":{"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual":ctrl.puntajeDado[3]}},
-                    {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[4],"puntajeManual": ctrl.puntajeDado[4],"numCasilla":5,"nivel":{"puntajeAsignado":ctrl.puntajeDado[4],"puntajeManual":ctrl.puntajeDado[4]}}
                   ]
                 }
               ]
             }
           ]
         };
+        console.log(angular.toJson(ctrl.evaluacion));
         herramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.enviarCalificacion));
       }
     });
@@ -126,7 +126,7 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
   * Puntaje dinámico: Función temporal
   *================================================
   */
-  ctrl.puntajeDado = [-1,-1,-1,-1,-1];
+  ctrl.puntajeDado = [-1,-1,-1,-1];
   ctrl.sumarPuntaje = function(criterio,i){
     var aux = -1;
     if(ctrl.puntajeDado[criterio.id-1] != -1) aux = ctrl.puntajeDado[criterio.id-1];
