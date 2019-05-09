@@ -166,6 +166,26 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     entregableM.ponderacion="";
   };
 
+  ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+    // year=entregableM.fechaEntrega.getFullYear();
+    // month=entregableM.fechaEntrega.getMonth();
+    // date=entregableM.fechaEntrega.getDate();
+    data={
+      "id": entregableM.id, //Defecto
+      "nombre": entregableM.nombre,
+      "fechaEntrega": (new Date(Date.now()))*1,//Se da formato a la fecha para que se registre con hora y fecha
+      "tieneAlarma": 1,
+      "ponderacion": 1
+      }
+      console.log(angular.toJson(data));
+    entregableService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
+        swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+        $state.go('curso');
+    });
+
+  };
+
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
     entregableService.listarEntregables().then(function (entregablesListaData) {
