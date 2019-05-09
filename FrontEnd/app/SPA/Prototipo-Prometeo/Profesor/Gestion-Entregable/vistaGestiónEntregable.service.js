@@ -50,6 +50,20 @@ function($q, $http) {
       return $defer.promise;
     }
 
+    servicio.eliminarentregableAlumno = function(data){
+      var urlEnviarCalificacion = 'http://localhost:7002/entregables/eliminar';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
     servicio.listarEntregables = function(){
 
       var urlListarEntregables = 'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
