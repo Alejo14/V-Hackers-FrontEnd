@@ -84,15 +84,16 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[0],"puntajeManual": ctrl.puntajeDado[0],"numCasilla":1,"nivel":{"puntajeAsignado":ctrl.puntajeDado[0],"puntajeManual":ctrl.puntajeDado[0]}},
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual": ctrl.puntajeDado[1],"numCasilla":2,"nivel":{"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual":ctrl.puntajeDado[1]}},
                     {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual": ctrl.puntajeDado[2],"numCasilla":3,"nivel":{"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual":ctrl.puntajeDado[2]}},
-                    {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual": ctrl.puntajeDado[3],"numCasilla":4,"nivel":{"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual":ctrl.puntajeDado[3]}},
+                    {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual": ctrl.puntajeDado[3],"numCasilla":4,"nivel":{"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual":ctrl.puntajeDado[3]}}
                   ]
                 }
               ]
             }
           ]
+
         };
         console.log(angular.toJson(ctrl.evaluacion));
-        herramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.enviarCalificacion));
+        herramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion));
       }
     });
   };
