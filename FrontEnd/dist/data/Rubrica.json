@@ -1,0 +1,34 @@
+{
+  "id":1,
+  "puntajeMax":20,
+  "herramientaEvaluacion":[
+      {
+      "id": 1,
+      "nombre": "Presenta un buen dominio del tema de Arquitectura de microservicios",
+      "calificacion": [false,false,false,false,false],
+      "puntaje" : [5,4,3,2,1],
+      "observacion": ""
+      },
+      {
+      "id": 2,
+      "nombre": "Se desenvuelve de manera adecuada a la hora de exponer",
+      "calificacion": [false,false,false,false,false],
+      "puntaje" : [5,4,3,2,1],
+      "observacion": ""
+      },
+      {
+      "id": 3,
+      "nombre": "La presentación es clara y tiene el formato adecuado",
+      "calificacion": [false,false,false,false,false],
+      "puntaje" : [5,4,3,2,1],
+      "observacion": ""
+      },
+      {
+      "id": 4,
+      "nombre": "Utiliza de manera eficiente la tecnología multimedia que dispone",
+      "calificacion": [false,false,false,false,false],
+      "puntaje" : [5,4,3,2,1],
+      "observacion": ""
+      }
+    ]
+}

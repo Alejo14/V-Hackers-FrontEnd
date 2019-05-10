@@ -1,0 +1,141 @@
+<!-- Anderson -->
+<section id="main">
+  <div ng-controller="entregableCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2></h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>{{ctrl.tituloNuevo}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">Nombre:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <input type="text" class="form-control input-sm" ng-model="entregable.nombre" placeholder="e.g: Entregable de Ingeniería de Software">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--fechaI horaI-->
+                        <label class="col-sm-4 control-label">Fecha y Hora Inicio:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <input type="date" class="form-control input-sm" ng-model="entregable.fechaEntrega" placeholder="e.g: 11/04/2019">
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <input type="time" class="form-control input-sm" ng-model="entregable.horaEntrega" placeholder="e.g: 11/04/2019">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--fechaF horaF-->
+                        <label class="col-sm-4 control-label">Fecha y Hora Fin:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <input type="date" class="form-control input-sm" ng-model="entregable.fechaFin"  placeholder="e.g: 11/04/2019">
+                          </div>
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <input type="time" class="form-control input-sm" ng-model="entregable.horaFin"  placeholder="e.g: 11/04/2019">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--descrEntrg-->
+                        <label class="col-sm-4 control-label">Descripción:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <textarea class="form-control" rows="5" ng-model="entregable.descripcion"  placeholder="......."></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--puntaje-->
+                        <label class="col-sm-4 control-label">Puntaje Máximo:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <input type="number" ng-model="entregable.ponderacion" class="form-control input-sm">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">Herramienta de Evaluación:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <button class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+                          </div>
+                        </div>
+
+                      </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-4">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group">
+                        <label class="control-label">Notificaciones</label>
+                      </div>
+                      <div class="form-group">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th ng-repeat="dia in ctrl.dias">{{dia}}</th>
+                            </tr>
+
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="fila in ctrl.filas">
+                              <td ng-repeat="columna in ctrl.columnas"><i class="far fa-calendar fa-2x" aria-hidden="true" ></i></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                  </div>
+              </form>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.crearEntregable(entregable)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
+            </div>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li ng-repeat="alumno in ctrl.alumnosLista">
+                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
+                </li>
+              </ul>
+            </div> -->
+          </div>
+          <!-- <div class="row">
+            <ul>
+              <li ng-repeat="alumno in ctrl.alumnosLista">{{alumno}}</li>
+            </ul>
+               </div> -->
+
+               <!-- <a ng-click="ctrl.verEntregable(entregable)">
+                 {{entregable.nombre}}
+               </a> -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
