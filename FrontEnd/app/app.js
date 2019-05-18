@@ -65,6 +65,16 @@ function ($urlRouterProvider,stateHelperProvider) {
           name: 'evaluacion-herramienta-listar',
           url: '/evaluacion-herramienta-listar',
           templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
+        },
+        {
+          name: 'administrador',
+          url: '/administrador',
+          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/vistaPrincipalAdministrador.html'
+        },
+        {
+          name: 'crear-semestre',
+          url: '/crear-semestre',
+          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaCrearSemestre.html'
         }
       ]
     }, { keepOriginalNames: true });

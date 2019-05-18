@@ -1,0 +1,121 @@
+<!-- César -->
+<section id="main">
+  <div ng-controller="administradorSemestreCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2></h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h2>Nuevo Semestre</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group"><!--Ciclo académico-->
+                        <label class="col-sm-4 control-label">(*)Ciclo académico:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <input type="text" class="form-control input-sm" ng-model="semestre.añoCiclo" placeholder="e.g: 2019">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="fg-line">
+                              <input type="text" class="form-control input-sm" ng-model="semestre.ciclo" placeholder="e.g: 01">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="fg-line">
+                              <input type="text" class="form-control input-sm" ng-model="semestre.tipoCiclo" placeholder="e.g: 00">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--Nombre del ciclo-->
+                        <label class="col-sm-4 control-label">(*)Nombre del ciclo:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <input type="text" class="form-control input-sm" ng-model="semestre.nombreCiclo" placeholder="e.g: 2019-1">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--fechaI-->
+                        <label class="col-sm-4 control-label">(*)Fecha Inicio:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <input type="date" class="form-control input-sm" ng-model="semestre.fechaInicio" placeholder="e.g: 18/05/2019">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group"><!--fechaF-->
+                        <label class="col-sm-4 control-label">(*)Fecha Fin:</label>
+                        <div class="col-sm-8">
+                          <div class="fg-line">
+                              <input type="date" class="form-control input-sm" ng-model="semestre.fechaFin"  placeholder="e.g: 11/10/2019">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Profesor:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <button class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Asistente de docencia:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <button class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Alumnos:</label>
+                        <div class="col-sm-4">
+                          <div class="fg-line">
+                              <button class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.crearSemestre(semestre)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            </div>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li ng-repeat="alumno in ctrl.alumnosLista">
+                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
+                </li>
+              </ul>
+            </div> -->
+          </div>
+          <!-- <div class="row">
+            <ul>
+              <li ng-repeat="alumno in ctrl.alumnosLista">{{alumno}}</li>
+            </ul>
+               </div> -->
+
+               <!-- <a ng-click="ctrl.verEntregable(entregable)">
+                 {{entregable.nombre}}
+               </a> -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
