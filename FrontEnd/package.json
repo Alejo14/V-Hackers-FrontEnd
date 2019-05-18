@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Prometeo",
   "dependencies": {
-    "express": "*"
+    "angular-chosen-localytics": "^1.9.3",
+    "express": "*",
+    "oclazyload": "^1.1.0"
   },
   "engine": "node >=0.6.x",
   "scripts": {
