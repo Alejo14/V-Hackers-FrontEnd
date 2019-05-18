@@ -1,0 +1,68 @@
+<section id="main">
+  <div ng-controller="calificacionCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <div class="row">
+          <div class="col-sm-10">
+            <h2>Evalución<h2>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-10">
+            <h4>{{ctrl.titulo}}<h4>
+            </div>
+            <div class="col-sm-2">
+              <div class="fg-line"><label class="m-t-10 texto-centrado"><b>Nota</b><div type="text" ng-model="ctrl.puntaje">{{ctrl.puntaje}} / {{ctrl.puntajeMax}}</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <textarea ng-model="ctrl.retroalimentacion"
+              class="texto-retroalimentacion form-control"
+              placeholder="Ingresar observaciones generales del entregable"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive m-t-20">
+          <table ng-Table="ctrl.tablaAlumnos" class="table table-striped">
+            <tr ng-repeat="criterio in ctrl.herramientaEvaluacion">
+              <td data-title="'Criterios'" ng-model="criterio.nombre">{{criterio.nombre}}</td>
+              <td data-title="'Muy bueno'" class="texto-centrado"><label>
+                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[0]" ng-model="value" value={{criterio.puntaje[0]}} ng-change="ctrl.sumarPuntaje(criterio,0)"></input>
+              </td>
+              <td data-title="'Bueno'" class="texto-centrado">
+                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[1]" ng-model="value" value={{criterio.puntaje[1]}} ng-change="ctrl.sumarPuntaje(criterio,1)"></input>
+              </td>
+              <td data-title="'Regular'" class="texto-centrado">
+                <input type="radio"  name="{{criterio.id}}" ng-checked="criterio.calificacion[2]" ng-model="value" value={{criterio.puntaje[2]}} ng-change="ctrl.sumarPuntaje(criterio,2)"></input>
+              </td>
+              <td data-title="'Bajo'" class="texto-centrado">
+                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[3]" ng-model="value" value={{criterio.puntaje[3]}} ng-change="ctrl.sumarPuntaje(criterio,3)"></input>
+              </td>
+              <td data-title="'Muy bajo'" class="texto-centrado">
+                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[4]" ng-model="value" value={{criterio.puntaje[4]}} ng-change="ctrl.sumarPuntaje(criterio,4)"></input>
+              </td>
+              <td data-title="'Observación'">
+                <textarea ng-model="criterio.observacion"
+                class="form-control"
+                placeholder="Ingresar observaciones"
+                ></textarea>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="btn btn-default waves-effect float-right m-15" ng-click="ctrl.atras()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            <button class="btn bgm-blue waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()"><i class="fa fa-save"></i> Guardar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
