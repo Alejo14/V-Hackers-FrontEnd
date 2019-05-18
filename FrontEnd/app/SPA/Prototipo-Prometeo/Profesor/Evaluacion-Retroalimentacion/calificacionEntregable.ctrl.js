@@ -36,8 +36,6 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
     });
   };
 
-
-
   /*===============================================
   * Servicio para enviar Calificación al Back-End
   *================================================
@@ -90,7 +88,6 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
               ]
             }
           ]
-
         };
         console.log(angular.toJson(ctrl.evaluacion));
         herramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion));
