@@ -197,6 +197,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     });
   };
 
+  ctrl.obtenerInfoArchivo = function (archivo,parametros) {
+    console.log(archivo.nombre)
+  }
+
   ctrl.init = function (){
     ctrl.cargarEntregables();
   }
