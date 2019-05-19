@@ -86,7 +86,7 @@
                       <div class="form-group">
                         <label class="control-label">Notificaciones</label>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group border">
                         <div class="table table-hover">
                           <table class="table table-hover">
                             <thead>
@@ -102,6 +102,43 @@
                             </tbody>
                           </table>
                         </div>
+                      </div>
+                      <div class="form-group">
+                            <div class="col-m-3">
+                                <div class="radio m-b-5">
+                                    <label>
+                                      <input type="radio" name="sample" value="">
+                                      <i class="input-helper"></i>
+                                      Notificar Faltando
+
+                                    </label>
+
+                                </div>
+
+                                <div class="radio m-b-5">
+                                  <label>
+                                    <input type="radio" name="sample" value="">
+                                    <i class="input-helper"></i>
+                                    Cada
+                                  </label>
+                                </div>
+                            </div>
+                            <div class="col-m-3">
+
+                                <div class="col-m-1">
+                                  <div class="fg-line">
+                                    <input type="number" ng-model="entregableM.numeroTiempo" class="form-control input-sm" placeholder="Ingrese la cantidad">
+                                  </div>
+
+                                </div>
+                              <div class="col-m-1">
+                                <select class="form-control" data-placeholder="Seleccione un periodo">
+                                  <option value="dias"> Dia(s)</option>
+                                  <option value="semanas" >Semana(s)</option>
+                                </select>
+                              </div>
+
+                            </div>
                       </div>
                   </div>
               </form>

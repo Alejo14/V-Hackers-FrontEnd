@@ -6,8 +6,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   ctrl.tituloModificado= "Entregable";
   ctrl.tituloVer="Entregables";
   ctrl.filas=[1,2,3,4];
-  ctrl.dias=['D','L','M','Mi','J','V','S'];
-  ctrl.columnas=[1,2,3,4,5,6,7];
+  ctrl.dias=['L','M','Mi','J','V','S'];
+  ctrl.columnas=[1,2,3,4,5,6];
   ctrl.entregableM=[];
   ctrl.id=0;
   // var d=new Date("5/11/2020");
@@ -46,30 +46,34 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
 
   ctrl.crearEntregable = function (entregable) {
     console.log(angular.toJson(entregable));//Envio el json para crear el entregable
-    year=entregable.fechaEntrega.getFullYear();
-    month=entregable.fechaEntrega.getMonth();
-    date=entregable.fechaEntrega.getDate();
-    hours=entregable.horaEntrega.getHours();
-    minutes=entregable.horaEntrega.getMinutes();
-    data={
-      "id": uuid(), //Defecto
-      "nombre": entregable.nombre,
-      "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
-      "tieneAlarma": 1,
-      "ponderacion": 1
-      }
-    entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
-        swal("¡Bien hecho!", "El entregable se creo exitosamente" , "success");
-    });
-    entregable.id=0;
-    entregable.tieneAlarma=1;
-    entregable.nombre="";
-    entregable.fechaEntrega="";
-    entregable.horaEntrega="";
-    entregable.fechaFin="";
-    entregable.horaFin="";
-    entregable.descripcion="";
-    entregable.ponderacion="";
+    if (!entregable || !(entregable.nombre) || !(entregable.descripcion) || !(entregable.fechaEntrega) || !(entregable.ponderacion)){
+      swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
+    }else {
+      year=entregable.fechaEntrega.getFullYear();
+      month=entregable.fechaEntrega.getMonth();
+      date=entregable.fechaEntrega.getDate();
+      hours=entregable.horaEntrega.getHours();
+      minutes=entregable.horaEntrega.getMinutes();
+      data={
+        "id": uuid(), //Defecto
+        "nombre": entregable.nombre,
+        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+        "tieneAlarma": 1,
+        "ponderacion": 1
+        }
+      entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
+          swal("¡Bien hecho!", "El entregable se creo exitosamente" , "success");
+      });
+      entregable.id=0;
+      entregable.tieneAlarma=1;
+      entregable.nombre="";
+      entregable.fechaEntrega="";
+      entregable.horaEntrega="";
+      entregable.fechaFin="";
+      entregable.horaFin="";
+      entregable.descripcion="";
+      entregable.ponderacion="";
+    }
   };
 
 
