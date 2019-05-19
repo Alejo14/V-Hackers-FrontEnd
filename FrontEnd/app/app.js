@@ -80,6 +80,11 @@ function ($urlRouterProvider,stateHelperProvider) {
           name: 'crear-semestre',
           url: '/crear-semestre',
           templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaCrearSemestre.html'
+        },
+        {
+          name: 'crear-especialidad',
+          url: '/crear-especialidad',
+          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
         }
       ]
     }, { keepOriginalNames: true });

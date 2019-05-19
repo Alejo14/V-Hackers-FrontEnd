@@ -15,5 +15,9 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('crear-semestre');
   }
 
+  ctrl.crearEspecialidad = function(semestre){
+    $state.go('crear-especialidad');
+  }
+
 
 }]);

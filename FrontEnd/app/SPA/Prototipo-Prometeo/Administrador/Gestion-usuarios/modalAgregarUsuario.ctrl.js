@@ -26,16 +26,18 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       nombre: 'Ingenieria Industrial'
     }
   ];
-  ctrl.rolesUsuario = [
+  ctrl.tipoUsuarioLista = [
     {
       id: "",
-      descripcion: "Alumno",
-      fechaCreacion: ""
+      nombre: "Profesor"
     },
     {
       id: "",
-      descripcion: "Profesor",
-      fechaCreacion: ""
+      nombre: "Asistente de docencia"
+    },
+    {
+      id: "",
+      nombre: "Alumnos"
     }
   ];
 

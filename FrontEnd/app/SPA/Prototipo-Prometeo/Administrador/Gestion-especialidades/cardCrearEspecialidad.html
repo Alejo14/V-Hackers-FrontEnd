@@ -1,0 +1,54 @@
+<!-- <div class="card-body"> -->
+  <div class="row">
+    <div class="col-6">
+      <form class="form-horizontal ng-pristine ng-valid">
+        <div class="card-body card-padding">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Código*:</label>
+            <div class="col-sm-8">
+              <div class="fg-line">
+                  <input type="text" class="form-control input-sm" ng-model="semestre.anioCiclo" placeholder="e.g: Escriba Nombre">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Nombre*:</label>
+            <div class="col-sm-8">
+              <div class="fg-line">
+                  <input type="text" class="form-control input-sm" ng-model="semestre.anioCiclo" placeholder="e.g: Paterno">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Facultad*:</label>
+            <div class="col-sm-8">
+              <div class="fg-line">
+                <select class="form-control"
+                  placeholder="Seleccione una facultad"
+                  ng-model="facultad"
+                  ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
+                  ng-change="ctrl.obtenerEspecialidades()">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-6">
+      <form class="form-horizontal ng-pristine ng-valid">
+        <div class="card-body card-padding">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Responsable*:</label>
+            <div class="col-sm-8">
+              <div class="fg-line">
+                  <input type="text" class="form-control input-sm" ng-model="semestre.responsable" placeholder="Search">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+<!-- </div> -->
