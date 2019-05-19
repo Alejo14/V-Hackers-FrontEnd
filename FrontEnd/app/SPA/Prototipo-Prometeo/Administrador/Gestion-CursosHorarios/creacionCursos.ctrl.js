@@ -82,8 +82,7 @@ function($scope,$state, gestionUsuariosService, $uibModal){
         swal({
           title: "Curso guardado",
           icon:"success",
-          text:"{{ctrl.cursoNuevo.claveCurso}},ctrl.cursoNuevo.nombreCurso, ctrl.cursoNuevo.numeroCreditos, ctrl.cursoNuevo.facultad,ctrl.cursoNuevo.especialidad"
-        });
+          text:`${ctrl.cursoNuevo.claveCurso},${ctrl.cursoNuevo.nombreCurso}, ${ctrl.cursoNuevo.numeroCreditos}, ${ctrl.cursoNuevo.facultad},${ctrl.cursoNuevo.especialidad}`        });
       }
     });
   };
