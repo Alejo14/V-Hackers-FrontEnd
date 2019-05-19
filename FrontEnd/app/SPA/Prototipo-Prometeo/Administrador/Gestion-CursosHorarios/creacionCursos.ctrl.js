@@ -2,7 +2,13 @@ angular.module('vHackersModule').controller('creacionCursosCtrl', ['$scope','$st
 function($scope,$state, gestionUsuariosService, $uibModal){
   var ctrl = this;
   ctrl.cargaUnitaria = true;
-  ctrl.cursoNuevo = {};
+  ctrl.cursoNuevo = {
+    "id": "",
+    "claveCurso": "",
+    "numeroCreditos": "",
+    "facultad": "",
+    "especialidad": ""
+  };
   ctrl.listaCursos = [];
 
   function uuid() {
@@ -44,6 +50,40 @@ function($scope,$state, gestionUsuariosService, $uibModal){
     }).then(function(regresar){
       if (regresar == "confirm") {
         $state.go('administrador');
+      }
+      else{
+        swal({
+          title: "Curso nuevo",
+          text:"{{ctrl.cursoNuevo.claveCurso}},ctrl.cursoNuevo.nombreCurso, ctrl.cursoNuevo.numeroCreditos, ctrl.cursoNuevo.facultad,ctrl.cursoNuevo.especialidad"
+        });
+      }
+    });
+  };
+
+  ctrl.guardarCurso = function () {
+    swal({
+      title: "¿Está seguro de que quieres guardar?",
+      text: "Los cambios se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger",
+          value: "cancelar"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
+          value: "confirm"
+        }
+      }
+    }).then(function(guardar){
+      if (guardar == "confirm") {
+        swal({
+          title: "Curso guardado",
+          icon:"success",
+          text:"{{ctrl.cursoNuevo.claveCurso}},ctrl.cursoNuevo.nombreCurso, ctrl.cursoNuevo.numeroCreditos, ctrl.cursoNuevo.facultad,ctrl.cursoNuevo.especialidad"
+        });
       }
     });
   };
