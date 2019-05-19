@@ -34,4 +34,19 @@ function($q, $http) {
     return $defer.promise;
   }
 
+  servicio.eliminarProyecto = function(data){
+    var urlElimProyecto = 'http://localhost:7001/proyectos/eliminar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlElimProyecto,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

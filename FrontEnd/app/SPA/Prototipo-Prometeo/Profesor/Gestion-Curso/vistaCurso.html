@@ -42,11 +42,17 @@
             </div>
             <div class="card-body">
               <ul>
-                <li ng-repeat="proyecto in ctrl.proyectosLista">
-                  <a ng-click="ctrl.verProyecto(proyecto)">
-                    {{proyecto.nombre}}
-                  </a>
-                </li>
+                <div class="col-md-8">
+                  <li ng-repeat="proyecto in ctrl.proyectosLista">
+                      {{proyecto.nombre}}
+                      <a style="float:right" ng-click="ctrl.eliminarProyecto(proyecto)">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                      <a style="float:right" ng-click="ctrl.verProyecto(proyecto)">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                  </li>
+                </div>
               </ul>
             </div>
           </div>
@@ -60,9 +66,19 @@
             </div>
             <div class="card-body">
               <ul>
-                <li ng-repeat="entregable in ctrl.entregablesLista">
-                    {{entregable.nombre}}
-                </li>
+                <div class="col-md-8">
+                  <li ng-repeat="entregable in ctrl.entregablesLista">
+                      {{entregable.nombre}}
+                      <a style="float:right" ng-click="">
+                        <i class="fas fa-trash-alt"></i>
+
+                      </a>
+                      <a style="float:right" ng-click="">
+                        <i class="fas fa-pencil-alt"></i>
+
+                      </a>
+                  </li>
+                </div>
               </ul>
             </div>
           </div>
