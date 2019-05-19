@@ -1,0 +1,77 @@
+
+<div class="container-fluid">
+  <div class="card-body">
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-6 control-label m-t-10 m-b-0">Clave curso*: </label>
+            <div class="col-sm-6">
+              <div class="fg-line">
+                <input class="form-control input-sm" placeholder="Ingrese la clave del curso" ng-model = "ctrl.cursoNuevo.claveCurso">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-6 control-label m-t-10 m-b-0">Nombre curso*: </label>
+            <div class="col-sm-6">
+              <div class="fg-line">
+                <input class="form-control input-sm" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.cursoNuevo.nombreCurso">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-6 control-label m-t-10 m-b-0">Número de créditos*: </label>
+            <div class="col-sm-6">
+              <div class="fg-line">
+                <input class="form-control input-sm" placeholder="eg: 3.5 , 5" ng-model = "ctrl.cursoNuevo.numeroCreditos">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-6 control-label m-t-10 m-b-0"align="left">Facultad*: </label>
+            <div class="col-sm-6">
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control input-sm" ng-model="ctrl.cursoNuevo.facultad">
+                    <Option>Seleccionar facultad</Option>
+                    <Option>cargar facultades</Option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-6 control-label m-t-10 m-b-0" >Especialidad*: </label>
+            <div class="col-sm-6">
+              <div class="fg-line">
+                <div class="select">
+                  <select class="form-control input-sm" ng-model="ctrl.cursoNuevo.especialidad">
+                    <Option>Seleccionar especialidad</Option>
+                    <Option>cargar especialidades</Option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

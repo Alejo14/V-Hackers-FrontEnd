@@ -1,5 +1,17 @@
+//Obtener variables de ambiente
+
+var ambiente = {};
+
+//Importar las variables si estas estan definidas
+
+if (window) {
+  Object.assign(ambiente, window.__env);
+}
+
 var vHackersModule = angular.module('vHackersModule', ['ui.bootstrap', 'ngTable','ui.router','ui.router.stateHelper', 'localytics.directives']);
 
+//Regitrar las variables de ambiente
+vHackersModule.constant('variablesAmbiente', ambiente);
 //Se ejecuta antes de que corra la aplicacion
 vHackersModule.config(['$urlRouterProvider', 'stateHelperProvider',
 function ($urlRouterProvider,stateHelperProvider) {

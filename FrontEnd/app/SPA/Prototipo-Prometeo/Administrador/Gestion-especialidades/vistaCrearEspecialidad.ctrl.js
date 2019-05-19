@@ -2,9 +2,15 @@ angular.module('vHackersModule').controller('administradorEspecialidadCtrl', ['$
 
 function($scope, $state,$stateParams, administradorEspecialidadService, $uibModal){
   var ctrl = this;
-  ctrl.especialidadM=[];
-  ctrl.id=0;
   ctrl.cargaUnitaria = true;
+
+  ctrl.especialidad = {
+
+    codigo : "",
+    nombre : "",
+    facultad : "",
+    responsable : ""
+  };
 
   function uuid() {
       function randomDigit() {
@@ -25,6 +31,21 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     else ctrl.cargaUnitaria = false;
   }
 
+  ctrl.crearEspecialidad = function(especialidad) {
+    data = {
+      "id": uuid(), //Defecto
+      "codigo": especialidad.codigo,
+      "nombre": especialidad.nombre,
+      "facultad": especialidad.facultad,
+      "responsable": especialidad.responsable,
+    }
+    console.log(angular.toJson(data));//Envio el json para crear el semestre
+
+    administradorSemestreService.registroSemestre(angular.toJson(data)).then(function () {
+      swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success");
+    });
+  };
+
   ctrl.regresarAdministrador = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
@@ -40,8 +61,8 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+    }).then(function (especialidadConfirma) {
+      if (especialidadConfirma !== "cancelar") {
         $state.go('administrador');
       }
     });
@@ -49,50 +70,19 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
 
   ctrl.facultadesLista = [
     {
-      id: '',
+      id: '0',
       nombre: 'Ciencias e ingeniería'
     },
     {
-      id: '',
+      id: '1',
       nombre: 'Estudios Generales Ciencias'
     }
   ];
-
-  ctrl.especialidadesLista = [
-    {
-      id: '',
-      nombre: 'Ingenieria Informatica'
-    },
-    {
-      id: '',
-      nombre: 'Ingenieria Industrial'
-    }
-  ];
-  ctrl.tipoUsuarioLista = [
-    {
-      id: "",
-      nombre: "Profesor"
-    },
-    {
-      id: "",
-      nombre: "Asistente de docencia"
-    },
-    {
-      id: "",
-      nombre: "Alumnos"
-    }
-  ];
-  ctrl.obtenerFacultades = function () {
-    gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
-      ctrl.facultadesLista = facultadesListaData;
-    });
-  };
-
-  ctrl.obtenerEspecialidades = function () {
-    gestionUsuariosService.obtenerEspecialidades($scope.facultad.id).then(function (especialidadesListaData) {
-      ctrl.especialidadesLista = especialidadesListaData;
-    });
-  };
+  // ctrl.obtenerFacultades = function () {
+  //   gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
+  //     ctrl.facultadesLista = facultadesListaData;
+  //   });
+  // };
 
 
 

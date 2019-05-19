@@ -1,13 +1,14 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('gestionUsuariosService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('gestionUsuariosService', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
   servicio.obtenerUsuarios = function(){
 
     //var urlObtenerUsuarios = 'data/usuariosLista.json';
-    var urlObtenerUsuarios = 'http://localhost:7003/usuarios';
+    //var urlObtenerUsuarios = 'http://localhost:7003/usuarios';
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -21,7 +22,7 @@ function($q, $http) {
   };
 
   servicio.obtenerFacultades = function () {
-    var urlObtenerFacultades = 'http://localhost:7005/facultad';
+    var urlObtenerFacultades = variablesAmbiente.apiUrl + variablesAmbiente.puertoFacultades + '/facultad';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -35,7 +36,7 @@ function($q, $http) {
   };
 
   servicio.obtenerEspecialidades = function (idFacultadEspecialidad) {
-    var urlObtenerEspecialidades = 'http://localhost:7005/especialidad/' + idFacultadEspecialidad;
+    var urlObtenerEspecialidades = variablesAmbiente.apiUrl + variablesAmbiente.puertoFacultades + '/especialidad/' + idFacultadEspecialidad;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -49,7 +50,7 @@ function($q, $http) {
   };
 
   servicio.regitstrarUsuario = function (usuarioNuevo) {
-    var urlRegistrarUsuario = 'http://localhost:7003/usuarios/crear';
+    var urlRegistrarUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
