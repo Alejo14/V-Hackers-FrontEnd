@@ -19,5 +19,13 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('crear-especialidad');
   }
 
+  ctrl.crearCurso = function(curso){
+    $state.go('creacion-cursos');
+  }
+
+  ctrl.listarCursos = function(cursos){
+    $state.go('listar-cursos');
+  }
+
 
 }]);
