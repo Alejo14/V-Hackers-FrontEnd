@@ -1,5 +1,5 @@
-angular.module("vHackersModule").service('herramientaEvaluacionServicio', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('herramientaEvaluacionServicio', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
@@ -18,7 +18,7 @@ function($q, $http) {
   }
 
   servicio.enviarCalificacion = function(evaluacion){
-    var urlEnviarCalificacion = 'http://localhost:7007/calificacion';
+    var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/calificacion';
     var $defer = $q.defer();
     $http({
         method: 'POST',
