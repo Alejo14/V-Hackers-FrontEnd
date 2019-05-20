@@ -27,5 +27,8 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('listar-cursos');
   }
 
+  ctrl.gestionUsuarios = function(cursos){
+    $state.go('gestion-usuarios');
+  }
 
 }]);

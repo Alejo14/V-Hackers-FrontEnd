@@ -15,7 +15,7 @@ function($scope, hackersService, $uibModal){
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
     var modalInstance = $uibModal.open({
       animation: false,
-      templateUrl: 'SPA/Prototipo-Prometeo/modalListarAlumnos.html',
+      templateUrl: 'SPA/Prototipo-Prometeo/Ejemplos/modalListarAlumnos.html',
       controller: 'modalListarAlumnosCtrl as ctrl',
       size: 'lg',
       backdrop: true,

@@ -1,0 +1,27 @@
+<section id="main">
+  <div ng-controller="vistaPrincipalProfesorCtrl as ctrl">
+    <h1>Bienvenido Profesor</h1>
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Funcionalidades:</h2>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12 ">
+                <button class="btn btn-default" ng-click = "ctrl.cursoProfesor()"><i class="fa fa-lightbulb"></i> Curso Profesor</button>
+                <button class="btn btn-default" ng-click = "ctrl.calificacionEntregable()"><i class="fa fa-lightbulb"></i> Calificación Entregable</button>
+                <button class="btn btn-default" ng-click = "ctrl.listarEntregables()"><i class="fa fa-lightbulb"></i> Listar Entregables</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

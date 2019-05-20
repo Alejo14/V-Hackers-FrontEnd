@@ -28,12 +28,17 @@ function ($urlRouterProvider,stateHelperProvider) {
           url: '/principal',
           templateUrl: 'SPA/Prototipo-Prometeo/vistaPrincipal.html'
         },
+        //VISTAS DE EJEMPLO
         {
           name: 'ejemplos',
-          abstract: true,
           url: '/ejemplos',
           templateUrl: 'index.html',
           children:[
+            {
+              name: 'seleccionEjemplo',
+              url: '/seleccionEjemplo',
+              templateUrl: 'SPA/Prototipo-Prometeo/Ejemplos/vistaEjemplos.html'
+            },
             {
               name: 'listaAlumnos',
               url: '/listaAlumnos',
@@ -46,66 +51,82 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
           ]
         },
-        {
-          name: 'calificacion',
-          url: '/calificacion',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
-        },
-        {
-          name: 'profesor',
-          url: '/profesor',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaInicio.html'
-        },
-        {
-          name: 'curso',
-          url: '/curso',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
-        },
-        {
-          name:'gestion-proyecto',
-          url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
-        },
-        {
-            name: 'evaluacion-herramienta',
-            url: '/evaluacion-herramienta',
-            templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaCrearEntregable.html'
-        },
-        {
-          name: 'gestion-usuarios',
-          url: '/gestion-usuarios',
-          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
-        },
-        {
-          name: 'creacion-cursos',
-          url: '/creacion-cursos',
-          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
-        },
-        {
-          name: 'evaluacion-herramienta-modificar',
-          url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
-        },
-        {
-          name: 'evaluacion-herramienta-listar',
-          url: '/evaluacion-herramienta-listar',
-          templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
-        },
+        //VISTAS DEL ADMINISTRADOR
         {
           name: 'administrador',
           url: '/administrador',
-          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/vistaPrincipalAdministrador.html'
+          templateUrl: 'index.html',
+          children:[
+            {
+              name: 'inicioAdmin',
+              url: '/inicioAdmin',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/vistaPrincipalAdministrador.html'
+            },
+            {
+              name: 'crear-semestre',
+              url: '/crear-semestre',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaCrearSemestre.html'
+            },
+            {
+              name: 'crear-especialidad',
+              url: '/crear-especialidad',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
+            },
+            {
+              name: 'gestion-usuarios',
+              url: '/gestion-usuarios',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
+            },
+            {
+              name: 'creacion-cursos',
+              url: '/creacion-cursos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
+            }
+          ]
         },
+        //VISTAS DEL PROFESOR
         {
-          name: 'crear-semestre',
-          url: '/crear-semestre',
-          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaCrearSemestre.html'
+          name: 'profesor',
+          url: '/profesor',
+          templateUrl: 'index.html',
+          children:[
+            {
+              name: 'inicioProfes',
+              url: '/inicioProfes',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaPrincipalProfesor.html'
+            },
+            {
+              name: 'calificacion',
+              url: '/calificacion',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
+            },
+            {
+              name: 'curso',
+              url: '/curso',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
+            },
+            {
+              name:'gestion-proyecto',
+              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
+            },
+            {
+              name: 'evaluacion-herramienta',
+              url: '/evaluacion-herramienta',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaCrearEntregable.html'
+            },
+            {
+              name: 'evaluacion-herramienta-modificar',
+              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
+            },
+            {
+              name: 'evaluacion-herramienta-listar',
+              url: '/evaluacion-herramienta-listar',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
+            }
+          ]
         },
-        {
-          name: 'crear-especialidad',
-          url: '/crear-especialidad',
-          templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
-        }
       ]
     }, { keepOriginalNames: true });
 }]);
