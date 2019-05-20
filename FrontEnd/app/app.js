@@ -29,14 +29,22 @@ function ($urlRouterProvider,stateHelperProvider) {
           templateUrl: 'SPA/Prototipo-Prometeo/vistaPrincipal.html'
         },
         {
-          name: 'listaAlumnos',
-          url: '/listaAlumnos',
-          templateUrl: 'SPA/Prototipo-Prometeo/vistaListarAlumnos.html'
-        },
-        {
-          name: 'tabla',
-          url: '/tabla',
-          templateUrl: 'SPA/Prototipo-Prometeo/vistaTabla.html'
+          name: 'ejemplos',
+          abstract: true,
+          url: '/ejemplos',
+          templateUrl: 'index.html',
+          children:[
+            {
+              name: 'listaAlumnos',
+              url: '/listaAlumnos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Ejemplos/vistaListarAlumnos.html'
+            },
+            {
+              name: 'tabla',
+              url: '/tabla',
+              templateUrl: 'SPA/Prototipo-Prometeo/Ejemplos/vistaTabla.html'
+            },
+          ]
         },
         {
           name: 'calificacion',
