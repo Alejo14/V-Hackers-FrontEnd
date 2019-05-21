@@ -62,7 +62,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
         "ponderacion": 1
         }
       entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
-          swal("¡Bien hecho!", "El entregable se creo exitosamente" , "success");
+          swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
       });
       entregable.id=0;
       entregable.tieneAlarma=1;
@@ -80,7 +80,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   ctrl.regresarProyectos = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {
@@ -103,7 +103,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   ctrl.regresarEntregables = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {
@@ -157,7 +157,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
       }
       console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
-        swal("¡Bien hecho!", "El entregable se modifico exitosamente" , "success");
+        swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
     });
     entregableM.id=0;
     entregableM.tieneAlarma=1;
@@ -172,20 +172,35 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    // year=entregableM.fechaEntrega.getFullYear();
-    // month=entregableM.fechaEntrega.getMonth();
-    // date=entregableM.fechaEntrega.getDate();
-    data={
-      "id": entregableM.id, //Defecto
-      "nombre": entregableM.nombre,
-      "fechaEntrega": (new Date(Date.now()))*1,//Se da formato a la fecha para que se registre con hora y fecha
-      "tieneAlarma": 1,
-      "ponderacion": 1
+    swal({
+      title: "¿Está seguro que quiere eliminar el entregable?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
       }
-      console.log(angular.toJson(data));
-    entregableService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
-        swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
-        $state.go('curso');
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        data={
+          "id": entregableM.id, //Defecto
+          "nombre": entregableM.nombre,
+          "fechaEntrega": (new Date(Date.now()))*1,//Se da formato a la fecha para que se registre con hora y fecha
+          "tieneAlarma": 1,
+          "ponderacion": 1
+          }
+          console.log(angular.toJson(data));
+        entregableService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+            $state.go('curso');
+        });
+      }
     });
 
   };

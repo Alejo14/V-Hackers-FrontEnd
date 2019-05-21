@@ -127,6 +127,24 @@ function ($urlRouterProvider,stateHelperProvider) {
             }
           ]
         },
+        //VISTAS DEL ALUMNO
+        {
+          name: 'alumno',
+          url: '/alumno',
+          templateUrl: 'index.html',
+          children:[
+            {
+              name: 'inicioAlumnos',
+              url: '/inicioAlumnos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
+            },
+            {
+              name: 'cargar-archivos',
+              url: '/cargar-archivos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
+            }
+          ]
+        },
       ]
     }, { keepOriginalNames: true });
 }]);
