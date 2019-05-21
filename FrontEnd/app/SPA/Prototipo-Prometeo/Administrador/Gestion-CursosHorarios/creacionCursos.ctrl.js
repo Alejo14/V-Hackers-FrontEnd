@@ -52,10 +52,7 @@ function($scope,$state, gestionUsuariosService, $uibModal){
         $state.go('administrador');
       }
       else{
-        swal({
-          title: "Curso nuevo",
-          text:"{{ctrl.cursoNuevo.claveCurso}},ctrl.cursoNuevo.nombreCurso, ctrl.cursoNuevo.numeroCreditos, ctrl.cursoNuevo.facultad,ctrl.cursoNuevo.especialidad"
-        });
+        
       }
     });
   };
