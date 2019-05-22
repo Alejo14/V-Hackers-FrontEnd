@@ -64,6 +64,7 @@ function($q, $http) {
        });
       return $defer.promise;
     }
+
     servicio.listarEntregables = function(){
 
       var urlListarEntregables = 'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';

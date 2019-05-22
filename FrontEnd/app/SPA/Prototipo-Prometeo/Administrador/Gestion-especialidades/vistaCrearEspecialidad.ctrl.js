@@ -5,7 +5,6 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   ctrl.cargaUnitaria = true;
 
   ctrl.especialidad = {
-
     codigo : "",
     nombre : "",
     facultad : "",
@@ -41,8 +40,45 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     }
     console.log(angular.toJson(data));//Envio el json para crear el semestre
 
-    administradorSemestreService.registroSemestre(angular.toJson(data)).then(function () {
-      swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success");
+    administradorEspecialidadService.registroEspecialidad(angular.toJson(data)).then(function () {
+      swal("¡Bien hecho!", "La especialidad fue creada exitosamente" , "success").then(function () {
+        $state.go('inicioAdmin');
+      });
+    });
+
+  };
+
+  ctrl.agregarResponsable = function () {
+    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/modalResponsable.html',
+      controller: 'especialidadResponsableCtrl as ctrl',
+      size: 'lg',
+      backdrop: true,
+      keyboard: true,
+    });
+
+    //Recibo parametro de retorno
+    modalInstance.result.then( function (parametroRetorno) {
+      if (parametroRetorno) {
+        var responsableSeleccionado = {
+          "id": parametroRetorno.id,
+          "nombres": parametroRetorno.nombres,
+        };
+        ctrl.especialidad.responsable = responsableSeleccionado.id;
+        swal({
+          title: "¡Listo!",
+          text: "Responsable seleccionado con éxito",
+          icon: "success",
+          buttons: {
+            confirm: {
+              text: "ok",
+              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+            }
+          }
+        });
+      }
     });
   };
 
@@ -61,9 +97,9 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (especialidadConfirma) {
-      if (especialidadConfirma !== "cancelar") {
-        $state.go('administrador');
+    }).then(function (especialidadNuevaConfirma) {
+      if (especialidadNuevaConfirma !== "cancelar") {
+        $state.go('inicioAdmin');
       }
     });
   };

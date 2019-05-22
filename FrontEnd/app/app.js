@@ -112,7 +112,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name:'gestion-proyecto',
-              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
+              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaHabilitacion/:ponderacion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
             },
             {
@@ -122,7 +122,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-modificar',
-              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
+              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {

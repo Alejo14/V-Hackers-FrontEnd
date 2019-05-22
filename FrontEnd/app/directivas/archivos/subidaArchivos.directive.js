@@ -11,7 +11,7 @@ angular.module('vHackersModule').directive('subirArchivo', [function () {
             element.bind('change', function () {
 
                 if (scope.eventoPostSeleccion) {
-                    scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size }, scope.parametros);
+                    scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fecha: Date.now()}, scope.parametros);
                 }
 
                 //var formData = new FormData();
