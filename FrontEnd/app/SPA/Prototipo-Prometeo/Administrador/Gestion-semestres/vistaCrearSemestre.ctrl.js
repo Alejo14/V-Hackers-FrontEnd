@@ -2,8 +2,14 @@ angular.module('vHackersModule').controller('administradorSemestreCtrl', ['$scop
 
 function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
   var ctrl = this;
-  ctrl.entregableM=[];
-  ctrl.id=0;
+  ctrl.semestre={
+    anioCiclo : "",
+    ciclo : "",
+    tipoCiclo : "",
+    nombreCiclo : "",
+    fechaInicio : "",
+    fechaFin : ""
+  };
 
   function uuid() {
       function randomDigit() {
@@ -20,32 +26,29 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
   }
 
   ctrl.crearSemestre = function(semestre){
-    console.log(angular.toJson(semestre));//Envio el json para crear el semestre
     yearI = semestre.fechaInicio.getFullYear();
     monthI = semestre.fechaInicio.getMonth();
     dateI = semestre.fechaInicio.getDate();
     yearF = semestre.fechaFin.getFullYear();
     monthF = semestre.fechaFin.getMonth();
-    dataF = semestre.fechaFin.getDate();
+    dateF = semestre.fechaFin.getDate();
     data = {
       "id": uuid(), //Defecto
-      "añoCiclo": semestre.anioCiclo,
-      "ciclo": semestre.ciclo,
-      "tipoCiclo": semestre.tipoCiclo,
+      "cicloAcadémico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
       "nombreCiclo": semestre.nombreCiclo,
+      //no se debe mandar fecha de creación
+      "fechaCreación": (new Date(2019, 05, 20)),
       "fechaInicio": (new Date(yearI, monthI, dateI)),//Se da formato a la fecha para que se registre
       "fechaFin": (new Date(yearF, monthF, dateF)),//Se da formato a la fecha para que se registre
     }
+
+    console.log(angular.toJson(data));//Envio el json para crear el semestre
+
     administradorSemestreService.registroSemestre(angular.toJson(data)).then(function () {
-      swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success");
+      swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success").then(function () {
+        $state.go('inicioAdmin');
+      });
     });
-    semestre.id = 0;
-    semestre.anioCiclo = "";
-    semestre.ciclo = "";
-    semestre.tipoCiclo = "";
-    semestre.nombreCiclo = "";
-    semestre.fechaInicio = "";
-    semestre.fechaFin = "";
   };
 
   ctrl.regresarAdministrador = function () {
@@ -63,9 +66,9 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('administrador');
+    }).then(function (semestreNuevoConfirma) {
+      if (semestreNuevoConfirma !== "cancelar") {
+        $state.go('inicioAdmin');
       }
     });
   };
