@@ -156,7 +156,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
 
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    if (!entregableM || !(entregableM.nombre) || !(entregableM.descripcion) || !(entregableM.fechaEntrega) || !(entregableM.ponderacion)){
+    if (!entregableM || !(entregableM.nombre) || !(entregableM.descripcion) || !(entregableM.fechaEntrega) || !(entregableM.puntajeMaximo)){
       swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
     }else {
       year=entregableM.fechaEntrega.getFullYear();
@@ -171,13 +171,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
       if (!entregableM.horaHabilitacion) {hoursH=0} else {hoursH=entregableM.horaHabilitacion.getHours();}
       if (!entregableM.horaHabilitacion) {minutesH=0} else {minutesH=entregableM.horaHabilitacion.getMinutes();}
       data={
-        "id": uuid(), //Defecto
-        "nombre": entregable.nombre,
+        "id": entregableM.id, //Defecto
+        "nombre": entregableM.nombre,
         "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
         "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
         "tieneAlarma": 1,
         "ponderacion": 1,
-        "descripcion": entregable.descripcion
+        "descripcion": entregableM.descripcion
         }
       console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
@@ -192,6 +192,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     entregableM.horaFin="";
     entregableM.descripcion="";
     entregableM.ponderacion="";
+    entregableM.puntajeMaximo="";
     };
 };
 
