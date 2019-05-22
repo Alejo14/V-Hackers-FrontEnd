@@ -81,6 +81,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'creacion-cursos',
               url: '/creacion-cursos',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
+            },
+            {
+              name: 'gestion-horarios',
+              url: '/gestion-horarios',
+              templateUrl: 'SPA/Prototipo_Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
             }
           ]
         },
