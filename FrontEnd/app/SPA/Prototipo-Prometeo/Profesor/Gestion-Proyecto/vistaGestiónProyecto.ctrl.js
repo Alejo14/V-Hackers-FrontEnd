@@ -111,6 +111,18 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
         hoursF=proyectoNuevo.fechaFin.getHours();
         minutesF=proyectoNuevo.fechaFin.getMinutes();
 
+        if($('#ts1').is(':checked')){
+            var vis = 1
+        }else{
+            var vis = 0;
+        }
+
+        if($('#ts2').is(':checked')){
+            var horas = 1
+        }else{
+            var horas = 0;
+        }
+
         console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
         data={
           "id": uuid(),
@@ -118,7 +130,12 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "fechaCreacion": (new Date())*1,
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
           "fechaFin": (new Date(yearF, monthF, dateF, hoursF, minutesF,0))*1,
-          "ponderacion": parseInt(proyectoNuevo.ponderacion)
+          "ponderacion": parseInt(proyectoNuevo.ponderacion),
+          "descripcion": "Hola",
+          "visible": vis,
+          "registroHoras": horas,
+          "metodoTrabajo": 0,
+          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
           }
           console.log(angular.toJson(data));
           gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
@@ -207,5 +224,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
   }
 
   ctrl.init();
+
+
 
 }]);
