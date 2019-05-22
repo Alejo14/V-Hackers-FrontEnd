@@ -32,11 +32,15 @@
                               {{archivo.nombre}}
                             </td>
                             <td data-title="'Fecha y Hora de Última modificación'">
+                              {{archivo.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
                             </td>
                             <td data-title="'Tamaño'">
-                              {{archivo.tamano}}
+                              {{archivo.tamano/1000}} KB
                             </td>
                             <td data-title="'Eliminar'">
+                              <a style="float:right" ng-click="ctrl.elminarArchivo(archivo)">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
                             </td>
                           </tr>
                         </table>

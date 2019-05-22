@@ -9,6 +9,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   ctrl.dias=['L','M','Mi','J','V','S'];
   ctrl.columnas=[1,2,3,4,5,6];
   ctrl.entregableM=[];
+  $scope.fechaActual=new Date();
   ctrl.id=0;
   // var d=new Date("5/11/2020");
   // $scope.entregable={nombEntrg: 'Entregable 1', fechaI:new Date("2/05/2019"), horaI:new Date("2/05/2019 20:08"),
@@ -52,14 +53,22 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
       year=entregable.fechaEntrega.getFullYear();
       month=entregable.fechaEntrega.getMonth();
       date=entregable.fechaEntrega.getDate();
-      hours=entregable.horaEntrega.getHours();
-      minutes=entregable.horaEntrega.getMinutes();
+      if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
+      if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
+
+      yearH=entregable.fechaHabilitacion.getFullYear();
+      monthH=entregable.fechaHabilitacion.getMonth();
+      dateH=entregable.fechaHabilitacion.getDate();
+      if (!entregable.horaHabilitacion) {hoursH=0} else {hoursH=entregable.horaHabilitacion.getHours();}
+      if (!entregable.horaHabilitacion) {minutesH=0} else {minutesH=entregable.horaHabilitacion.getMinutes();}
       data={
         "id": uuid(), //Defecto
         "nombre": entregable.nombre,
         "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
         "tieneAlarma": 1,
-        "ponderacion": 1
+        "ponderacion": 1,
+        "descripcion": entregable.descripcion
         }
       entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
           swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
@@ -69,7 +78,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
       entregable.nombre="";
       entregable.fechaEntrega="";
       entregable.horaEntrega="";
-      entregable.fechaFin="";
+      entregable.fechaHabilitacion="";
       entregable.horaFin="";
       entregable.descripcion="";
       entregable.ponderacion="";
@@ -128,7 +137,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   };
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega});
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion});
 
   };
 
@@ -137,7 +147,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     ctrl.entregableM.nombre=$stateParams.nombre;
     ctrl.entregableM.id=$stateParams.id;
     ctrl.entregableM.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
-
+    ctrl.entregableM.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+    ctrl.entregableM.descripcion=$stateParams.descripcion;
   }
 
 
@@ -145,16 +156,29 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
 
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    year=entregableM.fechaEntrega.getFullYear();
-    month=entregableM.fechaEntrega.getMonth();
-    date=entregableM.fechaEntrega.getDate();
-    data={
-      "id": entregableM.id, //Defecto
-      "nombre": entregableM.nombre,
-      "fechaEntrega": (new Date(year, month, date))*1,//Se da formato a la fecha para que se registre con hora y fecha
-      "tieneAlarma": 1,
-      "ponderacion": 1
-      }
+    if (!entregableM || !(entregableM.nombre) || !(entregableM.descripcion) || !(entregableM.fechaEntrega) || !(entregableM.ponderacion)){
+      swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
+    }else {
+      year=entregableM.fechaEntrega.getFullYear();
+      month=entregableM.fechaEntrega.getMonth();
+      date=entregableM.fechaEntrega.getDate();
+      if (!entregableM.horaEntrega) {hours=0} else {hours=entregableM.horaEntrega.getHours();}
+      if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
+
+      yearH=entregableM.fechaHabilitacion.getFullYear();
+      monthH=entregableM.fechaHabilitacion.getMonth();
+      dateH=entregableM.fechaHabilitacion.getDate();
+      if (!entregableM.horaHabilitacion) {hoursH=0} else {hoursH=entregableM.horaHabilitacion.getHours();}
+      if (!entregableM.horaHabilitacion) {minutesH=0} else {minutesH=entregableM.horaHabilitacion.getMinutes();}
+      data={
+        "id": uuid(), //Defecto
+        "nombre": entregable.nombre,
+        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
+        "tieneAlarma": 1,
+        "ponderacion": 1,
+        "descripcion": entregable.descripcion
+        }
       console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
         swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
@@ -164,11 +188,12 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     entregableM.nombre="";
     entregableM.fechaEntrega="";
     entregableM.horaEntrega="";
-    entregableM.fechaFin="";
+    entregableM.fechaHabilitacion="";
     entregableM.horaFin="";
     entregableM.descripcion="";
     entregableM.ponderacion="";
-  };
+    };
+};
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
@@ -198,8 +223,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
           console.log(angular.toJson(data));
         entregableService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
             swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
-            $state.go('curso');
         });
+        ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM.id));
       }
     });
 
