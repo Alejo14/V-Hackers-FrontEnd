@@ -77,6 +77,47 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
     });
   }
 
+  ctrl.verEntregable = function (entregable) {
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion});
+
+  };
+
+  ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+    swal({
+      title: "¿Está seguro que quiere eliminar el entregable?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        data={
+          "id": entregableM.id, //Defecto
+          "nombre": entregableM.nombre,
+          "fechaEntrega": (new Date(Date.now()))*1,//Se da formato a la fecha para que se registre con hora y fecha
+          "tieneAlarma": 1,
+          "ponderacion": 1
+          }
+          console.log(angular.toJson(data));
+        profesorCursoService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+        });
+        ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM.id));
+      }
+    });
+
+  };
+
   ctrl.init = function (){
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();

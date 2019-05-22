@@ -14,4 +14,8 @@ function($scope, $state,$stateParams, $uibModal){
   ctrl.profesor = function(){
     $state.go('inicioProfes');
   }
+
+  ctrl.alumno = function(){
+    $state.go('inicioAlumnos');
+  }
 }]);

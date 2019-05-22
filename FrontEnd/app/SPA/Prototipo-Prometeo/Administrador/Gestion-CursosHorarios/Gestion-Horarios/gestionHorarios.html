@@ -1,24 +1,24 @@
 <section id="main">
-  <div ng-controller="administradorEspecialidadCtrl as ctrl">
+  <div ng-controller="creacionCursosCtrl as ctrl">
     <div class="container">
 
       <div class="row">
         <div class="col">
-
+          <h2>Creación de cursos</h2>
           <div class="card text-center">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Crear nueva especialidad</a>
+                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Crear nuevo curso</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)">Carga masiva</a>
                 </li>
               </ul>
             </div>
-            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/cardCrearEspecialidad.html'">
+            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/cardCrearCurso.html'">
             </div>
-            <div ng-if="!ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/cardCargaMasivaEspecialidad.html'">
+            <div ng-if="!ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/cardCargaMasivaCurso.html'">
             </div>
           </div>
         </div>
@@ -29,12 +29,14 @@
             <h5>Campos obligatorios *</h5>
         </div>
         <div class="col" align="right">
-          <button type="button" ng-click = "ctrl.crearEspecialidad(ctrl.especialidad)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+<!--          <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <button type="button" ng-click = "ctrl.guardarCurso(curso)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
           <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         </div>
       </div>
 
 
     </div>
+
   </div>
 </section>

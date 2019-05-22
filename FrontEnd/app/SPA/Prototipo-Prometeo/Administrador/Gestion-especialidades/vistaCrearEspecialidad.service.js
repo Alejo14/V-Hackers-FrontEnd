@@ -1,22 +1,22 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('administradorEspecialidadService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('administradorEspecialidadService', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
-//  servicio.listarEntregables = function(){
-
-//    var urlListarEntregables = 'http://localhost:7002/entregables';
-//    var $defer = $q.defer();
-//    $http({
-//        method: 'GET',
-//        url: urlListarEntregables
-//     }).then(function (respuesta) {
-//       $defer.resolve(respuesta.data);
-//     }).catch(function (error) {
-//       $defer.reject(error);
-//     });
-//    return $defer.promise;
-//  }
+  servicio.registroEspecialidad = function(data){
+    var urlRegistroEspecialidad = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/crear';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlRegistroEspecialidad,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 
 }]);

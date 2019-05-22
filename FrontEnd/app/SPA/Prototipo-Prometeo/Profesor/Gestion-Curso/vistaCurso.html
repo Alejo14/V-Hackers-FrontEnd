@@ -79,10 +79,10 @@
                 <div class="col-md-8">
                   <li ng-repeat="entregable in ctrl.entregablesLista">
                       {{entregable.nombre}}
-                      <a style="float:right" ng-click="">
+                      <a style="float:right"  ng-click="ctrl.elminarEntregable(entregable)">
                         <i class="fas fa-trash-alt"></i>
                       </a>
-                      <a style="float:right" ng-click="">
+                      <a style="float:right" ng-click="ctrl.verEntregable(entregable)">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
                   </li>

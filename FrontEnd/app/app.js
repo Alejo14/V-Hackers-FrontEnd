@@ -81,6 +81,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'creacion-cursos',
               url: '/creacion-cursos',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
+            },
+            {
+              name: 'gestion-horarios',
+              url: '/gestion-horarios',
+              templateUrl: 'SPA/Prototipo_Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
             }
           ]
         },
@@ -107,7 +112,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name:'gestion-proyecto',
-              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion',
+              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaHabilitacion/:ponderacion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
             },
             {
@@ -117,13 +122,31 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-modificar',
-              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega',
+              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {
               name: 'evaluacion-herramienta-listar',
               url: '/evaluacion-herramienta-listar',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
+            }
+          ]
+        },
+        //VISTAS DEL ALUMNO
+        {
+          name: 'alumno',
+          url: '/alumno',
+          templateUrl: 'index.html',
+          children:[
+            {
+              name: 'inicioAlumnos',
+              url: '/inicioAlumnos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
+            },
+            {
+              name: 'cargar-archivos',
+              url: '/cargar-archivos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
             }
           ]
         },
