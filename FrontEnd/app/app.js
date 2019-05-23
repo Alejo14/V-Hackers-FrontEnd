@@ -73,6 +73,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
             },
             {
+              name: 'listar-especialidades',
+              url: '/listar-especialidades',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaListarEspecialidades.html'
+            },
+            {
               name: 'gestion-usuarios',
               url: '/gestion-usuarios',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
