@@ -38,3 +38,7 @@ body{
 .chosen-container {
   width: 100% !important;
 }
+
+.dropdown-toggle::after{
+  content: none !important;
+}

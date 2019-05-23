@@ -24,7 +24,7 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
   }
 
   ctrl.listarCursos = function(cursos){
-    $state.go('listar-cursos');
+    $state.go('gestion-horarios');
   }
 
   ctrl.gestionUsuarios = function(cursos){

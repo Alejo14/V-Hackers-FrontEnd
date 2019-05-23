@@ -86,6 +86,16 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'creacion-cursos',
               url: '/creacion-cursos',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
+            },
+            {
+              name: 'gestion-horarios',
+              url: '/gestion-horarios',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
+            },
+            {
+              name: 'modificacion-cursos',
+              url: '/modificacion-cursos/:id/:especialidadId/:codigo/:nombre/:fechaCreacion/:facultadId/:creditos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/modificacionCursos.html'
             }
           ]
         },
@@ -112,7 +122,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name:'gestion-proyecto',
-              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaHabilitacion/:ponderacion',
+              url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion/:descripcion/:visible/:registroHoras/:metodoTrabajo/:cursoCiclo_id',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
             },
             {

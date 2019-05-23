@@ -49,6 +49,19 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
+  servicio.obtenerRoles = function () {
+    var urlObtenerRoles = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerRoles,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
   servicio.regitstrarUsuario = function (usuarioNuevo) {
     var urlRegistrarUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/crear';
     var $defer = $q.defer();
@@ -56,6 +69,21 @@ function($q, $http, variablesAmbiente) {
         method: 'POST',
         url: urlRegistrarUsuario,
         data: usuarioNuevo
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  servicio.eliminarUsuario = function (usuarioEliminar) {
+    var urlRegistrarUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/eliminar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlRegistrarUsuario,
+        data: usuarioEliminar
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
