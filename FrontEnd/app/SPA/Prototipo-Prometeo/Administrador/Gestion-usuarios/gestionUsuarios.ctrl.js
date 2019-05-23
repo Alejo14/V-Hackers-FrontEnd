@@ -55,6 +55,44 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
 
   }
 
+  ctrl.eliminarUsuario = function (usuario, indiceUsuarioTabla) {
+    swal({
+      title: "¿Esta seguro de que desea eliminar a este usuario?",
+      text: "Una vez eliminado, no podrá deshacer esta acción",
+      icon: "warning",
+      //buttons: ["Cancelar", "Sí, agregar"],
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (usuarioEliminadoConfirmado) {
+      if (usuarioEliminadoConfirmado !== "cancelar") {
+        gestionUsuariosService.eliminarUsuario(usuario).then(function (resultadoEliminacion) {
+          ctrl.usuariosLista.splice(indiceUsuarioTabla, 1);
+          swal({
+            title: "¡Listo!",
+            text: "Usuario eliminado con éxito",
+            icon: "success",
+            //buttons: ["Cancelar", "Sí, agregar"],
+            buttons: {
+              confirm: {
+                text: "ok",
+                className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+              }
+            }
+          });
+        })
+      }
+    });
+  }
+
   ctrl.init = function () {
     ctrl.obtenerUsuarios();
 

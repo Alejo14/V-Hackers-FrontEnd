@@ -26,7 +26,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       nombre: 'Ingenieria Industrial'
     }
   ];
-  ctrl.tipoUsuarioLista = [
+  ctrl.rolesUsuarioLista = [
     {
       id: "",
       nombre: "Profesor"
@@ -40,6 +40,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       nombre: "Alumnos"
     }
   ];
+  ctrl.registroValido = false;
 
   ctrl.obtenerFacultades = function () {
     gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
@@ -52,6 +53,17 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       ctrl.especialidadesLista = especialidadesListaData;
     });
   };
+
+  ctrl.obtenerRoles = function () {
+    gestionUsuariosService.obtenerRoles().then(function (rolesListaData) {
+      ctrl.rolesUsuarioLista = rolesListaData;
+    });
+  }
+
+ctrl.validarRegistroValido = function () {
+  ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && $scope.facultad && ctrl.usuarioNuevo.apellidos !== "" && $scope.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && $scope.rolesUsuarioNuevo.length > 0;
+};
+
   ctrl.guardarUsuario = function () {
     swal({
       title: "¿Esta seguro de que desea agregar a este usuario?",
@@ -76,7 +88,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
         ctrl.usuarioNuevo.rolesUsuario = [];
         var numRoles = $scope.rolesUsuarioNuevo.length;
         for (var i = 0; i < numRoles; i++) {
-          var usuarioRol = {rol: $scope.rolesUsuarioNuevo[i]};
+          var usuarioRol = {id: $scope.rolesUsuarioNuevo[i].id};
           ctrl.usuarioNuevo.rolesUsuario.push(usuarioRol);
         }
         $uibModalInstance.close(ctrl.usuarioNuevo);
@@ -85,6 +97,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   };
   ctrl.init = function(){
     ctrl.obtenerFacultades();
+    ctrl.obtenerRoles();
   };
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);
