@@ -1,14 +1,23 @@
 angular.module('vHackersModule').controller('creacionCursosCtrl', ['$scope','$state' ,'creacionCursosService', '$uibModal',
-function($scope,$state, gestionUsuariosService, $uibModal){
+function($scope,$state, creacionCursosService, $uibModal){
   var ctrl = this;
   ctrl.cargaUnitaria = true;
   ctrl.cursoNuevo = {
     "id": "",
+    "nombreCurso": "",
     "claveCurso": "",
     "numeroCreditos": "",
     "facultad": "",
     "especialidad": ""
   };
+  ctrl.titulo = "Creación de curso";
+
+  ctrl.especialidadesLista = [];
+
+  ctrl.facultadesLista = [];
+
+
+
   ctrl.listaCursos = [];
 
   function uuid() {
@@ -54,30 +63,50 @@ function($scope,$state, gestionUsuariosService, $uibModal){
     });
   };
 
-  ctrl.guardarCurso = function () {
-    swal({
-      title: "¿Está seguro de que quieres guardar?",
-      text: "Los cambios se guardaran",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger",
-          value: "cancelar"
-        },
-        confirm: {
-          text: "Sí, guardar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-          value: "confirm"
-        }
+  ctrl.guardarCurso = function (curso) {
+    //console.log("hola");
+    if(ctrl.cursoNuevo.claveCurso=="" || ctrl.cursoNuevo.nombreCurso=="" || ctrl.cursoNuevo.numeroCreditos=="" || ctrl.cursoNuevo.especialidad=="" || ctrl.cursoNuevo.facultad==""){
+      swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
+    }else{
+      //console.log(ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id);
+      data = {
+        "id": uuid(),
+        "especialidadId": ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id,
+        "codigo": ctrl.cursoNuevo.claveCurso,
+        "nombre": ctrl.cursoNuevo.nombreCurso,
+        "fechaCreacion": (new Date())*1,
+        "facultadId": ctrl.facultadesLista[ctrl.facultadesLista.indexOf(ctrl.cursoNuevo.facultad)].id,
+        "creditos": ctrl.cursoNuevo.numeroCreditos
       }
-    }).then(function(guardar){
-      if (guardar == "confirm") {
-        swal({
-          title: "Curso guardado",
-          icon:"success",
-          text:`${ctrl.cursoNuevo.claveCurso},${ctrl.cursoNuevo.nombreCurso}, ${ctrl.cursoNuevo.numeroCreditos}, ${ctrl.cursoNuevo.facultad},${ctrl.cursoNuevo.especialidad}`        });
-      }
+      creacionCursosService.registroCurso(angular.toJson(data)).then(function () {
+          swal("¡Bien hecho!", "El curso se guardó exitosamente" , "success");
+      });
+    }
+    ctrl.cursoNuevo.nombreCurso = "";
+    ctrl.cursoNuevo.claveCurso = "";
+    ctrl.cursoNuevo.numeroCreditos = "";
+    ctrl.cursoNuevo.facultad = "";
+    ctrl.cursoNuevo.especialidad="";
+  };
+
+  ctrl.obtenerFacultades = function () {
+    creacionCursosService.obtenerFacultades().then(function (facultadesListaData) {
+      ctrl.facultadesLista = facultadesListaData;
     });
   };
+
+  ctrl.obtenerEspecialidades = function () {
+    creacionCursosService.obtenerEspecialidades().then(function (especialidadesListaData) {
+      ctrl.especialidadesLista = especialidadesListaData;
+    });
+  };
+
+  ctrl.init = function(){
+    ctrl.obtenerFacultades();
+    ctrl.obtenerEspecialidades();
+  };
+
+
+  ctrl.init();
+
 }]);

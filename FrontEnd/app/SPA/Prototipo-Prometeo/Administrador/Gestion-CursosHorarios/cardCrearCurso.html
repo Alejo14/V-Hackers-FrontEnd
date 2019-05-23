@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-sm-6" align="left">
           <div class="form-group">
-            <label class="col-sm-6 control-label m-t-10 m-b-0" aligned="left">Clave curso*: </label>
+            <label class="col-sm-6 control-label m-t-10 m-b-0" aligned="left">Código*: </label>
             <div class="col-sm-6">
               <div class="fg-line">
                 <input class="form-control input-sm" placeholder="Ingrese la clave del curso" ng-model = "ctrl.cursoNuevo.claveCurso">
@@ -45,9 +45,12 @@
             <div class="col-sm-6">
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="ctrl.cursoNuevo.facultad">
-                    <Option>Seleccionar facultad</Option>
-                    <Option>cargar facultades</Option>
+                  <select class="form-control"
+                    data-placeholder="Seleccione una facultad"
+                    ng-model="ctrl.cursoNuevo.facultad"
+                    ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
+                    ng-change="ctrl.obtenerEspecialidades()">
+                    <option value=""></option>
                   </select>
                 </div>
               </div>
@@ -62,9 +65,11 @@
             <div class="col-sm-6">
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="ctrl.cursoNuevo.especialidad">
-                    <Option>Seleccionar especialidad</Option>
-                    <Option>cargar especialidades</Option>
+                  <select class="form-control"
+                    data-placeholder="Seleccione una especialidad"
+                    ng-model="ctrl.cursoNuevo.especialidad"
+                    ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista">
+                    <option value=""></option>
                   </select>
                 </div>
               </div>

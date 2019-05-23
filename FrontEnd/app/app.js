@@ -85,7 +85,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             {
               name: 'gestion-horarios',
               url: '/gestion-horarios',
-              templateUrl: 'SPA/Prototipo_Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
+            },
+            {
+              name: 'modificacion-cursos',
+              url: '/modificacion-cursos/:id/:especialidadId/:codigo/:nombre/:fechaCreacion/:facultadId/:creditos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/modificacionCursos.html'
             }
           ]
         },
