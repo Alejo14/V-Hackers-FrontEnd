@@ -52,16 +52,18 @@
             </div>
             <div class="card-body">
               <ul>
-                <div class="col-md-8">
-                  <li ng-repeat="proyecto in ctrl.proyectosLista">
-                      {{proyecto.nombre}}
-                      <a style="float:right" ng-click="ctrl.eliminarProyecto(proyecto)">
-                        <i class="fas fa-trash-alt"></i>
-                      </a>
+                <div class="col-md-12">
+                  <div ng-repeat="proyecto in ctrl.proyectosLista" >
+                    <div class="row">
+                      <li class="col-md-8" ng-click="ctrl.ingresarProyecto()"> {{proyecto.nombre}} </li>
                       <a style="float:right" ng-click="ctrl.verProyecto(proyecto)">
                         <i class="fas fa-pencil-alt"></i>
                       </a>
-                  </li>
+                      <a style="float:right" ng-click="ctrl.eliminarProyecto(proyecto)">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </ul>
             </div>

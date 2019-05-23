@@ -151,9 +151,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     ctrl.entregableM.descripcion=$stateParams.descripcion;
   }
 
-
-
-
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
     if (!entregableM || !(entregableM.nombre) || !(entregableM.descripcion) || !(entregableM.fechaEntrega) || !(entregableM.puntajeMaximo)){
