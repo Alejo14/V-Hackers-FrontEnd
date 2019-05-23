@@ -33,10 +33,10 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   ctrl.crearEspecialidad = function(especialidad) {
     data = {
       "id": uuid(), //Defecto
+      "facultad": especialidad.facultad.id,
       "codigo": especialidad.codigo,
       "nombre": especialidad.nombre,
-      "facultad": especialidad.facultad,
-      "responsable": especialidad.responsable,
+      "responsable": uuid(),
     }
     console.log(angular.toJson(data));//Envio el json para crear el semestre
 
@@ -82,6 +82,41 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   };
 
+  ctrl.elminarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+    swal({
+      title: "¿Está seguro que quiere eliminar la especialidad?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (especialidadEliminaConfirma) {
+      if (especialidadEliminaConfirma !== "cancelar") {
+        data={
+          "id": uuid(), //Defecto
+          "facultad": especialidad.facultad.id,
+          "codigo": especialidad.codigo,
+          "nombre": especialidad.nombre,
+          "responsable": uuid(),
+        }
+        console.log(angular.toJson(data));
+        administradorEspecialidadService.elminarEspecialidad(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "La especialidad se eliminó exitosamente" , "success");
+        });
+        ctrl.especialidadesLista.splice(ctrl.especialidadesLista.indexOf(especialidad.id));
+      }
+    });
+
+  };
+
   ctrl.regresarAdministrador = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
@@ -104,24 +139,26 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   };
 
-  ctrl.facultadesLista = [
-    {
-      id: '0',
-      nombre: 'Ciencias e ingeniería'
-    },
-    {
-      id: '1',
-      nombre: 'Estudios Generales Ciencias'
-    }
-  ];
-  // ctrl.obtenerFacultades = function () {
-  //   gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
-  //     ctrl.facultadesLista = facultadesListaData;
-  //   });
-  // };
+  ctrl.facultadesLista = [ ];
+  ctrl.obtenerFacultades = function () {
+    administradorEspecialidadService.obtenerFacultades().then(function (facultadesListaData) {
+      ctrl.facultadesLista = facultadesListaData;
+    });
+  };
 
 
+  ctrl.especialidadesLista = [ ];
+  ctrl.cargarEspecialidades = function () {
+    administradorEspecialidadService.listarEspecialidades().then(function (especialidadesListaData) {
+      ctrl.especialidadesLista = especialidadesListaData;
+    });
+  };
 
+  ctrl.init = function (){
+    ctrl.obtenerFacultades();
+    ctrl.cargarEspecialidades();
+  }
 
+  ctrl.init();
 
 }]);

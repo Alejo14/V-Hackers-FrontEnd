@@ -73,6 +73,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
             },
             {
+              name: 'listar-especialidades',
+              url: '/listar-especialidades',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaListarEspecialidades.html'
+            },
+            {
               name: 'gestion-usuarios',
               url: '/gestion-usuarios',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
@@ -85,7 +90,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             {
               name: 'gestion-horarios',
               url: '/gestion-horarios',
-              templateUrl: 'SPA/Prototipo_Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
+            },
+            {
+              name: 'modificacion-cursos',
+              url: '/modificacion-cursos/:id/:especialidadId/:codigo/:nombre/:fechaCreacion/:facultadId/:creditos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/modificacionCursos.html'
             }
           ]
         },

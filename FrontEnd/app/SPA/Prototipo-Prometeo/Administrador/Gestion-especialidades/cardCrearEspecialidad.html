@@ -7,7 +7,7 @@
             <label class="col-sm-4 control-label">C&oacute;digo*:</label>
             <div class="col-sm-8">
               <div class="fg-line">
-                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.codigo" placeholder="e.g: 12345678">
+                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.codigo" placeholder="e.g: COD">
               </div>
             </div>
           </div>
@@ -15,7 +15,7 @@
             <label class="col-sm-4 control-label">Nombre*:</label>
             <div class="col-sm-8">
               <div class="fg-line">
-                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.nombre" placeholder="e.g: 2019-1">
+                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.nombre" placeholder="e.g: Especialidad">
               </div>
             </div>
           </div>
@@ -23,12 +23,11 @@
             <label class="col-sm-4 control-label">Facultad*:</label>
             <div class="col-sm-8">
               <div class="fg-line">
-                <select class="form-control"
-                  placeholder="Seleccione una facultad"
-                  ng-model="ctrl.especialidad.facultad"
-                  ng-options="facultad.nombre for facultad in ctrl.facultadesLista">
-                  <option value=""></option>
-                </select>
+                <div class="select">
+                  <select class="form-control" ng-model="ctrl.especialidad.facultad" ng-options="facultad.nombre for facultad in ctrl.facultadesLista">
+                    <!--<option value="">Seleccione una facultad:</option>-->
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -39,10 +38,21 @@
       <form class="form-horizontal ng-pristine ng-valid">
         <div class="card-body card-padding">
           <div class="form-group">
-            <label class="col-sm-4 control-label">Responsable*:</label>
-            <div class="col-sm-8">
-              <div class="fg-line">
-                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.responsable" placeholder="Search">
+            <div class="row">
+              <label class="col-sm-4 control-label">Responsable*:</label>
+              <div class="col-sm-8">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsable" placeholder="Responsable">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-8">
+                <div class="fg-line">
+                    <!--<input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.responsable" placeholder="Search">-->
+                    <button class="btn btn-primary" style="margin-top: 10px;" ng-click = "ctrl.agregarResponsable()"><i class="fa fa-plus-circle"></i> Seleccionar responsable</button>
+                </div>
               </div>
             </div>
           </div>

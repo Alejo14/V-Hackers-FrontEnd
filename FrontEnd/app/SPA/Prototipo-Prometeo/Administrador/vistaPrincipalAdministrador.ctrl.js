@@ -31,4 +31,8 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('gestion-usuarios');
   }
 
+  ctrl.listarEspecialidades = function(especialidades){
+    $state.go('listar-especialidades')
+  }
+
 }]);
