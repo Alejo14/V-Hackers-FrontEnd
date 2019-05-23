@@ -111,6 +111,22 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
         hoursF=proyectoNuevo.fechaFin.getHours();
         minutesF=proyectoNuevo.fechaFin.getMinutes();
 
+        if($('#ts1').is(':checked')){
+            var vis = 1
+        }else{
+            var vis = 0;
+        }
+
+        if($('#ts2').is(':checked')){
+            var horas = 1
+        }else{
+            var horas = 0;
+        }
+
+        var descripcion = $('textarea#desTA').val()
+
+        var metodo = parseInt($('input[name=metodo]:checked').val())
+
         console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
         data={
           "id": uuid(),
@@ -118,7 +134,12 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "fechaCreacion": (new Date())*1,
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
           "fechaFin": (new Date(yearF, monthF, dateF, hoursF, minutesF,0))*1,
-          "ponderacion": parseInt(proyectoNuevo.ponderacion)
+          "ponderacion": parseInt(proyectoNuevo.ponderacion),
+          "descripcion": descripcion,
+          "visible": vis,
+          "registroHoras": horas,
+          "metodoTrabajo": metodo,
+          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
           }
           console.log(angular.toJson(data));
           gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
@@ -130,6 +151,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           proyectoNuevo.fechaInicio="";
           proyectoNuevo.fechaFin="";
           proyectoNuevo.ponderacion="";
+          $("textarea#desTA").val("");
 
           swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
@@ -167,6 +189,22 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
         hoursF=proyectoModif.fechaFin.getHours();
         minutesF=proyectoModif.fechaFin.getMinutes();
 
+        if($('#ts1').is(':checked')){
+            var vis = 1
+        }else{
+            var vis = 0;
+        }
+
+        if($('#ts2').is(':checked')){
+            var horas = 1
+        }else{
+            var horas = 0;
+        }
+
+        var descripcion = $('textarea#desTA').val()
+
+        var metodo = parseInt($('input[name=metodo]:checked').val())
+
         console.log(angular.toJson(proyectoModif));//Envio el json para crear el entregable
         data={
           "id": proyectoModif.id,
@@ -174,7 +212,12 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "fechaCreacion": (new Date())*1,
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
           "fechaFin": (new Date(yearF, monthF, dateF, hoursF, minutesF,0))*1,
-          "ponderacion": parseInt(proyectoModif.ponderacion)
+          "ponderacion": parseInt(proyectoModif.ponderacion),
+          "descripcion": descripcion,
+          "visible": vis,
+          "registroHoras": horas,
+          "metodoTrabajo": metodo,
+          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
           }
           console.log(angular.toJson(data));
           gestiónProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
@@ -186,6 +229,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           proyectoModif.fechaInicio="";
           proyectoModif.fechaFin="";
           proyectoModif.ponderacion="";
+          $("textarea#desTA").val("");
 
           swal("¡Bien hecho!", "El Proyecto se modifico exitosamente" , "success");
       }
@@ -203,9 +247,30 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
       ctrl.proyectoG.fechaInicio=new Date(Number($stateParams.fechaInicio));;
       ctrl.proyectoG.fechaFin=new Date(Number($stateParams.fechaFin));;
       ctrl.proyectoG.ponderacion=$stateParams.ponderacion;
+
+      if($stateParams.visible==1){
+        $("#ts1").attr("checked", true);
+      }else{
+        $("#ts1").attr("checked", false);
+      }
+
+      if($stateParams.registroHoras==1){
+        $("#ts2").attr("checked", true);
+      }else{
+        $("#ts2").attr("checked", false);
+      }
+
+      if($stateParams.metodoTrabajo==1){
+        $("input[name=metodo][value=1]").prop('checked', true);
+      }else{
+        $("input[name=metodo][value=0]").prop('checked', true);
+      }
+      $("textarea#desTA").val($stateParams.descripcion);
     }
   }
 
   ctrl.init();
+
+
 
 }]);

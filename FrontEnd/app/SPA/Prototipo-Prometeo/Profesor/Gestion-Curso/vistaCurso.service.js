@@ -6,7 +6,7 @@ function($q, $http) {
 
   servicio.listarProyectos = function(){
 
-    var urlListarProyectos = 'http://localhost:7001/proyectos';
+    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/cde22521-8cc6-4cea-a2d2-802c4b03674a';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -40,6 +40,21 @@ function($q, $http) {
     $http({
         method: 'POST',
         url: urlElimProyecto,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.eliminarentregableAlumno = function(data){
+    var urlEnviarCalificacion = 'http://localhost:7002/entregables/eliminar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlEnviarCalificacion,
         data: data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);

@@ -15,7 +15,9 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
     $state.go('evaluacion-herramienta');
   }
   ctrl.swalProyecto = function () {
-    $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0});
+    $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
+    descripcion: 0, visible: 0, registroHoras: 0,
+    metodoTrabajo: 0, cursoCiclo_id: 0});
   };
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
@@ -28,7 +30,10 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.verProyecto = function (proyecto) {
-    $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion, fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion});
+    $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
+      fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
+      descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
+      metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
   };
 
   ctrl.eliminarProyecto = function (proyectoElim) {
@@ -76,6 +81,47 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
       }
     });
   }
+
+  ctrl.verEntregable = function (entregable) {
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion});
+
+  };
+
+  ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+    swal({
+      title: "¿Está seguro que quiere eliminar el entregable?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        data={
+          "id": entregableM.id, //Defecto
+          "nombre": entregableM.nombre,
+          "fechaEntrega": (new Date(Date.now()))*1,//Se da formato a la fecha para que se registre con hora y fecha
+          "tieneAlarma": 1,
+          "ponderacion": 1
+          }
+          console.log(angular.toJson(data));
+        profesorCursoService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+        });
+        ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM.id));
+      }
+    });
+
+  };
 
   ctrl.init = function (){
     ctrl.cargarProyectos();

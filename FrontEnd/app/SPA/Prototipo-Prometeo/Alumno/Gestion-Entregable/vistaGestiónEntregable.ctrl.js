@@ -38,4 +38,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
     $state.go('cargar-archivos');
   }
 
+  ctrl.elminarArchivo= function (archivo){
+    ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+  }
+
 }]);
