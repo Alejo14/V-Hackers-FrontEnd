@@ -7,6 +7,8 @@
   //Puertos de microservicios
   //Puerto de usuarios
   window.__env.puertoUsuarios = ':7003';
+  //Puerto de Cursos
+  window.__env.puertoCursos = ':7004';
   //Puerto de Facultados
   window.__env.puertoFacultades = ':7005';
   //Puerto de especialidades
