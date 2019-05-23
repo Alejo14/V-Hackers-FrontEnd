@@ -15,7 +15,9 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
     $state.go('evaluacion-herramienta');
   }
   ctrl.swalProyecto = function () {
-    $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0});
+    $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
+    descripcion: 0, visible: 0, registroHoras: 0,
+    metodoTrabajo: 0, cursoCiclo_id: 0});
   };
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
@@ -28,7 +30,10 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.verProyecto = function (proyecto) {
-    $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion, fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion});
+    $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
+      fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
+      descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
+      metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
   };
 
   ctrl.eliminarProyecto = function (proyectoElim) {

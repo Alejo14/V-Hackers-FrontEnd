@@ -5,7 +5,11 @@
     "fechaCreacion": 1555822800000,
     "fechaInicio": 1555822800000,
     "fechaFin": 1555822800000,
-    "ponderacion": 5
+    "ponderacion": 5,
+    "descripcion": "El objetivo es la implementacion de un sistema web",
+    "visible": true,
+    "registroHoras": true,
+    "metodoTrabajo": true,
   },
   {
     "id": "123456",
