@@ -1,15 +1,15 @@
-angular.module('vHackersModule').controller('creacionCursosCtrl', ['$scope','$state' ,'creacionCursosService', '$uibModal',
-function($scope,$state, gestionUsuariosService, $uibModal){
+angular.module('vHackersModule').controller('gestionHorariosCtrl', ['$scope','$state' ,'gestionHorariosService', '$uibModal','NgTableParams',
+function($scope,$state, gestionHorariosService, $uibModal,NgTableParams){
   var ctrl = this;
-  ctrl.cargaUnitaria = true;
-  ctrl.cursoNuevo = {
-    "id": "",
-    "claveCurso": "",
-    "numeroCreditos": "",
-    "facultad": "",
-    "especialidad": ""
+  ctrl.cursosLista = [];
+
+  ctrl.obtenerCursos = function () {
+    gestionHorariosService.obtenerCursos().then(function (cursosListaData) {
+      ctrl.cursosLista = cursosListaData;
+      //console.log("HOLAA");
+      ctrl.cursosTabla = new NgTableParams({}, { dataset: ctrl.cursosLista });
+    });
   };
-  ctrl.listaCursos = [];
 
   function uuid() {
       function randomDigit() {
@@ -25,10 +25,6 @@ function($scope,$state, gestionUsuariosService, $uibModal){
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
   }
 
-  ctrl.cambiarVista = function(indice) {
-    if(indice == 0) ctrl.cargaUnitaria = true;
-    else ctrl.cargaUnitaria = false;
-  }
 
   ctrl.regresarAdministrador = function () {
     swal({
@@ -54,30 +50,60 @@ function($scope,$state, gestionUsuariosService, $uibModal){
     });
   };
 
-  ctrl.guardarCurso = function () {
+  ctrl.obtenerFacultades = function () {
+    gestionHorariosService.obtenerFacultades().then(function (facultadesListaData) {
+      ctrl.facultadesLista = facultadesListaData;
+    });
+  };
+
+  ctrl.obtenerEspecialidades = function () {
+    gestionHorariosService.obtenerEspecialidades().then(function (especialidadesListaData) {
+      ctrl.especialidadesLista = especialidadesListaData;
+    });
+  };
+
+  ctrl.editarCurso = function(curso){
+    $state.go('modificacion-cursos',{id:curso.id, especialidadId:curso.especialidadId, codigo:curso.codigo, nombre:curso.nombre, fechaCreacion:curso.fechaCreacion, facultadId:curso.facultadId, creditos:curso.creditos});
+  }
+
+  ctrl.asignarHorarios = function(curso){
+
+  }
+
+  ctrl.eliminarCurso = function(curso){
     swal({
-      title: "¿Está seguro de que quieres guardar?",
-      text: "Los cambios se guardaran",
+      title: "¿Esta seguro de que desea eliminar el curso?",
+      text: "",
       icon: "warning",
+      //buttons: ["Cancelar", "Sí, agregar"],
       buttons: {
         cancelar: {
           text: "Cancelar",
-          className: "btn btn-lg btn-danger",
-          value: "cancelar"
+          className: "btn btn-lg btn-danger"
         },
         confirm: {
-          text: "Sí, guardar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-          value: "confirm"
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
-      }
-    }).then(function(guardar){
-      if (guardar == "confirm") {
-        swal({
-          title: "Curso guardado",
-          icon:"success",
-          text:`${ctrl.cursoNuevo.claveCurso},${ctrl.cursoNuevo.nombreCurso}, ${ctrl.cursoNuevo.numeroCreditos}, ${ctrl.cursoNuevo.facultad},${ctrl.cursoNuevo.especialidad}`        });
+      },
+      closeModal: false
+    }).then(function (eliminar) {
+      if (eliminar !== "cancelar") {
+          gestionHorariosService.eliminarProyecto(angular.toJson(curso));
+          swal("¡Listo!", "El curso se eliminó exitosamente" , "success");
+          ctrl.obtenerCursos();
       }
     });
+  }
+
+
+  ctrl.init = function(){
+    ctrl.obtenerFacultades();
+    ctrl.obtenerEspecialidades();
+    ctrl.obtenerCursos();
   };
+
+
+
+  ctrl.init();
 }]);

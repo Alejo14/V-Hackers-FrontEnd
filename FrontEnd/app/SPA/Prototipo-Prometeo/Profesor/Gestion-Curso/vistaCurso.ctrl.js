@@ -23,6 +23,7 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   ctrl.cargarEntregables = function () {
     profesorCursoService.listarEntregables().then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
+      console.log(ctrl.entregablesLista);
     });
   };
   ctrl.swalEntregable = function () {
@@ -67,17 +68,9 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
           }
           console.log(angular.toJson(data));
           profesorCursoService.eliminarProyecto(angular.toJson(data)).then(function () {
-            ctrl.exitoso="Proyecto enviado con éxito";
+            swal("¡Listo!", "El Proyecto se elimino exitosamente" , "success");
           });
-
-          proyectoElim.nombre="";
-          proyectoElim.fechaCreacion="";
-          proyectoElim.fechaInicio="";
-          proyectoElim.fechaFin="";
-          proyectoElim.ponderacion="";
-
-          swal("¡Listo!", "El Proyecto se elimino exitosamente" , "success");
-          $state.go('curso');
+          ctrl.proyectosLista.splice(ctrl.proyectosLista.indexOf(proyectoElim),1);
       }
     });
   }
@@ -114,10 +107,10 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
           "ponderacion": 1
           }
           console.log(angular.toJson(data));
-        profesorCursoService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
-        });
-        ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM.id));
+          profesorCursoService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
+              swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+          });
+          ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM),1);
       }
     });
 
@@ -126,6 +119,10 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   ctrl.init = function (){
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();
+  }
+
+  ctrl.ingresarProyecto = function(){
+    $state.go('evaluacion-herramienta-listar');
   }
 
   ctrl.init();

@@ -37,9 +37,9 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
       "cicloAcadémico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
       "nombreCiclo": semestre.nombreCiclo,
       //no se debe mandar fecha de creación
-      "fechaCreación": (new Date(2019, 05, 20)),
-      "fechaInicio": (new Date(yearI, monthI, dateI)),//Se da formato a la fecha para que se registre
-      "fechaFin": (new Date(yearF, monthF, dateF)),//Se da formato a la fecha para que se registre
+      "fechaCreacion": (new Date(2019, 05, 20))*1,
+      "fechaInicio": (new Date(yearI, monthI, dateI))*1,//Se da formato a la fecha para que se registre
+      "fechaFin": (new Date(yearF, monthF, dateF))*1,//Se da formato a la fecha para que se registre
     }
 
     console.log(angular.toJson(data));//Envio el json para crear el semestre

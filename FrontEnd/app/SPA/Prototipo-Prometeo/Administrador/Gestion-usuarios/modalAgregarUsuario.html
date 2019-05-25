@@ -18,7 +18,7 @@
               <label class="col-sm-4 control-label m-t-10 m-b-0">Nombres*: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese los nombres del usuario" ng-model = "ctrl.usuarioNuevo.nombres">
+                  <input class="form-control input-sm" placeholder="Ingrese los nombres del usuario" ng-model = "ctrl.usuarioNuevo.nombres" ng-change="ctrl.validarRegistroValido()">
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@
                     data-placeholder="Seleccione una facultad"
                     ng-model="facultad"
                     ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
-                    ng-change="ctrl.obtenerEspecialidades()">
+                    ng-change="ctrl.obtenerEspecialidades(); ctrl.validarRegistroValido()">
                     <option value=""></option>
                   </select>
                 </div>
@@ -46,7 +46,7 @@
               <label class="col-sm-4 control-label m-t-10 m-b-0">Apellidos*: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese los apellidos del usuario" ng-model = "ctrl.usuarioNuevo.apellidos">
+                  <input class="form-control input-sm" placeholder="Ingrese los apellidos del usuario" ng-model = "ctrl.usuarioNuevo.apellidos" ng-change="ctrl.validarRegistroValido()">
                 </div>
               </div>
             </div>
@@ -59,7 +59,9 @@
                   <select class="form-control"
                     data-placeholder="Seleccione una especialidad"
                     ng-model="especialidad"
-                    ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista">
+                    ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista"
+                    ng-disabled="!facultad"
+                    ng-change="ctrl.validarRegistroValido()">
                     <option value=""></option>
                   </select>
                 </div>
@@ -73,7 +75,7 @@
               <label class="col-sm-4 control-label m-t-10 m-b-0">Correo*: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese el correo del usuario" ng-model = "ctrl.usuarioNuevo.correo">
+                  <input class="form-control input-sm" placeholder="Ingrese el correo del usuario" ng-model = "ctrl.usuarioNuevo.correo" ng-change="ctrl.validarRegistroValido()">
                 </div>
               </div>
             </div>
@@ -83,7 +85,7 @@
               <label class="col-sm-4 control-label m-t-10 m-b-0">C&oacute;digo*: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese el código del usuario" ng-model = "ctrl.usuarioNuevo.codigo">
+                  <input class="form-control input-sm" placeholder="Ingrese el código del usuario" ng-model = "ctrl.usuarioNuevo.codigo" ng-change="ctrl.validarRegistroValido()">
                 </div>
               </div>
             </div>
@@ -98,7 +100,8 @@
                   <select multiple class="form-control"
                     data-placeholder="Seleccione los roles de usuario"
                     ng-model="rolesUsuarioNuevo"
-                    ng-options="rol as rol.descripcion for rol in ctrl.rolesUsuario">
+                    ng-options="rol as rol.descripcion for rol in ctrl.rolesUsuarioLista"
+                    ng-change="ctrl.validarRegistroValido()">
                     <option value=""></option>
                   </select>
                 </div>
@@ -109,7 +112,7 @@
       </div>
       <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
         <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
-        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarUsuario()"><i class="fa fa-save"></i> Guardar</button>
+        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarUsuario()" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
       </div>
     </div>
   </div>

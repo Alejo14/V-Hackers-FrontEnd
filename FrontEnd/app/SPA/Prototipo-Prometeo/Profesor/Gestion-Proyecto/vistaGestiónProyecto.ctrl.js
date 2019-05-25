@@ -73,11 +73,15 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
   ctrl.proyectoG = {};
 
   ctrl.gestionarProyecto = function (proyectoG){
+    if (!proyectoG || !(proyectoG.nombre) || !(proyectoG.fechaInicio) || !(proyectoG.fechaFin) || !(proyectoG.ponderacion)){
+      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
+    }else{
       if ($stateParams.id==0) {
         ctrl.guardarProyecto(proyectoG);
       }else {
         ctrl.modificarProyecto(proyectoG);
       }
+    }
   }
 
   ctrl.guardarProyecto = function (proyectoNuevo) {

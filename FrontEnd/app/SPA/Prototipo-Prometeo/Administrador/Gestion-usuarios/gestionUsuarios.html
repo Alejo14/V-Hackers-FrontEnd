@@ -40,8 +40,22 @@
                     <td data-title="'Correo'">
                       {{usuario.correo}}
                     </td>
-                    <td data-title="'Detalle'">
-                      <a ng-click = "ctrl.verDetalleUsuario(usuario)">Ver detalle</a>
+                    <td data-title="'Acciones'">
+                      <ul class="actions texto-centrado">
+                        <li class="dropdown action-show" uib-dropdown="">
+                          <a href="" uib-dropdown-toggle="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-more-vert"></i>
+                          </a>
+                          <ul class="dropdown-menu dm-icon pull-right">
+                            <li>
+                              <a><i class="zmdi zmdi-eye"> Ver detalle</i></a>
+                            </li>
+                            <li>
+                              <a ng-click="ctrl.eliminarUsuario(usuario, $index)"><i class="zmdi zmdi-delete"> Eliminar</i></a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
                     </td>
                   </tr>
                 </table>
