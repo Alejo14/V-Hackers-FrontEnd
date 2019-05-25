@@ -144,6 +144,16 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'nueva-herramienta',
               url: '/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
+            },
+            {
+              name: 'nueva-rubrica',
+              url: '/nueva-rubrica',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
+            },
+            {
+              name: 'nuevo-aspecto',
+              url: '/nuevo-aspecto',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             }
           ]
         },
