@@ -1,6 +1,6 @@
 //-- Anderson
-angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal',
-function($scope, $state,$stateParams, entregableService, $uibModal){
+angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
+function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
@@ -232,6 +232,14 @@ function($scope, $state,$stateParams, entregableService, $uibModal){
   ctrl.cargarEntregables = function () {
     entregableService.listarEntregables().then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
+    });
+  };
+
+  ctrl.herramientasEvaluacion = [];
+  ctrl.cargarHerramientas = function (){
+    entregableService.listarHerramientas().then(function (herramientasLista){
+      ctrl.herramientasEvaluacion = herramientasLista;
+      ctrl.herramientasTabla = new NgTableParams({}, { dataset: ctrl.herramientasEvaluacion });
     });
   };
 

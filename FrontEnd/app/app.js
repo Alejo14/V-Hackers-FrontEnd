@@ -144,6 +144,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'evaluacion-herramienta-listar',
               url: '/evaluacion-herramienta-listar',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
+            },
+            {
+              name: 'nueva-herramienta',
+              url: '/nueva-herramienta',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             }
           ]
         },
