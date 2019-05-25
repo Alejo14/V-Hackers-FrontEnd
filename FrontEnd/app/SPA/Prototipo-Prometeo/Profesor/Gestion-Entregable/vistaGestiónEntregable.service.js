@@ -80,4 +80,19 @@ function($q, $http) {
       return $defer.promise;
     }
 
+    servicio.listarHerramientas = function(){
+      //Hay que definir el microservicio para la tabla y también el JSON
+      var urlListarHerramientas = '';
+      var $defer = $q.defer();
+      $http({
+        method: 'GET',
+        url: urlListarHerramientas
+      }).then(function (respuesta){
+        $defer.resolve(respuesta.data);
+      }).catch(function(error){
+        $defer.reject(error);
+      });
+      return $defer.promise;
+    }
+
 }]);

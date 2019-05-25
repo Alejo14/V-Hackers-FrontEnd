@@ -1,8 +1,8 @@
 angular.module('vHackersModule').controller('calificacionCtrl', calificacionCtrl);
 
-calificacionCtrl.$inject = ['$scope','$state','NgTableParams','herramientaEvaluacionServicio'];
+calificacionCtrl.$inject = ['$scope','$state','NgTableParams','calificacionHerramientaEvaluacionServicio'];
 
-function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServicio){
+function calificacionCtrl ($scope,$state,NgTableParams,calificacionHerramientaEvaluacionServicio){
   var ctrl = this;
 
   /*Generación de ID como GUID para esta iteración*/
@@ -30,7 +30,7 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
   */
   ctrl.herramientaEvaluacion = [];
   ctrl.obtenerHerramientaEvaluacion = function () {
-    herramientaEvaluacionServicio.obtenerHerramientaEvaluacion().then(function (herramientaEvaluacion) {
+    calificacionHerramientaEvaluacionServicio.obtenerHerramientaEvaluacion().then(function (herramientaEvaluacion) {
       ctrl.herramientaEvaluacion = herramientaEvaluacion.herramientaEvaluacion;
       ctrl.puntajeMax = herramientaEvaluacion.puntajeMax;
     });
@@ -90,7 +90,7 @@ function calificacionCtrl ($scope,$state,NgTableParams,herramientaEvaluacionServ
           ]
         };
         console.log(angular.toJson(ctrl.evaluacion));
-        herramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion));
+        calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion));
       }
     });
   };
