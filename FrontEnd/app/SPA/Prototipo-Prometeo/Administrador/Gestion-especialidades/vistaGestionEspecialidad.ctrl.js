@@ -1,14 +1,16 @@
-angular.module('vHackersModule').controller('administradorEspecialidadCtrl', ['$scope', '$state' , '$stateParams' ,'administradorEspecialidadService', '$uibModal',
+angular.module('vHackersModule').controller('administradorEspecialidadCtrl', ['$scope', '$state', '$stateParams', 'administradorEspecialidadService', '$uibModal',
 
 function($scope, $state,$stateParams, administradorEspecialidadService, $uibModal){
   var ctrl = this;
   ctrl.cargaUnitaria = true;
 
   ctrl.especialidad = {
+    id : "",
     codigo : "",
     nombre : "",
     facultad : "",
-    responsable : ""
+    responsableId : "",
+    responsableNombre : ""
   };
 
   function uuid() {
@@ -33,10 +35,10 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   ctrl.crearEspecialidad = function(especialidad) {
     data = {
       "id": uuid(), //Defecto
-      "facultad": especialidad.facultad.id,
+      "facultadId": especialidad.facultad.id,
       "codigo": especialidad.codigo,
       "nombre": especialidad.nombre,
-      "responsable": uuid(),
+      "responsable": especialidad.responsableId
     }
     console.log(angular.toJson(data));//Envio el json para crear el semestre
 
@@ -64,9 +66,11 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       if (parametroRetorno) {
         var responsableSeleccionado = {
           "id": parametroRetorno.id,
-          "nombres": parametroRetorno.nombres,
+          "nombre": parametroRetorno.nombre,
         };
-        ctrl.especialidad.responsable = responsableSeleccionado.id;
+        console.log(angular.toJson(responsableSeleccionado));
+        ctrl.especialidad.responsableId = responsableSeleccionado.id;
+        ctrl.especialidad.responsableNombre = responsableSeleccionado.nombre;
         swal({
           title: "¡Listo!",
           text: "Responsable seleccionado con éxito",
@@ -82,11 +86,27 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   };
 
-  ctrl.elminarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
-    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
+  ctrl.verEspecialidad = function (especialidad) {
+    console.log(angular.toJson(especialidad));
+    $state.go('modificar-especialidad', {id : especialidad.id, codigo : especialidad.codigo,
+      nombre : especialidad.nombre, facultad : especialidad.facultadId,
+      responsable : "especialidad.responsable"});
+  };
+
+  if ($stateParams.id){
+    ctrl.especialidad.id = $stateParams.id;
+    ctrl.especialidad.codigo = $stateParams.codigo;
+    ctrl.especialidad.nombre = $stateParams.nombre;
+    ctrl.especialidad.facultad = $stateParams.facultad;
+    ctrl.especialidad.responsable = $stateParams.responsable;
+  }
+
+
+  ctrl.eliminarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log(angular.toJson(especialidad));//Envio el json para crear el entregable
     swal({
       title: "¿Está seguro que quiere eliminar la especialidad?",
-      text: "Los cambios no se guardarán",
+      text: "La especialidad se eliminará permanentemente",
       icon: "warning",
       buttons: {
         cancelar: {
@@ -94,27 +114,18 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
           className: "btn btn-lg btn-danger"
         },
         confirm: {
-          text: "Sí, eliminar",
+          text: "Sí. Eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (especialidadEliminaConfirma) {
       if (especialidadEliminaConfirma !== "cancelar") {
-        data={
-          "id": uuid(), //Defecto
-          "facultad": especialidad.facultad.id,
-          "codigo": especialidad.codigo,
-          "nombre": especialidad.nombre,
-          "responsable": uuid(),
-        }
-        console.log(angular.toJson(data));
-        administradorEspecialidadService.elminarEspecialidad(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "La especialidad se eliminó exitosamente" , "success");
+        administradorEspecialidadService.eliminarEspecialidad(angular.toJson(especialidad)).then(function () {
+          swal("¡Bien hecho!", "La especialidad se eliminó exitosamente" , "success");
         });
-        ctrl.especialidadesLista.splice(ctrl.especialidadesLista.indexOf(especialidad.id));
+        ctrl.especialidadesLista.splice(ctrl.especialidadesLista.indexOf(especialidad),1);
       }
     });
-
   };
 
   ctrl.regresarAdministrador = function () {

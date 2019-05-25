@@ -24,20 +24,15 @@
                           <ul>
                             <li ng-repeat="especialidad in ctrl.especialidadesLista">
                               {{especialidad.nombre}}
-                              <a style="float:right" ng-click="ctrl.elminarEspecialidad(especialidad)">
+                              <a style="float:right" ng-click="ctrl.eliminarEspecialidad(especialidad)">
                                 <i class="fas fa-trash-alt"></i>
-
                               </a>
                               <a style="float:right" ng-click="ctrl.verEspecialidad(especialidad)">
                                 <i class="fas fa-pencil-alt"></i>
-
                               </a>
-
-
                             </li>
                           </ul>
                         </div>
-
                       </div>
                 </div>
               </form>
@@ -46,18 +41,8 @@
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-              <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
+              <button type="button" ng-click = "" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <ul>
-                <li ng-repeat="alumno in ctrl.alumnosLista">
-                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
-                </li>
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>

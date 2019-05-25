@@ -14,15 +14,15 @@
       <div class="row">
         <div class="col-md-12">
           <table ng-Table="ctrl.tablaResponsables" class="table table-bordered">
-            <tr ng-repeat="responsable in ctrl.responsables">
-              <td data-title="'id'">{{responsable.id}}</td>
+            <tr ng-repeat="responsable in ctrl.responsablesLista">
+              <td data-title="">{{responsable.n}}</td>
               <td data-title="'Nombre'">{{responsable.nombre}}</td>
               <td data-title="'Edad'">{{responsable.edad}}</td>
               <td data-title="'Correo'">{{responsable.correo}}</td>
               <td data-title="'Selecionar'">
                 <div class="radio m-b-15" align="center">
                 <label>
-                    <input type="radio" name="sample" value="" ng-checked="ctrl.responsables.seleccionado">
+                    <input type="radio" name="sample" ng-value="responsable" ng-model="ctrl.responsableSeleccionado">
                     <i class="input-helper"></i>
                 </label>
                 </div>

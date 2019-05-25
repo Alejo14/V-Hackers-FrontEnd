@@ -34,10 +34,8 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     dateF = semestre.fechaFin.getDate();
     data = {
       "id": uuid(), //Defecto
-      "cicloAcadémico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
+      "cicloAcademico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
       "nombreCiclo": semestre.nombreCiclo,
-      //no se debe mandar fecha de creación
-      "fechaCreacion": (new Date(2019, 05, 20))*1,
       "fechaInicio": (new Date(yearI, monthI, dateI))*1,//Se da formato a la fecha para que se registre
       "fechaFin": (new Date(yearF, monthF, dateF))*1,//Se da formato a la fecha para que se registre
     }
