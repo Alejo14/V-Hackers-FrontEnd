@@ -38,7 +38,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       "facultadId": especialidad.facultad.id,
       "codigo": especialidad.codigo,
       "nombre": especialidad.nombre,
-      "responsable": especialidad.responsableId
+      "responsableId": especialidad.responsableId
     }
     console.log(angular.toJson(data));//Envio el json para crear el semestre
 
