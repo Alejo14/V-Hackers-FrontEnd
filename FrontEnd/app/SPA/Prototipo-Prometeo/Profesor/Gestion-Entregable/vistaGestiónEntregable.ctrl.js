@@ -243,6 +243,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
+  ctrl.crearHerramienta = function(){
+      $state.go('nueva-herramienta');
+  }
+
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
     console.log(archivo.nombre)
   }
