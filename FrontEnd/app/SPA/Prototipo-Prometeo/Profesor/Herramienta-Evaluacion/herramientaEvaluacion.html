@@ -18,9 +18,9 @@
                       </textarea>
                   </div>
                   <div class="form-group">
-                    <div class="col-sm-6">
-                      <label class="col-sm-6 control-label">Puntaje m&aacute;ximo</label>
-                        <div class="col-sm-6">
+                    <div class="col-sm-6 p-l-0">
+                      <label class="col-sm-4 p-l-0 p-t-10 p-r-0 control-label">Puntaje m&aacute;ximo</label>
+                        <div class="col-sm-6 p-l-0">
                             <div class="fg-line">
                                 <input class="form-control input-sm" placeholder="Ingrese puntaje máximo" ng-model="ctrl.herramienta.puntuacionMaxima">
                             </div>
@@ -29,18 +29,25 @@
                   </div>
                   <div class="form-group">
                     <div class="fg-line">
-                        <label>Tipo de herramienta</label>
+                        <label class="m-t-15">Tipo de herramienta</label>
                     </div>
                     <div class="radio m-b-15">
                       <label>
-                        <input type="radio" name="sample" ng-model="ctrl.tipoHerramienta" value="lista">
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="lista">
                         <i class="input-helper"></i>
                         Lista de cotejo
                       </label>
                     </div>
+                    <div class="radio m-b-15" ng-if="false">
+                      <label>
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="rubrica">
+                        <i class="input-helper"></i>
+                        Escala de valores
+                      </label>
+                    </div>
                     <div class="radio m-b-15">
                       <label>
-                        <input type="radio" name="sample" ng-model="ctrl.tipoHerramienta" value="rubrica">
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="rubrica">
                         <i class="input-helper"></i>
                         R&uacute;brica
                       </label>

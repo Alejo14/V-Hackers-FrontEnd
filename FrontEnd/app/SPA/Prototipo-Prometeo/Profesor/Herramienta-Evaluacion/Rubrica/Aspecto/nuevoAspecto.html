@@ -12,12 +12,16 @@
           </div>
           <div class="card-body">
             <div class="form-group fg-line">
-                <label>Descripci&oacute;n</label>
-                <textarea class="form-control" rows="5" placeholder="Ingrese la descripción del aspecto" ng-model="ctrl.aspecto.descripcion">
-                </textarea>
+              <label class="control-label">T&iacute;tulo</label>
+              <input class="form-control input-sm" placeholder="Ingrese el título del aspecto">
+            <div>
+            <div class="form-group fg-line m-t-15">
+              <label class="control-label">Descripci&oacute;n</label>
+              <textarea class="form-control" rows="5" placeholder="Ingrese la descripción del aspecto" ng-model="ctrl.aspecto.descripcion">
+              </textarea>
             </div>
-            <div class="form-group">
-                <label class="col-md-1 col-sm-4 control-label m-t-15">Criterios</label>
+            <div class="form-group fg-line">
+              <label class="control-label m-t-15 m-r-15">Criterios</label>
               <label class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarCriterio()"><i class="fa fa-plus"></i></label>
             </div>
             <div class="form-group">

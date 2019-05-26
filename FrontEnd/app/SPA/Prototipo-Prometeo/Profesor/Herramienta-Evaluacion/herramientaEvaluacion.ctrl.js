@@ -1,13 +1,12 @@
-angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state',
-function($scope, $state){
+angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', 'herramientaEvaluacionService',
+function($scope, $state, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
  ctrl.herramienta = {};
  ctrl.herramienta.descripcion = "";
  ctrl.herramienta.puntuacionMaxima = 0;
  ctrl.herramienta.usoOtrosEvaluadores = false;
-
- ctrl.tipoHerramienta = "";
+ ctrl.herramienta.tipo = "";
 
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
@@ -30,6 +29,10 @@ ctrl.crearHerramienta = function () {
     closeModal: false
     }).then(function (crearHerramientaConfirmada) {
       if (crearHerramientaConfirmada !== "cancelar") {
+        //Llamada al servicio parar crear herramienta de evaluación
+        // herramientaEvaluacionService.crearHerramienta().then(function(id){
+        //   ctrl.herramienta.id = id;
+        // });
         swal({
           title: "¡Listo!",
           text: "Herramienta creada con éxito",
@@ -48,7 +51,26 @@ ctrl.crearHerramienta = function () {
   }
 
   ctrl.regresarEntregable = function (){
-    $state.go('evaluacion-herramienta');
+    swal({
+      title: "¿Esta seguro de que desea salir?",
+      text: "No se guardará los cambios realizados",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, salir",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (regresarConfirmado){
+      if(regresarConfirmado !== "cancelar"){
+        $state.go('evaluacion-herramienta');
+      }
+    });
   }
 
 }]);
