@@ -1,5 +1,6 @@
-angular.module('vHackersModule').directive('subirArchivo', [function () {
+angular.module('vHackersModule').directive('subirArchivo', ['variablesAmbiente',function (variablesAmbiente) {
     return {
+
         restrict: 'A',
         scope: {
             eventoPostSeleccion: "=?",
@@ -14,22 +15,37 @@ angular.module('vHackersModule').directive('subirArchivo', [function () {
                     scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fecha: Date.now()}, scope.parametros);
                 }
 
-                //var formData = new FormData();
-                //formData.append('file', element[0].files[0]);
+                var formData = new FormData();
+                formData.append('file', element[0].files[0]);
+                console.log(formData);
+                //formData.append('id', element[0].files[0]);scope.parametros
 
-                // agregar referencua a httpPostFactorypara la siguiente sección
+               //agregar referencua a httpPostFactorypara la siguiente sección
 
-                //httpPostFactory(appSettings.apiBaseUri + 'api/OADataSource/UploadData', formData, function (callback) {
-                //    // recieve image name to use in a ng-src
-                //    //console.log(callback);
+                httpPostFactory(variablesAmbiente.apiUrl + + variablesAmbiente.puertoArchivos + '/Cargar', formData, function (callback) {
+                  // recieve image name to use in a ng-src
+                  //console.log(callback);
 
-                //    if (scope.afterUploadEvent) {
+                  if (scope.eventoPostSubida) {
+                      scope.eventoPostSubida(callback, scope.parametros);
+                  }
+               });
 
-                //        scope.afterUploadEvent(callback, scope.params);
-                //    }
-                //});
             });
 
         }
     };
 }]);
+
+app.factory('httpPostFactory', function ($http) {
+       return function (file, data, callback) {
+           $http({
+               url: file,
+               method: "POST",
+               data: data,
+               headers: { 'Content-Type': undefined }
+           }).success(function (response) {
+               callback(response);
+           });
+       };
+});
