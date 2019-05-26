@@ -152,12 +152,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-rubrica',
-              url: '/nueva-rubrica',
+              url: '/nueva-rubrica/:id',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
             },
             {
               name: 'nuevo-aspecto',
-              url: '/nuevo-aspecto',
+              url: '/nuevo-aspecto/:id',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             }
           ]
