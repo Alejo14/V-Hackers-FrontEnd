@@ -33,7 +33,7 @@
               </div>
             </form>
             <div class="col-md-12" align="right" ng-if="ctrl.rubrica.numeroNiveles >= 1">
-              <button type="button" ng-click = "ctrl.guardarNiveles()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar n&uacutemero de niveles</button>
+              <button type="button" ng-if="ctrl.puedoAgregarNivel" ng-click = "ctrl.guardarNiveles()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar n&uacutemero de niveles</button>
             </div>
             <div class="form-group p-t-20">
               <div class="col-sm-12">

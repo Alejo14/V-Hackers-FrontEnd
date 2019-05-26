@@ -47,14 +47,14 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
     ctrl.puedoAgregarNivel = false;
     swal({
       title: "¿Esta seguro de que desea guardar estos niveles?",
-      text: "No podrá modificar",
+      text: "No podrá modificar el número de niveles",
       icon: "warning",
       buttons: {
         cancelar: {
           className: "btn btn-lg btn-danger"
         },
         confirm: {
-          text: "Sí, eliminar",
+          text: "Sí, guardar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
