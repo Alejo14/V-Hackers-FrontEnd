@@ -156,6 +156,9 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           proyectoNuevo.fechaFin="";
           proyectoNuevo.ponderacion="";
           $("textarea#desTA").val("");
+          $("#ts1").attr("checked", false);
+          $("#ts2").attr("checked", false);
+          $("input[name=metodo][value=0]").prop('checked', true);
 
           swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
