@@ -2,7 +2,7 @@
   <div ng-controller="profesorCursoCtrl as ctrl">
     <div class="container">
       <div class="block-container">
-        <h2> {{ctrl.nombreCurso}} </h2>
+        <h2> {{ctrl.curso.codigoCurso}} - {{ctrl.curso.nombreCurso}} - {{ctrl.curso.horario}}</h2>
       </div>
       <div class="col-md-4">
         <div class="card ">
@@ -55,7 +55,9 @@
                 <div class="col-md-12">
                   <div ng-repeat="proyecto in ctrl.proyectosLista" >
                     <div class="row">
-                      <li class="col-md-8" ng-click="ctrl.ingresarProyecto()"> {{proyecto.nombre}} </li>
+                      <li class="col-md-8" ng-click="ctrl.ingresarProyecto()">
+                        <a href=""> {{proyecto.nombre}} </a>
+                      </li>
                       <a style="float:right" ng-click="ctrl.verProyecto(proyecto)">
                         <i class="fas fa-pencil-alt"></i>
                       </a>

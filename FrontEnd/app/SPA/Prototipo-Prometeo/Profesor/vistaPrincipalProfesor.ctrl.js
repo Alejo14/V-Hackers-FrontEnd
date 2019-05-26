@@ -14,4 +14,8 @@ function($scope, $state,$stateParams, $uibModal){
   ctrl.listarEntregables = function(){
     $state.go('evaluacion-herramienta-listar');
   }
+
+  ctrl.misCursos = function(){
+    $state.go('profesorMisCursos');
+  }
 }]);

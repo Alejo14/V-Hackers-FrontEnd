@@ -116,13 +116,18 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaPrincipalProfesor.html'
             },
             {
+              name: 'profesorMisCursos',
+              url: '/profesorMisCursos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+            },
+            {
               name: 'calificacion',
               url: '/calificacion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
             },
             {
               name: 'curso',
-              url: '/curso',
+              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
             },
             {
