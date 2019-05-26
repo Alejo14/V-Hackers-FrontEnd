@@ -6,7 +6,8 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
     descripcion: "",
     criterios: []
   };
-
+  ctrl.rubricaId = $stateParams.id;
+  ctrl.criteriosLista = [];
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
       animation: false,
@@ -16,7 +17,9 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
       backdrop: true,
       keyboard: true,
       resolve: {
-        rubrica:  function(){ return $stateParams.rubrica;}
+        parametros:  function(){
+          return ctrl.rubricaId;
+        }
       }
     });
 
@@ -28,12 +31,20 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
           "indicaciones": parametroRetorno.indicaciones,
           "nivelesCriterio": parametroRetorno.nivelesCriterio
         };
-
+        ctrl.criteriosLista.push(nuevoCriterio);
       }
     });
   };
-
-  ctrl.regresarAspectos = function () {
-    $state.go('nueva-rubrica');
+  ctrl.inicializarTabla = function () {
+    ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
   }
+  ctrl.regresarAspectos = function () {
+    $state.go('nueva-rubrica', {id: ctrl.rubricaId});
+  }
+
+  ctrl.init = function () {
+    ctrl.inicializarTabla()
+  }
+
+  ctrl.init();
 }]);

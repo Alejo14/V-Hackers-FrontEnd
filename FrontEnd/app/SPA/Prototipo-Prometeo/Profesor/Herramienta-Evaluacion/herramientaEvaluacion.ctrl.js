@@ -9,6 +9,9 @@ function($scope, $state){
 
  ctrl.tipoHerramienta = "";
 
+ //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
+ ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
+
 ctrl.crearHerramienta = function () {
   swal({
     title: "¿Esta seguro de que desea crear esta herramienta?",
@@ -38,7 +41,7 @@ ctrl.crearHerramienta = function () {
             }
           }
         }).then(function(){
-          $state.go('nueva-rubrica');
+          $state.go('nueva-rubrica', {id: ctrl.herramienta.id});
         });
       }
     });

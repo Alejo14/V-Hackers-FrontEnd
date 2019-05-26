@@ -1,16 +1,35 @@
-angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'rubrica',
-function($scope, $uibModalInstance, rubrica){
+angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'parametros',
+function($scope, $uibModalInstance, parametros){
   var ctrl = this;
 
   ctrl.criterio = {
     descripcion: "",
-    indicaciones: ""
+    indicaciones: "",
+    nivelesCriterio: []
   }
+
+  ctrl.rubricaId = parametros.id;
 
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
-  }
-
+  };
+  ctrl.nivelesRubrica = [
+      {
+        id: "",
+        descripcion: "Alta",
+        puntaje: 10
+      },
+      {
+        id: "",
+        descripcion: "Media",
+        puntaje: 5
+      },
+      {
+        id: "",
+        descripcion: "Baja",
+        puntaje: 0
+      }
+    ];
   ctrl.guardarCriterio = function () {
     swal({
       title: "¿Esta seguro de que desea agregar este criterio?",
@@ -27,8 +46,8 @@ function($scope, $uibModalInstance, rubrica){
         }
       },
       closeModal: false
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+    }).then(function (criterioNuevoConfirmado) {
+      if (criterioNuevoConfirmado !== "cancelar") {
         $uibModalInstance.close(ctrl.criterio);
       }
     });

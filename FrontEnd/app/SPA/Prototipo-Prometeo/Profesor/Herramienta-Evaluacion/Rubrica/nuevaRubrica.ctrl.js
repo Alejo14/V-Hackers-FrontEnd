@@ -1,8 +1,9 @@
-angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', 'NgTableParams',
-function($scope, $state, NgTableParams){
+angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams',
+function($scope, $state, $stateParams, NgTableParams){
   var ctrl = this;
   ctrl.titulo = 'Nueva rúbrica';
   ctrl.rubrica = {
+    id: $stateParams.id,
     numeroNiveles: 0,
     niveles: [],
     aspecto: []
@@ -24,7 +25,6 @@ function($scope, $state, NgTableParams){
       icon: "warning",
       buttons: {
         cancelar: {
-          text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
         confirm: {
@@ -43,7 +43,7 @@ function($scope, $state, NgTableParams){
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto');
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id});
   }
 
   ctrl.regresarEntregable = function (){

@@ -17,17 +17,15 @@
                 </textarea>
             </div>
             <div class="form-group">
-                <label class="col-sm-1 control-label m-t-15">Criterios</label>
+                <label class="col-md-1 col-sm-4 control-label m-t-15">Criterios</label>
               <label class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarCriterio()"><i class="fa fa-plus"></i></label>
             </div>
             <div class="form-group">
               <div class="table-responsive p-t-30">
-                <table ng-table="ctrl.criterioAspecto" class="table table-bordered">
-                  <tr ng-repeat="criterio in ctrl.criterioLista">
+                <table ng-table="ctrl.criteriosTabla" class="table table-bordered">
+                  <tr ng-repeat="criterio in ctrl.criteriosLista">
                     <td data-title="'Nombre'">
-                    </td>
-                    <td data-title="'Niveles'">
-
+                      {{criterio.descripcion}}
                     </td>
                     <td data-title="'Detalle'">
                       <a ng-click = "">Ver detalle</a>
