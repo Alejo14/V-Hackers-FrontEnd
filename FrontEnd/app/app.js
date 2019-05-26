@@ -73,6 +73,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
             },
             {
+              name: 'modificar-especialidad',
+              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultad/:responsable',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaModificarEspecialidad.html'
+            },
+            {
               name: 'listar-especialidades',
               url: '/listar-especialidades',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaListarEspecialidades.html'
@@ -144,6 +149,21 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'evaluacion-herramienta-listar',
               url: '/evaluacion-herramienta-listar',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
+            },
+            {
+              name: 'nueva-herramienta',
+              url: '/nueva-herramienta',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
+            },
+            {
+              name: 'nueva-rubrica',
+              url: '/nueva-rubrica',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
+            },
+            {
+              name: 'nuevo-aspecto',
+              url: '/nuevo-aspecto',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             }
           ]
         },

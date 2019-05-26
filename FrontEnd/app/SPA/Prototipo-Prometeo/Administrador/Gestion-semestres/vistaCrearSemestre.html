@@ -22,17 +22,17 @@
                     <label class="col-sm-4 control-label">Ciclo académico*:</label>
                     <div class="col-sm-4">
                       <div class="fg-line">
-                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.anioCiclo" placeholder="e.g: 2019">
+                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.anioCiclo" placeholder="e.g: 2019" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                     <div class="col-sm-2">
                       <div class="fg-line">
-                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.ciclo" placeholder="e.g: 01">
+                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.ciclo" placeholder="e.g: 01" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                     <div class="col-sm-2">
                       <div class="fg-line">
-                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.tipoCiclo" placeholder="e.g: 00">
+                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.tipoCiclo" placeholder="e.g: 00" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                   </div>
@@ -40,7 +40,7 @@
                     <label class="col-sm-4 control-label">Nombre del ciclo*:</label>
                     <div class="col-sm-8">
                       <div class="fg-line">
-                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.nombreCiclo" placeholder="e.g: 2019-1">
+                          <input type="text" class="form-control input-sm" ng-model="ctrl.semestre.nombreCiclo" placeholder="e.g: 2019-1" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
                     <label class="col-sm-4 control-label">Fecha Inicio*:</label>
                     <div class="col-sm-8">
                       <div class="fg-line">
-                          <input type="date" class="form-control input-sm" ng-model="ctrl.semestre.fechaInicio" placeholder="e.g: 18/05/2019">
+                          <input type="date" class="form-control input-sm" ng-model="ctrl.semestre.fechaInicio" placeholder="e.g: 18/05/2019" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                     <label class="col-sm-4 control-label">Fecha Fin*:</label>
                     <div class="col-sm-8">
                       <div class="fg-line">
-                          <input type="date" class="form-control input-sm" ng-model="ctrl.semestre.fechaFin"  placeholder="e.g: 11/10/2019">
+                          <input type="date" class="form-control input-sm" ng-model="ctrl.semestre.fechaFin"  placeholder="e.g: 11/10/2019" ng-change="ctrl.validarRegistroValido()">
                       </div>
                     </div>
                   </div>
@@ -93,7 +93,7 @@
                 <h5>Campos obligatorios *</h5>
             </div>
             <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.crearSemestre(ctrl.semestre)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.crearSemestre(ctrl.semestre)" class="btn color-fondo-azul-pucp color-blanco" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
               <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
 

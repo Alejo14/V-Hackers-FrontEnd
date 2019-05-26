@@ -34,22 +34,26 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     dateF = semestre.fechaFin.getDate();
     data = {
       "id": uuid(), //Defecto
-      "cicloAcadémico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
+      "cicloAcademico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
       "nombreCiclo": semestre.nombreCiclo,
-      //no se debe mandar fecha de creación
-      "fechaCreacion": (new Date(2019, 05, 20))*1,
       "fechaInicio": (new Date(yearI, monthI, dateI))*1,//Se da formato a la fecha para que se registre
       "fechaFin": (new Date(yearF, monthF, dateF))*1,//Se da formato a la fecha para que se registre
     }
-
-    console.log(angular.toJson(data));//Envio el json para crear el semestre
-
-    administradorSemestreService.registroSemestre(angular.toJson(data)).then(function () {
-      swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success").then(function () {
-        $state.go('inicioAdmin');
+    if (((new Date(yearI, monthI, dateI))*1) < ((new Date(yearF, monthF, dateF))*1)) {
+      administradorSemestreService.registroSemestre(angular.toJson(data)).then(function () {
+        swal("¡Bien hecho!", "El semestre fue creado exitosamente" , "success").then(function () {
+          $state.go('inicioAdmin');
+        });
       });
-    });
+    } else {
+      swal("¡Error!", "Seleccione una fecha fin mayor a la fecha inicio", "error");
+    }
   };
+
+  ctrl.validarRegistroValido = function () {
+    ctrl.registroValido = ctrl.semestre.anioCiclo !== "" && ctrl.semestre.ciclo !== "" && ctrl.semestre.tipoCiclo !== "" && ctrl.semestre.nombreCiclo !== "" &&  ctrl.semestre.fechaInicio !== "" && ctrl.semestre.fechaFin !== "";
+  };
+
 
   ctrl.regresarAdministrador = function () {
     swal({

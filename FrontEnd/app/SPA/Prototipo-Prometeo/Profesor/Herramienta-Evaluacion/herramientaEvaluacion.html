@@ -1,0 +1,59 @@
+<section id="main">
+  <div ng-controller="herramientaEvaluacionCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-10">
+                <h2>{{ctrl.titulo}}<h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form role="form" class="ng-pristine ng-valid">
+                  <div class="form-group fg-line">
+                      <label>Descripci&oacute;n</label>
+                      <textarea class="form-control" rows="5" placeholder="Ingrese la descripción de la herramienta de la evaluación" ng-model="ctrl.herramienta.descripcion">
+                      </textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-6">
+                      <label class="col-sm-6 control-label">Puntaje m&aacute;ximo</label>
+                        <div class="col-sm-6">
+                            <div class="fg-line">
+                                <input class="form-control input-sm" placeholder="Ingrese puntaje máximo" ng-model="ctrl.herramienta.puntuacionMaxima">
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="fg-line">
+                        <label>Tipo de herramienta</label>
+                    </div>
+                    <div class="radio m-b-15">
+                      <label>
+                        <input type="radio" name="sample" ng-model="ctrl.tipoHerramienta" value="lista">
+                        <i class="input-helper"></i>
+                        Lista de cotejo
+                      </label>
+                    </div>
+                    <div class="radio m-b-15">
+                      <label>
+                        <input type="radio" name="sample" ng-model="ctrl.tipoHerramienta" value="rubrica">
+                        <i class="input-helper"></i>
+                        R&uacute;brica
+                      </label>
+                    </div>
+                  </div>
+              </form>
+              <div class="col-md-12" align="right">
+                <button class="btn btn-primary btn-sm waves-effect" ng-click="ctrl.crearHerramienta()"><i class="fa fa-check"></i> Crear herramienta de evaluaci&oacute;n</button>
+                <button type="button" ng-click = "ctrl.regresarEntregable()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
