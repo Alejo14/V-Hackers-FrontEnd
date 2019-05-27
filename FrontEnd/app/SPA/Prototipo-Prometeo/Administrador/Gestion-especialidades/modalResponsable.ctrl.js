@@ -16,19 +16,6 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
   //     ctrl.responsablesLista = responsablesListaData;
   //   });
   // };
-  function uuid() {
-      function randomDigit() {
-          if (crypto && crypto.getRandomValues) {
-              var rands = new Uint8Array(1);
-              crypto.getRandomValues(rands);
-              return (rands[0] % 16).toString(16);
-          } else {
-              return ((Math.random() * 16) | 0).toString(16);
-          }
-      }
-      var crypto = window.crypto || window.msCrypto;
-      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
-  }
 
   ctrl.cambiarVista = function(indice) {
     if(indice == 0) ctrl.cargaUnitaria = true;
@@ -37,26 +24,26 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.responsablesLista =
   [{
-    n : "00",
-    id : uuid(),
-    nombre: "Alejandro Tapia",
-    edad: 21,
-    correo: "a.tapiat@pucp.pe"
+    n : "01",
+    id : "42325bfb-767e-4323-bba0-d81b7c86facb",
+    codigo : "20145648",
+    nombre: "Jonathan Loli",
+    correo: "jloli@pucp.pe"
 
   },
   {
-    n : "01",
-    id : uuid(),
-    nombre: "Diego Paredes",
-    edad: 21,
-    correo: "a20151107@pucp.pe"
+    n : "02",
+    id : "a6f5d4b2-4616-4649-be63-65d0eee79c96",
+    codigo : "19960275",
+    nombre: "Luis Flores",
+    correo: "luis.flores@pucp.edu.pe"
   },
   {
-    n : "02",
-    id : uuid(),
-    nombre: "Leticia Amaya",
-    edad: 21,
-    correo: "leticia.amaya@pucp.edu.pe"
+    n : "03",
+    id : "ff4da352-ff6b-456e-8ff9-9cf962cf496f",
+    codigo : "20015612",
+    nombre: "Walter Segama",
+    correo: "wzegama@pucp.edu.pe"
   }];
 
   ctrl.tablaResponsables = new NgTableParams({}, { dataset: ctrl.responsablesLista });
@@ -66,7 +53,6 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
       title: "¿Esta seguro de que desea seleccionar a este responsable?",
       text: "",
       icon: "warning",
-      //buttons: ["Cancelar", "Sí, agregar"],
       buttons: {
         cancelar: {
           text: "Cancelar",
@@ -80,7 +66,6 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
       closeModal: false
     }).then(function (responsableConfirmado) {
       if (responsableConfirmado !== "cancelar") {
-        console.log(ctrl.responsableSeleccionado);
         $uibModalInstance.close(ctrl.responsableSeleccionado);
       }
     });
