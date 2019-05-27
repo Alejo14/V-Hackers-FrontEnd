@@ -5,10 +5,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
   ctrl.tituloVer="Entregables";
+  ctrl.titulo="";
+  ctrl.botonGrabar="";
   ctrl.filas=[1,2,3,4];
   ctrl.dias=['L','M','Mi','J','V','S'];
   ctrl.columnas=[1,2,3,4,5,6];
   ctrl.entregableM=[];
+  ctrl.entregableG=[];
   $scope.fechaActual=new Date();
   ctrl.id=0;
   // var d=new Date("5/11/2020");
@@ -44,45 +47,53 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
   }
 
+  ctrl.gestionarEntregable = function (entregableG){
+    if (!entregableG || !(entregableG.nombre) || !(entregableG.descripcion) || !(entregableG.fechaEntrega) || !(entregableG.ponderacion)){
+      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
+    }else{
+      if ($stateParams.id==0) {
+        ctrl.crearEntregable(entregableG);
+      }else {
+        ctrl.modificarEntregable(entregableG);
+      }
+    }
+  }
 
   ctrl.crearEntregable = function (entregable) {
     console.log(angular.toJson(entregable));//Envio el json para crear el entregable
-    if (!entregable || !(entregable.nombre) || !(entregable.descripcion) || !(entregable.fechaEntrega) || !(entregable.ponderacion)){
-      swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
-    }else {
-      year=entregable.fechaEntrega.getFullYear();
-      month=entregable.fechaEntrega.getMonth();
-      date=entregable.fechaEntrega.getDate();
-      if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
-      if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
+    year=entregable.fechaEntrega.getFullYear();
+    month=entregable.fechaEntrega.getMonth();
+    date=entregable.fechaEntrega.getDate();
+    if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
+    if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
 
-      yearH=entregable.fechaHabilitacion.getFullYear();
-      monthH=entregable.fechaHabilitacion.getMonth();
-      dateH=entregable.fechaHabilitacion.getDate();
-      if (!entregable.horaHabilitacion) {hoursH=0} else {hoursH=entregable.horaHabilitacion.getHours();}
-      if (!entregable.horaHabilitacion) {minutesH=0} else {minutesH=entregable.horaHabilitacion.getMinutes();}
-      data={
-        "id": uuid(), //Defecto
-        "nombre": entregable.nombre,
-        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
-        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
-        "tieneAlarma": 1,
-        "ponderacion": 1,
-        "descripcion": entregable.descripcion
-        }
-      entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
-          swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
-      });
-      entregable.id=0;
-      entregable.tieneAlarma=1;
-      entregable.nombre="";
-      entregable.fechaEntrega="";
-      entregable.horaEntrega="";
-      entregable.fechaHabilitacion="";
-      entregable.horaFin="";
-      entregable.descripcion="";
-      entregable.ponderacion="";
-    }
+    yearH=entregable.fechaHabilitacion.getFullYear();
+    monthH=entregable.fechaHabilitacion.getMonth();
+    dateH=entregable.fechaHabilitacion.getDate();
+    if (!entregable.horaHabilitacion) {hoursH=0} else {hoursH=entregable.horaHabilitacion.getHours();}
+    if (!entregable.horaHabilitacion) {minutesH=0} else {minutesH=entregable.horaHabilitacion.getMinutes();}
+    data={
+      "id": uuid(), //Defecto
+      "nombre": entregable.nombre,
+      "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+      "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
+      "tieneAlarma": 1,
+      "ponderacion": 1,
+      "descripcion": entregable.descripcion
+      }
+    entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
+        swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
+    });
+    entregable.id=0;
+    entregable.tieneAlarma=1;
+    entregable.nombre="";
+    entregable.fechaEntrega="";
+    entregable.horaEntrega="";
+    entregable.fechaHabilitacion="";
+    entregable.horaFin="";
+    entregable.descripcion="";
+    entregable.ponderacion="";
+
   };
 
 
@@ -153,44 +164,40 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    if (!entregableM || !(entregableM.nombre) || !(entregableM.descripcion) || !(entregableM.fechaEntrega) || !(entregableM.puntajeMaximo)){
-      swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
-    }else {
-      year=entregableM.fechaEntrega.getFullYear();
-      month=entregableM.fechaEntrega.getMonth();
-      date=entregableM.fechaEntrega.getDate();
-      if (!entregableM.horaEntrega) {hours=0} else {hours=entregableM.horaEntrega.getHours();}
-      if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
+    year=entregableM.fechaEntrega.getFullYear();
+    month=entregableM.fechaEntrega.getMonth();
+    date=entregableM.fechaEntrega.getDate();
+    if (!entregableM.horaEntrega) {hours=0} else {hours=entregableM.horaEntrega.getHours();}
+    if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
 
-      yearH=entregableM.fechaHabilitacion.getFullYear();
-      monthH=entregableM.fechaHabilitacion.getMonth();
-      dateH=entregableM.fechaHabilitacion.getDate();
-      if (!entregableM.horaHabilitacion) {hoursH=0} else {hoursH=entregableM.horaHabilitacion.getHours();}
-      if (!entregableM.horaHabilitacion) {minutesH=0} else {minutesH=entregableM.horaHabilitacion.getMinutes();}
-      data={
-        "id": entregableM.id, //Defecto
-        "nombre": entregableM.nombre,
-        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
-        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
-        "tieneAlarma": 1,
-        "ponderacion": 1,
-        "descripcion": entregableM.descripcion
-        }
-      console.log(angular.toJson(data));
-    entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
-        swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
-    });
-    entregableM.id=0;
-    entregableM.tieneAlarma=1;
-    entregableM.nombre="";
-    entregableM.fechaEntrega="";
-    entregableM.horaEntrega="";
-    entregableM.fechaHabilitacion="";
-    entregableM.horaFin="";
-    entregableM.descripcion="";
-    entregableM.ponderacion="";
-    entregableM.puntajeMaximo="";
-    };
+    yearH=entregableM.fechaHabilitacion.getFullYear();
+    monthH=entregableM.fechaHabilitacion.getMonth();
+    dateH=entregableM.fechaHabilitacion.getDate();
+    if (!entregableM.horaHabilitacion) {hoursH=0} else {hoursH=entregableM.horaHabilitacion.getHours();}
+    if (!entregableM.horaHabilitacion) {minutesH=0} else {minutesH=entregableM.horaHabilitacion.getMinutes();}
+    data={
+      "id": entregableM.id, //Defecto
+      "nombre": entregableM.nombre,
+      "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+      "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
+      "tieneAlarma": 1,
+      "ponderacion": 1,
+      "descripcion": entregableM.descripcion
+      }
+    console.log(angular.toJson(data));
+  entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
+      swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success");
+  });
+  entregableM.id=0;
+  entregableM.tieneAlarma=1;
+  entregableM.nombre="";
+  entregableM.fechaEntrega="";
+  entregableM.horaEntrega="";
+  entregableM.fechaHabilitacion="";
+  entregableM.horaFin="";
+  entregableM.descripcion="";
+  entregableM.ponderacion="";
+  entregableM.puntajeMaximo="";
 };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
@@ -253,6 +260,28 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.init = function (){
     ctrl.cargarEntregables();
+
+    if ($stateParams.id==0){
+      ctrl.titulo = "Nuevo Entregable";
+      ctrl.botonGrabar="Guardar";
+    }else{
+      ctrl.titulo = "Modificar Entregable";
+      ctrl.botonGrabar="Modificar";
+      ctrl.entregableG.nombre=$stateParams.nombre;
+      ctrl.entregableG.id=$stateParams.id;
+      ctrl.entregableG.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
+      ctrl.entregableG.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+      ctrl.entregableG.descripcion=$stateParams.descripcion;
+    }
+
+    if($stateParams.cursoCicloId==0){
+      ctrl.entregableG.cursoProyecto='C';
+      ctrl.entregableG.proyectoId=$stateParams.proyectoId;
+    }else{
+      ctrl.entregableG.cursoProyecto='P';
+      ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
+    }
+
   }
 
   ctrl.init();
