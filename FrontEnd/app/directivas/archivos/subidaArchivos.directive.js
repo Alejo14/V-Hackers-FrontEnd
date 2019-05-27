@@ -1,4 +1,4 @@
-angular.module('vHackersModule').directive('subirArchivo', ['variablesAmbiente',function (variablesAmbiente) {
+angular.module('vHackersModule').directive('subirArchivo', ['httpPostFactory','variablesAmbiente',function (httpPostFactory,variablesAmbiente) {
     return {
 
         restrict: 'A',
@@ -16,13 +16,14 @@ angular.module('vHackersModule').directive('subirArchivo', ['variablesAmbiente',
                 }
 
                 var formData = new FormData();
-                formData.append('file', element[0].files[0]);
+                formData.append('files', element[0].files[0]);
+                //formData.append('id',scope.parametros);
                 console.log(formData);
                 //formData.append('id', element[0].files[0]);scope.parametros
 
                //agregar referencua a httpPostFactorypara la siguiente sección
 
-                httpPostFactory(variablesAmbiente.apiUrl + + variablesAmbiente.puertoArchivos + '/Cargar', formData, function (callback) {
+                httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/guardar', formData, function (callback) {
                   // recieve image name to use in a ng-src
                   //console.log(callback);
 
@@ -35,16 +36,17 @@ angular.module('vHackersModule').directive('subirArchivo', ['variablesAmbiente',
 
         }
     };
-}]);
+}])
 
-app.factory('httpPostFactory', function ($http) {
+
+angular.module('vHackersModule').factory('httpPostFactory', function ($http) {
        return function (file, data, callback) {
            $http({
                url: file,
                method: "POST",
                data: data,
                headers: { 'Content-Type': undefined }
-           }).success(function (response) {
+           }).then(function (response) {
                callback(response);
            });
        };
