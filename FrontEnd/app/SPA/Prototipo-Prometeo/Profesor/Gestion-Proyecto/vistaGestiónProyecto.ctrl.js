@@ -143,7 +143,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
+          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
@@ -224,7 +224,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
+          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
           gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
@@ -246,6 +246,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   ctrl.init = function (){
     if ($stateParams.id==0){
       ctrl.titulo = "Nuevo Proyecto";
+      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
     }else{
       ctrl.titulo = "Modificar Proyecto";
       ctrl.proyectoG.id=$stateParams.id;
@@ -254,6 +255,8 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       ctrl.proyectoG.fechaInicio=new Date(Number($stateParams.fechaInicio));;
       ctrl.proyectoG.fechaFin=new Date(Number($stateParams.fechaFin));;
       ctrl.proyectoG.ponderacion=$stateParams.ponderacion;
+      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
+
 
       if($stateParams.visible==1){
         $("#ts1").attr("checked", true);

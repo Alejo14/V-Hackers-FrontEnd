@@ -14,20 +14,18 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
 
     $state.go('evaluacion-herramienta');
   }
-  ctrl.swalProyecto = function () {
+  ctrl.crearProyecto = function () {
     $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
     descripcion: 0, visible: 0, registroHoras: 0,
-    metodoTrabajo: 0, cursoCiclo_id: 0});
+    metodoTrabajo: 0, cursoCiclo_id: ctrl.curso.cursoCicloId});
   };
+
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
     profesorCursoService.listarEntregables().then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
       console.log(ctrl.entregablesLista);
     });
-  };
-  ctrl.swalEntregable = function () {
-    swal("¡Bien hecho!", "El entregable se creo exitosamente", "success");
   };
 
   ctrl.verProyecto = function (proyecto) {
@@ -115,6 +113,13 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     });
 
   };
+
+  ctrl.cargaUnitaria = true;
+
+  ctrl.cambiarVista = function(indice) {
+    if(indice == 0) ctrl.cargaUnitaria = true;
+    else ctrl.cargaUnitaria = false;
+  }
 
   ctrl.init = function (){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;

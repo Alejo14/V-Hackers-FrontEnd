@@ -1,0 +1,15 @@
+<div class="col-md-12">
+  <div ng-repeat="entregable in ctrl.entregablesLista" >
+    <div class="row">
+      <li class="col-md-8" ng-click="ctrl.ingresarEntregable()">
+        <a href=""> {{entregable.nombre}} </a>
+      </li>
+      <a style="float:right" ng-click="ctrl.verEntregable(entregable)">
+        <i class="fas fa-pencil-alt"></i>
+      </a>
+      <a style="float:right" ng-click="ctrl.elminarEntregable(entregable)">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+    </div>
+  </div>
+</div>
