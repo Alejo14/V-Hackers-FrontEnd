@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('gestiónProyectoCtrl', ['$scope', '$state', '$stateParams', 'gestiónProyectoService', '$uibModal',
-function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
+angular.module('vHackersModule').controller('gestionProyectoCtrl', ['$scope', '$state', '$stateParams', 'gestionProyectoService', '$uibModal',
+function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   var ctrl = this;
   ctrl.titulo = "fafa";
   ctrl.alumnosLista = [];
@@ -146,7 +146,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
           }
           console.log(angular.toJson(data));
-          gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
+          gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
           });
 
@@ -156,6 +156,9 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           proyectoNuevo.fechaFin="";
           proyectoNuevo.ponderacion="";
           $("textarea#desTA").val("");
+          $("#ts1").attr("checked", false);
+          $("#ts2").attr("checked", false);
+          $("input[name=metodo][value=0]").prop('checked', true);
 
           swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
@@ -224,7 +227,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
           }
           console.log(angular.toJson(data));
-          gestiónProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
+          gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
           });
 

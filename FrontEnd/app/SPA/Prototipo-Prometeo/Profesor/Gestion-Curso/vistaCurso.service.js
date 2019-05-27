@@ -4,9 +4,8 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.listarProyectos = function(){
-
-    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/cde22521-8cc6-4cea-a2d2-802c4b03674a';
+  servicio.listarProyectos = function(codigoCurso){
+    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',

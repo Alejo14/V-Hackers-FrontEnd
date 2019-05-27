@@ -1,12 +1,12 @@
 angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams' ,'profesorCursoService', '$uibModal',
 
-function($scope, $state,$stateParams, profesorCursoService, $uibModal){
+function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   var ctrl = this;
-  ctrl.nombreCurso = "Ingeniería de Software";
-  ctrl.mensajeNuevo = "Go V-Hackers";
+  ctrl.curso = {};
   ctrl.proyectosLista = [];
   ctrl.cargarProyectos = function () {
-    profesorCursoService.listarProyectos().then(function (proyectosListaData) {
+    var idCursoCiclo = ctrl.curso.cursoCicloId;
+    profesorCursoService.listarProyectos(idCursoCiclo).then(function (proyectosListaData) {
       ctrl.proyectosLista = proyectosListaData;
     });
   };
@@ -117,6 +117,13 @@ function($scope, $state,$stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.init = function (){
+    ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
+    ctrl.curso.nombreCurso=$stateParams.nombreCurso;
+    ctrl.curso.codigoCurso=$stateParams.codigoCurso;
+    ctrl.curso.creditos=$stateParams.creditos;
+    ctrl.curso.cantidadAlumnos=$stateParams.cantidadAlumnos;
+    ctrl.curso.horario=$stateParams.horario;
+
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();
   }
