@@ -144,12 +144,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.regresarEntregable = function () {
-    $state.go('evaluacion-herramienta');
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaEntrega: 0, fechaHabilitacion: 0,
+      descripcion: 0, ponderacion: 0, cursoCicloId: 0, proyectoId: 0});//ctrl.curso.cursoCicloId
   };
 
   ctrl.verEntregable = function (entregable) {
     $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion});
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: 0, cursoCicloId: 0, proyectoId: 0});
 
   };
 
