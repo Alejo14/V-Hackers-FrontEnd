@@ -114,7 +114,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('curso');
+        $state.go('profesorMisCursos');//curso, {cursoCicloId: 0, nombreCurso: 0, codigoCurso: 0, creditos: 0,cantidadAlumnos: 0, horario: 0 } );
+
+
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });
@@ -149,7 +151,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
     fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: 0, cursoCicloId: 0, proyectoId: 0});
 
   };
