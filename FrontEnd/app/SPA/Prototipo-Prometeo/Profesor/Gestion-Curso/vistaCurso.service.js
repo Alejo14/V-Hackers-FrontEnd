@@ -4,9 +4,8 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.listarProyectos = function(){
-
-    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/cde22521-8cc6-4cea-a2d2-802c4b03674a';
+  servicio.listarProyectos = function(codigoCurso){
+    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -19,7 +18,7 @@ function($q, $http) {
     return $defer.promise;
   }
 
-  servicio.listarEntregables = function(){
+  servicio.listarEntregables = function(codigoCurso){
 
     var urlListarEntregables = 'http://localhost:7002/entregables';
     var $defer = $q.defer();

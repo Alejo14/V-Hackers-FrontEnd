@@ -1,0 +1,37 @@
+<section>
+  <div>
+    <div class="card-header">
+      <h2>
+        Agregar Criterio
+      </h2>
+      <ul class="actions">
+        <li>
+          <a class="pull-right" ng-click="ctrl.cerrar()"><i class="fa fa-window-close"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="container-fluid">
+      <div class="card-body">
+        <div class="form-group fg-line">
+            <label>Descripci&oacute;n</label>
+            <textarea class="form-control" rows="2" placeholder="Ingrese la descripción del criterio" ng-model="ctrl.criterio.descripcion">
+            </textarea>
+        </div>
+        <div class="form-group fg-line">
+            <label>Indicaciones</label>
+            <textarea class="form-control" rows="3" placeholder="Ingrese indicaciones para el criterio" ng-model="ctrl.criterio.indicaciones">
+            </textarea>
+        </div>
+        <div class="form-group fg-line" ng-repeat="nivel in ctrl.nivelesRubrica">
+          <label>Descripci&oacute;n del nivel {{nivel.descripcion}}</label>
+          <textarea class="form-control" rows="2" placeholder="Ingrese la descripción del nivel de este criterio" ng-model="ctrl.criterio.nivelesCriterio[$index]">
+          </textarea>
+        </div>
+      </div>
+      <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
+        <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
+        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarCriterio()" ng-disabled=""><i class="fa fa-save"></i> Guardar</button>
+      </div>
+    </div>
+  </div>
+</section>

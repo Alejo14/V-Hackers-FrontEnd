@@ -37,7 +37,6 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
             title: "¡Listo!",
             text: "Usuario agregado con éxito",
             icon: "success",
-            //buttons: ["Cancelar", "Sí, agregar"],
             buttons: {
               confirm: {
                 text: "ok",

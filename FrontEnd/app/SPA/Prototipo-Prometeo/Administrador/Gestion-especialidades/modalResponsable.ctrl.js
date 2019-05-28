@@ -6,7 +6,7 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   var ctrl = this;
 
-  ctrl.responsable = {
+  ctrl.responsableSeleccionado = {
     id : "",
     nombre : ""
   };
@@ -16,36 +16,43 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
   //     ctrl.responsablesLista = responsablesListaData;
   //   });
   // };
-  ctrl.responsables =
+
+  ctrl.cambiarVista = function(indice) {
+    if(indice == 0) ctrl.cargaUnitaria = true;
+    else ctrl.cargaUnitaria = false;
+  }
+
+  ctrl.responsablesLista =
   [{
-    id : "00",
-    nombre: "Alejandro Tapia",
-    edad: 21,
-    correo: "a.tapiat@pucp.pe",
-    seleccionado: false
+    n : "01",
+    id : "42325bfb-767e-4323-bba0-d81b7c86facb",
+    codigo : "20145648",
+    nombre: "Jonathan Loli",
+    correo: "jloli@pucp.pe"
+
   },
   {
-    id : "01",
-    nombre: "Diego Paredes",
-    edad: 21,
-    correo: "a20151107@pucp.pe",
-    seleccionado: false
+    n : "02",
+    id : "a6f5d4b2-4616-4649-be63-65d0eee79c96",
+    codigo : "19960275",
+    nombre: "Luis Flores",
+    correo: "luis.flores@pucp.edu.pe"
   },
   {
-    id : "02",
-    nombre: "Leticia Amaya",
-    edad: 21,
-    correo: "leticia.amaya@pucp.edu.pe",
-    seleccionado: false
+    n : "03",
+    id : "ff4da352-ff6b-456e-8ff9-9cf962cf496f",
+    codigo : "20015612",
+    nombre: "Walter Segama",
+    correo: "wzegama@pucp.edu.pe"
   }];
-  ctrl.tablaResponsables = new NgTableParams({}, { dataset: ctrl.responsables });
+
+  ctrl.tablaResponsables = new NgTableParams({}, { dataset: ctrl.responsablesLista });
 
   ctrl.seleccionarResponsable = function () {
     swal({
       title: "¿Esta seguro de que desea seleccionar a este responsable?",
       text: "",
       icon: "warning",
-      //buttons: ["Cancelar", "Sí, agregar"],
       buttons: {
         cancelar: {
           text: "Cancelar",
@@ -59,22 +66,19 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
       closeModal: false
     }).then(function (responsableConfirmado) {
       if (responsableConfirmado !== "cancelar") {
-        //corregir esto:
-        ctrl.responsableSeleccionado = {};
-        angular.forEach(ctrl.responsables, function (responsable,indice){
-          if(responsable.seleccionado) ctrl.responsableSeleccionado = responsable;
-        })
-        console.log(ctrl.responsableSeleccionado);
         $uibModalInstance.close(ctrl.responsableSeleccionado);
       }
     });
   };
+
   ctrl.init = function(){
     //ctrl.obtenerResponsables();
   };
+
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);
   };
+
   ctrl.init();
 
 };

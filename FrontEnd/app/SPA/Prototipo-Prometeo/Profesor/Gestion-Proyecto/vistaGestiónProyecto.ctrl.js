@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('gestiónProyectoCtrl', ['$scope', '$state', '$stateParams', 'gestiónProyectoService', '$uibModal',
-function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
+angular.module('vHackersModule').controller('gestionProyectoCtrl', ['$scope', '$state', '$stateParams', 'gestionProyectoService', '$uibModal',
+function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   var ctrl = this;
   ctrl.titulo = "fafa";
   ctrl.alumnosLista = [];
@@ -143,10 +143,10 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
+          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
-          gestiónProyectoService.registroProyecto(angular.toJson(data)).then(function () {
+          gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
           });
 
@@ -156,6 +156,9 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           proyectoNuevo.fechaFin="";
           proyectoNuevo.ponderacion="";
           $("textarea#desTA").val("");
+          $("#ts1").attr("checked", false);
+          $("#ts2").attr("checked", false);
+          $("input[name=metodo][value=0]").prop('checked', true);
 
           swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
@@ -221,10 +224,10 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": "cde22521-8cc6-4cea-a2d2-802c4b03674a"
+          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
-          gestiónProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
+          gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
           });
 
@@ -243,6 +246,7 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
   ctrl.init = function (){
     if ($stateParams.id==0){
       ctrl.titulo = "Nuevo Proyecto";
+      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
     }else{
       ctrl.titulo = "Modificar Proyecto";
       ctrl.proyectoG.id=$stateParams.id;
@@ -251,6 +255,8 @@ function($scope, $state, $stateParams, gestiónProyectoService, $uibModal){
       ctrl.proyectoG.fechaInicio=new Date(Number($stateParams.fechaInicio));;
       ctrl.proyectoG.fechaFin=new Date(Number($stateParams.fechaFin));;
       ctrl.proyectoG.ponderacion=$stateParams.ponderacion;
+      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
+
 
       if($stateParams.visible==1){
         $("#ts1").attr("checked", true);

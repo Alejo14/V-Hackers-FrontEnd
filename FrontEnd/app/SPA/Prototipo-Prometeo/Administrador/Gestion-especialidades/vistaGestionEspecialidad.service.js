@@ -1,5 +1,6 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('administradorEspecialidadService', ['$q', '$http', 'variablesAmbiente',
+angular.module("vHackersModule").service('administradorEspecialidadService', ['$q', '$http',
+'variablesAmbiente',
 function($q, $http, variablesAmbiente) {
 
   var servicio = this;
@@ -19,7 +20,22 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.elminarEspecialidad = function(data){
+  servicio.modificoEspecialidad = function(data){
+    var urlModificoEspecialidad = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/modificar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModificoEspecialidad,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.eliminarEspecialidad = function(data){
     var urlEliminarEspecialidad = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/eliminar';
     var $defer = $q.defer();
     $http({

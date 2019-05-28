@@ -5,18 +5,18 @@
       <div class="row">
         <div class="col">
 
-          <div class="card text-center">
+          <div class="card text-center" ng-init="ctrl.init()">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Crear nueva especialidad</a>
+                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Modificar especialidad</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)">Carga masiva</a>
                 </li>
               </ul>
             </div>
-            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/cardCrearEspecialidad.html'">
+            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/cardModificarEspecialidad.html'">
             </div>
             <div ng-if="!ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/cardCargaMasivaEspecialidad.html'">
             </div>

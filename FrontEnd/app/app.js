@@ -73,6 +73,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'
             },
             {
+              name: 'modificar-especialidad',
+              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultadId/:responsableId/:responsableNombre',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaModificarEspecialidad.html'
+            },
+            {
               name: 'listar-especialidades',
               url: '/listar-especialidades',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaListarEspecialidades.html'
@@ -111,13 +116,18 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaPrincipalProfesor.html'
             },
             {
+              name: 'profesorMisCursos',
+              url: '/profesorMisCursos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+            },
+            {
               name: 'calificacion',
               url: '/calificacion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
             },
             {
               name: 'curso',
-              url: '/curso',
+              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
             },
             {
@@ -136,14 +146,29 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {
+              name: 'evaluacion-herramienta-gestionar',
+              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
+            },
+            {
               name: 'evaluacion-herramienta-listar',
               url: '/evaluacion-herramienta-listar',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
               name: 'nueva-herramienta',
-              url: '/nueva-herramienta',
+              url: ':id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
+            },
+            {
+              name: 'nueva-rubrica',
+              url: '/nueva-rubrica/:id',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
+            },
+            {
+              name: 'nuevo-aspecto',
+              url: '/nuevo-aspecto/:id',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             }
           ]
         },

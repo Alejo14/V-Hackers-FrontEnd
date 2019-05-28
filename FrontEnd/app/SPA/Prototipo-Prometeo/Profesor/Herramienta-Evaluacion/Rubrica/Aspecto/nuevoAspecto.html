@@ -1,0 +1,54 @@
+<section id="main">
+  <div ng-controller="nuevoAspectoCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-10">
+                <h2>{{ctrl.titulo}}<h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group fg-line">
+              <label class="control-label">T&iacute;tulo</label>
+              <input class="form-control input-sm" placeholder="Ingrese el título del aspecto">
+            <div>
+            <div class="form-group fg-line m-t-15">
+              <label class="control-label">Descripci&oacute;n</label>
+              <textarea class="form-control" rows="5" placeholder="Ingrese la descripción del aspecto" ng-model="ctrl.aspecto.descripcion">
+              </textarea>
+            </div>
+            <div class="form-group fg-line">
+              <label class="control-label m-t-15 m-r-15">Criterios</label>
+              <label class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarCriterio()"><i class="fa fa-plus"></i></label>
+            </div>
+            <div class="form-group">
+              <div class="table-responsive p-t-30">
+                <table ng-table="ctrl.criteriosTabla" class="table table-bordered">
+                  <tr ng-repeat="criterio in ctrl.criteriosLista">
+                    <td data-title="'Descripción del Criterio'">
+                      {{criterio.descripcion}}
+                    </td>
+                    <td data-title="'Indicaciones del Criterio'">
+                      {{criterio.indicaciones}}
+                    </td>
+                    <td data-title="'Detalle'" align="center">
+                      <a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                      <a ng-click="ctrl.eliminarCriterio($index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.guardarAspecto()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.regresarAspectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
