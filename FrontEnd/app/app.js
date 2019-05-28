@@ -152,7 +152,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-herramienta',
-              url: '/nueva-herramienta',
+              url: ':id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {

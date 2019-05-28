@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', 'herramientaEvaluacionService',
-function($scope, $state, herramientaEvaluacionService){
+angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService',
+function($scope, $state, $stateParams, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
  ctrl.herramienta = {};
@@ -7,7 +7,7 @@ function($scope, $state, herramientaEvaluacionService){
  ctrl.herramienta.puntuacionMaxima = 0;
  ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";
-
+ ctrl.idEntregable = $stateParams.id;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 

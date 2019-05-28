@@ -8,7 +8,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.filas=[1,2,3,4];
   ctrl.dias=['L','M','Mi','J','V','S'];
   ctrl.columnas=[1,2,3,4,5,6];
-  ctrl.entregableM=[];
+  ctrl.entregableM={};
   $scope.fechaActual=new Date();
   ctrl.id=0;
   // var d=new Date("5/11/2020");
@@ -244,7 +244,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.crearHerramienta = function(){
-      $state.go('nueva-herramienta');
+
+      if (!ctrl.entregableM.id) {
+        ctrl.entregableM.id = '859e054f-ae56-4e68-9a40-cfee27cf8b2a';
+      }
+      $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
   }
 
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
