@@ -1,12 +1,12 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('entregableService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('entregableService', ['$q', '$http','variablesAmbiente',
+function($q, $http,variablesAmbiente) {
 
   var servicio = this;
 
   servicio.entregableAlumno = function(){
 
-    var urlEntregableAlumno =  'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
+    var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -21,7 +21,7 @@ function($q, $http) {
 
 
     servicio.registroentregableAlumno = function(data){
-      var urlEnviarCalificacion = 'http://localhost:7002/entregables/crear';
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/crear';
       var $defer = $q.defer();
       $http({
           method: 'POST',
@@ -36,7 +36,7 @@ function($q, $http) {
     }
 
     servicio.modificarentregableAlumno = function(data){
-      var urlEnviarCalificacion = 'http://localhost:7002/entregables/modificar';
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/modificar';
       var $defer = $q.defer();
       $http({
           method: 'POST',
@@ -51,7 +51,7 @@ function($q, $http) {
     }
 
     servicio.eliminarentregableAlumno = function(data){
-      var urlEnviarCalificacion = 'http://localhost:7002/entregables/eliminar';
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/eliminar';
       var $defer = $q.defer();
       $http({
           method: 'POST',
@@ -67,7 +67,7 @@ function($q, $http) {
 
     servicio.listarEntregables = function(){
 
-      var urlListarEntregables = 'http://localhost:7002/entregables'; //'http://localhost:7002/entregables';
+      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
       var $defer = $q.defer();
       $http({
           method: 'GET',

@@ -17,6 +17,10 @@
   window.__env.puertoSemestre = ':7006';
   //Puerto de Calificacióng
   window.__env.puertoCalificacion = ':7007';
+  //Puerto de Entregables
+  window.__env.puertoEntregable = ':7002';
+  //Puerto de Archivos
+  window.__env.puertoArchivos = ':';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));

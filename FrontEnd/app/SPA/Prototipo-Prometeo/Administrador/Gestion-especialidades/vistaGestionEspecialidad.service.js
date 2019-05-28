@@ -20,6 +20,21 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.modificoEspecialidad = function(data){
+    var urlModificoEspecialidad = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/modificar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModificoEspecialidad,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   servicio.eliminarEspecialidad = function(data){
     var urlEliminarEspecialidad = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/eliminar';
     var $defer = $q.defer();

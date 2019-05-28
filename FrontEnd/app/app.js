@@ -74,7 +74,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'modificar-especialidad',
-              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultad/:responsable',
+              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultadId/:responsableId/:responsableNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaModificarEspecialidad.html'
             },
             {
@@ -144,6 +144,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'evaluacion-herramienta-modificar',
               url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
+            },
+            {
+              name: 'evaluacion-herramienta-gestionar',
+              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
             },
             {
               name: 'evaluacion-herramienta-listar',

@@ -18,7 +18,7 @@
               <div class="<col-md-12 m-t-50>">
                 <div class="row">
                   <div class="col-md-12">
-                    <button ng-click = "ctrl.swalProyecto()" ><i class="fa fa-plus"></i> Crear Proyecto</button>
+                    <button ng-click = "ctrl.crearProyecto()" ><i class="fa fa-plus"></i> Crear Proyecto</button>
                   </div>
                 </div>
                 <div class="row">
@@ -42,56 +42,20 @@
         </div>
       </div>
       <div class="col-md-8">
-          <div class="card ">
+          <div class="card">
             <div class="card-header">
-              <div class="row">
-                <div class="col-md-12">
-                  <h2> Proyectos </h2>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <ul>
-                <div class="col-md-12">
-                  <div ng-repeat="proyecto in ctrl.proyectosLista" >
-                    <div class="row">
-                      <li class="col-md-8" ng-click="ctrl.ingresarProyecto()">
-                        <a href=""> {{proyecto.nombre}} </a>
-                      </li>
-                      <a style="float:right" ng-click="ctrl.verProyecto(proyecto)">
-                        <i class="fas fa-pencil-alt"></i>
-                      </a>
-                      <a style="float:right" ng-click="ctrl.eliminarProyecto(proyecto)">
-                        <i class="fas fa-trash-alt"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)">Entregables</a>
+                </li>
               </ul>
             </div>
-          </div>
-          <div class="card ">
-            <div class="card-header">
-              <div class="row">
-                <div class="col-md-12">
-                  <h2> Entregables </h2>
-                </div>
-              </div>
+            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/cardProyectos.html'">
             </div>
-            <div class="card-body">
-              <ul>
-                <div class="col-md-8">
-                  <li ng-repeat="entregable in ctrl.entregablesLista">
-                      {{entregable.nombre}}
-                      <a style="float:right"  ng-click="ctrl.elminarEntregable(entregable)">
-                        <i class="fas fa-trash-alt"></i>
-                      </a>
-                      <a style="float:right" ng-click="ctrl.verEntregable(entregable)">
-                        <i class="fas fa-pencil-alt"></i>
-                      </a>
-                  </li>
-                </div>
-              </ul>
+            <div ng-if="!ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/cardEntregables.html'">
             </div>
           </div>
       </div>

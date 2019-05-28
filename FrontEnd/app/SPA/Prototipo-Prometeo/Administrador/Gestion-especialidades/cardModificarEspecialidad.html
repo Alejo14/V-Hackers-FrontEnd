@@ -7,7 +7,7 @@
             <label class="col-sm-4 control-label">C&oacute;digo*:</label>
             <div class="col-sm-8">
               <div class="fg-line">
-                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.codigo" placeholder="e.g: COD" ng-change="ctrl.validarRegistroValido()">
+                  <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.codigo" placeholder="e.g: COD" disabled>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@
               <label class="col-sm-4 control-label">Responsable*:</label>
               <div class="col-sm-8">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsable.nombre" placeholder="Responsable">
+                    <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsable.nombre" placeholder="Responsable" ng-change="ctrl.validarRegistroValido()">
                 </div>
               </div>
             </div>
@@ -50,7 +50,6 @@
               <div class="col-sm-4"></div>
               <div class="col-sm-8">
                 <div class="fg-line">
-                    <!--<input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.responsable" placeholder="Search">-->
                     <button class="btn btn-primary" style="margin-top: 10px;" ng-click = "ctrl.agregarResponsable()"><i class="fa fa-plus-circle"></i> Seleccionar responsable</button>
                 </div>
               </div>
@@ -65,8 +64,8 @@
         <h5>* Campos obligatorios</h5>
     </div>
     <div class="col-9" align="right">
-      <button type="button" ng-click = "ctrl.crearEspecialidad(ctrl.especialidad)" class="btn btn-primary waves-effect" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
-      <button type="button" ng-click = "ctrl.regresarAdministradorSwal()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+      <button type="button" ng-click = "ctrl.modificarEspecialidad(ctrl.especialidad)" class="btn btn-primary waves-effect" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
+      <button type="button" ng-click = "ctrl.regresarListaEspecialidades()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
     </div>
   </div>
 <!-- </div> -->

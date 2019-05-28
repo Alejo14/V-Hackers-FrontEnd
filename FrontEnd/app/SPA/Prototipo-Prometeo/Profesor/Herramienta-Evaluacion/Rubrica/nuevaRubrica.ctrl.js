@@ -44,7 +44,6 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
   }
 
   ctrl.guardarNiveles = function (){
-    ctrl.puedoAgregarNivel = false;
     swal({
       title: "¿Esta seguro de que desea guardar estos niveles?",
       text: "No podrá modificar el número de niveles",
@@ -61,13 +60,15 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
       closeModal: false
     }).then(function (confirmarNiveles) {
       if (confirmarNiveles !== "cancelar") {
+        ctrl.puedoAgregarNivel = false;
         ctrl.nivelesRubrica = {
           "tipo": "seleccion",
           "rubricaId": ctrl.rubrica.id,
           "niveles": ctrl.rubrica.niveles
         }
+        $scope.$apply();
         // nuevaRubricaService.enviarNiveles(ctrl.nivelesRubrica).then(function(data){
-        //   swal("Se guardó su configuración con éxito","success","ok");
+        //   swal("Feliciades","Se guardó su configuración con éxito","success");
         // });
       }
     });

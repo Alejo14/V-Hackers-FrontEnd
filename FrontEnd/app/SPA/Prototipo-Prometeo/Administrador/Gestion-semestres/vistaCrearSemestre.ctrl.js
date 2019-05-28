@@ -11,20 +11,6 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     fechaFin : ""
   };
 
-  function uuid() {
-      function randomDigit() {
-          if (crypto && crypto.getRandomValues) {
-              var rands = new Uint8Array(1);
-              crypto.getRandomValues(rands);
-              return (rands[0] % 16).toString(16);
-          } else {
-              return ((Math.random() * 16) | 0).toString(16);
-          }
-      }
-      var crypto = window.crypto || window.msCrypto;
-      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
-  }
-
   ctrl.crearSemestre = function(semestre){
     yearI = semestre.fechaInicio.getFullYear();
     monthI = semestre.fechaInicio.getMonth();
@@ -33,7 +19,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     monthF = semestre.fechaFin.getMonth();
     dateF = semestre.fechaFin.getDate();
     data = {
-      "id": uuid(), //Defecto
+      "id": null,
       "cicloAcademico": semestre.anioCiclo + semestre.ciclo + semestre.tipoCiclo,
       "nombreCiclo": semestre.nombreCiclo,
       "fechaInicio": (new Date(yearI, monthI, dateI))*1,//Se da formato a la fecha para que se registre
