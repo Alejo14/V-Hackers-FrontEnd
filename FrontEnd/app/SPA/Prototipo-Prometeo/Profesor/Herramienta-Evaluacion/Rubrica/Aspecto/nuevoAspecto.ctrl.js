@@ -3,6 +3,7 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.titulo = 'Nueva aspecto';
   ctrl.aspecto = {
+    titulo: "",
     descripcion: "",
     criterios: []
   };
@@ -86,11 +87,34 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
     });
   }
 
+  ctrl.guardarAspecto = function(){
+    swal({
+      title: "¿Esta seguro de que desea guardar el Aspecto actual?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (aspectoGuardarConfirmado) {
+      if (aspectoGuardarConfirmado !== "cancelar") {
+        
+        $scope.$apply();
+      }
+    });
+  }
+
   ctrl.inicializarTabla = function () {
     ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
   }
 
-  ctrl.regresarAspectos = function () {
+  ctrl.regresar = function () {
     $state.go('nueva-rubrica', {id: ctrl.rubricaId});
   }
 

@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="form-group fg-line">
               <label class="control-label">T&iacute;tulo</label>
-              <input class="form-control input-sm" placeholder="Ingrese el título del aspecto">
+              <input class="form-control input-sm" placeholder="Ingrese el título del aspecto" ng-model="ctrl.aspecto.titulo">
             <div>
             <div class="form-group fg-line m-t-15">
               <label class="control-label">Descripci&oacute;n</label>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-12" align="right">
               <button type="button" ng-click = "ctrl.guardarAspecto()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
-              <button type="button" ng-click = "ctrl.regresarAspectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
           </div>
         </div>
