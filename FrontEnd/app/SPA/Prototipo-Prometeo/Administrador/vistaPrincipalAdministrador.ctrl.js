@@ -2,14 +2,6 @@ angular.module('vHackersModule').controller('administradorCtrl', ['$scope', '$st
 
 function($scope, $state,$stateParams, administadorService, $uibModal){
   var ctrl = this;
-//  ctrl.nombreCurso = "Ingeniería de Software";
-//  ctrl.mensajeNuevo = "Go V-Hackers";
-//  ctrl.proyectosLista = [];
-//  ctrl.cargarProyectos = function () {
-//    profesorCursoService.listarProyectos().then(function (proyectosListaData) {
-//      ctrl.proyectosLista = proyectosListaData;
-//    });
-//  };
 
   ctrl.crearSemestre = function(semestre){
     $state.go('crear-semestre');
@@ -20,7 +12,7 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
   }
 
   ctrl.crearCurso = function(curso){
-    $state.go('creacion-cursos');
+    $state.go('creacion-cursos',{id:0,especialidadId:0,codigo:0,nombre:0,fechaCreacion:0,facultadId:0,creditos:0});
   }
 
   ctrl.listarCursos = function(cursos){

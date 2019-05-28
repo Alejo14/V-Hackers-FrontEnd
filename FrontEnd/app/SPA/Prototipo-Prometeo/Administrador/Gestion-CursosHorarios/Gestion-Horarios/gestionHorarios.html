@@ -43,8 +43,7 @@
                           <select class="form-control"
                             data-placeholder="Seleccione una facultad"
                             ng-model="facultad"
-                            ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
-                            ng-change="ctrl.obtenerEspecialidades()">
+                            ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista">
                             <option value=""></option>
                           </select>
                         </div>
@@ -64,6 +63,26 @@
                             data-placeholder="Seleccione una especialidad"
                             ng-model="especialidad"
                             ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista">
+                            <option value=""></option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6" align="left">
+                  <div class="form-group">
+                    <label class="col-sm-6 control-label m-t-10 m-b-0"align="left">Semestre*: </label>
+                    <div class="col-sm-6">
+                      <div class="fg-line">
+                        <div class="select">
+                          <select class="form-control"
+                            data-placeholder="Seleccione un semestre"
+                            ng-model="ciclo"
+                            ng-options="ciclo.id as ciclo.nombreCiclo for ciclo in ctrl.ciclosLista"
+                            ng-change="">
                             <option value=""></option>
                           </select>
                         </div>

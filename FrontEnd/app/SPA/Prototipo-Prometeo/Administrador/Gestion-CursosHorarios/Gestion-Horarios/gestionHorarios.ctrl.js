@@ -1,7 +1,13 @@
-angular.module('vHackersModule').controller('gestionHorariosCtrl', ['$scope','$state' ,'gestionHorariosService', '$uibModal','NgTableParams',
-function($scope,$state, gestionHorariosService, $uibModal,NgTableParams){
+angular.module('vHackersModule').controller('gestionHorariosCtrl', ['$scope','$state','$stateParams' ,'gestionHorariosService', '$uibModal','NgTableParams',
+function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTableParams){
   var ctrl = this;
   ctrl.cursosLista = [];
+  ctrl.idCurso = "0";
+  ctrl.idSemestre = "0";
+  ctrl.nombreCurso = "0",
+  ctrl.codigoCurso = "0";
+  ctrl.idCursoCiclo = "0";
+
 
   ctrl.obtenerCursos = function () {
     gestionHorariosService.obtenerCursos().then(function (cursosListaData) {
@@ -62,12 +68,22 @@ function($scope,$state, gestionHorariosService, $uibModal,NgTableParams){
     });
   };
 
+  ctrl.obtenerCiclos = function () {
+    gestionHorariosService.obtenerCiclos().then(function (ciclosListaData) {
+      ctrl.ciclosLista = ciclosListaData;
+    });
+  }
+
+  ctrl.actualizarTabla = function () {
+    //Falta actualizar datos de tabla a medida que se cambia algún filtro
+  }
+
   ctrl.editarCurso = function(curso){
-    $state.go('modificacion-cursos',{id:curso.id, especialidadId:curso.especialidadId, codigo:curso.codigo, nombre:curso.nombre, fechaCreacion:curso.fechaCreacion, facultadId:curso.facultadId, creditos:curso.creditos});
+    $state.go('creacion-cursos',{id:curso.id, especialidadId:curso.especialidadId, codigo:curso.codigo, nombre:curso.nombre, fechaCreacion:curso.fechaCreacion, facultadId:curso.facultadId, creditos:curso.creditos});
   }
 
   ctrl.asignarHorarios = function(curso){
-
+    $state.go('asignar-horarios',{idCursoCiclo:curso.cursoCicloId,idCurso:curso.id,idSemestre:curso.cicloId,nombreCurso:curso.nombre,codigoCurso:curso.codigo});
   }
 
   ctrl.eliminarCurso = function(curso){
@@ -98,12 +114,11 @@ function($scope,$state, gestionHorariosService, $uibModal,NgTableParams){
 
 
   ctrl.init = function(){
+    ctrl.obtenerCursos();
     ctrl.obtenerFacultades();
     ctrl.obtenerEspecialidades();
-    ctrl.obtenerCursos();
+    ctrl.obtenerCiclos();
   };
-
-
 
   ctrl.init();
 }]);

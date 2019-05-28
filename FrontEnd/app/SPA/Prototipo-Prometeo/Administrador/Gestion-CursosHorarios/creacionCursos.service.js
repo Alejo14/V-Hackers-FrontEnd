@@ -19,6 +19,21 @@ function($q, $http) {
     return $defer.promise;
   }
 
+  servicio.modificarCurso = function(data){
+    var urlModificarCurso = 'http://localhost:7004/cursos/modificar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModificarCurso,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   servicio.obtenerFacultades = function () {
     var urlObtenerFacultades = 'http://localhost:7005/facultad';
     var $defer = $q.defer();

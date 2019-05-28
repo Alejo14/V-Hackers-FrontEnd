@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('creacionCursosCtrl', ['$scope','$state' ,'creacionCursosService', '$uibModal',
-function($scope,$state, creacionCursosService, $uibModal){
+angular.module('vHackersModule').controller('creacionCursosCtrl', ['$scope','$state' ,'$stateParams','creacionCursosService', '$uibModal',
+function($scope,$state,$stateParams , creacionCursosService, $uibModal){
   var ctrl = this;
   ctrl.cargaUnitaria = true;
   ctrl.cursoNuevo = {
@@ -8,9 +8,11 @@ function($scope,$state, creacionCursosService, $uibModal){
     "claveCurso": "",
     "numeroCreditos": "",
     "facultad": "",
-    "especialidad": ""
+    "especialidad": "",
+    "fechaCreacion": ""
   };
   ctrl.titulo = "Creación de curso";
+  ctrl.modo = "c";
 
   ctrl.especialidadesLista = [];
 
@@ -69,18 +71,33 @@ function($scope,$state, creacionCursosService, $uibModal){
       swal("¡Opss!", "Debe ingresar los campos obligatorios" , "error");
     }else{
       //console.log(ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id);
-      data = {
-        "id": uuid(),
-        "especialidadId": ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id,
-        "codigo": ctrl.cursoNuevo.claveCurso,
-        "nombre": ctrl.cursoNuevo.nombreCurso,
-        "fechaCreacion": (new Date())*1,
-        "facultadId": ctrl.facultadesLista[ctrl.facultadesLista.indexOf(ctrl.cursoNuevo.facultad)].id,
-        "creditos": ctrl.cursoNuevo.numeroCreditos
+      if(ctrl.modo == 'c'){
+        data = {
+          "id": uuid(),
+          "especialidadId": ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id,
+          "codigo": ctrl.cursoNuevo.claveCurso,
+          "nombre": ctrl.cursoNuevo.nombreCurso,
+          "fechaCreacion": (new Date())*1,
+          "facultadId": ctrl.facultadesLista[ctrl.facultadesLista.indexOf(ctrl.cursoNuevo.facultad)].id,
+          "creditos": ctrl.cursoNuevo.numeroCreditos
+        }
+        creacionCursosService.registroCurso(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El curso se creó exitosamente" , "success");
+        });
+      } else {
+        data = {
+          "id": ctrl.cursoNuevo.id,
+          "especialidadId": ctrl.cursoNuevo.especialidad,
+          "codigo": ctrl.cursoNuevo.claveCurso,
+          "nombre": ctrl.cursoNuevo.nombreCurso,
+          "fechaCreacion": ctrl.cursoNuevo.fechaCreacion,
+          "facultadId": ctrl.cursoNuevo.facultad,
+          "creditos": ctrl.cursoNuevo.numeroCreditos
+        }
+        creacionCursosService.modificarCurso(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El curso se modificó exitosamente" , "success");
+        });
       }
-      creacionCursosService.registroCurso(angular.toJson(data)).then(function () {
-          swal("¡Bien hecho!", "El curso se guardó exitosamente" , "success");
-      });
     }
     ctrl.cursoNuevo.nombreCurso = "";
     ctrl.cursoNuevo.claveCurso = "";
@@ -101,10 +118,23 @@ function($scope,$state, creacionCursosService, $uibModal){
     });
   };
 
-  ctrl.init = function(){
+  ctrl.init = function (){
     ctrl.obtenerFacultades();
     ctrl.obtenerEspecialidades();
-  };
+    if ($stateParams.id==0){
+      ctrl.titulo = "Creación de cursos";
+    }else{
+      ctrl.titulo = "Modificación de Cursos";
+      ctrl.modo = "m";
+      ctrl.cursoNuevo.id = $stateParams.id;
+      ctrl.cursoNuevo.nombreCurso = $stateParams.nombre;
+      ctrl.cursoNuevo.claveCurso = $stateParams.codigo;
+      ctrl.cursoNuevo.numeroCreditos = $stateParams.creditos;
+      ctrl.cursoNuevo.facultad = $stateParams.facultadId;
+      ctrl.cursoNuevo.especialidad = $stateParams.especialidadId;
+      ctrl.cursoNuevo.fechaCreacion = $stateParams.fechaCreacion;
+    }
+  }
 
 
   ctrl.init();
