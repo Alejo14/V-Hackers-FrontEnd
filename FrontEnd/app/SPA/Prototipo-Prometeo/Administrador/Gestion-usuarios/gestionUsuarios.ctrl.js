@@ -29,7 +29,8 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
           "codigo": parametroRetorno.codigo,
           "nombres": parametroRetorno.nombres,
           "apellidos": parametroRetorno.apellidos,
-          "correo": parametroRetorno.correo
+          "correo": parametroRetorno.correo,
+          "roles": parametroRetorno.roles
         };
         gestionUsuariosService.regitstrarUsuario(usuarioRegistro).then(function (resultadoRegistro) {
           ctrl.usuariosLista.push(parametroRetorno);

@@ -5,7 +5,12 @@ modalAgregarUsuarioCtrl.$inject = ['$scope', '$uibModalInstance', 'gestionUsuari
 function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosService){
 
   var ctrl = this;
-  ctrl.usuarioNuevo = {};
+  ctrl.usuarioNuevo = {
+    nombres: "",
+    apellidos: "",
+    correo: "",
+    codigo: ""
+  };
   ctrl.facultadesLista = [
     {
       id: '',
@@ -61,7 +66,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   }
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && $scope.facultad && ctrl.usuarioNuevo.apellidos !== "" && $scope.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && $scope.rolesUsuarioNuevo.length > 0;
+    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && $scope.facultad && ctrl.usuarioNuevo.apellidos !== "" && $scope.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && $scope.rolesUsuarioNuevo;
   };
 
   ctrl.guardarUsuario = function () {
@@ -83,13 +88,14 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       closeModal: false
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
+        ctrl.usuarioNuevo.id = "859e054f-ae56-4e68-9a40-cfee27cf8b2a";
         ctrl.usuarioNuevo.especialidad = $scope.especialidad;
         ctrl.usuarioNuevo.especialidad.facultad = $scope.facultad;
-        ctrl.usuarioNuevo.rolesUsuario = [];
+        ctrl.usuarioNuevo.roles = [];
         var numRoles = $scope.rolesUsuarioNuevo.length;
         for (var i = 0; i < numRoles; i++) {
-          var usuarioRol = {id: $scope.rolesUsuarioNuevo[i].id};
-          ctrl.usuarioNuevo.rolesUsuario.push(usuarioRol);
+          var usuarioRol =  $scope.rolesUsuarioNuevo[i];
+          ctrl.usuarioNuevo.roles.push(usuarioRol);
         }
         $uibModalInstance.close(ctrl.usuarioNuevo);
       }
