@@ -11,23 +11,22 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     });
   };
   ctrl.crearEntregable = function(entregable){
-
-    $state.go('evaluacion-herramienta');
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaEntrega: 0, fechaHabilitacion: 0,
+      descripcion: 0, ponderacion: 0, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
   }
-  ctrl.swalProyecto = function () {
+  ctrl.crearProyecto = function () {
     $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
     descripcion: 0, visible: 0, registroHoras: 0,
-    metodoTrabajo: 0, cursoCiclo_id: 0});
+    metodoTrabajo: 0, cursoCiclo_id: ctrl.curso.cursoCicloId});
   };
+
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
-    profesorCursoService.listarEntregables().then(function (entregablesListaData) {
+    var idCursoCiclo = ctrl.curso.cursoCicloId;
+    profesorCursoService.listarEntregables(idCursoCiclo).then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
       console.log(ctrl.entregablesLista);
     });
-  };
-  ctrl.swalEntregable = function () {
-    swal("¡Bien hecho!", "El entregable se creo exitosamente", "success");
   };
 
   ctrl.verProyecto = function (proyecto) {
@@ -76,8 +75,8 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion});
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
 
   };
 
@@ -115,6 +114,13 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     });
 
   };
+
+  ctrl.cargaUnitaria = true;
+
+  ctrl.cambiarVista = function(indice) {
+    if(indice == 0) ctrl.cargaUnitaria = true;
+    else ctrl.cargaUnitaria = false;
+  }
 
   ctrl.init = function (){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;

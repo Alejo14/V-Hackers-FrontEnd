@@ -25,18 +25,12 @@
               <div class="table-responsive">
                 <table ng-table="ctrl.tablaUsuarios" class="table table-bordered">
                   <tr ng-repeat="usuario in ctrl.usuariosLista">
-                    <!-- <td data-title="'Rol'">
-                      {{usuario.rolesUsuario[0].rol.descripcion}}
-                    </td> -->
                     <td data-title="'Código'">
                       {{usuario.codigo}}
                     </td>
                     <td data-title="'Nombre'">
                       {{usuario.nombres + ' ' + usuario.apellidos}}
                     </td>
-                    <!-- <td data-title="'Unidad académica'">
-                      {{usuario.especialidad.facultad.nombre}}
-                    </td> -->
                     <td data-title="'Correo'">
                       {{usuario.correo}}
                     </td>

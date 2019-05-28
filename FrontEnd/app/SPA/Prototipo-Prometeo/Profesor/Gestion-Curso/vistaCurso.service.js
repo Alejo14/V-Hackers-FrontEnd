@@ -18,7 +18,7 @@ function($q, $http) {
     return $defer.promise;
   }
 
-  servicio.listarEntregables = function(){
+  servicio.listarEntregables = function(codigoCurso){
 
     var urlListarEntregables = 'http://localhost:7002/entregables';
     var $defer = $q.defer();

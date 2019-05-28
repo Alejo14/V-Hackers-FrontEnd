@@ -7,7 +7,7 @@ function($q, $http) {
   servicio.obtenerCursos = function(){
 
     //var urlObtenerUsuarios = 'data/usuariosLista.json';
-    var urlObtenerCursos = 'http://localhost:7004/cursos';
+    var urlObtenerCursos = 'http://localhost:7004/cursos/cursociclo';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -34,8 +34,22 @@ function($q, $http) {
     return $defer.promise;
   };
 
-  servicio.obtenerEspecialidades = function (idFacultadEspecialidad) {
+  servicio.obtenerEspecialidades = function () {
     var urlObtenerEspecialidades = 'http://localhost:7005/especialidad';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerEspecialidades,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  servicio.obtenerCiclos = function () {
+    var urlObtenerEspecialidades = 'http://localhost:7006/semestres';
     var $defer = $q.defer();
     $http({
         method: 'GET',

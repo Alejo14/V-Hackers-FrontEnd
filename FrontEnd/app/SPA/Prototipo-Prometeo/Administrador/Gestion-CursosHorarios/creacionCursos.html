@@ -4,15 +4,15 @@
 
       <div class="row">
         <div class="col">
-          <h2>Creación de Cursos</h2>
+          <h2>{{ctrl.titulo}}</h2>
           <div class="card text-center">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Crear nuevo curso</a>
+                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Crear nuevo curso</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)">Carga masiva</a>
+                  <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Carga masiva</a>
                 </li>
               </ul>
             </div>

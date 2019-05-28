@@ -89,7 +89,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'creacion-cursos',
-              url: '/creacion-cursos',
+              url: '/creacion-cursos/:id/:especialidadId/:codigo/:nombre/:fechaCreacion/:facultadId/:creditos',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/creacionCursos.html'
             },
             {
@@ -98,9 +98,9 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/gestionHorarios.html'
             },
             {
-              name: 'modificacion-cursos',
-              url: '/modificacion-cursos/:id/:especialidadId/:codigo/:nombre/:fechaCreacion/:facultadId/:creditos',
-              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/modificacionCursos.html'
+              name: 'asignar-horarios',
+              url: '/asignar-horarios/:idCursoCiclo/:idCurso/:idSemestre/:nombreCurso/:codigoCurso',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/asignarHorario.html'
             }
           ]
         },
@@ -146,13 +146,18 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {
+              name: 'evaluacion-herramienta-gestionar',
+              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
+            },
+            {
               name: 'evaluacion-herramienta-listar',
               url: '/evaluacion-herramienta-listar',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
               name: 'nueva-herramienta',
-              url: '/nueva-herramienta',
+              url: ':id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {

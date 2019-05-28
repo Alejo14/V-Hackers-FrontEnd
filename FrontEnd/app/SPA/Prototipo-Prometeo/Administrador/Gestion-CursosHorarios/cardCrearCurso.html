@@ -48,7 +48,7 @@
                   <select class="form-control"
                     data-placeholder="Seleccione una facultad"
                     ng-model="ctrl.cursoNuevo.facultad"
-                    ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
+                    ng-options="facultad.id as facultad.nombre for facultad in ctrl.facultadesLista"
                     ng-change="ctrl.obtenerEspecialidades()">
                     <option value=""></option>
                   </select>
@@ -68,7 +68,7 @@
                   <select class="form-control"
                     data-placeholder="Seleccione una especialidad"
                     ng-model="ctrl.cursoNuevo.especialidad"
-                    ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista">
+                    ng-options="especialidad.id as especialidad.nombre for especialidad in ctrl.especialidadesLista">
                     <option value=""></option>
                   </select>
                 </div>
@@ -77,6 +77,7 @@
           </div>
         </div>
       </div>
+
 
   </div>
 </div>
