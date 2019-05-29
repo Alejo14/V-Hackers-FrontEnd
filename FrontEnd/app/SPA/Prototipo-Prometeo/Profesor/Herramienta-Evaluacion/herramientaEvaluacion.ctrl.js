@@ -3,11 +3,11 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
  ctrl.herramienta = {};
- ctrl.herramienta.descripcion = "";
- ctrl.herramienta.puntaje_Max = 0;
- ctrl.herramienta.usoOtrosEvaluadores = false;
+ ctrl.herramienta.descripcion = "Rubrica";
+ ctrl.herramienta.puntajeMax = 0;
+ //ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";
- ctrl.idEntregable = $stateParams.id;
+ ctrl.herramienta.entregableId = $stateParams.id;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 
@@ -32,8 +32,7 @@ ctrl.crearHerramienta = function () {
         //Llamada al servicio parar crear herramienta de evaluación
         console.log(ctrl.herramienta);
         herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
-          ctrl.herramienta.id = id;
-          console.log(ctrl.herramienta.id);
+          ctrl.herramienta.id = id.herramientaID;
         });
         swal({
           title: "¡Listo!",
@@ -46,6 +45,7 @@ ctrl.crearHerramienta = function () {
             }
           }
         }).then(function(){
+          console.log("Id herramienta: "+ ctrl.herramienta.id);
           $state.go('nueva-rubrica', {id: ctrl.herramienta.id});
         });
       }
