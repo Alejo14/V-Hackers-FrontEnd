@@ -20,7 +20,7 @@ function($q, $http) {
 
   servicio.listarEntregables = function(codigoCurso){
 
-    var urlListarEntregables = 'http://localhost:7002/entregables';
+    var urlListarEntregables = 'http://localhost:7002/entregablesxcursociclo/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',

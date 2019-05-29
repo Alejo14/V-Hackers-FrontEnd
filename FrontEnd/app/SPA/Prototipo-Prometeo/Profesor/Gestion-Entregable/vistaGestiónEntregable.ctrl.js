@@ -72,18 +72,41 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     dateH=entregable.fechaHabilitacion.getDate();
     if (!entregable.horaHabilitacion) {hoursH=0} else {hoursH=entregable.horaHabilitacion.getHours();}
     if (!entregable.horaHabilitacion) {minutesH=0} else {minutesH=entregable.horaHabilitacion.getMinutes();}
-    data={
-      "id": uuid(), //Defecto
-      "nombre": entregable.nombre,
-      "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
-      "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
-      "tieneAlarma": 1,
-      "ponderacion": 1,
-      "descripcion": entregable.descripcion
-      }
-    entregableService.registroentregableAlumno(angular.toJson(data)).then(function () {
-        swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
-    });
+
+    if(entregable.cursoCicloId==0){
+      data={
+        "id": uuid(), //Defecto
+        "nombre": entregable.nombre,
+        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
+        "tieneAlarma": 1,
+        "ponderacion": 1,
+        "descripcion": entregable.descripcion,
+        "idCursoCiclo": uuid(),
+        "idProyecto": entregable.proyectoId
+        }
+
+      entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
+          swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
+      });
+    }else{
+      data={
+        "id": uuid(), //Defecto
+        "nombre": entregable.nombre,
+        "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
+        "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
+        "tieneAlarma": 1,
+        "ponderacion": 1,
+        "descripcion": entregable.descripcion,
+        "idCursoCiclo": entregable.cursoCicloId,
+        "idProyecto": uuid()
+        }
+
+      entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
+          swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
+      });
+    }
+
     entregable.id=0;
     entregable.tieneAlarma=1;
     entregable.nombre="";
@@ -282,10 +305,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     }
 
     if($stateParams.cursoCicloId==0){
-      ctrl.entregableG.cursoProyecto='C';
+      ctrl.entregableG.cursoCicloId=0;
       ctrl.entregableG.proyectoId=$stateParams.proyectoId;
     }else{
-      ctrl.entregableG.cursoProyecto='P';
+      ctrl.entregableG.proyectoId=0;
       ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
     }
 
