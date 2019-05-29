@@ -133,6 +133,10 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     else ctrl.cargaUnitaria = false;
   }
 
+  ctrl.volverCurso = function () {
+        $state.go('profesorMisCursos');
+  };
+
   ctrl.init = function (){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
     ctrl.curso.nombreCurso=$stateParams.nombreCurso;

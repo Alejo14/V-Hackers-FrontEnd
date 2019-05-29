@@ -162,7 +162,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('evaluacion-herramienta-listar');
+        //$state.go('evaluacion-herramienta-listar');
+        $state.go('profesorMisCursos');
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });
