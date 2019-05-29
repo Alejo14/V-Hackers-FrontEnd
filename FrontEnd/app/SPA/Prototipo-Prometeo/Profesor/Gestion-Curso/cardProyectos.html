@@ -1,9 +1,12 @@
 <div class="col-md-12">
   <div ng-repeat="proyecto in ctrl.proyectosLista" >
     <div class="row">
-      <li class="col-md-8" ng-click="ctrl.ingresarProyecto()">
-        <a href=""> {{proyecto.nombre}} </a>
+      <li class="col-md-5" ng-click="ctrl.ingresarProyecto(proyecto)">
+        <a href=""> {{proyecto.nombre}}</a>
       </li>
+      <div class="col-md-3" >
+        <a> {{proyecto.fechaCreacionStr}} </a>
+      </div>
       <a style="float:right" ng-click="ctrl.verProyecto(proyecto)">
         <i class="fas fa-pencil-alt"></i>
       </a>
