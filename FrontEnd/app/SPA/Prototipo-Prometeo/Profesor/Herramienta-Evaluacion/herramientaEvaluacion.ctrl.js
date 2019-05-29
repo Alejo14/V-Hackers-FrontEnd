@@ -4,12 +4,12 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
  ctrl.herramienta = {};
  ctrl.herramienta.descripcion = "";
- ctrl.herramienta.puntuacionMaxima = 0;
+ ctrl.herramienta.puntaje_Max = 0;
  ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";
  ctrl.idEntregable = $stateParams.id;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
- ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
+ //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 
 ctrl.crearHerramienta = function () {
   swal({
@@ -30,8 +30,10 @@ ctrl.crearHerramienta = function () {
     }).then(function (crearHerramientaConfirmada) {
       if (crearHerramientaConfirmada !== "cancelar") {
         //Llamada al servicio parar crear herramienta de evaluación
+        console.log(ctrl.herramienta);
         herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
           ctrl.herramienta.id = id;
+          console.log(ctrl.herramienta.id);
         });
         swal({
           title: "¡Listo!",
