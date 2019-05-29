@@ -110,6 +110,20 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
+    servicio.listarEntregablesXProyecto = function(idProyecto){
+      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregablesxproyecto/' + idProyecto; //'http://localhost:7002/entregables';
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlListarEntregables
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
     servicio.listarHerramientas = function(){
       //Hay que definir el microservicio para la tabla y también el JSON
       var urlListarHerramientas = '';
