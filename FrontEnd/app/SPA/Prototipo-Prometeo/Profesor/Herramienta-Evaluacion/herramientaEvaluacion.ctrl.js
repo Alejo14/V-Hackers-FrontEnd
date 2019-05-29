@@ -30,9 +30,9 @@ ctrl.crearHerramienta = function () {
     }).then(function (crearHerramientaConfirmada) {
       if (crearHerramientaConfirmada !== "cancelar") {
         //Llamada al servicio parar crear herramienta de evaluación
-        // herramientaEvaluacionService.crearHerramienta().then(function(id){
-        //   ctrl.herramienta.id = id;
-        // });
+        herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
+          ctrl.herramienta.id = id;
+        });
         swal({
           title: "¡Listo!",
           text: "Herramienta creada con éxito",
