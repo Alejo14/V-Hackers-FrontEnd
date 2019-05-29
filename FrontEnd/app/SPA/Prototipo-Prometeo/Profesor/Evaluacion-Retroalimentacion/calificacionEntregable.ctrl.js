@@ -31,7 +31,7 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
   ctrl.herramientaEvaluacionLista = [];
   ctrl.obtenerHerramientaEvaluacion = function () {
     ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientaEvaluacionLista });
-    calificacionHerramientaEvaluacionServicio.obtenerHerramientaEvaluacion().then(function (evaluacion) {
+    calificacionHerramientaEvaluacionServicio.obtenerHerramientaEvaluacion($stateParams.avanceEntregableId).then(function (evaluacion) {
       ctrl.evaluacion = evaluacion;
       ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
     });
@@ -59,37 +59,6 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
         $state.go('inicioProfes');
-        // ctrl.evaluacion =
-        // {
-        //   "avanceEntregableId": uuid(),
-        //   "avanceItemId": uuid(),
-        //   "evaluacionId": ctrl.id,
-        //   "puntajeEvaluacion": ctrl.puntaje,
-        //   "descripcion" : ctrl.retroalimentacion,
-        //   "calificacionHerramientas":[
-        //     {
-        //       "idHerramienta":uuid(),
-        //       "idEstadoCalHerraEvalu": uuid(),
-        //       "puntajeHerramientaEvaluacion": ctrl.puntaje,
-        //       "observacion": ctrl.retroalimentacion,
-        //       "flagAspecto": 0,
-        //       "calificacionAspecto":[
-        //         {
-        //           "puntajeAsignado": ctrl.puntaje,
-        //           "puntajeManual": ctrl.puntaje,
-        //           "cantCriterios": 5,
-        //           "calificacionCriterio":[
-        //             {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[0],"puntajeManual": ctrl.puntajeDado[0],"numCasilla":1,"nivel":{"puntajeAsignado":ctrl.puntajeDado[0],"puntajeManual":ctrl.puntajeDado[0]}},
-        //             {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual": ctrl.puntajeDado[1],"numCasilla":2,"nivel":{"puntajeAsignado":ctrl.puntajeDado[1],"puntajeManual":ctrl.puntajeDado[1]}},
-        //             {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual": ctrl.puntajeDado[2],"numCasilla":3,"nivel":{"puntajeAsignado":ctrl.puntajeDado[2],"puntajeManual":ctrl.puntajeDado[2]}},
-        //             {"idCriterio":uuid(),"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual": ctrl.puntajeDado[3],"numCasilla":4,"nivel":{"puntajeAsignado":ctrl.puntajeDado[3],"puntajeManual":ctrl.puntajeDado[3]}}
-        //           ]
-        //         }
-        //       ]
-        //     }
-        //   ]
-        // };
-        // console.log(angular.toJson(ctrl.evaluacion));
         calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
           swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
         });

@@ -122,7 +122,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'calificacion',
-              url: '/calificacion',
+              url: '/calificacion/:entregableId/:avanceEntregableId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
             },
             {
