@@ -2,57 +2,31 @@
   <div ng-controller="calificacionCtrl as ctrl">
     <div class="container">
       <div class="block-container">
-        <div class="row">
-          <div class="col-sm-10">
-            <h2>Evalución<h2>
-          </div>
-        </div>
-      </div>
       <div class="card">
         <div class="card-header">
-          <div class="row">
-            <div class="col-sm-10">
-            <h4>{{ctrl.titulo}}<h4>
-            </div>
-            <div class="col-sm-2">
-              <div class="fg-line"><label class="m-t-10 texto-centrado"><b>Nota</b><div type="text" ng-model="ctrl.puntaje">{{ctrl.puntaje}} / {{ctrl.puntajeMax}}</div></div>
-            </div>
-          </div>
+        <h2>Evaluación</h2>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <textarea ng-model="ctrl.retroalimentacion"
-              class="texto-retroalimentacion form-control"
-              placeholder="Ingresar observaciones generales del entregable"
-              ></textarea>
-            </div>
+          <div class="form-group fg-line">
+            <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n</label>
+            <label class="col-sm-2 p-t-10">Puntaje</label>
+            <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.evaluacion.calificacionEvaluacion.puntaje" placeholder="Ingrese el puntaje">
+            <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación general del entregable" ng-model="ctrl.evaluacion.descripcion">
+            </textarea>
           </div>
         </div>
-        <div class="table-responsive m-t-20">
-          <table ng-Table="ctrl.tablaAlumnos" class="table table-striped">
-            <tr ng-repeat="criterio in ctrl.herramientaEvaluacion">
-              <td data-title="'Criterios'" ng-model="criterio.nombre">{{criterio.nombre}}</td>
-              <td data-title="'Muy bueno'" class="texto-centrado"><label>
-                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[0]" ng-model="value" value={{criterio.puntaje[0]}} ng-change="ctrl.sumarPuntaje(criterio,0)"></input>
+        <div class="table-responsive">
+          <table ng-Table="ctrl.tablaHerramientas" class="table table-bordered">
+            <tr ng-repeat="herramienta in ctrl.herramientaEvaluacionLista">
+              <td data-title="'Nombre Herramienta'">
               </td>
-              <td data-title="'Bueno'" class="texto-centrado">
-                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[1]" ng-model="value" value={{criterio.puntaje[1]}} ng-change="ctrl.sumarPuntaje(criterio,1)"></input>
+              <td data-title="'Descripción Herramienta'">
               </td>
-              <td data-title="'Regular'" class="texto-centrado">
-                <input type="radio"  name="{{criterio.id}}" ng-checked="criterio.calificacion[2]" ng-model="value" value={{criterio.puntaje[2]}} ng-change="ctrl.sumarPuntaje(criterio,2)"></input>
+              <td data-title="'Puntaje'">
               </td>
-              <td data-title="'Bajo'" class="texto-centrado">
-                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[3]" ng-model="value" value={{criterio.puntaje[3]}} ng-change="ctrl.sumarPuntaje(criterio,3)"></input>
-              </td>
-              <td data-title="'Muy bajo'" class="texto-centrado">
-                <input type="radio" name="{{criterio.id}}" ng-checked="criterio.calificacion[4]" ng-model="value" value={{criterio.puntaje[4]}} ng-change="ctrl.sumarPuntaje(criterio,4)"></input>
-              </td>
-              <td data-title="'Observación'">
-                <textarea ng-model="criterio.observacion"
-                class="form-control"
-                placeholder="Ingresar observaciones"
-                ></textarea>
+              <td data-title="'Detalle'" align="center">
+                <a ng-click="" class="m-r-10"><i class=""></i></a>
+                <a ng-click="" class="m-l-10"><i class=""></i></a>
               </td>
             </tr>
           </table>
@@ -60,9 +34,10 @@
         <div class="row">
           <div class="col-sm-12">
             <button class="btn btn-default waves-effect float-right m-15" ng-click="ctrl.atras()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-            <button class="btn bgm-blue waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()"><i class="fa fa-save"></i> Guardar</button>
+            <button class="btn bgm-gray waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()"><i class="fa fa-paper-plane"></i> Enviar</button>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </section>
