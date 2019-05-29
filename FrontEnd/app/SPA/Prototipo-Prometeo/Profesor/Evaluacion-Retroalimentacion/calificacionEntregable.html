@@ -19,14 +19,17 @@
           <table ng-Table="ctrl.tablaHerramientas" class="table table-bordered">
             <tr ng-repeat="herramienta in ctrl.herramientaEvaluacionLista">
               <td data-title="'Nombre Herramienta'">
+                {{ctrl.evaluacion.herramienta.tipoEvaluacion}}
               </td>
               <td data-title="'Descripción Herramienta'">
+                {{ctrl.evaluacion.herramienta.descripcion}}
               </td>
               <td data-title="'Puntaje'">
+                {{ctrl.evaluacion.herramienta.puntaje}}
               </td>
               <td data-title="'Detalle'" align="center">
-                <a ng-click="" class="m-r-10"><i class=""></i></a>
-                <a ng-click="" class="m-l-10"><i class=""></i></a>
+                <a ng-click="" class="m-r-10"><i class="fa fa-downloads"></i></a>
+                <a ng-click="" class="m-l-10"><i class="fa fa-"></i></a>
               </td>
             </tr>
           </table>
