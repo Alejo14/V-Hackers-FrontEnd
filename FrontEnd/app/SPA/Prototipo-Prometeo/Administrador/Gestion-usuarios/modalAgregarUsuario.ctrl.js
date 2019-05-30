@@ -1,8 +1,8 @@
 angular.module('vHackersModule').controller('modalAgregarUsuarioCtrl', modalAgregarUsuarioCtrl);
 
-modalAgregarUsuarioCtrl.$inject = ['$scope', '$uibModalInstance', 'gestionUsuariosService'];
+modalAgregarUsuarioCtrl.$inject = ['$scope', '$uibModalInstance', 'gestionUsuariosService', 'parametrosModalUsuario'];
 
-function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosService){
+function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosService, parametrosModalUsuario){
 
   var ctrl = this;
   ctrl.usuarioNuevo = {
