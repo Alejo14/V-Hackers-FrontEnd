@@ -83,6 +83,7 @@ function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTablePa
   }
 
   ctrl.asignarHorarios = function(curso){
+    console.log(curso.cursoCicloId);
     $state.go('asignar-horarios',{idCursoCiclo:curso.cursoCicloId,idCurso:curso.id,idSemestre:curso.cicloId,nombreCurso:curso.nombre,codigoCurso:curso.codigo});
   }
 
