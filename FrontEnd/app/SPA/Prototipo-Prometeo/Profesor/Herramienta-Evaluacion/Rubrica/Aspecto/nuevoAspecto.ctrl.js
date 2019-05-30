@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevoAspectoCtrl', ['$scope','$state', '$stateParams','$uibModal', 'NgTableParams',
-function($scope, $state, $stateParams, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('nuevoAspectoCtrl', ['$scope','$state', '$stateParams','nuevoAspectoServicio','$uibModal', 'NgTableParams',
+function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.titulo = 'Nueva aspecto';
   ctrl.aspecto = {
@@ -103,8 +103,18 @@ function($scope, $state, $stateParams, $uibModal, NgTableParams){
       },
       closeModal: false
     }).then(function (aspectoGuardarConfirmado) {
+      data = {
+        "rubricaID": ctrl.rubricaId,
+        "descripcion": ctrl.aspecto.descripcion,
+        "puntaje_maximo": 20,
+	      "cant_criterios": ctrl.criteriosLista.length,
+	      "titulo": ctrl.aspecto.titulo,
+	      "criterios": ctrl.criteriosLista
+      }
       if (aspectoGuardarConfirmado !== "cancelar") {
-        
+        nuevoAspectoServicio.enviarAspecto(data).then(function(){
+           swal("Felicidades","Se guardó su configuración con éxito" ,"success");
+        });
         $scope.$apply();
       }
     });

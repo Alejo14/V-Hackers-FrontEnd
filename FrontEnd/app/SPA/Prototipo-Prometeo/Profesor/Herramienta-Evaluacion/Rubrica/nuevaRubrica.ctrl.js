@@ -66,7 +66,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
         console.log(ctrl.rubrica.niveles);
         ctrl.nivelesRubrica = {
           "tipo": "seleccion",
-          "rubricaId": ctrl.rubrica.id,
+          "rubricaID": ctrl.rubrica.id,
           "niveles": ctrl.rubrica.niveles
         }
 
