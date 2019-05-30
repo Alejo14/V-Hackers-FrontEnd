@@ -35,6 +35,36 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
+    servicio.registroentregableAlumnoXCurso = function(data){
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/crearxcursociclo';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
+    servicio.registroentregableAlumnoXProyecto = function(data){
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/crearxproyecto';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
     servicio.modificarentregableAlumno = function(data){
       var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/modificar';
       var $defer = $q.defer();
@@ -68,6 +98,20 @@ function($q, $http,variablesAmbiente) {
     servicio.listarEntregables = function(){
 
       var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlListarEntregables
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
+    servicio.listarEntregablesXProyecto = function(idProyecto){
+      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregablesxproyecto/' + idProyecto; //'http://localhost:7002/entregables';
       var $defer = $q.defer();
       $http({
           method: 'GET',

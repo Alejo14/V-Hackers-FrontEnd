@@ -5,6 +5,7 @@ function($scope, $uibModalInstance, parametros){
   ctrl.criterio = {
     descripcion: "",
     indicaciones: "",
+    puntajeMaximo: 0,
     nivelesCriterio: []
   }
 
@@ -48,9 +49,30 @@ function($scope, $uibModalInstance, parametros){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
+        ctrl.criterio.puntajeMaximo = ctrl.criterio.nivelesCriterio[0].puntaje;
+        angular.forEach(ctrl.criterio.nivelesCriterio, function(nivel,indice){
+          if(ctrl.criterio.puntajeMaximo < nivel.puntaje){
+            ctrl.criterio.puntajeMaximo = nivel.puntaje;
+          }
+        });
         $uibModalInstance.close(ctrl.criterio);
       }
     });
   };
+
+  ctrl.nivelesPorCriterio = function(){
+    angular.forEach(ctrl.nivelesRubrica, function(nivel,indice){
+      var nivelCriterio = {
+        descripcion: "",
+        puntaje: 0
+      }
+      ctrl.criterio.nivelesCriterio.push(nivelCriterio);
+    });
+  }
+
+  ctrl.init = function(){
+    ctrl.nivelesPorCriterio();
+  }
+  ctrl.init();
 
 }])

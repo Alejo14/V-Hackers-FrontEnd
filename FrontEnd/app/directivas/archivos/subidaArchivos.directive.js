@@ -26,9 +26,10 @@ angular.module('vHackersModule').directive('subirArchivo', ['httpPostFactory','v
                 httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/guardar', formData, function (callback) {
                   // recieve image name to use in a ng-src
                   //console.log(callback);
-
+                  scope.parametros=callback;
                   if (scope.eventoPostSubida) {
-                      scope.eventoPostSubida(callback, scope.parametros);
+                      scope.eventoPostSubida(scope.parametros );
+
                   }
                });
 

@@ -22,7 +22,7 @@
                       <label class="col-sm-4 p-l-0 p-t-10 p-r-0 control-label">Puntaje m&aacute;ximo</label>
                         <div class="col-sm-6 p-l-0">
                             <div class="fg-line">
-                                <input class="form-control input-sm" placeholder="Ingrese puntaje máximo" ng-model="ctrl.herramienta.puntuacionMaxima">
+                                <input type="number" min="0" step="any" class="form-control input-sm" placeholder="Ingrese puntaje máximo" ng-model="ctrl.herramienta.puntajeMax">
                             </div>
                         </div>
                     </div>
@@ -33,21 +33,21 @@
                     </div>
                     <div class="radio m-b-15">
                       <label>
-                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="lista">
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="Lista de Cotejo">
                         <i class="input-helper"></i>
                         Lista de cotejo
                       </label>
                     </div>
                     <div class="radio m-b-15" ng-if="false">
                       <label>
-                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="rubrica">
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="Escala">
                         <i class="input-helper"></i>
                         Escala de valores
                       </label>
                     </div>
                     <div class="radio m-b-15">
                       <label>
-                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="rubrica">
+                        <input type="radio" name="herramientaEvaluacion" ng-model="ctrl.herramienta.tipo" value="Rubrica">
                         <i class="input-helper"></i>
                         R&uacute;brica
                       </label>

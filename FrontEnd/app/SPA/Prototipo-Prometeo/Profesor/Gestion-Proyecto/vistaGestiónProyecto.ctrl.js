@@ -50,7 +50,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('curso');
+        $state.go('profesorMisCursos');
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });

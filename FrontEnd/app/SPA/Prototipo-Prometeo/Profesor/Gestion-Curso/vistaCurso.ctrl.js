@@ -4,12 +4,19 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   var ctrl = this;
   ctrl.curso = {};
   ctrl.proyectosLista = [];
+
   ctrl.cargarProyectos = function () {
     var idCursoCiclo = ctrl.curso.cursoCicloId;
     profesorCursoService.listarProyectos(idCursoCiclo).then(function (proyectosListaData) {
       ctrl.proyectosLista = proyectosListaData;
+      for(let i = 0; i < ctrl.proyectosLista.length; i++){
+        fechCr = new Date(Number(ctrl.proyectosLista[i].fechaCreacion));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.proyectosLista[i].fechaCreacionStr = fechCrStr;
+      }
     });
   };
+
   ctrl.crearEntregable = function(entregable){
     $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaEntrega: 0, fechaHabilitacion: 0,
       descripcion: 0, ponderacion: 0, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
@@ -25,7 +32,11 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     var idCursoCiclo = ctrl.curso.cursoCicloId;
     profesorCursoService.listarEntregables(idCursoCiclo).then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
-      console.log(ctrl.entregablesLista);
+      for(let i = 0; i < ctrl.entregablesLista.length; i++){
+        fechCr = new Date(Number(ctrl.entregablesLista[i].fechaHabilitacion));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.entregablesLista[i].fechaCreacionStr = fechCrStr;
+      }
     });
   };
 
@@ -122,6 +133,10 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     else ctrl.cargaUnitaria = false;
   }
 
+  ctrl.volverCurso = function () {
+        $state.go('profesorMisCursos');
+  };
+
   ctrl.init = function (){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
     ctrl.curso.nombreCurso=$stateParams.nombreCurso;
@@ -134,8 +149,8 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     ctrl.cargarEntregables();
   }
 
-  ctrl.ingresarProyecto = function(){
-    $state.go('evaluacion-herramienta-listar');
+  ctrl.ingresarProyecto = function(proyecto){
+    $state.go('evaluacion-herramienta-listar', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   }
 
   ctrl.init();
