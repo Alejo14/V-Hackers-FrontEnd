@@ -162,7 +162,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('evaluacion-herramienta-listar');
+        //$state.go('evaluacion-herramienta-listar');
+        $state.go('profesorMisCursos');
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });
@@ -279,7 +280,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.crearHerramienta = function(){
 
       if (!ctrl.entregableM.id) {
-        ctrl.entregableM.id = '859e054f-ae56-4e68-9a40-cfee27cf8b2a';
+        ctrl.entregableM.id = '074b668b-6a29-4331-bc2d-797795784f3b';
       }
       $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
   }

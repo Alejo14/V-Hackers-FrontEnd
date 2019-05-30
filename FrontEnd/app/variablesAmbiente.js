@@ -21,6 +21,8 @@
   window.__env.puertoEntregable = ':7002';
   //Puerto de Archivos
   window.__env.puertoArchivos = ':';
+  //Puerto de herramienta de Evaluacion
+  window.__env.puertoHerramientaEvaluacion = ':7008';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));

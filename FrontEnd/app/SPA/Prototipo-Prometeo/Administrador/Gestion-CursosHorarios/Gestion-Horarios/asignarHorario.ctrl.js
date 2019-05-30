@@ -4,7 +4,10 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.cursoCiclo = {};
   ctrl.codigo = "Código";
   ctrl.nombre = "Nombre Curso";
-  ctrl.horariosLista = [{"codigo":"H-8081","codigoProfesor":"Guanirection","nombreProfesor":"Luis Flores"}];
+  ctrl.idCursoCiclo = "";
+  ctrl.idCurso = "";
+  ctrl.idCiclo = "";
+  ctrl.horariosLista = [{"codigo":"H-8081","codigoProfesor":"a19992314","nombreProfesor":"Luis Flores"}];
 
 
   function uuid() {
@@ -59,31 +62,20 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
       resolve: {
         modo: function(){
           return modo;
+        },
+        idCursoCiclo: function(){
+          return ctrl.idCursoCiclo;
+        },
+        idCurso: function(){
+          return ctrl.idCurso;
+        },
+        idCiclo: function(){
+          return ctrl.idCiclo;
         }
       }
     });
     modalInstance.result.then( function (parametroRetorno) {
-      if (parametroRetorno) {
-        var horarioRegistro = {
-          //crear horario con datos de modal
-        };
-        asignarHorarioService.regitstrarUsuario(horarioRegistro).then(function (resultadoRegistro) {
-          ctrl.horariosLista.push(parametroRetorno);
-          swal({
-            title: "¡Listo!",
-            text: "Horario agregado con éxito",
-            icon: "success",
-            //buttons: ["Cancelar", "Sí, agregar"],
-            buttons: {
-              confirm: {
-                text: "ok",
-                className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-              }
-            }
-          });
-        });
-
-      }
+        ctrl.listarHorarios(ctrl.idCursoCiclo);
     });
   };
 
@@ -112,24 +104,27 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
       if (eliminar !== "cancelar") {
           asignarHorarioService.eliminarHorario(angular.toJson(horario));
           swal("¡Listo!", "El horario se eliminó exitosamente" , "success");
-          ctrl.listarHorarios();
+          ctrl.listarHorarios(ctrl.idCursoCiclo);
       }
     });
   }
 
 
-  ctrl.listarHorarios = function () {
-    asignarHorarioService.listarHorarios().then(function (horariosListaData) {
+  ctrl.listarHorarios = function (idcc) {
+    asignarHorarioService.listarHorarios(idcc).then(function (horariosListaData) {
       ctrl.horariosLista = horariosListaData;
     });
   }
-  
+
 
 
   ctrl.init = function(){
-    ctrl.listarHorarios();
+    ctrl.listarHorarios($stateParams.idCursoCiclo);
     ctrl.nombre = $stateParams.nombreCurso;
     ctrl.codigo = $stateParams.codigoCurso;
+    ctrl.idCursoCiclo = $stateParams.idCursoCiclo;
+    ctrl.idCurso = $stateParams.idCurso;
+    ctrl.idCiclo = $stateParams.idSemestre;
   };
 
 

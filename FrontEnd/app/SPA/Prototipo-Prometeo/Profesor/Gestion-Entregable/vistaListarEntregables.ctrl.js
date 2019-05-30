@@ -103,28 +103,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
 
   ctrl.regresarProyectos = function () {
-    swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardarán",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, volver",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
         $state.go('profesorMisCursos');//curso, {cursoCicloId: 0, nombreCurso: 0, codigoCurso: 0, creditos: 0,cantidadAlumnos: 0, horario: 0 } );
-
-
-        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
-      }
-    });
   };
 
   ctrl.regresarEntregables = function () {

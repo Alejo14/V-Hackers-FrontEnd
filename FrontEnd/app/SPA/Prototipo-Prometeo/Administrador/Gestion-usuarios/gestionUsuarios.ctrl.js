@@ -18,6 +18,13 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
       size: 'lg',
       backdrop: true,
       keyboard: true,
+      resolve: {
+        parametrosModalUsuario: function () {
+          return {
+            actualizarRoles: false
+          };
+        }
+      }
     });
 
     //Recibo parametro de retorno
@@ -53,6 +60,24 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
 
   ctrl.verDetalleUsuario = function (usuario) {
 
+  }
+
+  ctrl.modificarRoles = function (usuario) {
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/modalAgregarUsuario.html',
+      controller: 'modalAgregarUsuarioCtrl as ctrl',
+      size: 'lg',
+      backdrop: true,
+      keyboard: true,
+      resolve: {
+        parametrosModalUsuario: function () {
+          return {
+            actualizarRoles: true
+          };
+        }
+      }
+    });
   }
 
   ctrl.eliminarUsuario = function (usuario, indiceUsuarioTabla) {

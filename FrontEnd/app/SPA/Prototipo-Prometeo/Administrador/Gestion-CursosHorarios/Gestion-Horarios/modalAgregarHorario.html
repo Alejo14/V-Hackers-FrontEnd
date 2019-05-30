@@ -45,7 +45,7 @@
                   <select class="form-control"
                     data-placeholder="Seleccione un profesor"
                     ng-model="ctrl.horarioNuevo.profesorId"
-                    ng-options="profesor.id as profesor.nombre for profesor in ctrl.profesoresLista">
+                    ng-options="profesor.rolUsuarioId as profesor.nombres for profesor in ctrl.profesoresLista">
                     <option value=""></option>
                   </select>
                 </div>
@@ -62,7 +62,7 @@
                   <select class="form-control"
                     data-placeholder="Seleccione un asistente de docencia"
                     ng-model="ctrl.horarioNuevo.asistenteId"
-                    ng-options="asistente.id as asistente.nombre for asistente in ctrl.asistentesLista">
+                    ng-options="asistente.rolUsuarioId as asistente.nombres for asistente in ctrl.asistentesLista">
                     <option value=""></option>
                   </select>
                 </div>

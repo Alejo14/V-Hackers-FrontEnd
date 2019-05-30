@@ -4,7 +4,7 @@ function($q, $http) {
   var servicio = this;
 
   servicio.enviarNiveles = function(data){
-    var urlEnviarNiveles = ''; //url a donde se envían los niveles seleccionados
+    var urlEnviarNiveles = 'http://localhost:7008/herramienta/agregarNiveles'; //url a donde se envían los niveles seleccionados
     var $defer = $q.defer();
     $http({
         method: 'POST',
