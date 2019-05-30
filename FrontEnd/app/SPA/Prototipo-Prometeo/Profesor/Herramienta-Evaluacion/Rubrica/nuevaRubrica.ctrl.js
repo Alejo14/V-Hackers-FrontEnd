@@ -1,6 +1,7 @@
 angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService',
 function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
   var ctrl = this;
+  console.log($stateParams.id);
   ctrl.titulo = 'Nueva rúbrica';
   ctrl.rubrica = {
     id: $stateParams.id,
@@ -61,15 +62,18 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
     }).then(function (confirmarNiveles) {
       if (confirmarNiveles !== "cancelar") {
         ctrl.puedoAgregarNivel = false;
+
+        console.log(ctrl.rubrica.niveles);
         ctrl.nivelesRubrica = {
           "tipo": "seleccion",
           "rubricaId": ctrl.rubrica.id,
           "niveles": ctrl.rubrica.niveles
         }
+
+        nuevaRubricaService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
+           swal("Felicidades","Se guardó su configuración con éxito" + ctrl.rubrica.id,"success");
+        });
         $scope.$apply();
-        // nuevaRubricaService.enviarNiveles(ctrl.nivelesRubrica).then(function(data){
-        //   swal("Feliciades","Se guardó su configuración con éxito","success");
-        // });
       }
     });
 
