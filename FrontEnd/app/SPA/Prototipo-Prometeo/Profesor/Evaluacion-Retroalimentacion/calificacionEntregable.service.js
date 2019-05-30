@@ -3,12 +3,12 @@ function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
-  servicio.obtenerHerramientaEvaluacion = function(){
-    var urlObtenerHerramientaEvaluacion = './data/Rubrica.json';
+  servicio.obtenerEvaluacion = function(avanceEntregableId){
+    var urlObtenerEvaluacion = '' + avanceEntregableId;
     var $defer = $q.defer();
     $http({
         method: 'GET',
-        url: urlObtenerHerramientaEvaluacion
+        url: urlObtenerEvaluacion
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

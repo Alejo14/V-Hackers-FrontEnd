@@ -1,0 +1,28 @@
+<section id="main">
+  <div ng-controller="gestionUsuariosCtrl as ctrl">
+    <div class="container">
+      <h3>Evaluaci&oacute;n de la herramienta</h3>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+                <h4>Aspectos</h4>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-group fg-line">
+            <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n</label>
+            <label class="col-sm-2 p-t-10">Puntaje</label>
+            <input type="number" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.evaluacion.calificacionEvaluacion.puntaje" placeholder="Ingrese el puntaje">
+            <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación general del entregable" ng-model="ctrl.evaluacion.descripcion">
+            </textarea>
+          </div>
+          <div class="form-group fg-line">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

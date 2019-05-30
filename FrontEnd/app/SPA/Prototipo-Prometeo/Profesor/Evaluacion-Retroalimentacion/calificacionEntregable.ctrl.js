@@ -5,36 +5,22 @@ calificacionCtrl.$inject = ['$scope','$state', '$stateParams','NgTableParams','c
 function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionHerramientaEvaluacionServicio){
   var ctrl = this;
 
-  /*Generación de ID como GUID para esta iteración*/
-  // function uuid() {
-  //     function randomDigit() {
-  //         if (crypto && crypto.getRandomValues) {
-  //             var rands = new Uint8Array(1);
-  //             crypto.getRandomValues(rands);
-  //             return (rands[0] % 16).toString(16);
-  //         } else {
-  //             return ((Math.random() * 16) | 0).toString(16);
-  //         }
-  //     }
-  //     var crypto = window.crypto || window.msCrypto;
-  //     return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
-  // }
-
   ctrl.evaluacion = {};
   ctrl.evaluacion.descripcion = ""; //Hay que borrarlo porque se trae con el Servicio
   ctrl.evaluacion.calificacionEvaluacion = {}; //Hay que borrarlo porque se trae en el servicio
   ctrl.evaluacion.calificacionEvaluacion.puntaje = 0;
+
   /*===============================================
   * Servicio para traer Herramienta de Evaluación
   *================================================
   */
   ctrl.herramientaEvaluacionLista = [];
-  ctrl.obtenerHerramientaEvaluacion = function () {
+  ctrl.obtenerEvaluacion = function () {
     ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientaEvaluacionLista });
-    calificacionHerramientaEvaluacionServicio.obtenerHerramientaEvaluacion($stateParams.avanceEntregableId).then(function (evaluacion) {
-      ctrl.evaluacion = evaluacion;
-      ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
-    });
+    // calificacionHerramientaEvaluacionServicio.obtenerEvaluacion($stateParams.avanceEntregableId).then(function (evaluacion) {
+    //   ctrl.evaluacion = evaluacion;
+    //   ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
+    // });
   };
 
   /*===============================================
@@ -58,9 +44,10 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('inicioProfes');
+        ctrl.evaluacion.avanceEntregableId = $stateParams.avanceEntregableId;
         calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
           swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
+          $state.go('inicioProfes');
         });
       }
     });
@@ -91,21 +78,17 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
       }
     });
   };
-  /*===============================================
-  * Puntaje dinámico: Función temporal
-  *================================================
+
+  /*=================================================
+  * Calificación de una herramienta
+  *==================================================
   */
-  // ctrl.puntajeDado = [-1,-1,-1,-1];
-  // ctrl.sumarPuntaje = function(criterio,i){
-  //   var aux = -1;
-  //   if(ctrl.puntajeDado[criterio.id-1] != -1) aux = ctrl.puntajeDado[criterio.id-1];
-  //   ctrl.puntajeDado[criterio.id-1] = criterio.puntaje[i];
-  //   if (aux != -1) ctrl.puntaje -= aux;
-  //   ctrl.puntaje += ctrl.puntajeDado[criterio.id-1];
-  // };
+  ctrl.calificarHerramienta = function(){
+    $state.go('calificacionAspectos');
+  }
 
   ctrl.init = function (){
-    ctrl.obtenerHerramientaEvaluacion();
+    ctrl.obtenerEvaluacion();
   };
   ctrl.init();
 }
