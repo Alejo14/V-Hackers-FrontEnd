@@ -10,7 +10,20 @@ function($q, $http,variablesAmbiente) {
     $http({
         method: 'POST',
         url: urlcrearAvanceEntregable,
-        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.mostrarAvanceEntregable = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarArchivo/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

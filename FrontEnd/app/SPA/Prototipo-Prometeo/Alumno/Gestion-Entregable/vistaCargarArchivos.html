@@ -12,8 +12,10 @@
                 <label ><h2>{{ctrl.tituloEntregable}}</h2></label>
                 <div class="fg-line">
                   <label for="archivoEntregable" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
-                  <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="ctrl.obtenerIdArchivo" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
                 </div>
+
+
             </div>
           </div>
         </div>
@@ -25,17 +27,17 @@
                       <div class="form-group">
                         <h4><label class="control-label">Archivos:</h4>
                         <table ng-table="ctrl.tablaArchivos" class="table table-bordered">
-                          <tr ng-repeat="archivo in ctrl.listaArchivos">
+                          <tr ng-repeat="arch in ctrl.listaArchivos">
                             <td data-title="'Ícono'">
                             </td>
                             <td data-title="'Nombre del Archivo'">
-                              {{archivo.nombre}}
+                                <a href="" ng-click="ctrl.obtenerIdArchivo(arch)"> {{arch.nombre}} </a>
                             </td>
                             <td data-title="'Fecha y Hora de Última modificación'">
-                              {{archivo.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
+                              {{arch.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
                             </td>
                             <td data-title="'Tamaño'">
-                              {{archivo.tamano/1000}} KB
+                              {{arch.tamano/1000}} KB
                             </td>
                             <td data-title="'Eliminar'">
                               <a style="float:right" ng-click="ctrl.elminarArchivo(archivo)">
