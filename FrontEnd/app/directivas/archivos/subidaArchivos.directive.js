@@ -31,7 +31,7 @@ angular.module('vHackersModule').directive('subirArchivo', ['httpPostFactory','v
                   // }
 
                   if (scope.eventoPostSeleccion) {
-                      scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fecha: Date.now()}, scope.parametros);
+                      scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
                       swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
                   }
                });

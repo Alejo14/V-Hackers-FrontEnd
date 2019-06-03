@@ -1,0 +1,126 @@
+<section id="main">
+  <div ng-controller="gestionProyectoACtrl as ctrl">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2> {{ctrl.titulo}} </h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="row">
+                <div class="col-md-12">
+                    <label class="col-sm-3 control-label">Nombre*:</label>
+                    <div class="col-sm-7">
+                      <div class="fg-line">
+                        <input class="form-control input-sm" rows="1" placeholder="Proyecto ejemplo..." ng-model = "ctrl.proyectoG.nombre">
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 m-t-30">
+                    <label class="col-sm-3 control-label">Fecha Inicio*:</label>
+                    <div class="col-sm-5">
+                      <div class="fg-line">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaInicio">
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 m-t-30">
+                    <label class="col-sm-3 control-label">Fecha Fin*:</label>
+                    <div class="col-sm-5">
+                      <div class="fg-line">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaFin">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="toggle-switch">
+                        <label for="ts1" class="ts-label">Proyecto visible:</label>
+                        <input id="ts1" type="checkbox"   hidden="hidden">
+                        <label for="ts1" class="ts-helper"></label>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 m-t-30">
+                  <label for="ts1" class="ts-label">Metodo de Trabajo:</label>
+                  <div class="radio m-b-15">
+                    <label>
+                      <input type="radio" name="metodo" value="0" checked>
+                      <i class="input-helper"></i>
+                      Individual
+                    </label>
+                  </div>
+                  <div class="radio m-b-15">
+                    <label>
+                      <input type="radio" name="metodo" value="1">
+                      <i class="input-helper"></i>
+                      Grupal
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="toggle-switch">
+                        <label for="ts2" class="ts-label">Registro de horas:</label>
+                        <input id="ts2" type="checkbox" hidden="hidden">
+                        <label for="ts2" class="ts-helper"></label>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col-md-5 m-t-30">
+                      <label class="control-label">Ponderado*:</label>
+                    </div>
+                    <div class="col-md-4 m-t-30">
+                      <input class="form-control input-sm" rows="1" ng-model = "ctrl.proyectoG.ponderacion">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 m-t-10">
+              <div class="row">
+                <div class="col-md-12 m-t-10">
+                  <label class="col-sm-3 control-label">Descripción</label>
+                </div>
+              </div>
+              <div class="row-sm-3">
+                <div class="col-sm-11">
+                    <textarea id="desTA" class="form-control" cols="10" rows="5" style="border:solid 1px gray;"
+                      placeholder="Ingrese descripción aqui..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 m-t-20" align="right">
+              <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.gestionarProyecto(ctrl.proyectoG)"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <!-- <button ng-click = "ctrl.probarSwal()"><i class="fa fa-file"></i> Probar Swal</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

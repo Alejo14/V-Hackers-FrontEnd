@@ -8,6 +8,14 @@ if (window) {
   Object.assign(ambiente, window.__env);
 }
 
+//funcion empleada en login
+function onLoadFunction() {
+  gapi.client.setApiKey('AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY');
+  gapi.client.load('plus', 'v1', function () {
+
+  });
+}
+
 var vHackersModule = angular.module('vHackersModule', ['ui.bootstrap', 'ngTable','ui.router','ui.router.stateHelper', 'localytics.directives']);
 
 //Regitrar las variables de ambiente
@@ -117,7 +125,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'profesorMisCursos',
-              url: '/profesorMisCursos',
+              url: '/profesorMisCursos/:rolUsuario',
               templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
             },
             {
@@ -189,11 +197,6 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
             },
             {
-              name: 'alumnoMisCursos',
-              url: '/MisCursos',
-              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaMisCursos.html'
-            },
-            {
               name: 'alumnoCurso',
               url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
@@ -202,7 +205,32 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'cargar-archivos',
               url: '/cargar-archivos',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
-            }
+            },
+            {
+              name: 'alumnoMisCursos',
+              url: '/alumnoMisCursos/:rolUsuario',
+              templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+            },
+            {
+              name: 'alumnoCursos',
+              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
+            },
+            {
+              name:'gestion-proyecto-alumno',
+              url: '/gestion-proyecto-alumno/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion/:descripcion/:visible/:registroHoras/:metodoTrabajo/:cursoCiclo_id',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Proyecto/vistaGestiónProyecto.html'
+            },
+            {
+              name: 'evaluacion-herramienta-listar-a',
+              url: '/evaluacion-herramienta-listar-a/:proyectoId/:proyectoNombre',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
+            },
+            {
+              name: 'detalle-entregable',
+              url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/detalleEntregable.html'
+            },
           ]
         },
       ]
