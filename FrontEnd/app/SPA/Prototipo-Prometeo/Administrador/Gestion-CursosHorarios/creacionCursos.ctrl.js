@@ -60,7 +60,11 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
       }
     }).then(function(regresar){
       if (regresar == "confirm") {
-        $state.go('inicioAdmin');
+        if(ctrl.modo=='c'){
+            $state.go('inicioAdmin');
+        } else {
+            $state.go('gestion-horarios');
+        }
       }
     });
   };
@@ -74,11 +78,11 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
       if(ctrl.modo == 'c'){
         data = {
           "id": uuid(),
-          "especialidadId": ctrl.especialidadesLista[ctrl.especialidadesLista.indexOf(ctrl.cursoNuevo.especialidad)].id,
+          "especialidadId": ctrl.cursoNuevo.especialidad,
           "codigo": ctrl.cursoNuevo.claveCurso,
           "nombre": ctrl.cursoNuevo.nombreCurso,
           "fechaCreacion": (new Date())*1,
-          "facultadId": ctrl.facultadesLista[ctrl.facultadesLista.indexOf(ctrl.cursoNuevo.facultad)].id,
+          "facultadId": ctrl.cursoNuevo.facultad,
           "creditos": ctrl.cursoNuevo.numeroCreditos
         }
         creacionCursosService.registroCurso(angular.toJson(data)).then(function () {
