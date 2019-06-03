@@ -202,7 +202,32 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'cargar-archivos',
               url: '/cargar-archivos',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
-            }
+            },
+            {
+              name: 'alumnoMisCursos',
+              url: '/alumnoMisCursos/:rolUsuario',
+              templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+            },
+            {
+              name: 'alumnoCursos',
+              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
+            },
+            {
+              name:'gestion-proyecto-alumno',
+              url: '/gestion-proyecto-alumno/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion/:descripcion/:visible/:registroHoras/:metodoTrabajo/:cursoCiclo_id',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Proyecto/vistaGestiónProyecto.html'
+            },
+            {
+              name: 'evaluacion-herramienta-listar-a',
+              url: '/evaluacion-herramienta-listar-a/:proyectoId/:proyectoNombre',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
+            },
+            {
+              name: 'evaluacion-herramienta-gestionar-a',
+              url: '/evaluacion-herramienta-gestionar-a/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaGestiónEntregable.html'
+            },
           ]
         },
       ]

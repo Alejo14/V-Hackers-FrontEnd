@@ -15,7 +15,7 @@ function($scope, $state,$stateParams, $uibModal){
     $state.go('evaluacion-herramienta-listar');
   }
 
-  ctrl.misCursos = function(){
-    $state.go('profesorMisCursos');
+  ctrl.misCursos = function(rol){
+    $state.go('profesorMisCursos',{rolUsuario: rol});
   }
 }]);
