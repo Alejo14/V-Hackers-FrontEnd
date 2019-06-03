@@ -4,7 +4,7 @@ function($q, $http, variablesAmbiente) {
   var servicio = this;
 
   servicio.obtenerEvaluacion = function(avanceEntregableId){
-    var urlObtenerEvaluacion = '' + avanceEntregableId;
+    var urlObtenerEvaluacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/mostrarCalificacion/' + avanceEntregableId;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -18,7 +18,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.enviarCalificacion = function(evaluacion){
-    var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/calificacion';
+    var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacion';
     var $defer = $q.defer();
     $http({
         method: 'POST',

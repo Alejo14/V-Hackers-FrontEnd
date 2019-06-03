@@ -2,25 +2,23 @@ angular.module('vHackersModule').controller('calificacionCtrl', calificacionCtrl
 
 calificacionCtrl.$inject = ['$scope','$state', '$stateParams','NgTableParams','calificacionHerramientaEvaluacionServicio'];
 
-function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionHerramientaEvaluacionServicio){
+function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacionHerramientaEvaluacionServicio){
   var ctrl = this;
 
   ctrl.evaluacion = {};
-  ctrl.evaluacion.descripcion = ""; //Hay que borrarlo porque se trae con el Servicio
-  ctrl.evaluacion.calificacionEvaluacion = {}; //Hay que borrarlo porque se trae en el servicio
-  ctrl.evaluacion.calificacionEvaluacion.puntaje = 0;
-
   /*===============================================
   * Servicio para traer Herramienta de Evaluación
   *================================================
   */
+  ctrl.avanceEntregableId = $stateParams.avanceEntregableId;
   ctrl.herramientaEvaluacionLista = [];
   ctrl.obtenerEvaluacion = function () {
     ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientaEvaluacionLista });
-    // calificacionHerramientaEvaluacionServicio.obtenerEvaluacion($stateParams.avanceEntregableId).then(function (evaluacion) {
-    //   ctrl.evaluacion = evaluacion;
-    //   ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
-    // });
+    calificacionHerramientaEvaluacionServicio.obtenerEvaluacion(ctrl.avanceEntregableId).then(function (evaluacion) {
+        ctrl.evaluacion = evaluacion;
+        ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
+        console.log(evaluacion);
+    });
   };
 
   /*===============================================
@@ -44,7 +42,6 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        ctrl.evaluacion.avanceEntregableId = $stateParams.avanceEntregableId;
         calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
           swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
           $state.go('inicioProfes');
@@ -83,8 +80,8 @@ function calificacionCtrl ($scope,$state,$stateParam,NgTableParams,calificacionH
   * Calificación de una herramienta
   *==================================================
   */
-  ctrl.calificarHerramienta = function(){
-    $state.go('calificacionAspectos');
+  ctrl.calificarHerramienta = function(indice){
+    $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
   }
 
   ctrl.init = function (){
