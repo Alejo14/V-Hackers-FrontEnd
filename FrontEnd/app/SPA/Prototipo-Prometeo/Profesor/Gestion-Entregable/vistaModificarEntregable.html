@@ -60,7 +60,7 @@
                         <label class="col-sm-4 control-label">Fecha y Hora Fin*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaFin" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaFin)">
+                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaFin" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaFin(ctrl.entregableG.fechaFin)" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaFin)">
                           </div>
                         </div>
                         <div class="col-sm-4">

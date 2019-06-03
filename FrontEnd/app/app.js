@@ -147,12 +147,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-modificar',
-              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion',
+              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaInicio/:fechaFin/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {
               name: 'evaluacion-herramienta-gestionar',
-              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              url: '/evaluacion-herramienta-gestionar/:cursoCicloId/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
             },
             {

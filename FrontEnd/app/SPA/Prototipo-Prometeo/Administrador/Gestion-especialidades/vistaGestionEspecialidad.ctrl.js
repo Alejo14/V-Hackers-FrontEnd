@@ -25,7 +25,6 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   }
 
   ctrl.crearEspecialidad = function(especialidad) {
-    console.log((angular.toJson(especialidad)));
     data = {
       "id": null,
       "facultadId": especialidad.facultad.id,

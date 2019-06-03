@@ -7,6 +7,9 @@ function($scope, $state,$stateParams, $uibModal){
     $state.go('cargar-archivos');
   }
 
+  ctrl.verMisCursos = function(){
+    $state.go('alumnoMisCursos');
+  }
   // ctrl.calificacionEntregable = function(){
   //   $state.go('calificacion');
   // }

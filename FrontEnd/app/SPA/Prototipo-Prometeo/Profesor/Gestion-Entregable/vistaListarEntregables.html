@@ -23,7 +23,7 @@
 
                         <div class="col-sm-9">
                           <div class="fg-line">
-                              <button ng-click = "ctrl.regresarEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+                              <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
                           </div>
                         </div>
 
@@ -48,7 +48,7 @@
                                 <div class="col-md-3" >
                                   <a> {{entregable.fechaCreacionStr}} </a>
                                 </div>
-                                <a style="float:right" ng-click="ctrl.verEntregable(entregable)">
+                                <a style="float:right" ng-click="ctrl.irModificarEntregable(entregable)">
                                   <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a style="float:right" ng-click="ctrl.elminarEntregable(entregable)">

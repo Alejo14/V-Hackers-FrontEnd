@@ -30,7 +30,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.gestionarEntregable = function (entregableG){
-    if (!entregableG || !(entregableG.nombre) || !(entregableG.descripcion) || !(entregableG.fechaEntrega) || !(entregableG.ponderacion)){
+    if (!entregableG || !(entregableG.nombre) || !(entregableG.descripcion) || !(entregableG.fechaInicio) || !(entregableG.ponderacion)){
       swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
     }else{
       if ($stateParams.id==0) {
@@ -43,17 +43,17 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.crearEntregable = function (entregable) {
     console.log(angular.toJson(entregable));//Envio el json para crear el entregable
-    year=entregable.fechaEntrega.getFullYear();
-    month=entregable.fechaEntrega.getMonth();
-    date=entregable.fechaEntrega.getDate();
-    if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
-    if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
+    year=entregable.fechaInicio.getFullYear();
+    month=entregable.fechaInicio.getMonth();
+    date=entregable.fechaInicio.getDate();
+    if (!entregable.horaInicio) {hours=0} else {hours=entregable.horaInicio.getHours();}
+    if (!entregable.horaInicio) {minutes=0} else {minutes=entregable.horaInicio.getMinutes();}
 
-    yearH=entregable.fechaHabilitacion.getFullYear();
-    monthH=entregable.fechaHabilitacion.getMonth();
-    dateH=entregable.fechaHabilitacion.getDate();
-    if (!entregable.horaHabilitacion) {hoursH=0} else {hoursH=entregable.horaHabilitacion.getHours();}
-    if (!entregable.horaHabilitacion) {minutesH=0} else {minutesH=entregable.horaHabilitacion.getMinutes();}
+    yearH=entregable.fechaFin.getFullYear();
+    monthH=entregable.fechaFin.getMonth();
+    dateH=entregable.fechaFin.getDate();
+    if (!entregable.horaFin) {hoursH=0} else {hoursH=entregable.horaFin.getHours();}
+    if (!entregable.horaFin) {minutesH=0} else {minutesH=entregable.horaFin.getMinutes();}
 
     if(entregable.cursoCicloId==0){
       data={
@@ -92,9 +92,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     entregable.id=0;
     entregable.tieneAlarma=1;
     entregable.nombre="";
-    entregable.fechaEntrega="";
-    entregable.horaEntrega="";
-    entregable.fechaHabilitacion="";
+    entregable.fechaInicio="";
+    entregable.horaInicio="";
+    entregable.fechaFin="";
     entregable.horaFin="";
     entregable.descripcion="";
     entregable.ponderacion="";
@@ -129,39 +129,39 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
-  ctrl.regresarEntregable = function () {
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaEntrega: 0, fechaHabilitacion: 0,
-      descripcion: 0, ponderacion: 0, cursoCicloId: 0, proyectoId: ctrl.proyectoId});//ctrl.curso.cursoCicloId
+  ctrl.crearEntregable = function () {
+    //entregable de un proyecto
+    $state.go('evaluacion-herramienta-gestionar' , {cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
   };
 
-  ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: 0, cursoCicloId: 0, proyectoId: 0});
-
+  ctrl.irModificarEntregable = function (entregable) {
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaInicio: entregable.fechaEntrega,
+    fechaFin: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
+    cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});
   };
 
 
   if ($stateParams.nombre){
     ctrl.entregableM.nombre=$stateParams.nombre;
     ctrl.entregableM.id=$stateParams.id;
-    ctrl.entregableM.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
-    ctrl.entregableM.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+    ctrl.entregableM.fechaInicio=new Date(Number($stateParams.fechaInicio));
+    ctrl.entregableM.fechaFin=new Date(Number($stateParams.fechaFin));
     ctrl.entregableM.descripcion=$stateParams.descripcion;
   }
 
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
-    year=entregableM.fechaEntrega.getFullYear();
-    month=entregableM.fechaEntrega.getMonth();
-    date=entregableM.fechaEntrega.getDate();
-    if (!entregableM.horaEntrega) {hours=0} else {hours=entregableM.horaEntrega.getHours();}
-    if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
+    year=entregableM.fechaInicio.getFullYear();
+    month=entregableM.fechaInicio.getMonth();
+    date=entregableM.fechaInicio.getDate();
+    if (!entregableM.horaInicio) {hours=0} else {hours=entregableM.horaInicio.getHours();}
+    if (!entregableM.horaInicio) {minutes=0} else {minutes=entregableM.horaInicio.getMinutes();}
 
-    yearH=entregableM.fechaHabilitacion.getFullYear();
-    monthH=entregableM.fechaHabilitacion.getMonth();
-    dateH=entregableM.fechaHabilitacion.getDate();
-    if (!entregableM.horaHabilitacion) {hoursH=0} else {hoursH=entregableM.horaHabilitacion.getHours();}
-    if (!entregableM.horaHabilitacion) {minutesH=0} else {minutesH=entregableM.horaHabilitacion.getMinutes();}
+    yearH=entregableM.fechaFin.getFullYear();
+    monthH=entregableM.fechaFin.getMonth();
+    dateH=entregableM.fechaFin.getDate();
+    if (!entregableM.horaFin) {hoursH=0} else {hoursH=entregableM.horaFin.getHours();}
+    if (!entregableM.horaFin) {minutesH=0} else {minutesH=entregableM.horaFin.getMinutes();}
     data={
       "id": entregableM.id, //Defecto
       "nombre": entregableM.nombre,
@@ -178,9 +178,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   entregableM.id=0;
   entregableM.tieneAlarma=1;
   entregableM.nombre="";
-  entregableM.fechaEntrega="";
-  entregableM.horaEntrega="";
-  entregableM.fechaHabilitacion="";
+  entregableM.fechaInicio="";
+  entregableM.horaInicio="";
+  entregableM.fechaFin="";
   entregableM.horaFin="";
   entregableM.descripcion="";
   entregableM.ponderacion="";
@@ -251,6 +251,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.init = function (){
     ctrl.tituloVer = $stateParams.proyectoNombre;
+    ctrl.proyectoNombre = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
     ctrl.cargarEntregables(ctrl.proyectoId);
 
