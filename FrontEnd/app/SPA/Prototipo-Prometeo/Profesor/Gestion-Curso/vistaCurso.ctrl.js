@@ -18,7 +18,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.crearEntregable = function(entregable){
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaInicio: 0, fechaFin: 0,
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaHabilitacion: 0, fechaEntrega: 0,
       descripcion: 0, ponderacion: 0, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
   }
   ctrl.crearProyecto = function () {
@@ -85,8 +85,8 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaInicio: entregable.fechaEntrega,
-       fechaFin: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaEntrega,
+       fechaEntrega: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
        cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
   };
 

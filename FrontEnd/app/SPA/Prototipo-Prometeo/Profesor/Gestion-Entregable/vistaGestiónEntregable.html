@@ -44,28 +44,28 @@
                         </div>
                       </div>
                       <div class="form-group"><!--fechaI horaI-->
-                        <label class="col-sm-4 control-label">Fecha y Hora Inicio*:</label>
+                        <label class="col-sm-4 control-label">Fecha y Hora habilitación*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaInicio" placeholder="e.g: 11/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaInicio(ctrl.entregableG.fechaInicio)" ng-change="ctrl.marcarFechaInicio(ctrl.entregableG.fechaInicio)">
+                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaHabilitacion" placeholder="e.g: 11/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaInicio(ctrl.entregableG.fechaHabilitacion)" ng-change="ctrl.marcarFechaInicio(ctrl.entregableG.fechaHabilitacion)">
                           </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaInicio">
+                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaHabilitacion">
                           </div>
                         </div>
                       </div>
                       <div class="form-group"><!--fechaF horaF-->
-                        <label class="col-sm-4 control-label">Fecha y Hora Fin*:</label>
+                        <label class="col-sm-4 control-label">Fecha y Hora Entrega*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaFin" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaFin)">
+                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)">
                           </div>
                         </div>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaFin">
+                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega">
 
                           </div>
                         </div>

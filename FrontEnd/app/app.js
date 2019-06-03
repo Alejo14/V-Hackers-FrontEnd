@@ -155,7 +155,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-modificar',
-              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaInicio/:fechaFin/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
+              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaHabilitacion/:fechaEntrega/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
             },
             {
