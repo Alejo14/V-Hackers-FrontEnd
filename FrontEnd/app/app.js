@@ -117,7 +117,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'profesorMisCursos',
-              url: '/profesorMisCursos',
+              url: '/profesorMisCursos/:rolUsuario',
               templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
             },
             {
