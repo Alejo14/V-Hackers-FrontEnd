@@ -18,7 +18,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     var modalInstance = $uibModal.open({
       animation: false,
       templateUrl: 'SPA/Prototipo-Prometeo/modalListarAlumnos.html',
-      controller: 'modalListarAlumnosCtrl as ctrl',
+      controller: 'modalAgregarArchivoCtrl as ctrl',
       size: 'lg',
       backdrop: true,
       keyboard: true,
@@ -68,7 +68,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     arch=[];
     arch.id=parametros.data;
     arch.nombre=archivo.nombre;
-    arch.fecha=archivo.fecha;
+    arch.fecha=archivo.fechaCreacion;
     arch.tamano=archivo.tamano;
     //console.log(arch);
     ctrl.listaArchivos.push(arch);
@@ -127,7 +127,7 @@ function toBase64(file) {
          var arch1=[];
          arch1.id=respuesta[i].id;
          arch1.nombre=respuesta[i].nombreArchivo;
-         arch1.fecha=respuesta[i].fecha;
+         arch1.fecha=respuesta[i].fechaCreacion;
          arch1.tamano=respuesta[i].tamano;
          ctrl.listaArchivos.push(arch1);
        }
@@ -148,9 +148,53 @@ function toBase64(file) {
   }
 
   ctrl.elminarArchivo= function (archivo){
-      ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+    var id=archivo.id;
+
+    swal({
+      title: "¿Está seguro que quiere eliminar el archivo?",
+      text: "Los cambios se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (eliminarArchivoConfirmacion) {
+      if (eliminarArchivoConfirmacion !== "cancelar") {
+        entregableAlumnoService.eliminarArchivo(id).then(function () {
+            swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
+        });
+        ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+      }
+    });
+
+
+
   }
 
+  ctrl.agregarArchivo = function () {
+    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/modalAgregarArchivo.html',
+      controller: 'modalAgregarArchivoCtrl as ctrl',
+      size: 'lg',
+      backdrop: true,
+      keyboard: true,
+      resolve: {
+        parametrosModalArchivo: function () {
+          return {
+            //actualizarRoles: false
+          };
+        }
+      }
+    });
+}
 
   ctrl.init = function () {
     ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";

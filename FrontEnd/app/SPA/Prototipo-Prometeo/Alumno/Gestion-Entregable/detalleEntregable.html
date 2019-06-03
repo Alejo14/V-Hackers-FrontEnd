@@ -13,6 +13,7 @@
                 <div class="fg-line">
                   <label for="archivoEntregable" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
                   <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  <!-- <button class="btn btn-primary" ng-click = "ctrl.agregarArchivo()"><i class="fa fa-plus-circle"></i> Agregar Archivo</button> -->
                 </div>
 
 
@@ -40,7 +41,7 @@
                               {{archi.tamano/1000}} KB
                             </td>
                             <td data-title="'Eliminar'">
-                              <a style="float:right" ng-click="ctrl.elminarArchivo(archivo)">
+                              <a style="float:left" ng-click="ctrl.elminarArchivo(archi)">
                                 <i class="fas fa-trash-alt"></i>
                               </a>
                             </td>
@@ -66,6 +67,8 @@
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
+              <button type="button" ng-click = "" class="btn btn-primary"><i class="far fa-edit"></i> Evaluación</button>
+              <button type="button" ng-click = "" class="btn bgm-brown waves-effect"><i class="fas fa-vote-yea"></i> Encuesta</button>
               <button type="button" ng-click = "ctrl.regresarEntregablesAlumno()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
               <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
             </div>

@@ -49,6 +49,22 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
+
+  servicio.eliminarArchivo = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/eliminarArchivo/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   // servicio.entregableAlumno = function(){
   //
   //   var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
