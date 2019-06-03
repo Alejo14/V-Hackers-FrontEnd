@@ -189,11 +189,6 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
             },
             {
-              name: 'alumnoMisCursos',
-              url: '/MisCursos',
-              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaMisCursos.html'
-            },
-            {
               name: 'alumnoCurso',
               url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
