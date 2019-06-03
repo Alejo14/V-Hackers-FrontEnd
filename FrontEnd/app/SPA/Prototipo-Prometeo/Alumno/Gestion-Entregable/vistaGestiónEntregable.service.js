@@ -10,6 +10,7 @@ function($q, $http,variablesAmbiente) {
     $http({
         method: 'POST',
         url: urlcrearAvanceEntregable,
+        data:data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
@@ -18,7 +19,22 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.mostrarAvanceEntregable = function(id){
+  servicio.mostrarArchivosAvanceEntregable = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarArchivoAvanceEntregable/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.descargarArchivoEntregable = function(id){
     var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarArchivo/' + id;
     var $defer = $q.defer();
     $http({
@@ -26,6 +42,7 @@ function($q, $http,variablesAmbiente) {
         url: urlmostrarAvanceEntregable
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
      }).catch(function (error) {
        $defer.reject(error);
      });

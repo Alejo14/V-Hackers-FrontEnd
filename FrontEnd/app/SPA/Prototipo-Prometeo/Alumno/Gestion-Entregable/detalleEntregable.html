@@ -1,4 +1,149 @@
-<div class="content">
+<!-- Anderson -->
+<section id="main">
+  <div ng-controller="detalleEntregableCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2></h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-4">
+                <label ><h2>{{ctrl.titulo}}</h2></label>
+                <div class="fg-line">
+                  <label for="archivoEntregable" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                  <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group">
+                        <h4><label class="control-label">Archivos:</h4>
+                        <table ng-table="ctrl.tablaArchivos" class="table table-bordered">
+                          <tr ng-repeat="archi in ctrl.listaArchivos">
+                            <td data-title="'Ícono'">
+                            </td>
+                            <td data-title="'Nombre del Archivo'">
+                                <a href="" ng-click="ctrl.obtenerIdArchivo(archi)"> {{archi.nombre}} </a>
+                            </td>
+                            <td data-title="'Fecha y Hora de Última modificación'">
+                              {{archi.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
+                            </td>
+                            <td data-title="'Tamaño'">
+                              {{archi.tamano/1000}} KB
+                            </td>
+                            <td data-title="'Eliminar'">
+                              <a style="float:right" ng-click="ctrl.elminarArchivo(archivo)">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="form-group"><!--fechaI horaI-->
+                        <h4><label class="control-label">URLs:</h4>
+                        <table ng-table="ctrl.tablaURLs" class="table table-bordered">
+                          <tr >
+                            <td data-title="'Link'">
+                            </td>
+                            <td data-title="'Fecha y Hora de Última modificación'">
+                            </td>
+                            <td data-title="'Eliminar'">
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.regresarEntregablesAlumno()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
+            </div>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li ng-repeat="alumno in ctrl.alumnosLista">
+                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
+                </li>
+              </ul>
+            </div> -->
+          </div>
+          <!-- <div class="row">
+            <ul>
+              <li ng-repeat="alumno in ctrl.alumnosLista">{{alumno}}</li>
+            </ul>
+               </div> -->
+
+               <!-- <a ng-click="ctrl.verEntregable(entregable)">
+                 {{entregable.nombre}}
+               </a> -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="content">
   <div ng-controller="">
     <div class="row">
       <div class="col-md-12">
@@ -26,4 +171,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -1,15 +1,17 @@
-angular.module('vHackersModule').controller('detalleEntregableCtrl', ['$scope', 'detalleEntregableService', '$uibModal',
-function($scope, detalleEntregableService, $uibModal){
+angular.module('vHackersModule').controller('detalleEntregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableAlumnoService', '$uibModal', 'NgTableParams',
+function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.mensaje = "Hola Mundo";
   ctrl.alumnosLista = [];
   ctrl.alumnosListaModal = [];
   ctrl.mensajeNuevo = "Go V-Hackers";
   ctrl.obtenerCalificacionEntregable = function () {
-    detalleEntregableService.obtenerCalificacionEntregable().then(function (calificacionEntregableData) {
+    entregableAlumnoService.obtenerCalificacionEntregable().then(function (calificacionEntregableData) {
       ctrl.calificacionEntregable = alumnosListaData;
     });
   };
+  ctrl.detalleE=[];
+  $scope.fechaActual=new Date();
 
   ctrl.probarModal = function () {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
@@ -37,22 +39,141 @@ function($scope, detalleEntregableService, $uibModal){
     swal("¡Felicidades!", "Has ejecutado un swal", "success");
   };
 
-  ctrl.init = function () {
-    //ctrl.obtenerCalificacionEntregable();
-    ctrl.calificacionEntregable = [
-      {
-        id: '',
-        nombre: 'Backlog y estandar de interfaz',
-        nota: 14,
-        entregable: {
-          id: '',
-          nombre: 'Backlog y estandar de interfaz',
-          fechaEntrega: '04/04/2019',
-          tieneAlarma: false,
-          ponderacion: 1
-        }
+  ctrl.id=0;
+  ctrl.listaArchivos=[];
+
+  function uuid() {
+      function randomDigit() {
+          if (crypto && crypto.getRandomValues) {
+              var rands = new Uint8Array(1);
+              crypto.getRandomValues(rands);
+              return (rands[0] % 16).toString(16);
+          } else {
+              return ((Math.random() * 16) | 0).toString(16);
+          }
       }
-    ];
+      var crypto = window.crypto || window.msCrypto;
+      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+  }
+
+  ctrl.obtenerInfoArchivo = function (archivo,parametros) {
+    //console.log(parametros);
+    var id=parametros.data;
+    data={
+          "archivoId":id,
+        	"entregableId":ctrl.idAvanceEntregable
+    }
+    console.log(ctrl.idAvanceEntregable);
+    entregableAlumnoService.registroAvanceEntregable(data);
+    arch=[];
+    arch.id=parametros.data;
+    arch.nombre=archivo.nombre;
+    arch.fecha=archivo.fecha;
+    arch.tamano=archivo.tamano;
+    //console.log(arch);
+    ctrl.listaArchivos.push(arch);
+    // //$state.go('cargar-archivos');
+  }
+
+  function toBlob(b64Data, contentType, sliceSize) {
+      contentType = contentType || '';
+      sliceSize = sliceSize || 512;
+
+      var byteCharacters = atob(b64Data);
+      var byteArrays = [];
+
+      for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+          var byteNumbers = new Array(slice.length);
+          for (var i = 0; i < slice.length; i++) {
+              byteNumbers[i] = slice.charCodeAt(i);
+          }
+
+          var byteArray = new Uint8Array(byteNumbers);
+
+          byteArrays.push(byteArray);
+      }
+
+      var blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+  }
+
+  function downloadFromBase64(base64File, filename,tipo) {
+    const itemBlob = toBlob(base64File, 'application/'+ tipo);
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(itemBlob);
+    link.download = filename;
+    link.target = '_blank';
+    link.click();
+    link.remove();
+}
+
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject
+    })
+}
+
+  ctrl.listaArchivos = [];
+  ctrl.cargarArchivos = function (id) {
+    entregableAlumnoService.mostrarArchivosAvanceEntregable(id).then(function (respuesta) {
+          //console.log(respuesta);
+       for (i=0;i<respuesta.length;i++) {
+         //console.log(respuesta[i].id);
+         var arch1=[];
+         arch1.id=respuesta[i].id;
+         arch1.nombre=respuesta[i].nombreArchivo;
+         arch1.fecha=respuesta[i].fecha;
+         arch1.tamano=respuesta[i].tamano;
+         ctrl.listaArchivos.push(arch1);
+       }
+    });
+  }
+
+  ctrl.obtenerIdArchivo = function (archivo) { //Prueba
+    var id=archivo.id;//"688f4990-fffe-4761-a178-62a2ce86837c";
+    console.log(id);
+    entregableAlumnoService.descargarArchivoEntregable(id).then(function (respuesta) {
+      console.log(respuesta);
+      if (respuesta.extension){
+        downloadFromBase64(respuesta.datos,respuesta.nombreArchivo,respuesta.extension);
+      }
+    });
+
+      //swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
+  }
+
+  ctrl.elminarArchivo= function (archivo){
+      ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+  }
+
+
+  ctrl.init = function () {
+    ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
+    ctrl.cargarArchivos(ctrl.idAvanceEntregable);
+    ctrl.titulo = $stateParams.nombre;
+          //ctrl.botonGrabar="Modificar";
+    ctrl.detalleE.nombre=$stateParams.nombre;
+    ctrl.detalleE.id=$stateParams.id;
+    ctrl.detalleE.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
+    ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+    ctrl.detalleE.descripcion=$stateParams.descripcion;
+
+     //este debe ser el id que se debe usar para registrar el archivo
+
+    if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto
+      ctrl.detalleE.cursoCicloId=0;
+      ctrl.detalleE.proyectoId=$stateParams.proyectoId;
+    }else{                            //Entregable pertence a un cursoCiclo
+      ctrl.detalleE.proyectoId=0;
+      ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
+    }
+
+
   }
 
   ctrl.init();
