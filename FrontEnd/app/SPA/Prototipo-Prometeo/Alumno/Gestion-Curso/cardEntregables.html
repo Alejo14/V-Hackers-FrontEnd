@@ -1,0 +1,12 @@
+<div class="col-md-12">
+  <div ng-repeat="entregable in ctrl.entregablesLista" >
+    <div class="row">
+      <li class="col-md-6" ng-click="ctrl.ingresarEntregable(entregable)">
+        <a href=""> {{entregable.nombre}} </a>
+      </li>
+      <div class="col-md-3" >
+        <a> {{entregable.fechaCreacionStr}} </a>
+      </div>
+    </div>
+  </div>
+</div>
