@@ -122,12 +122,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'calificacion',
-              url: '/calificacion/:entregableId/:avanceEntregableId',
+              url: '/calificacion/:avanceEntregableId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
             },
             {
               name: 'calificacionAspectos',
-              url: '/calificacionAspectos',
+              url: '/calificacionAspectos/:avanceEntregableId/:herramientaEvaluacionId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Aspecto/calificacionAspectos.html'
             },
             {
@@ -187,6 +187,16 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'inicioAlumnos',
               url: '/inicioAlumnos',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
+            },
+            {
+              name: 'alumnoMisCursos',
+              url: '/MisCursos',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaMisCursos.html'
+            },
+            {
+              name: 'alumnoCurso',
+              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
             },
             {
               name: 'cargar-archivos',

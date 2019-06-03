@@ -62,8 +62,8 @@ function($q, $http) {
     return $defer.promise;
   };
 
-  servicio.eliminarProyecto = function(data){
-    var urlElimCurso = 'http://localhost:7004/cursos/eliminar';
+  servicio.eliminarCursoCiclo = function(data){
+    var urlElimCurso = 'http://localhost:7004/cursos/cursociclo/eliminar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
