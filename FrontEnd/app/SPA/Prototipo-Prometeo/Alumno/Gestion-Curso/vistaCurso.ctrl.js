@@ -39,8 +39,8 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
   };
 
 
-  ctrl.ingresarEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-gestionar-a' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+  ctrl.verEntregable = function (entregable) {
+    $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
     fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
 
   };
