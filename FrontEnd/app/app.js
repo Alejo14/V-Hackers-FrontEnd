@@ -8,6 +8,14 @@ if (window) {
   Object.assign(ambiente, window.__env);
 }
 
+//funcion empleada en login
+function onLoadFunction() {
+  gapi.client.setApiKey('AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY');
+  gapi.client.load('plus', 'v1', function () {
+
+  });
+}
+
 var vHackersModule = angular.module('vHackersModule', ['ui.bootstrap', 'ngTable','ui.router','ui.router.stateHelper', 'localytics.directives']);
 
 //Regitrar las variables de ambiente
