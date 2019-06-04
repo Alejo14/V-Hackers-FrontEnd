@@ -1,0 +1,48 @@
+<section>
+  <div>
+    <div class="card-header">
+      <h2>{{ctrl.herramienta.descripcion}} </h2>
+      <ul class="actions">
+        <li>
+          <a class="pull-right" ng-click="ctrl.cerrar()"><i class="fa fa-window-close"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <table ng-Table="ctrl.tablaHerramienta" class="table table-bordered">
+            <tr ng-repeat="criterio in ctrl.criteriosLista">
+              <td data-title="'Criterio'">{{criterio}}</td>
+              <td data-title="'Mucha'"><label class="checkbox checkbox-inline m-r-20"><input type="checkbox" disabled><i class="input-helper"></i></label></td>
+              <td data-title="'Normal'"><label class="checkbox checkbox-inline m-r-20"><input type="checkbox" disabled><i class="input-helper"></i></label></td>
+              <td data-title="'Regular'"><label class="checkbox checkbox-inline m-r-20"><input type="checkbox" disabled><i class="input-helper"></i></label></td>
+              <td data-title="'Baja'"><label class="checkbox checkbox-inline m-r-20"><input type="checkbox" disabled><i class="input-helper"></i></label></td>
+              <td data-title="'Observaciones'"></td>
+            </tr>
+          </table>
+
+          <!-- <table ng-Table="ctrl.tablaResponsables" class="table table-bordered">
+            <tr ng-repeat="responsable in ctrl.responsablesLista">
+              <td data-title="">{{responsable.n}}</td>
+              <td data-title="'Código'">{{responsable.codigo}}</td>
+              <td data-title="'Nombre'">{{responsable.nombre}}</td>
+              <td data-title="'Correo'">{{responsable.correo}}</td>
+              <td data-title="'Selecionar'">
+                <div class="radio m-b-15" align="center">
+                <label>
+                    <input type="radio" name="sample" ng-value="responsable" ng-model="ctrl.responsableSeleccionado">
+                    <i class="input-helper"></i>
+                </label>
+                </div>
+              </td>
+            </tr>
+          </table> -->
+        </div>
+      </div>
+      <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
+        <button class="btn btn-primary btn-sm waves-effect" ng-click="ctrl.cerrar()"><i class="far fa-check-circle"></i> Aceptar</button>
+      </div>
+    </div>
+  </div>
+</section>

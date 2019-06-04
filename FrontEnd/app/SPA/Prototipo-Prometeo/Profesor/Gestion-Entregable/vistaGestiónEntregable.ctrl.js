@@ -349,6 +349,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
+  ctrl.verReutilizarHerramienta = function() {
+    if (!ctrl.entregableM.id) {
+      ctrl.entregableM.id = '074b668b-6a29-4331-bc2d-797795784f3b';
+    }
+    $state.go('reutilizar-herramienta', {id: ctrl.entregableM.id});
+  }
+
   ctrl.herramientasEvaluacion = [];
   ctrl.cargarHerramientas = function (){
     entregableService.listarHerramientas().then(function (herramientasLista){

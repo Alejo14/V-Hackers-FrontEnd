@@ -1,0 +1,92 @@
+<section id="main">
+  <div ng-controller="reutilizarHerramientaCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-12">
+                <h2>Reutilizar herramienta del curso<h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style= " padding: 30px;">
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                <form role="form" class="ng-pristine ng-valid">
+                  <div class="form-group">
+                    <!-- <label class="col-sm-4 control-label">Nombre*:</label> -->
+                    <label style="padding-right: 30px;">Herramienta de evaluación: </label>
+                    <label class="checkbox checkbox-inline m-r-20"><input type="checkbox" checked><i class="input-helper"></i> Escala</label>
+                    <label class="checkbox checkbox-inline m-r-20"><input type="checkbox" checked><i class="input-helper"></i> Lista de cotejo</label>
+                    <label class="checkbox checkbox-inline m-r-20"><input type="checkbox" checked><i class="input-helper"></i> Rúbrica</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1">
+                <form role="form" class="ng-pristine ng-valid">
+                  <div class="form-group">
+                    <label style="padding-top: 7px;">Ciclo: </label>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <div class="fg-line">
+                    <div class="select">
+                      <select class="form-control">
+                        <option value="">2018 - II</option>
+                        <option value="">2018 - I</option>
+                        <option value="">2017 - II</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3" align="center">
+                <button class="btn btn-default waves-effect" ng-click=""><i class="fa fa-bars"></i> Mostrar todo</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                <table ng-Table="ctrl.tablaHerramientas" class="table table-bordered">
+                  <tr ng-repeat="herramienta in ctrl.herramientasLista">
+                    <td data-title="'Herramienta'">{{herramienta.tipo}}</td>
+                    <td data-title="'Descripción'">{{herramienta.descripcion}}</td>
+                    <td data-title="'Docente que lo aplicó'">{{herramienta.docente}}</td>
+                    <td data-title="'Año académico'">{{herramienta.anio}}</td>
+                    <td data-title="'Ver'">
+                      <a style="float:right" ng-click="ctrl.verHerramienta(herramienta)">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                    </td>
+                    <td data-title="'Selecionar'">
+                      <div class="radio m-b-15" align="center">
+                      <label>
+                          <input type="radio" name="sample" ng-value="herramienta" ng-model="ctrl.herramientaSeleccionada">
+                          <i class="input-helper"></i>
+                      </label>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="col-md-12" align="right">
+                <button class="btn btn-primary btn-sm waves-effect" style="background-color: green;" ng-click=""><i class="fa fa-recycle"></i> Reutilizar</button>
+                <button type="button" ng-click = "ctrl.regresarEntregable()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

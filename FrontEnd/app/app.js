@@ -169,8 +169,13 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
+              name: 'reutilizar-herramienta',
+              url: '/:id/reulizar-herramienta',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Reutilizar/vistaReutilizarHerramienta.html'
+            },
+            {
               name: 'nueva-herramienta',
-              url: ':id/nueva-herramienta',
+              url: '/:id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {
@@ -207,11 +212,6 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
             },
             {
-              name: 'cargar-archivos',
-              url: '/cargar-archivos',
-              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
-            },
-            {
               name: 'alumnoMisCursos',
               url: '/alumnoMisCursos/:rolUsuario',
               templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
@@ -238,6 +238,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
           ]
         },
+        //LOGIN
+        {
+          name: 'login',
+          url: '/login',
+          templateUrl: 'SPA/google-API/login.html'
+        }
       ]
     }, { keepOriginalNames: true });
 }]);
