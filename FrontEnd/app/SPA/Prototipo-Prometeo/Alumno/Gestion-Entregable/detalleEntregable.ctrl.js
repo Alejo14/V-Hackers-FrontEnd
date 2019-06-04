@@ -41,7 +41,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   ctrl.id=0;
   ctrl.listaArchivos=[];
-
+  ctrl.listaURLs=[];
   function uuid() {
       function randomDigit() {
           if (crypto && crypto.getRandomValues) {
@@ -134,6 +134,20 @@ function toBase64(file) {
     });
   }
 
+  ctrl.cargarURLs = function (id) {
+    entregableAlumnoService.mostrarURLsAvanceEntregable(id).then(function (respuesta) {
+          //console.log(respuesta);
+       for (i=0;i<respuesta.length;i++) {
+         //console.log(respuesta[i].id);
+         var linkURL=[];
+         linkURL.id=""; //Debe traer el id el servicio
+         linkURL.nombre=respuesta[i];
+         linkURL.fecha=Date.now(); //debe traer la fecha el servicio
+         ctrl.listaURLs.push(linkURL);
+       }
+    });
+  }
+
   ctrl.obtenerIdArchivo = function (archivo) { //Prueba
     var id=archivo.id;//"688f4990-fffe-4761-a178-62a2ce86837c";
     console.log(id);
@@ -172,10 +186,35 @@ function toBase64(file) {
         ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
       }
     });
+}
 
-
-
-  }
+ctrl.elminarURL= function (url){
+  // var id=archivo.id;
+  //
+  // swal({
+  //   title: "¿Está seguro que quiere eliminar el archivo?",
+  //   text: "Los cambios se guardarán",
+  //   icon: "warning",
+  //   buttons: {
+  //     cancelar: {
+  //       text: "Cancelar",
+  //       className: "btn btn-lg btn-danger"
+  //     },
+  //     confirm: {
+  //       text: "Sí, eliminar",
+  //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+  //     }
+  //   }
+  // }).then(function (eliminarArchivoConfirmacion) {
+  //   if (eliminarArchivoConfirmacion !== "cancelar") {
+  //     entregableAlumnoService.eliminarArchivo(id).then(function () {
+  //         swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
+  //     });
+  //     ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+  //   }
+  // });
+  ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(url),1);
+}
 
   ctrl.agregarArchivo = function () {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
@@ -200,8 +239,14 @@ function toBase64(file) {
     modalInstance.result.then( function (parametroRetorno) {
       //console.log(parametroRetorno);
       if (parametroRetorno) {
-        swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
-        ctrl.listaArchivos.push(parametroRetorno);
+        if (parametroRetorno[0]==1){
+          swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
+          ctrl.listaURLs.push(parametroRetorno[1]);
+        }else {
+          swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
+          ctrl.listaArchivos.push(parametroRetorno[1]);
+        }
+
       }
     });
 }
@@ -209,6 +254,7 @@ function toBase64(file) {
   ctrl.init = function () {
     ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
     ctrl.cargarArchivos(ctrl.idAvanceEntregable);
+    ctrl.cargarURLs(ctrl.idAvanceEntregable); //Falta traer la fecha
     ctrl.titulo = $stateParams.nombre;
           //ctrl.botonGrabar="Modificar";
     ctrl.detalleE.nombre=$stateParams.nombre;

@@ -21,6 +21,7 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
     }
   }
   arch=[];
+  data={};
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
     //console.log(parametros);
     var id=parametros.data;
@@ -63,14 +64,38 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
   ctrl.validarRegistroValido = function () {
     //ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && $scope.facultad && ctrl.usuarioNuevo.apellidos !== "" && $scope.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && $scope.rolesUsuarioNuevo;
   };
-
+  ctrl.idURL="";
   ctrl.guardarArchivo = function () {
+    var tipoArch=[];
     var metodo = parseInt($('input[name=metodo]:checked').val());
     if (metodo==0){
       entregableAlumnoService.registroAvanceEntregable(data);
-      $uibModalInstance.close(arch);
+      tipoArch.push(0);
+      tipoArch.push(arch);
+      $uibModalInstance.close(tipoArch);
     }else {
       //URL
+      var urldata=ctrl.archivoURL;
+      if (urldata){
+        entregableAlumnoService.registroURL(urldata).then(function (idURL) {
+            //swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
+            ctrl.idURL=idURL;
+            dataURL={
+                  "archivoId":idURL,
+                  "entregableId":ctrl.idAvanceEntregable
+            }
+            entregableAlumnoService.registroAvanceEntregable(dataURL);
+            //console.log(idURL);
+            linkURL=[];
+            linkURL.id=ctrl.idURL;
+            linkURL.nombre=urldata;
+            linkURL.fecha=Date.now();
+            tipoArch.push(1);
+            tipoArch.push(linkURL);
+            $uibModalInstance.close(tipoArch);
+        });
+
+      }
     }
 
   };
@@ -88,7 +113,10 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
       entregableAlumnoService.eliminarArchivo(arch.id);//Si cierra lo debo eliminar el archivo
       $uibModalInstance.close(0);
     }else {
-        //URL
+        //Eliminar URL si cancela
+        entregableAlumnoService.eliminarArchivo(ctrl.idURL);//Si cierra lo debo eliminar el archivo
+        $uibModalInstance.close(0);
+
     }
   };
   ctrl.init();
