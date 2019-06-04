@@ -1,22 +1,12 @@
 <div class="col-md-12">
-  <div class="row" align="center">
-    <div class="col-md-4">ENTREGABLE</div>
-    <div class="col-md-3">FECHA CREACIÓN</div>
-    <div class="col-md-3">FECHA DE ENTREGA</div>
-    <div class="col-md-2">NOTA</div>
-  </div>
-  <div ng-repeat="entregable in ctrl.entregablesLista">
+  <div ng-repeat="entregable in ctrl.entregablesLista" >
     <div class="row">
-      <div class="col-md-4" >
-        <a href="" ng-click="ctrl.abrirEntregable(entregable)"> {{entregable.nombre}}</a>
-      </div>
-      <div class="col-md-3" align="center">
+      <li class="col-md-6" ng-click="ctrl.verEntregable(entregable)">
+        <a href=""> {{entregable.nombre}} </a>
+      </li>
+      <div class="col-md-3" >
         <a> {{entregable.fechaCreacionStr}} </a>
       </div>
-      <div class="col-md-3" align="center">
-        <a> {{entregable.fechaFinStr}} </a>
-      </div>
-      <div class="col-md-2" align="center">20</div>
     </div>
   </div>
 </div>

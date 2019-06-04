@@ -1,11 +1,11 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('alumnoCursoService', ['$q', '$http','variablesAmbiente',
-function($q, $http, variablesAmbiente) {
+angular.module("vHackersModule").service('alumnoCursoService', ['$q', '$http',
+function($q, $http) {
 
   var servicio = this;
 
   servicio.listarProyectos = function(codigoCurso){
-    var urlListarProyectos = variablesAmbiente.apiUrl + ':7001' + '/proyectosxcurso/' + codigoCurso;
+    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',
