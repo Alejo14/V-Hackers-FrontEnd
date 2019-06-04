@@ -194,6 +194,16 @@ function toBase64(file) {
         }
       }
     });
+
+
+    //Recibo parametro de retorno
+    modalInstance.result.then( function (parametroRetorno) {
+      //console.log(parametroRetorno);
+      if (parametroRetorno) {
+        swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
+        ctrl.listaArchivos.push(parametroRetorno);
+      }
+    });
 }
 
   ctrl.init = function () {
