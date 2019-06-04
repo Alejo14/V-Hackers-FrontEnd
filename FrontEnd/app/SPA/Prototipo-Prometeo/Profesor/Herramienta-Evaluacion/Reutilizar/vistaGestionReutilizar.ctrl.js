@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('reutilizarHerramientaCtrl', ['$scope','$state', '$stateParams', 'NgTableParams','reutilizarHerramientaService',
-function($scope, $state, $stateParams, NgTableParams, reutilizarHerramientaService){
+angular.module('vHackersModule').controller('reutilizarHerramientaCtrl', ['$scope','$state', '$stateParams', 'NgTableParams','reutilizarHerramientaService', '$uibModal',
+function($scope, $state, $stateParams, NgTableParams, reutilizarHerramientaService, $uibModal){
   var ctrl = this;
 
   ctrl.herramienta = {};
@@ -42,6 +42,22 @@ function($scope, $state, $stateParams, NgTableParams, reutilizarHerramientaServi
 
   ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientasLista });
 
+  ctrl.verHerramienta = function (herramienta) {
+    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-evaluacion/Reutilizar/modalHerramienta.html',
+      controller: 'verReutilizarHerramientaCtrl as ctrl',
+      size: 'lg',
+      backdrop: true,
+      keyboard: true,
+      resolve: {
+        parametrosModal: function () {
+          return herramienta;
+        }
+      }
+    });
+  };
 
    ctrl.regresarEntregable = function (){
      swal({

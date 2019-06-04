@@ -170,12 +170,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'reutilizar-herramienta',
-              url: ':id/reulizar-herramienta',
+              url: '/:id/reulizar-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Reutilizar/vistaReutilizarHerramienta.html'
             },
             {
               name: 'nueva-herramienta',
-              url: ':id/nueva-herramienta',
+              url: '/:id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {
@@ -205,11 +205,6 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'alumnoCurso',
               url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
-            },
-            {
-              name: 'cargar-archivos',
-              url: '/cargar-archivos',
-              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaCargarArchivos.html'
             },
             {
               name: 'alumnoMisCursos',

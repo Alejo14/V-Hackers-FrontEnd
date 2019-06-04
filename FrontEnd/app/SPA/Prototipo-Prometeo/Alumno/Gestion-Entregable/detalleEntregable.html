@@ -51,12 +51,17 @@
                       <div class="form-group"><!--fechaI horaI-->
                         <h4><label class="control-label">URLs:</h4>
                         <table ng-table="ctrl.tablaURLs" class="table table-bordered">
-                          <tr >
+                          <tr ng-repeat="url in ctrl.listaURLs">
                             <td data-title="'Link'">
+                              <a href="{{url.nombre}}" > {{url.nombre}} </a>
                             </td>
                             <td data-title="'Fecha y Hora de Última modificación'">
+                              {{url.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
                             </td>
                             <td data-title="'Eliminar'">
+                              <a style="float:left" ng-click="ctrl.elminarURL(url)">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
                             </td>
                           </tr>
                         </table>
