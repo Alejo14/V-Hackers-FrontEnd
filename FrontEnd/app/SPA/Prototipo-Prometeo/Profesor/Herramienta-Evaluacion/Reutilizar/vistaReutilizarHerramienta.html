@@ -6,7 +6,7 @@
           <div class="card-header">
             <div class="row">
               <div class="col-sm-12">
-                <h2>Reutilizar entregable del curso<h2>
+                <h2>Reutilizar herramienta del curso<h2>
               </div>
             </div>
           </div>
@@ -39,9 +39,9 @@
                   <div class="fg-line">
                     <div class="select">
                       <select class="form-control">
+                        <option value="">2018 - II</option>
                         <option value="">2018 - I</option>
                         <option value="">2017 - II</option>
-                        <option value="">2017 - I</option>
                       </select>
                     </div>
                   </div>
@@ -60,7 +60,11 @@
                     <td data-title="'Descripción'">{{herramienta.descripcion}}</td>
                     <td data-title="'Docente que lo aplicó'">{{herramienta.docente}}</td>
                     <td data-title="'Año académico'">{{herramienta.anio}}</td>
-                    <td data-title="'Ver'"><i class="fa fa-eye"></i></td>
+                    <td data-title="'Ver'">
+                      <a style="float:right" ng-click="ctrl.verHerramienta(herramienta)">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                    </td>
                     <td data-title="'Selecionar'">
                       <div class="radio m-b-15" align="center">
                       <label>

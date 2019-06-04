@@ -170,12 +170,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'reutilizar-herramienta',
-              url: ':id/reulizar-herramienta',
+              url: '/:id/reulizar-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Reutilizar/vistaReutilizarHerramienta.html'
             },
             {
               name: 'nueva-herramienta',
-              url: ':id/nueva-herramienta',
+              url: '/:id/nueva-herramienta',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {
