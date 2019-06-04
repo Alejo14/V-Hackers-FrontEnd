@@ -65,6 +65,41 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   };
 
+  ctrl.agregarCargaMasiva = function () {
+    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
+    var modalInstance = $uibModal.open({
+      animation: false,
+      templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/modalCargaEspecialidades.html',
+      controller: 'especialidadCargaMasivaCtrl as ctrl',
+      size: 'lg',
+      backdrop: true,
+      keyboard: true,
+      // resolve: {
+      //   parametrosModal: function () {
+      //     return {
+      //       //actualizarRoles: false
+      //     };
+      //   }
+      // }
+    });
+
+
+    //Recibo parametro de retorno
+    modalInstance.result.then( function (parametroRetorno) {
+      if (parametroRetorno) {
+        if (parametroRetorno[0]==1){
+          swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
+          ctrl.listaURLs.push(parametroRetorno[1]);
+        }else {
+          swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
+          ctrl.listaArchivos.push(parametroRetorno[1]);
+        }
+
+      }
+    });
+  }
+
+
   ctrl.verEspecialidad = function (especialidad) {
     $state.go('modificar-especialidad', {id : especialidad.id, codigo : especialidad.codigo,
       nombre : especialidad.nombre, facultadId : especialidad.facultadId,
