@@ -1,18 +1,29 @@
 <div class="col-md-12">
+  <div class="row" align="center" style="padding:10px;">
+    <div class="col-md-4">ENTREGABLE</div>
+    <div class="col-md-3">FECHA CREACIÓN</div>
+    <div class="col-md-3">FECHA FIN</div>
+    <div class="col-md-2">ACCIONES</div>
+  </div>
   <div ng-repeat="entregable in ctrl.entregablesLista" >
-    <div class="row">
-      <li class="col-md-6" ng-click="ctrl.ingresarEntregable()">
+    <div class="row" style="padding:5px;">
+      <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
         <a href=""> {{entregable.nombre}} </a>
-      </li>
-      <div class="col-md-3" >
+      </div>
+      <div class="col-md-3" align="center">
         <a> {{entregable.fechaCreacionStr}} </a>
       </div>
-      <a style="float:right" ng-click="ctrl.verEntregable(entregable)">
-        <i class="fas fa-pencil-alt"></i>
-      </a>
-      <a style="float:right" ng-click="ctrl.elminarEntregable(entregable)">
-        <i class="fas fa-trash-alt"></i>
-      </a>
+      <div class="col-md-3" align="center">
+        <a> {{entregable.fechaFinStr}} </a>
+      </div>
+      <div class="col-md-2" align="center">
+        <a style="padding:10px;" ng-click="ctrl.verEntregable(entregable)">
+          <i class="fas fa-pencil-alt"></i>
+        </a>
+        <a style="padding:10px;" ng-click="ctrl.elminarEntregable(entregable)">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>

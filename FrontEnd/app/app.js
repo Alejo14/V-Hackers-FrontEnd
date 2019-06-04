@@ -10,7 +10,7 @@ if (window) {
 
 //funcion empleada en login
 function onLoadFunction() {
-  gapi.client.setApiKey('AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY');
+  gapi.client.setApiKey(ambiente.llaveApiLogin);
   gapi.client.load('plus', 'v1', function () {
 
   });

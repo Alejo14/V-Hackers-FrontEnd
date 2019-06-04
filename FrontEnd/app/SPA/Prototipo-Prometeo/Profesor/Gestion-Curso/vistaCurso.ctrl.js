@@ -14,6 +14,12 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.proyectosLista[i].fechaCreacionStr = fechCrStr;
       }
+      for(let i = 0; i < ctrl.proyectosLista.length; i++){
+        fechCr = new Date(Number(ctrl.proyectosLista[i].fechaFin));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.proyectosLista[i].fechaFinStr = fechCrStr;
+      };
+
     });
   };
 
@@ -36,6 +42,11 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.entregablesLista[i].fechaCreacionStr = fechCrStr;
       }
+      for(let i = 0; i < ctrl.entregablesLista.length; i++){
+        fechCr = new Date(Number(ctrl.entregablesLista[i].fechaEntrega));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.entregablesLista[i].fechaFinStr = fechCrStr;
+      };
     });
   };
 
@@ -85,8 +96,8 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaEntrega,
-       fechaEntrega: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
+    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
+       fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
        cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
   };
 

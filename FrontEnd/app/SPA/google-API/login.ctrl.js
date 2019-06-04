@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('loginCtrl', ['$scope',
-function ($scope) {
+angular.module('vHackersModule').controller('loginCtrl', ['$scope', 'variablesAmbiente',
+function ($scope, variablesAmbiente) {
   var ctrl = this;
 
   ctrl.usuario = {
@@ -8,7 +8,7 @@ function ($scope) {
   };
   ctrl.googleLogin = function () {
     var params = {
-      "clientid": "844327842205-hr7p49le062oob0ki3t59u89jhd9t2p0.apps.googleusercontent.com",
+      "clientid": variablesAmbiente.clienteLogin,
       "cookiepolicy": "single_host_origin",
       "callback": function (result) {
         if (result['status']['signed_in']) {
