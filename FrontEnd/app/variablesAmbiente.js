@@ -17,12 +17,16 @@
   window.__env.puertoSemestre = ':7006';
   //Puerto de Calificacióng
   window.__env.puertoCalificacion = ':7007';
+  //Puerto de Proyectos
+  window.__env.puertoProyectos = ':7001';
   //Puerto de Entregables
   window.__env.puertoEntregable = ':7002';
   //Puerto de Archivos
   window.__env.puertoArchivos = ':';
   //Puerto de herramienta de Evaluacion
   window.__env.puertoHerramientaEvaluacion = ':7008';
+  //Puerto de horarios
+  window.__env.puertoHorarios = ':7010';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));
