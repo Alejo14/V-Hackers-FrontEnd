@@ -238,6 +238,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
           ]
         },
+        //LOGIN
+        {
+          name: 'login',
+          url: '/login',
+          templateUrl: 'SPA/google-API/login.html'
+        }
       ]
     }, { keepOriginalNames: true });
 }]);

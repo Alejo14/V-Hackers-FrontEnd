@@ -1,114 +1,37 @@
 <section>
   <div>
     <div class="card-header">
-      <h2>
-        Agregar Usuario
-      </h2>
-      <ul class="actions">
-        <li>
-          <a class="pull-right" ng-click="ctrl.cerrar()"><i class="fa fa-window-close"></i></a>
-        </li>
-      </ul>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>
+            Agregar Usuario
+          </h2>
+          <ul class="actions">
+            <li>
+              <a class="pull-right" ng-click="ctrl.cerrar()"><i class="fa fa-window-close"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Crear nuevo curso</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Carga masiva</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="container-fluid">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Nombres*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese los nombres del usuario" ng-model = "ctrl.usuarioNuevo.nombres" ng-change="ctrl.validarRegistroValido()">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Facultad*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <select class="form-control"
-                    data-placeholder="Seleccione una facultad"
-                    ng-model="facultad"
-                    ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
-                    ng-change="ctrl.obtenerEspecialidades(); ctrl.validarRegistroValido()">
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Apellidos*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese los apellidos del usuario" ng-model = "ctrl.usuarioNuevo.apellidos" ng-change="ctrl.validarRegistroValido()">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Especialidad*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <select class="form-control"
-                    data-placeholder="Seleccione una especialidad"
-                    ng-model="especialidad"
-                    ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista"
-                    ng-disabled="!facultad"
-                    ng-change="ctrl.validarRegistroValido()">
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Correo*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese el correo del usuario" ng-model = "ctrl.usuarioNuevo.correo" ng-change="ctrl.validarRegistroValido()">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">C&oacute;digo*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <input class="form-control input-sm" placeholder="Ingrese el código del usuario" ng-model = "ctrl.usuarioNuevo.codigo" ng-change="ctrl.validarRegistroValido()">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Roles de usuario*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <select multiple class="form-control"
-                    data-placeholder="Seleccione los roles de usuario"
-                    ng-model="rolesUsuarioNuevo"
-                    ng-options="rol as rol.descripcion for rol in ctrl.rolesUsuarioLista"
-                    ng-change="ctrl.validarRegistroValido()">
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="card-body" ng-if="ctrl.cargaUnitaria" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/cardAgregarUsuarioUnitario.html'">
+
+      </div>
+      <div class="card-body" ng-if="!ctrl.cargaUnitaria" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/cardAgregarUsuarioMasivo.html'">
+
       </div>
       <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
         <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>

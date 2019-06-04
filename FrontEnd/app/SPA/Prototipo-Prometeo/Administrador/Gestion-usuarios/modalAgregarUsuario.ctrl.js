@@ -46,7 +46,11 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
     }
   ];
   ctrl.registroValido = false;
-
+  ctrl.cargaUnitaria = true;
+  ctrl.modo ='c';
+  ctrl.cambiarVista = function (indice) {
+    ctrl.cargaUnitaria = indice == 0;
+  };
   ctrl.obtenerFacultades = function () {
     gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
       ctrl.facultadesLista = facultadesListaData;
