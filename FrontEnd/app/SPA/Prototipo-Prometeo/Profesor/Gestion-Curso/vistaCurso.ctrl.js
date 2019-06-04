@@ -154,10 +154,15 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     ctrl.curso.creditos=$stateParams.creditos;
     ctrl.curso.cantidadAlumnos=$stateParams.cantidadAlumnos;
     ctrl.curso.horario=$stateParams.horario;
+    ctrl.curso.horarioId=$stateParams.idHorario;
 
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();
   }
+
+  ctrl.listaAlumnos = function () {
+    $state.go('listar-alumnos',  {cursoNombre: ctrl.curso.nombreCurso, horarioNombre: ctrl.curso.horario, horarioId: ctrl.curso.horarioId});
+  };
 
   ctrl.ingresarProyecto = function(proyecto){
     $state.go('evaluacion-herramienta-listar', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});

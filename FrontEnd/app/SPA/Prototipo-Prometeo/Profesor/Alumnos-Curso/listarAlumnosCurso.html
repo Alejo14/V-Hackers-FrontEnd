@@ -1,0 +1,66 @@
+<section id="main">
+  <div ng-controller="listarAlumnosCursoCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2>Alumnos: {{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}} </h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="pull-right">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table ng-table="" class="table table-striped">
+                  <tr ng-repeat="alumno in ctrl.alumnosLista">
+                    <td data-title="'Código'">
+                      {{alumno.codigo}}
+                    </td>
+                    <td data-title="'Nombre'">
+                      {{alumno.nombreCompleto}}
+                    </td>
+                    <td data-title="'Correo'">
+                      {{alumno.correo}}
+                    </td>
+                    <td data-title="'Especialidad'">
+                      {{alumno.nombreEspecialidad}}
+                    </td>
+                    <td data-title="'Acciones'">
+                      <ul class="actions texto-centrado">
+                        <li class="dropdown action-show" uib-dropdown="">
+                          <a href="" uib-dropdown-toggle="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                            <i class="zmdi zmdi-more-vert"></i>
+                          </a>
+                          <ul class="dropdown-menu dm-icon pull-right">
+                            <li>
+                              <a><i class="zmdi zmdi-eye"> Ver detalle</i></a>
+                            </li>
+                            <li>
+                              <a ng-click="ctrl.eliminarUsuario(usuario, $index)"><i class="zmdi zmdi-delete"> Eliminar</i></a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
