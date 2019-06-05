@@ -8,7 +8,19 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
     criterios: []
   };
   ctrl.rubricaId = $stateParams.id;
+  console.log("Aspecto - RubricaId: " + ctrl.rubricaId);
   ctrl.criteriosLista = [];
+  ctrl.nivelesLista = [];
+
+  ctrl.listarNiveles = function (){
+    var idRubrica = {
+      "herramientaID" : ctrl.rubricaId
+    };
+    nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      ctrl.nivelesLista = nivelesListaData;
+      console.log(nivelesListaData);
+    });
+  }
 
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
@@ -129,6 +141,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   }
 
   ctrl.init = function () {
+    ctrl.listarNiveles();
     ctrl.inicializarTabla();
   }
 

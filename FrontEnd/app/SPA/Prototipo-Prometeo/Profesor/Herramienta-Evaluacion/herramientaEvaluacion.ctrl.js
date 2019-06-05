@@ -3,7 +3,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
  ctrl.herramienta = {};
- ctrl.herramienta.descripcion = "Rubrica";
+ ctrl.herramienta.descripcion = "";
  ctrl.herramienta.puntajeMax = 0;
  //ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";

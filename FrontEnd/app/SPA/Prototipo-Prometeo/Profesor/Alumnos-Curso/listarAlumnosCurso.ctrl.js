@@ -6,6 +6,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
   ctrl.obtenerAlumnos = function (horarioId) {
     listarAlumnosService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
       ctrl.alumnosLista = alumnosListaData;
+      console.log(alumnosListaData);
       ctrl.alumnosTabla = new NgTableParams({}, { dataset: ctrl.alumnosLista });
     });
   };
