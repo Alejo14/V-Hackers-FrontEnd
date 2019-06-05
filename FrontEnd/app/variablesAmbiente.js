@@ -23,6 +23,10 @@
   window.__env.puertoArchivos = ':';
   //Puerto de herramienta de Evaluacion
   window.__env.puertoHerramientaEvaluacion = ':7008';
+  //Key para API de login
+  window.__env.llaveApiLogin = 'AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY';
+  //cliente login
+  window.__env.clienteLogin = '844327842205-hr7p49le062oob0ki3t59u89jhd9t2p0.apps.googleusercontent.com';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));
