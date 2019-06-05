@@ -1,11 +1,11 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('profesorCursoService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('profesorCursoService', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
   servicio.listarProyectos = function(codigoCurso){
-    var urlListarProyectos = 'http://localhost:7001/proyectosxcurso/' + codigoCurso;
+    var urlListarProyectos = variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectosxcurso/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -20,7 +20,7 @@ function($q, $http) {
 
   servicio.listarEntregables = function(codigoCurso){
 
-    var urlListarEntregables = 'http://localhost:7002/entregablesxcursociclo/' + codigoCurso;
+    var urlListarEntregables = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregablesxcursociclo/' + codigoCurso;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -34,7 +34,7 @@ function($q, $http) {
   }
 
   servicio.eliminarProyecto = function(data){
-    var urlElimProyecto = 'http://localhost:7001/proyectos/eliminar';
+    var urlElimProyecto =  variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectos/eliminar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -49,7 +49,7 @@ function($q, $http) {
   }
 
   servicio.eliminarentregableAlumno = function(data){
-    var urlEnviarCalificacion = 'http://localhost:7002/entregables/eliminar';
+    var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/eliminar';
     var $defer = $q.defer();
     $http({
         method: 'POST',

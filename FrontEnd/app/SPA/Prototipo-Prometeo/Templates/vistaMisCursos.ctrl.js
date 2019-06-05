@@ -1,22 +1,6 @@
 angular.module('vHackersModule').controller('misCursosCtrl', ['$scope', '$state', '$stateParams', '$uibModal', 'vistaMisCursosService', 'NgTableParams',
 function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTableParams){
   var ctrl = this;
-  ctrl.listaMisCursosHC = [
-    { "cursoCicloId": "1241241251252151",
-      "nombreCurso": "Ingeniería de Software",
-      "codigoCurso": "INF245",
-      "creditos": 4.5,
-      "cantidadAlumnos": 40,
-      "horario": "H801"
-    },
-    { "cursoCicloId": "1241241251252151",
-      "nombreCurso": "Redes de Computación",
-      "codigoCurso": "INF288",
-      "creditos": 4,
-      "cantidadAlumnos": 45,
-      "horario": "H501"
-    }
-  ];
 
   ctrl.listaMisCursos = [];
 //a23b0031-64f6-4ce0-8b03-5f577d16d06c	343a3ea8-a0c8-4a73-9f81-6df07737b673
@@ -49,7 +33,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
   ctrl.verCurso = function (miCurso){
     if($stateParams.rolUsuario=='P'){
       $state.go('curso', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso,
-      creditos: miCurso.creditos, cantidadAlumnos: miCurso.cantidadAlumnos, horario: miCurso.horario});
+      creditos: miCurso.creditos, cantidadAlumnos: miCurso.cantidadAlumnos, horario: miCurso.horario, idHorario: miCurso.idHorario});
     }else {
       $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso,
       creditos: miCurso.creditos, cantidadAlumnos: miCurso.cantidadAlumnos, horario: miCurso.horario});

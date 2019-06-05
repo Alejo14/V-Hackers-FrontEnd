@@ -140,7 +140,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'curso',
-              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario/:idHorario',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
             },
             {
@@ -187,6 +187,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'nuevo-aspecto',
               url: '/nuevo-aspecto/:id',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
+            },
+            {
+              name: 'listar-alumnos',
+              url: '/listar-alumnos/:cursoNombre/:horarioNombre/:horarioId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/listarAlumnosCurso.html'
             }
           ]
         },

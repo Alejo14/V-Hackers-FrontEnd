@@ -6,7 +6,7 @@
           <label class="col-sm-2 control-label">Carga masiva:</label>
           <div class="col-sm-2">
             <div class="fg-line">
-                <a class="btn btn-primary" style="color: white;">Cargar archivo</a>
+                <button class="btn btn-default waves-effect" ng-click="ctrl.agregarCargaMasiva()"><i class="fa fa-upload"></i> Subir archivo</button>
             </div>
           </div>
         </div>
@@ -15,12 +15,36 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-3">
-      <h5>* Campos obligatorios</h5>
+  <div class="col-md-12">
+    <form class="form-horizontal ng-pristine ng-valid">
+      <div class="card-body card-padding">
+            <div class="form-group">
+              <table ng-table="ctrl.tablaDetalleArchivo" class="table table-bordered">
+                <tr ng-repeat="especialidadArchivo in ctrl.especialidadesArchivoLista">
+                  <td data-title="'Código'">{{especialidadArchivo.codigo}}
+                  </td>
+                  <td data-title="'Nombre'">{{especialidadArchivo.nombre}}
+                      <!-- <a href="" ng-click="ctrl.obtenerIdArchivo(archi)"> {{archi.nombre}} </a> -->
+                  </td>
+                  <td data-title="'Facultad'">{{especialidadArchivo.facultad}}</td>
+                  <!-- <td data-title="'Fecha y Hora de Última modificación'">
+                    {{archi.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
+                  </td> -->
+                  <!-- <td data-title="'Tamaño'">
+                    {{archi.tamano/1000}} KB
+                  </td> -->
+                  <td data-title="'Responsable'">{{especialidadArchivo.responsable}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+      </div>
+    </form>
   </div>
-  <div class="col-9" align="right">
+</div>
+<div class="row">
+    <div class="col-sm-12" align="right">
     <button type="button" ng-click = "" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
     <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
   </div>
 </div>
-<!-- </div> -->
