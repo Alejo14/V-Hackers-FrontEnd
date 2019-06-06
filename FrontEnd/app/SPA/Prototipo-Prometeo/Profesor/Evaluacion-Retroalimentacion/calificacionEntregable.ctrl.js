@@ -17,7 +17,6 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
     calificacionHerramientaEvaluacionServicio.obtenerEvaluacion(ctrl.avanceEntregableId).then(function (evaluacion) {
         ctrl.evaluacion = evaluacion;
         ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
-        console.log(evaluacion);
     });
   };
 
@@ -81,7 +80,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   *==================================================
   */
   ctrl.calificarHerramienta = function(indice){
-    $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+    $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
   }
 
   ctrl.init = function (){

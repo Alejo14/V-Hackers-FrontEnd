@@ -1,34 +1,34 @@
 angular.module('vHackersModule').controller('calificacionAspectosCtrl', calificacionAspectosCtrl);
 
-calificacionAspectosCtrl.$inject = ['$scope','$state', '$stateParams','NgTableParams','calificacionAspectoService'];
+calificacionAspectosCtrl.$inject = ['$scope','$state', '$stateParams','calificacionAspectoService'];
 
-function calificacionAspectosCtrl ($scope,$state,$stateParams,NgTableParams,calificacionAspectoService){
+function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspectoService){
   var ctrl = this;
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
+  ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
   ctrl.evaluacionAspecto = {};
-  ctrl.criteriosLista = [];
+  ctrl.evaluacionAspectoEnviar = {};
+  ctrl.nivelesRubrica = {};
 
   ctrl.obtenerEvaluacionAspecto = function (){
-    ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
-    calificacionAspectoService.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId).then(function(evaluacionAspecto){
+    calificacionAspectoService.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
+      ctrl.nivelesRubrica = nivelesRubrica;
+      console.log(ctrl.nivelesRubrica);
+    });
+    calificacionAspectoService.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionAspecto){
       ctrl.evaluacionAspecto = evaluacionAspecto;
+      ctrl.evaluacionAspectoEnviar = evaluacionAspecto;
+      angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+        aspecto.accordionOpen = false;
+        aspecto.observacion = "";
+        angular.forEach(aspecto.criterios, function(criterio,indice){
+          criterio.observacion = "";
+        });
+      });
       console.log(ctrl.evaluacionAspecto);
     });
   }
-
-  $scope.groups = [
-    {
-      title: 'Dynamic Group Header - 1',
-      content: 'Dynamic Group Body - 1',
-      accordionOpen: false
-    },
-    {
-      title: 'Dynamic Group Header - 2',
-      content: 'Dynamic Group Body - 2',
-      accordion: false
-    }
-  ];
 
   ctrl.regresar = function (){
     swal({
