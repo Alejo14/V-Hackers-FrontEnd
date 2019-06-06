@@ -73,7 +73,8 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
       resolve: {
         parametrosModalUsuario: function () {
           return {
-            actualizarRoles: true
+            actualizarRoles: true,
+            usuarioModificar: usuario
           };
         }
       }

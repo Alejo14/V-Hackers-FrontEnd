@@ -74,27 +74,15 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       size: 'lg',
       backdrop: true,
       keyboard: true,
-      // resolve: {
-      //   parametrosModal: function () {
-      //     return {
-      //       //actualizarRoles: false
-      //     };
-      //   }
-      // }
     });
 
 
     //Recibo parametro de retorno
     modalInstance.result.then( function (parametroRetorno) {
       if (parametroRetorno) {
-        if (parametroRetorno[0]==1){
-          swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
-          ctrl.listaURLs.push(parametroRetorno[1]);
-        }else {
-          swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
-          ctrl.listaArchivos.push(parametroRetorno[1]);
-        }
-
+        ctrl.especialidadesArchivoLista = parametroRetorno.info;
+        ctrl.especialidadesArchivoNombre = parametroRetorno.nombre;
+        swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
       }
     });
   }

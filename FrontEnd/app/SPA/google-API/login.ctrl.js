@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('loginCtrl', ['$scope', 'variablesAmbiente',
-function ($scope, variablesAmbiente) {
+angular.module('vHackersModule').controller('loginCtrl', ['$scope', 'variablesAmbiente', '$cookies', 'loginService',
+function ($scope, variablesAmbiente, $cookies, loginService) {
   var ctrl = this;
 
   ctrl.usuario = {
@@ -21,6 +21,13 @@ function ($scope, variablesAmbiente) {
             $scope.$apply(function () {
               ctrl.usuario.username = resp.displayName;
               ctrl.usuario.email = resp.emails[0].value;
+              var correoLogin = {
+                "correo": ctrl.usuario.email
+              };
+
+              loginService.login(correoLogin).then(function (respuestaCookie) {
+                $cookies.put('usuarioID', respuestaCookie);
+              });
             });
           });
         }
@@ -30,5 +37,12 @@ function ($scope, variablesAmbiente) {
     };
 
     gapi.auth.signIn(params);
+  }
+
+  ctrl.probarCookie = function () {
+    var idUsuario = $cookies.get('usuarioID');
+    loginService.obtenerUsuarioLogin(idUsuario).then(function (usuario){
+      ctrl.usuario.email = usuario.correo;
+    });
   }
 }]);

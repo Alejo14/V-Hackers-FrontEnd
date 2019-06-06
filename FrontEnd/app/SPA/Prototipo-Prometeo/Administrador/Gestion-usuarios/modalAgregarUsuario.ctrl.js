@@ -51,6 +51,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   ctrl.cambiarVista = function (indice) {
     ctrl.cargaUnitaria = indice == 0;
   };
+  ctrl.facultad = {};
   ctrl.obtenerFacultades = function () {
     gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
       ctrl.facultadesLista = facultadesListaData;
@@ -58,7 +59,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   };
 
   ctrl.obtenerEspecialidades = function () {
-    gestionUsuariosService.obtenerEspecialidades($scope.facultad.id).then(function (especialidadesListaData) {
+    gestionUsuariosService.obtenerEspecialidades(ctrl.facultad.id).then(function (especialidadesListaData) {
       ctrl.especialidadesLista = especialidadesListaData;
     });
   };
@@ -70,7 +71,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   }
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && $scope.facultad && ctrl.usuarioNuevo.apellidos !== "" && $scope.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && $scope.rolesUsuarioNuevo;
+    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && ctrl.facultad && ctrl.usuarioNuevo.apellidos !== "" && ctrl.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && ctrl.rolesUsuarioNuevo;
   };
 
   ctrl.guardarUsuario = function () {
@@ -93,12 +94,12 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
         ctrl.usuarioNuevo.id = "859e054f-ae56-4e68-9a40-cfee27cf8b2a";
-        ctrl.usuarioNuevo.especialidad = $scope.especialidad;
-        ctrl.usuarioNuevo.especialidad.facultad = $scope.facultad;
+        ctrl.usuarioNuevo.especialidad = ctrl.especialidad;
+        ctrl.usuarioNuevo.especialidad.facultad = ctrl.facultad;
         ctrl.usuarioNuevo.roles = [];
-        var numRoles = $scope.rolesUsuarioNuevo.length;
+        var numRoles = ctrl.rolesUsuarioNuevo.length;
         for (var i = 0; i < numRoles; i++) {
-          var usuarioRol =  $scope.rolesUsuarioNuevo[i];
+          var usuarioRol =  ctrl.rolesUsuarioNuevo[i];
           ctrl.usuarioNuevo.roles.push(usuarioRol);
         }
         $uibModalInstance.close(ctrl.usuarioNuevo);

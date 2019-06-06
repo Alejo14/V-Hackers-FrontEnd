@@ -4,11 +4,12 @@
       <div class="card-body card-padding">
         <div class="form-group">
           <label class="col-sm-2 control-label">Carga masiva:</label>
-          <div class="col-sm-2">
+          <div class="col-sm-3">
             <div class="fg-line">
                 <button class="btn btn-default waves-effect" ng-click="ctrl.agregarCargaMasiva()"><i class="fa fa-upload"></i> Subir archivo</button>
             </div>
           </div>
+          <div class="col-sm-3 control-label" ng-if="ctrl.especialidadesArchivoNombre">{{ctrl.especialidadesArchivoNombre}}</div>
         </div>
       </div>
     </form>
@@ -40,6 +41,19 @@
             </div>
       </div>
     </form>
+  </div>
+</div>
+<div class="row">
+  <div id="tableContainer">
+    <table>
+      <tr ng-repeat="title in Elements |limitTo:1 ">
+        <th ng-repeat="(key,val) in title " ng-if="key != 'rowIndex'">{{key}}</th>
+      </tr>
+      <tr ng-repeat="elemnt in Elements" id="{{elemnt['rowIndex']}}">
+        <td ng-change="changedCeld(val,$event)"  ng-model="val" contenteditable="true" strip-br="true" strip-tags="true" select-non-editable="true" id="{{$index}}" ng-repeat="(key,val) in elemnt " ng-if="key != 'rowIndex'">{{val}}</td>
+      </tr>
+    </table>
+    <button ng-hide="saveButton" ng-click="saveData()">Guardar</button>
   </div>
 </div>
 <div class="row">
