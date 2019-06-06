@@ -1,8 +1,6 @@
   <div>
     <div class="card-header">
-      <h2>
-        {{ctrl.titulo}}
-      </h2>
+      <h2>Subir archivo</h2>
       <ul class="actions">
         <li>
           <a class="pull-right" ng-click="ctrl.cerrar()"><i class="fa fa-window-close"></i></a>
@@ -12,22 +10,6 @@
     </div>
     <div class="container-fluid">
       <div class="card-body">
-        <div class="row">
-          <div class="col-md-12 m-t-2">
-            <div class="radio m-b-15">
-              <label>
-                <input type="radio" name="metodo" value="0" ng-click="ctrl.cargarArchivo()" checked>
-                <i class="input-helper"></i>
-                Archivo
-              </label>
-              <label>
-                <input type="radio" name="metodo" value="1" ng-click="ctrl.cargarArchivo()">
-                <i class="input-helper"></i>
-                URL
-              </label>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-sm-10">
             <div class="form-group">
@@ -40,8 +22,8 @@
               </div>
               <div class="col-sm-2" ng-hide="ctrl.tipoCarga">
                 <div class="fg-line" >
-                  <label for="archivoEntregable" class="btn bgm-blue float-sm-none waves-effect waves-circle"><i class="fa fa-plus"></i></label>
-                  <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  <label for="archivoEspecialidades" class="btn bgm-blue float-sm-none waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                  <input type="file" id="archivoEspecialidades" accept=".xls, .xlsx" subir-archivo-especialidad parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
                 </div>
               </div>
             </div>
@@ -49,7 +31,7 @@
         </div>
       </div>
       <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
-        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarArchivo()" ><i class="fa fa-save"></i> Guardar</button>  <!-- ng-disabled="!ctrl.registroValido" -->
+        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.cargarArchivo()" ><i class="fa fa-save"></i> Cargar</button>  <!-- ng-disabled="!ctrl.registroValido" -->
         <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
       </div>
     </div>

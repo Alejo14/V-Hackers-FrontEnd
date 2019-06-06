@@ -6,6 +6,9 @@ function($scope, $uibModalInstance, parametros){
 
   ctrl.rubricaId = parametros.id;
 
+  console.log(ctrl.criterio);
+  console.log(ctrl.rubricaId);
+
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
   };

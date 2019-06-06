@@ -13,28 +13,32 @@
         <div class="card-body">
           <div class="form-group fg-line">
             <uib-accordion close-others="true">
-              <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups" is-open="group.accordionOpen">
+              <div uib-accordion-group class="panel-default" ng-repeat="aspecto in ctrl.evaluacionAspecto" is-open="aspecto.accordionOpen">
                 <uib-accordion-heading>
-                Descripcion de los aspectos <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': group.accordionOpen, 'glyphicon-chevron-right': !group.accordionOpen}"></i>
+                {{aspecto.titulo}} : {{aspecto.descripcion}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
                 </uib-accordion-heading>
                 <div class="form-group fg-line">
-                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n</label>
-                  <label class="col-sm-2 p-t-10">Puntaje</label>
-                  <input type="number" step="any" class="col-sm-2 form-control input-sm" ng-model="" placeholder="Ingrese el puntaje">
-                  <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación general del entregable" ng-model="">
+                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
+                  <label class="col-sm-2 p-t-10" ng-model="aspecto.puntajeAsignado">Puntaje</label>
+                  <input type="number" step="any" class="col-sm-2 form-control input-sm" ng-model="aspecto.puntajeAsignado" placeholder="Ingrese el puntaje">
+                  <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
                   </textarea>
-                  <div class="form-group">
-                    <div class="table-responsive p-t-30">
-                      <table ng-table="ctrl.criteriosTabla" class="table table-bordered">
-                        <tr ng-repeat="criterio in ctrl.criteriosLista">
-                          <td data-title="'Criterio'">
-                          </td>
-                          <td data-title="nivelRubrica.descripcion" align="center" ng-repeat="nivelRubrica in ctrl.evaluacionAspecto">
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
+                </div>
+                <div class="form-group fg-line">
+                  <p>Criterios</p>
+                </div>
+                <div class="form-group fg-line p-l-10" ng-repeat="criterio in aspecto.criterios">
+                  {{($index+1) + '. ' + criterio.descripcion}}
+                  <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
+                    <label>
+                        <input type="radio" name="{{criterio.id}}" value="">
+                        <i class="input-helper"></i>
+                        {{nivel.descripcion}} : {{criterio.nivelesCriterios[$index].descripcion}}
+                    </label>
                   </div>
+                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
+                  <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
+                  </textarea>
                 </div>
               </div>
             </uib-accordion>

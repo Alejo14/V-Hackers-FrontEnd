@@ -17,9 +17,6 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
   ctrl.especialidadesLista = [];
 
   ctrl.facultadesLista = [];
-
-
-
   ctrl.listaCursos = [];
 
   function uuid() {
@@ -34,6 +31,10 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
       }
       var crypto = window.crypto || window.msCrypto;
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+  }
+
+  ctrl.cargarArchivo = function(){
+    //cargamos archivos
   }
 
   ctrl.cambiarVista = function(indice) {
@@ -68,6 +69,96 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
       }
     });
   };
+
+  ctrl.obtenerIdArchivo = function (archivo) { //Prueba
+    var id=archivo.id;//"688f4990-fffe-4761-a178-62a2ce86837c";
+    console.log(id);
+    entregableAlumnoService.mostrarAvanceEntregable(id).then(function (respuesta) {
+      console.log(respuesta);
+      if (respuesta.extension){
+        downloadFromBase64(respuesta.datos,respuesta.nombreArchivo,respuesta.extension);
+      }
+    });
+
+      //swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
+  }
+
+  function toBlob(b64Data, contentType, sliceSize) {
+      contentType = contentType || '';
+      sliceSize = sliceSize || 512;
+
+      var byteCharacters = atob(b64Data);
+      var byteArrays = [];
+
+      for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+          var byteNumbers = new Array(slice.length);
+          for (var i = 0; i < slice.length; i++) {
+              byteNumbers[i] = slice.charCodeAt(i);
+          }
+
+          var byteArray = new Uint8Array(byteNumbers);
+
+          byteArrays.push(byteArray);
+      }
+
+      var blob = new Blob(byteArrays, { type: contentType });
+      return blob;
+  }
+
+  function downloadFromBase64(base64File, filename,tipo) {
+    const itemBlob = toBlob(base64File, 'application/'+ tipo);
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(itemBlob);
+    link.download = filename;
+    link.target = '_blank';
+    link.click();
+    link.remove();
+}
+
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject
+    })
+}
+ctrl.agregarArchivo = function () {
+  //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
+  var modalInstance = $uibModal.open({
+    animation: false,
+    templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/modalCargaMasiva.html',
+    controller: 'modalCargaMasivaCtrl as ctrl',
+    size: 'lg',
+    backdrop: true,
+    keyboard: true,
+    resolve: {
+      parametrosModalArchivo: function () {
+        return {
+          //actualizarRoles: false
+        };
+      }
+    }
+  });
+
+
+  //Recibo parametro de retorno
+  modalInstance.result.then( function (parametroRetorno) {
+    //console.log(parametroRetorno);
+    if (parametroRetorno) {
+      if (parametroRetorno[0]==1){
+        swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
+        //ctrl.listaURLs.push(parametroRetorno[1]);
+      }else {
+        swal("¡Bien hecho!", "El archivo se subió exitosamente" , "success");
+        //ctrl.listaArchivos.push(parametroRetorno[1]);
+      }
+
+    }
+  });
+}
 
   ctrl.guardarCurso = function (curso) {
     //console.log("hola");
