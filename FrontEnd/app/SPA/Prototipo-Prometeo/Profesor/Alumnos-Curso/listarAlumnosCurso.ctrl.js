@@ -3,6 +3,9 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
   var ctrl = this;
   ctrl.horario = {};
   ctrl.alumnosLista = [];
+  ctrl.conjuntosLista = [];
+  ctrl.nombreAgrupacionNueva = ""
+
   ctrl.obtenerAlumnos = function (horarioId) {
     listarAlumnosService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
       ctrl.alumnosLista = alumnosListaData;
@@ -11,7 +14,70 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
     });
   };
 
+  ctrl.obtenerConjuntosGrupo = function (horarioId) {
+    listarAlumnosService.obtenerConjuntosGrupo(horarioId).then(function (conjuntosListaData) {
+      ctrl.conjuntosLista = conjuntosListaData;
+      console.log(conjuntosListaData);
+      ctrl.conjuntosTabla = new NgTableParams({}, { dataset: ctrl.conjuntosLista });
+    });
+  };
+
   ctrl.verDetalleAlumno = function (alumno) {
+  }
+
+  function uuid() {
+      function randomDigit() {
+          if (crypto && crypto.getRandomValues) {
+              var rands = new Uint8Array(1);
+              crypto.getRandomValues(rands);
+              return (rands[0] % 16).toString(16);
+          } else {
+              return ((Math.random() * 16) | 0).toString(16);
+          }
+      }
+      var crypto = window.crypto || window.msCrypto;
+      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+  }
+
+  ctrl.crearConjuntosGrupo = function (grupoNuevo) {
+    if (grupoNuevo==""){
+      swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
+    }
+    else{
+      swal({
+        title: "¿Esta seguro de que desea crear esta agrupación?",
+        text: "",
+        icon: "warning",
+        //buttons: ["Cancelar", "Sí, agregar"],
+        buttons: {
+          cancelar: {
+            text: "Cancelar",
+            className: "btn btn-lg btn-danger"
+          },
+          confirm: {
+            text: "Sí, agregar",
+            className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+          }
+        },
+        closeModal: false
+      }).then(function (agrupacionNuevoConfirmado) {
+        if (agrupacionNuevoConfirmado !== "cancelar") {
+
+          console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
+          data={
+            "id": uuid(),
+            "nombre": grupoNuevo,
+            "fechaCreacion": (new Date())*1,
+            "conjuntoGrupos_id": uuid(),
+            "horario_id": ctrl.horario.horarioId
+            }
+            console.log(angular.toJson(data));
+            listarAlumnosService.crearConjuntosGrupo(angular.toJson(data)).then(function () {
+              swal("¡Bien hecho!", "La agrupación se genero exitosamente" , "success");
+            });
+        }
+      });
+    }
 
   }
 
@@ -21,6 +87,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
     ctrl.horario.horarioId = $stateParams.horarioId;
 
     ctrl.obtenerAlumnos(ctrl.horario.horarioId);
+    ctrl.obtenerConjuntosGrupo(ctrl.horario.horarioId);
   }
 
   ctrl.init();

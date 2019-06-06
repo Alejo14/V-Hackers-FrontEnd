@@ -27,6 +27,8 @@
   window.__env.puertoHerramientaEvaluacion = ':7008';
   //Puerto de horarios
   window.__env.puertoHorarios = ':7010';
+  //Puerto de grupos
+  window.__env.puertoGrupos = ':7011';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));

@@ -20,11 +20,11 @@ function($q, $http, variablesAmbiente) {
 
   servicio.listarAspectos = function(data){
     console.log(data);
-    var urlListarNiveles = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarAspectos';
+    var urlListarAspectos = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarAspectos';
     var $defer = $q.defer();
     $http({
         method: 'GET',
-        url: urlListarNiveles,
+        url: urlListarAspectos,
         data: data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);

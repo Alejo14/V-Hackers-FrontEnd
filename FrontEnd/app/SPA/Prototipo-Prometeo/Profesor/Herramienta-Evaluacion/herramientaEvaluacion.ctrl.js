@@ -8,6 +8,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  //ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";
  ctrl.herramienta.entregableId = $stateParams.id;
+ console.log(ctrl.herramienta.entregableId);
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 

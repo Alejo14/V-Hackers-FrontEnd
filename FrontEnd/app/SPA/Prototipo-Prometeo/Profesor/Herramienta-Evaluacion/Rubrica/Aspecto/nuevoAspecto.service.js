@@ -34,4 +34,19 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarCriteriosXAspecto = function(data){
+    console.log(data);
+    var urlListarCriterios = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarCriterios';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarCriterios,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 }]);

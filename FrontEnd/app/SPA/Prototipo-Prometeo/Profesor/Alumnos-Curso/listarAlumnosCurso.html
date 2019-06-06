@@ -4,22 +4,54 @@
       <div class="block-container">
         <h2>Alumnos: {{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}} </h2>
       </div>
+
+      <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button>
+              <div class="col-md-6">
+                <h3> Lista Agrupaciones </h3>
+              </div>
+              <div class="col-md-6" align="right">
+                <button class="btn btn-primary" ng-click = "ctrl.crearConjuntosGrupo(ctrl.nombreAgrupacionNueva)"><i class="fa fa-users"></i> Agregar Agrupacion </button>
+                <input class="form-control input-sm" rows="1" placeholder="Nombre de la nueva agrupacion" ng-model = "ctrl.nombreAgrupacionNueva">
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table ng-table="" class="table table-striped">
+                  <tr ng-repeat="conjunto in ctrl.conjuntosLista">
+                    <td data-title="'Nombre'">
+                      {{conjunto.nombre}}
+                    </td>
+
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h3> Lista Alumnos </h3>
+              <!--button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button-->
             </div>
           </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="pull-right">
-
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-md-12">
               <div class="table-responsive">
@@ -37,7 +69,7 @@
                     <td data-title="'Especialidad'">
                       {{alumno.nombreEspecialidad}}
                     </td>
-                    
+
                   </tr>
                 </table>
               </div>

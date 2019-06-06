@@ -13,7 +13,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   ctrl.nivelesLista = [];
 
   ctrl.listarNiveles = function (){
-    var idRubrica = {
+    idRubrica = {
       "herramientaID" : ctrl.rubricaId
     };
     nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
