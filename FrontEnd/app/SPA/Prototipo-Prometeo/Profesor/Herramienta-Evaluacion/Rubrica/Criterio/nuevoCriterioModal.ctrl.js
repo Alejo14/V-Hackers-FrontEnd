@@ -9,7 +9,10 @@ function($scope, $uibModalInstance, parametros){
     niveles: []
   }
 
-  ctrl.rubricaId = parametros.id;
+  ctrl.rubricaId = parametros;
+
+  console.log(ctrl.criterio);
+  console.log(ctrl.rubricaId);
 
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
