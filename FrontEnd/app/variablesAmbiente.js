@@ -6,7 +6,7 @@
   window.__env.baseUrl = '/';
   //Puertos de microservicios
   //Puerto de usuarios
-  window.__env.puertoUsuarios = ':7003';
+  window.__env.puertoUsuarios = ':7000';
   //Puerto de Cursos
   window.__env.puertoCursos = ':7004';
   //Puerto de Facultados
@@ -17,6 +17,8 @@
   window.__env.puertoSemestre = ':7006';
   //Puerto de Calificacióng
   window.__env.puertoCalificacion = ':7007';
+  //Puerto de Proyectos
+  window.__env.puertoProyectos = ':7001';
   //Puerto de Entregables
   window.__env.puertoEntregable = ':7002';
   //Puerto de Archivos
@@ -27,6 +29,7 @@
   window.__env.llaveApiLogin = 'AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY';
   //cliente login
   window.__env.clienteLogin = '844327842205-hr7p49le062oob0ki3t59u89jhd9t2p0.apps.googleusercontent.com';
+  window.__env.puertoHorarios = ':7010';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));

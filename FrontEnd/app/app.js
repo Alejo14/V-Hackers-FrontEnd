@@ -16,7 +16,7 @@ function onLoadFunction() {
   });
 }
 
-var vHackersModule = angular.module('vHackersModule', ['ui.bootstrap', 'ngTable','ui.router','ui.router.stateHelper', 'localytics.directives']);
+var vHackersModule = angular.module('vHackersModule', ['ui.bootstrap', 'ngTable','ui.router','ui.router.stateHelper', 'localytics.directives', 'ngCookies']);
 
 //Regitrar las variables de ambiente
 vHackersModule.constant('variablesAmbiente', ambiente);

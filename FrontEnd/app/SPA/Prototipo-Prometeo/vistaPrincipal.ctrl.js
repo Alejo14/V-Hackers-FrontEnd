@@ -18,4 +18,8 @@ function($scope, $state,$stateParams, $uibModal){
   ctrl.alumno = function(){
     $state.go('inicioAlumnos');
   }
+
+  ctrl.login = function () {
+    $state.go('login');
+  }
 }]);
