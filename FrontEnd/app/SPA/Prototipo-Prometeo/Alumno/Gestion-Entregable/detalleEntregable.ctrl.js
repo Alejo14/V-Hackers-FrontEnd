@@ -140,9 +140,14 @@ function toBase64(file) {
        for (i=0;i<respuesta.length;i++) {
          //console.log(respuesta[i].id);
          var linkURL=[];
-         linkURL.id=""; //Debe traer el id el servicio
-         linkURL.nombre=respuesta[i];
-         linkURL.fecha=Date.now(); //debe traer la fecha el servicio
+         // linkURL.id=""; //Debe traer el id el servicio
+         // linkURL.nombre=respuesta[i];
+         // linkURL.fecha=Date.now(); //debe traer la fecha el servicio
+         // ctrl.listaURLs.push(linkURL);
+
+         linkURL.id=respuesta[i].id;
+         linkURL.nombre=respuesta[i].nombreArchivo;
+         linkURL.fecha=respuesta[i].fechaCreacion;
          ctrl.listaURLs.push(linkURL);
        }
     });
@@ -188,33 +193,33 @@ function toBase64(file) {
     });
 }
 
-ctrl.elminarURL= function (url){
-  // var id=archivo.id;
-  //
-  // swal({
-  //   title: "¿Está seguro que quiere eliminar el archivo?",
-  //   text: "Los cambios se guardarán",
-  //   icon: "warning",
-  //   buttons: {
-  //     cancelar: {
-  //       text: "Cancelar",
-  //       className: "btn btn-lg btn-danger"
-  //     },
-  //     confirm: {
-  //       text: "Sí, eliminar",
-  //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-  //     }
-  //   }
-  // }).then(function (eliminarArchivoConfirmacion) {
-  //   if (eliminarArchivoConfirmacion !== "cancelar") {
-  //     entregableAlumnoService.eliminarArchivo(id).then(function () {
-  //         swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
-  //     });
-  //     ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
-  //   }
-  // });
-  ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(url),1);
-}
+// ctrl.elminarURL= function (url){
+//   // var id=archivo.id;
+//   //
+//   // swal({
+//   //   title: "¿Está seguro que quiere eliminar el archivo?",
+//   //   text: "Los cambios se guardarán",
+//   //   icon: "warning",
+//   //   buttons: {
+//   //     cancelar: {
+//   //       text: "Cancelar",
+//   //       className: "btn btn-lg btn-danger"
+//   //     },
+//   //     confirm: {
+//   //       text: "Sí, eliminar",
+//   //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+//   //     }
+//   //   }
+//   // }).then(function (eliminarArchivoConfirmacion) {
+//   //   if (eliminarArchivoConfirmacion !== "cancelar") {
+//   //     entregableAlumnoService.eliminarArchivo(id).then(function () {
+//   //         swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
+//   //     });
+//   //     ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
+//   //   }
+//   // });
+//   ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(url),1);
+// }
 
   ctrl.agregarArchivo = function () {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
