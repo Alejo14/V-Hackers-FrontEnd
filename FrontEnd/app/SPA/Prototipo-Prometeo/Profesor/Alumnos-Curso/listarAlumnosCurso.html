@@ -55,8 +55,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="table-responsive">
-                <table ng-table="" class="table table-striped">
-                  <tr ng-repeat="alumno in ctrl.alumnosLista">
+                <table class="table table-hover">
+                  <tr ng-repeat="alumno in ctrl.alumnosLista" (click)="RowSelected(alumno);">
                     <td data-title="'Código'">
                       {{alumno.codigo}}
                     </td>
@@ -69,7 +69,6 @@
                     <td data-title="'Especialidad'">
                       {{alumno.nombreEspecialidad}}
                     </td>
-
                   </tr>
                 </table>
               </div>

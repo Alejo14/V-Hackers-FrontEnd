@@ -39,6 +39,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
   }
 
+
   ctrl.crearConjuntosGrupo = function (grupoNuevo) {
     if (grupoNuevo==""){
       swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
