@@ -23,7 +23,7 @@ function($q, $http, variablesAmbiente) {
     var urlListarAspectos = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarAspectos';
     var $defer = $q.defer();
     $http({
-        method: 'GET',
+        method: 'POST',
         url: urlListarAspectos,
         data: data
      }).then(function (respuesta) {

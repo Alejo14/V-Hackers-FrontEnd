@@ -146,6 +146,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
+          console.log(data);
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             ctrl.exitoso="Proyecto enviado con éxito";
           });

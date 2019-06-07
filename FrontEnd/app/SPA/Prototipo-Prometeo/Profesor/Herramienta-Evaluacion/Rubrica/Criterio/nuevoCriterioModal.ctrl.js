@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'parametros',
-function($scope, $uibModalInstance, parametros){
+angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoServicio', 'parametros',
+function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
   var ctrl = this;
 
   ctrl.criterio = {
@@ -34,6 +34,22 @@ function($scope, $uibModalInstance, parametros){
         puntaje: 0
       }
     ];
+
+  ctrl.listarNiveles = function (){
+      idRubrica = {
+        "herramientaID" : ctrl.rubricaId
+      };
+      console.log(angular.toJson(idRubrica));
+      console.log(idRubrica);
+      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+        ctrl.nivelesLista = nivelesListaData;
+        for(let i = 0; i < ctrl.nivelesLista.length; i++){
+          ctrl.nivelesLista[i].puntaje = 0;
+        }
+        console.log(nivelesListaData);
+      });
+    }
+
   ctrl.guardarCriterio = function () {
     swal({
       title: "¿Esta seguro de que desea agregar este criterio?",
@@ -64,7 +80,7 @@ function($scope, $uibModalInstance, parametros){
   };
 
   ctrl.nivelesPorCriterio = function(){
-    angular.forEach(ctrl.nivelesRubrica, function(nivel,indice){
+    angular.forEach(ctrl.nivelesLista, function(nivel,indice){
       var nivelCriterio = {
         descripcion: "",
         puntaje: 0
@@ -74,6 +90,7 @@ function($scope, $uibModalInstance, parametros){
   }
 
   ctrl.init = function(){
+    ctrl.listarNiveles();
     ctrl.nivelesPorCriterio();
   }
   ctrl.init();

@@ -12,16 +12,6 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   ctrl.criteriosLista = [];
   ctrl.nivelesLista = [];
 
-  ctrl.listarNiveles = function (){
-    idRubrica = {
-      "herramientaID" : ctrl.rubricaId
-    };
-    nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
-      ctrl.nivelesLista = nivelesListaData;
-      console.log(nivelesListaData);
-    });
-  }
-
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
       animation: false,
@@ -123,6 +113,9 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
 	      "titulo": ctrl.aspecto.titulo,
 	      "criterios": ctrl.criteriosLista
       }
+      console.log("Lista de criterios");
+      console.log(ctrl.criteriosLista);
+
       if (aspectoGuardarConfirmado !== "cancelar") {
         nuevoAspectoServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
@@ -141,7 +134,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   }
 
   ctrl.init = function () {
-    ctrl.listarNiveles();
+
     ctrl.inicializarTabla();
   }
 

@@ -19,11 +19,10 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.listarNiveles = function(data){
-    console.log(data);
     var urlListarNiveles = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarNiveles';
     var $defer = $q.defer();
     $http({
-        method: 'GET',
+        method: 'POST',
         url: urlListarNiveles,
         data: data
      }).then(function (respuesta) {
@@ -39,7 +38,7 @@ function($q, $http, variablesAmbiente) {
     var urlListarCriterios = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarCriterios';
     var $defer = $q.defer();
     $http({
-        method: 'GET',
+        method: 'POST',
         url: urlListarCriterios,
         data: data
      }).then(function (respuesta) {
