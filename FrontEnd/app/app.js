@@ -223,7 +223,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'alumnoCursos',
-              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
             },
             {
@@ -238,7 +238,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'detalle-entregable',
-              url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/detalleEntregable.html'
             },
           ]

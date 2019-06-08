@@ -41,16 +41,10 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
 
   ctrl.verEntregable = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0,
+    nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario}); //Temporal, deberia usar un servicio para traerme esa info
 
   };
-
-  // ctrl.verEntregable = function (entregable) {
-  //   $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-  //   fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
-  //
-  // };
-
 
 
   ctrl.cargaUnitaria0 = true;
@@ -100,8 +94,8 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
     ctrl.curso.nombreCurso=$stateParams.nombreCurso;
     ctrl.curso.codigoCurso=$stateParams.codigoCurso;
-    ctrl.curso.creditos=$stateParams.creditos;
-    ctrl.curso.cantidadAlumnos=$stateParams.cantidadAlumnos;
+    ctrl.curso.creditos=//$stateParams.creditos;
+    ctrl.curso.cantidadAlumnos=//$stateParams.cantidadAlumnos;
     ctrl.curso.horario=$stateParams.horario;
 
     ctrl.cargarProyectos();
