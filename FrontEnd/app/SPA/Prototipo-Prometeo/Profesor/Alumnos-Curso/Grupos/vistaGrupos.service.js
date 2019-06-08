@@ -17,20 +17,6 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
-  servicio.listarGrupoAlumnos = function(grupoId){
-    var urlListarGrupoAlumnos = variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/listaralumnosxhorario/' + grupoId;
-    var $defer = $q.defer();
-    $http({
-        method: 'GET',
-        url: urlListarGrupoAlumnos
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
   /*servicio.obtenerConjuntosGrupo = function(horarioId){
     var urlObtenerConjuntosGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listarconjuntogruposxhorario/' + horarioId;
     var $defer = $q.defer();
@@ -89,5 +75,18 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
+  servicio.obtenerAlumnosGrupo = function(grupoId){
+    var urlListarGrupoAlumnos = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listargrupodealumnos/' + grupoId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarGrupoAlumnos
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
 
 }]);

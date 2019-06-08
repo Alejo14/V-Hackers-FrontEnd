@@ -5,7 +5,6 @@
         <h2>{{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}} </h2>
       </div>
 
-      <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           <div class="row">
@@ -20,54 +19,26 @@
             </div>
           </div>
         </div>
-
-
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
               <div class="table-responsive">
                 <table ng-table="" class="table table-striped">
-                  <tr ng-repeat="conjunto in ctrl.gruposLista">
+                  <tr ng-repeat="grupo in ctrl.gruposLista">
                     <td data-title="'Nombre'">
-                      {{conjunto.nombre}}
+                      <div class="col-md-4" align="center" ng-click="ctrl.verGrupo(grupo)">
+                        <a href=""> {{grupo.nombre}} </a>
+                      </div>
                     </td>
-
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        </div>
-
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-12">
-              <h3> Lista Alumnos </h3>
-              <!--button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button-->
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="table-responsive">
-                <table ng-table="" class="table table-hover">
-                  <tr ng-repeat="alumno in ctrl.alumnosLista" (click)="RowSelected(alumno);">
-                    <td data-title="'Código'">
-                      {{alumno.codigo}}
-                    </td>
-                    <td data-title="'Nombre'">
-                      {{alumno.nombreCompleto}}
-                    </td>
-                    <td data-title="'Correo'">
-                      {{alumno.correo}}
-                    </td>
-                    <td data-title="'Especialidad'">
-                      {{alumno.nombreEspecialidad}}
+                    <td data-title="'Acciones'">
+                      <div class="col-md-5" align="center">
+                        <a style="padding:10px;" ng-click="ctrl.actualizarGrupo(grupo)">
+                          <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a style="padding:10px;" ng-click="ctrl.eliminarGrupo(grupo)">
+                          <i class="fas fa-trash-alt"></i>
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 </table>
@@ -75,7 +46,9 @@
             </div>
           </div>
         </div>
+
       </div>
+
     </div>
   </div>
 </section>

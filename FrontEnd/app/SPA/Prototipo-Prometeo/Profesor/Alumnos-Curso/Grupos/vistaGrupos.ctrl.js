@@ -33,6 +33,45 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
     });
   };
 
+
+  ctrl.eliminarGrupo = function (grupoElim) {
+    console.log(grupoElim);
+    swal({
+      title: "¿Esta seguro de que desea eliminar al grupo "+ grupoElim.nombre+"?",
+      text: "",
+      icon: "warning",
+      //buttons: ["Cancelar", "Sí, agregar"],
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (grupoElimConfirmado) {
+      if (grupoElimConfirmado !== "cancelar") {
+
+        console.log(angular.toJson(grupoElim));//Envio el json para crear el entregable
+        data={
+          "id": grupoElim.id,
+          "nombre": "grupoNuevo",
+          "fechaCreacion": (new Date())*1,
+          "conjuntoGrupos_id": "6398aeef-e27f-4d9c-b8ef-52e6e4d48142",
+          "horario_id": ctrl.horario.horarioId
+          }
+          console.log(angular.toJson(data));
+          vistaGruposService.eliminarGrupo(angular.toJson(data)).then(function () {
+            swal("¡Bien hecho!", "El nuevo grupo se elimino exitosamente" , "success");
+          });
+          ctrl.gruposLista.splice(ctrl.gruposLista.indexOf(grupoElim),1);
+      }
+    });
+  }
+
   ctrl.verDetalleAlumno = function (alumno) {
   }
 
@@ -98,7 +137,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
       }
       else{
         swal({
-          title: "¿Esta seguro de que desea crear la agrupación " + grupoNuevo + "?",
+          title: "¿Esta seguro de que desea crear el grupo " + grupoNuevo + "?",
           text: "",
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
@@ -128,10 +167,15 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               vistaGruposService.crearGrupo(angular.toJson(data)).then(function () {
                 swal("¡Bien hecho!", "El nuevo grupo se genero exitosamente" , "success");
               });
+              $state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
         });
       }
     }
+
+  ctrl.actualizarGrupo = function(grupo){
+    $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupo.id, grupoNombre: grupo.nombre});
+  }
 
   ctrl.init = function () {
     ctrl.horario.cursoNombre = $stateParams.cursoNombre;
