@@ -165,7 +165,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.ingresarProyecto = function(proyecto){
-    $state.go('evaluacion-herramienta-listar', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
+    $state.go('evaluacion-herramienta-listar', {cursoId:ctrl.curso.cursoCicloId  ,proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   }
 
   ctrl.init();
