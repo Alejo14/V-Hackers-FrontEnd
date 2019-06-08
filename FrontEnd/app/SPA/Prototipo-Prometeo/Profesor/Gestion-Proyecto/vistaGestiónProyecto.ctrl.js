@@ -34,41 +34,27 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   };
 
   ctrl.volverCurso = function () {
-    swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, volver",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('profesorMisCursos');
-        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
-      }
-    });
+    // swal({
+    //   title: "¿Está seguro de que quieres volver?",
+    //   text: "Los cambios no se guardaran",
+    //   icon: "warning",
+    //   buttons: {
+    //     cancelar: {
+    //       text: "Cancelar",
+    //       className: "btn btn-lg btn-danger"
+    //     },
+    //     confirm: {
+    //       text: "Sí, volver",
+    //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+    //     }
+    //   }
+    // }).then(function (usuarioNuevoConfirmado) {
+    //   if (usuarioNuevoConfirmado !== "cancelar") {
+    //     // $state.go('profesorMisCursos', {rolUsuario: "P"});
+    //     //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+    //   }
+    // });
   };
-
-  function uuid() {
-      function randomDigit() {
-          if (crypto && crypto.getRandomValues) {
-              var rands = new Uint8Array(1);
-              crypto.getRandomValues(rands);
-              return (rands[0] % 16).toString(16);
-          } else {
-              return ((Math.random() * 16) | 0).toString(16);
-          }
-      }
-      var crypto = window.crypto || window.msCrypto;
-      return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
-  }
 
   ctrl.proyectoG = {};
 
@@ -133,7 +119,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
 
         console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
         data={
-          "id": uuid(),
+          "id": null,
           "nombre": proyectoNuevo.nombre,
           "fechaCreacion": (new Date())*1,
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
@@ -148,7 +134,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           console.log(angular.toJson(data));
           console.log(data);
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
-            ctrl.exitoso="Proyecto enviado con éxito";
+            swal("¡Bien hecho!", "El proyecto fue creado exitosamente" , "success");
           });
 
           proyectoNuevo.nombre="";
@@ -160,8 +146,6 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           $("#ts1").attr("checked", false);
           $("#ts2").attr("checked", false);
           $("input[name=metodo][value=0]").prop('checked', true);
-
-          swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
       }
     });
   }
@@ -229,7 +213,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           }
           console.log(angular.toJson(data));
           gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
-            ctrl.exitoso="Proyecto enviado con éxito";
+            swal("¡Bien hecho!", "El proyecto fue modificado exitosamente" , "success");
           });
 
           proyectoModif.nombre="";
@@ -238,8 +222,6 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           proyectoModif.fechaFin="";
           proyectoModif.ponderacion="";
           $("textarea#desTA").val("");
-
-          swal("¡Bien hecho!", "El Proyecto se modifico exitosamente" , "success");
       }
     });
   }

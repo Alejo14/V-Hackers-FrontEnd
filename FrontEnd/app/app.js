@@ -154,13 +154,8 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaCrearEntregable.html'
             },
             {
-              name: 'evaluacion-herramienta-modificar',
-              url: '/evaluacion-herramienta-modificar/:nombre/:id/:fechaHabilitacion/:fechaEntrega/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
-              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaModificarEntregable.html'
-            },
-            {
               name: 'evaluacion-herramienta-gestionar',
-              url: '/evaluacion-herramienta-gestionar/:cursoCicloId/:proyectoId/:proyectoNombre',
+              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaHabilitacion/:fechaEntrega/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
             },
             {

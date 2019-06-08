@@ -144,7 +144,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.volverCurso = function () {
-        $state.go('profesorMisCursos');
+        $state.go('profesorMisCursos', {rolUsuario: "P"});
   };
 
   ctrl.init = function (){

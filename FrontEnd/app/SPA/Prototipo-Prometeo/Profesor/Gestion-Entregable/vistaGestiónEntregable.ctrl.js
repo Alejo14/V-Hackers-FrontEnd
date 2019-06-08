@@ -73,7 +73,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     ctrl.fechasCargadas = false;
     $scope.options.maxDate = null;
     $scope.events.forEach(function(evento) {
-      if (evento.status === 'partially') {
+      if (evento.status === 'finish') {
         var ind = $scope.events.findIndex(i => i.date === evento.date);
         $scope.events.splice(ind,1);
       }
@@ -91,7 +91,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       };
       var dato = {
         date: fechaLong,
-        status: "partially"
+        status: "finish"
       };
       $scope.events.push(dato);
       $scope.options.maxDate = fecha.setDate(fecha.getDate()-1);
@@ -199,32 +199,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     entregable.ponderacion="";
   };
 
-
-  ctrl.regresarProyectos = function () {
-    swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardarán",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, volver",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('profesorMisCursos');//curso, {cursoCicloId: 0, nombreCurso: 0, codigoCurso: 0, creditos: 0,cantidadAlumnos: 0, horario: 0 } );
-
-
-        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
-      }
-    });
-  };
-
   ctrl.regresarEntregables = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
@@ -245,8 +219,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         if (ctrl.entregableG.proyectoId != 0) {
           $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre});
         }
-
-        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+        // else {
+        //   $state.go('curso', {cursoCicloId: ctrl.entregableG.proyectoId});
+        // }
       }
     });
   };
@@ -284,7 +259,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
       "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
       "tieneAlarma": 1,
-      "ponderacion": 1,
+      "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion
       }
     console.log(angular.toJson(data));
@@ -378,7 +353,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.init = function (){
     ctrl.cargarEntregables();
-    if ($stateParams.id == null){ //Creación de Entregable
+    if ($stateParams.id == 0){ //Creación de Entregable
       ctrl.titulo = "Nuevo entregable";
       fecha = new Date();
       year = fecha.getFullYear();

@@ -103,7 +103,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
 
   ctrl.regresarProyectos = function () {
-        $state.go('profesorMisCursos');//curso, {cursoCicloId: 0, nombreCurso: 0, codigoCurso: 0, creditos: 0,cantidadAlumnos: 0, horario: 0 } );
+        // $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
   };
 
   ctrl.regresarEntregables = function () {
@@ -131,11 +131,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.crearEntregable = function () {
     //entregable de un proyecto
-    $state.go('evaluacion-herramienta-gestionar' , {cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0 ,fechaHabilitacion: 0,
+    fechaEntrega: 0, descripcion: 0, ponderacion: 0,
+    cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
   };
 
   ctrl.irModificarEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
     fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
     cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});
   };

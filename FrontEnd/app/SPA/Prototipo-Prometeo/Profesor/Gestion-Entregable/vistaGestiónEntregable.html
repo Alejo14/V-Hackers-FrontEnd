@@ -11,7 +11,7 @@
       border-radius: 32px;
       color: black;
     }
-    .partially button span {
+    .finish button span {
       background-color: red;
       border-radius: 32px;
       color: black;
@@ -60,7 +60,7 @@
                         <label class="col-sm-4 control-label">Fecha y Hora Entrega*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)">
+                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)">
                           </div>
                         </div>
                         <div class="col-sm-4">
