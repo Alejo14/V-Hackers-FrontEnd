@@ -192,6 +192,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'listar-alumnos',
               url: '/listar-alumnos/:cursoNombre/:horarioNombre/:horarioId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/listarAlumnosCurso.html'
+            },
+            {
+              name: 'grupos',
+              url: '/grupos/:cursoNombre/:horarioNombre/:horarioId',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/Grupos/vistaGrupos.html'
             }
           ]
         },

@@ -2,52 +2,58 @@
   <div ng-controller="listarAlumnosCursoCtrl as ctrl">
     <div class="container">
       <div class="block-container">
-        <h2>Alumnos: {{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}} </h2>
-      </div>
-
-      <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-md-6">
-                <h3> Lista Agrupaciones </h3>
-              </div>
-              <div class="col-md-6" align="right">
-                <button class="btn btn-primary" ng-click = "ctrl.crearConjuntosGrupo(ctrl.nombreAgrupacionNueva)"><i class="fa fa-users"></i> Agregar Agrupacion </button>
-                <input class="form-control input-sm" rows="1" placeholder="Nombre de la nueva agrupacion" ng-model = "ctrl.nombreAgrupacionNueva">
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="table-responsive">
-                <table ng-table="" class="table table-striped">
-                  <tr ng-repeat="conjunto in ctrl.conjuntosLista">
-                    <td data-title="'Nombre'">
-                      {{conjunto.nombre}}
-                    </td>
-
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-
+        <div class="row">
+        <div class="col-md-6">
+          <h2>{{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}}</h2>
         </div>
         </div>
-
       </div>
       <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <h3> Lista Alumnos </h3>
-              <!--button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button-->
+              <h3> Alumnos del curso </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <h5> Código: </h5>
+            </div>
+            <div class="col-md-2">
+              <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.codigo">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary" ng-click = "ctrl.filtrarListaAlumnos(ctrl.filtro)"><i class="fa fa-filter"></i>  Filtrar </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <h5> Nombre: </h5>
+            </div>
+            <div class="col-md-2">
+              <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.nombre">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary" ng-click = "ctrl.limpiarFiltroAlumnos()"><i class="fa fa-broom"></i> Limpiar </button>
+            </div>
+            <div class="col-md-1" align="right">
+              <button class="btn btn-primary" ng-click = "ctrl.verGrupos()"><i class="fa fa-users"></i> Grupos </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <h5> Correo: </h5>
+            </div>
+            <div class="col-md-2">
+              <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.correo">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <h5> Especialidad: </h5>
+            </div>
+            <div class="col-md-2">
+              <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.especialidad">
             </div>
           </div>
         </div>
@@ -55,8 +61,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="table-responsive">
-                <table class="table table-hover">
-                  <tr ng-repeat="alumno in ctrl.alumnosLista" (click)="RowSelected(alumno);">
+                <table ng-table="ctrl.alumnosTabla" class="table table-hover">
+                  <tr ng-repeat="alumno in ctrl.alumnosLista">
                     <td data-title="'Código'">
                       {{alumno.codigo}}
                     </td>

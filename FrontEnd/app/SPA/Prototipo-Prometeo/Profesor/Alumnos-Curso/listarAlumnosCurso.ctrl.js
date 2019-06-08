@@ -3,12 +3,16 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
   var ctrl = this;
   ctrl.horario = {};
   ctrl.alumnosLista = [];
+  ctrl.alumnosListaTotal = [];
+  ctrl.alumnosListaFiltro = [];
   ctrl.conjuntosLista = [];
-  ctrl.nombreAgrupacionNueva = ""
+  ctrl.nombreAgrupacionNueva = "";
+  ctrl.filtro = {};
 
   ctrl.obtenerAlumnos = function (horarioId) {
     listarAlumnosService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
       ctrl.alumnosLista = alumnosListaData;
+      ctrl.alumnosListaTotal = alumnosListaData;
       console.log(alumnosListaData);
       ctrl.alumnosTabla = new NgTableParams({}, { dataset: ctrl.alumnosLista });
     });
@@ -23,7 +27,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
   };
 
   ctrl.verDetalleAlumno = function (alumno) {
-  }
+  };
 
   function uuid() {
       function randomDigit() {
@@ -37,50 +41,42 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
       }
       var crypto = window.crypto || window.msCrypto;
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+  };
+
+  ctrl.filtrarListaAlumnos = function (filtro) {
+    console.log(filtro.codigo);
+    ctrl.alumnosLista = ctrl.alumnosListaTotal.filter(function(alumno) {
+      var codigo = true;
+      var nombre = true;
+      var correo = true;
+      var especialidad = true;
+
+      if(filtro.codigo){
+        codigo = alumno.codigo.includes(filtro.codigo);
+      }
+      if(filtro.nombre){
+        nombre = alumno.nombreCompleto.toLowerCase().includes(filtro.nombre.toLowerCase());
+      }
+      if(filtro.correo){
+        correo = alumno.correo.toLowerCase().includes(filtro.correo.toLowerCase());
+      }
+      if(filtro.especialidad){
+        especialidad = alumno.nombreEspecialidad.toLowerCase().includes(filtro.especialidad.toLowerCase());
+      }
+
+      return codigo & nombre & correo & especialidad;
+    });
+    console.log(ctrl.alumnosLista);
+  };
+
+  ctrl.limpiarFiltroAlumnos = function (){
+    ctrl.filtro = {};
+    ctrl.filtrarListaAlumnos(ctrl.filtro);
   }
 
-
-  ctrl.crearConjuntosGrupo = function (grupoNuevo) {
-    if (grupoNuevo==""){
-      swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
-    }
-    else{
-      swal({
-        title: "¿Esta seguro de que desea crear esta agrupación?",
-        text: "",
-        icon: "warning",
-        //buttons: ["Cancelar", "Sí, agregar"],
-        buttons: {
-          cancelar: {
-            text: "Cancelar",
-            className: "btn btn-lg btn-danger"
-          },
-          confirm: {
-            text: "Sí, agregar",
-            className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-          }
-        },
-        closeModal: false
-      }).then(function (agrupacionNuevoConfirmado) {
-        if (agrupacionNuevoConfirmado !== "cancelar") {
-
-          console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
-          data={
-            "id": uuid(),
-            "nombre": grupoNuevo,
-            "fechaCreacion": (new Date())*1,
-            "conjuntoGrupos_id": uuid(),
-            "horario_id": ctrl.horario.horarioId
-            }
-            console.log(angular.toJson(data));
-            listarAlumnosService.crearConjuntosGrupo(angular.toJson(data)).then(function () {
-              swal("¡Bien hecho!", "La agrupación se genero exitosamente" , "success");
-            });
-        }
-      });
-    }
-
-  }
+  ctrl.verGrupos = function () {
+    $state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
+  };
 
   ctrl.init = function () {
     ctrl.horario.cursoNombre = $stateParams.cursoNombre;
@@ -89,7 +85,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
 
     ctrl.obtenerAlumnos(ctrl.horario.horarioId);
     ctrl.obtenerConjuntosGrupo(ctrl.horario.horarioId);
-  }
+  };
 
   ctrl.init();
 }]);
