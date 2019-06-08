@@ -144,10 +144,10 @@ function toBase64(file) {
          // linkURL.nombre=respuesta[i];
          // linkURL.fecha=Date.now(); //debe traer la fecha el servicio
          // ctrl.listaURLs.push(linkURL);
-
-         linkURL.id=respuesta[i].id;
-         linkURL.nombre=respuesta[i].nombreArchivo;
-         linkURL.fecha=respuesta[i].fechaCreacion;
+        console.log(respuesta[i]);
+         linkURL.id=respuesta[i].idUrl;
+         linkURL.nombre=respuesta[i].url;
+         linkURL.fecha=respuesta[i].fecha;
          ctrl.listaURLs.push(linkURL);
        }
     });
