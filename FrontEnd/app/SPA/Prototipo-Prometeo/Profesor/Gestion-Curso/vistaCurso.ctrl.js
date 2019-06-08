@@ -96,7 +96,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-modificar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
+    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
        fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
        cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
   };

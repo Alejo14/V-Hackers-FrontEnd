@@ -159,12 +159,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
         "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
         "tieneAlarma": 1,
-        "ponderacion": 1,
+        "ponderacion": entregable.ponderacion,
         "descripcion": entregable.descripcion,
         "idCursoCiclo": null,
-        "idProyecto": entregable.proyectoId
+        "idProyecto": entregable.proyectoId,
+        "notificaciones": $scope.events
         }
-
+      console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
           swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success").then(function () {
             $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre});
@@ -177,12 +178,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "fechaEntrega": (new Date(year, month, date, hours, minutes,0))*1,//Se da formato a la fecha para que se registre con hora y fecha
         "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
         "tieneAlarma": 1,
-        "ponderacion": 1,
+        "ponderacion": entregable.ponderacion,
         "descripcion": entregable.descripcion,
         "idCursoCiclo": entregable.cursoCicloId,
-        "idProyecto": null
+        "idProyecto": null,
+        "notificaciones": $scope.events
         }
-
+      console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
           swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
       });
@@ -197,6 +199,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     entregable.horaFin="";
     entregable.descripcion="";
     entregable.ponderacion="";
+
   };
 
   ctrl.regresarEntregables = function () {
@@ -260,7 +263,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "fechaHabilitacion": (new Date(yearH, monthH, dateH, hoursH, minutesH,0))*1,
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
-      "descripcion": entregableM.descripcion
+      "descripcion": entregableM.descripcion,
+      "notificaciones": $scope.events
       }
     console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
@@ -368,6 +372,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.entregableG.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
       ctrl.entregableG.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
       ctrl.entregableG.descripcion=$stateParams.descripcion;
+      ctrl.entregableG.ponderacion=Number($stateParams.ponderacion);
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"
