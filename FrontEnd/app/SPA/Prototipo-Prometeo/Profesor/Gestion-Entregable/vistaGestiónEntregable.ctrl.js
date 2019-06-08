@@ -130,7 +130,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       if (entregableG.fechaEntrega < entregableG.fechaHabilitacion){
         swal("¡Opss!", "La fecha de habilitación debe ser menor o igual a la fecha de entrega" , "error");
       }else{
-        if ($stateParams.id == null) {
+        if ($stateParams.id == 0) {
           ctrl.crearEntregable(entregableG);
         }else {
           ctrl.modificarEntregable(entregableG);
@@ -163,7 +163,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "descripcion": entregable.descripcion,
         "idCursoCiclo": null,
         "idProyecto": entregable.proyectoId,
-        "notificaciones": $scope.events
+        // "notificaciones": $scope.events
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
@@ -182,7 +182,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "descripcion": entregable.descripcion,
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": null,
-        "notificaciones": $scope.events
+        // "notificaciones": $scope.events
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
@@ -264,7 +264,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
-      "notificaciones": $scope.events
+      // "notificaciones": $scope.events
       }
     console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
