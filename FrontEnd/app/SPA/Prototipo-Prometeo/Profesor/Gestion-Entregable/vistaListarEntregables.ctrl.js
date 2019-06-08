@@ -133,13 +133,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     //entregable de un proyecto
     $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0 ,fechaHabilitacion: 0,
     fechaEntrega: 0, descripcion: 0, ponderacion: 0,
-    cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
+    cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
   };
 
   ctrl.irModificarEntregable = function (entregable) {
     $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
     fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
-    cursoCicloId: 0, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});
+    cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});
   };
 
 
@@ -255,7 +255,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
+    ctrl.cursoCicloId = $stateParams.cursoId;
     ctrl.cargarEntregables(ctrl.proyectoId);
+    console.log(ctrl.cursoCicloId);
 
     }
 
