@@ -35,8 +35,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
       $state.go('curso', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso,
       creditos: miCurso.creditos, cantidadAlumnos: miCurso.cantidadAlumnos, horario: miCurso.horario, idHorario: miCurso.idHorario});
     }else {
-      $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso,
-      creditos: miCurso.creditos, cantidadAlumnos: miCurso.cantidadAlumnos, horario: miCurso.horario});
+      $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario}); //Aca podemos enviar el RolUsuarioId tambien
     }
   }
 

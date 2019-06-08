@@ -216,7 +216,7 @@ ctrl.elminarURL= function (archivo){
       entregableAlumnoService.eliminarArchivo(id).then(function () {
           swal("¡Bien hecho!", "El URL se elimino exitosamente" , "success");
       });
-      
+
       ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(archivo),1);
     }
   });
@@ -256,6 +256,32 @@ ctrl.elminarURL= function (archivo){
     });
 }
 
+
+ctrl.regresarCursoAlumno = function () {
+  swal({
+    title: "¿Está seguro que quiere regresar?",
+    text: "Los cambios se guardarán",
+    icon: "warning",
+    buttons: {
+      cancelar: {
+        text: "Cancelar",
+        className: "btn btn-lg btn-danger"
+      },
+      confirm: {
+        text: "Sí, regresar",
+        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+      }
+    }
+  }).then(function (regresarVistaCurso) {
+    if (regresarVistaCurso !== "cancelar") {
+      $state.go('alumnoCursos', {cursoCicloId: $stateParams.cursoCicloId, nombreCurso: $stateParams.nombreCurso, codigoCurso: $stateParams.codigoCurso, horario: $stateParams.horario}); //Aca podemos enviar el RolUsuarioId tambien
+    }
+  });
+
+
+
+}
+
   ctrl.init = function () {
     ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
     ctrl.cargarArchivos(ctrl.idAvanceEntregable);
@@ -276,6 +302,9 @@ ctrl.elminarURL= function (archivo){
     }else{                            //Entregable pertence a un cursoCiclo
       ctrl.detalleE.proyectoId=0;
       ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
+      ctrl.detalleE.nombreCurso=$stateParams.nombreCurso;
+      ctrl.detalleE.codigoCurso=$stateParams.codigoCurso;
+      ctrl.detalleE.horario=$stateParams.horario;
     }
 
 
