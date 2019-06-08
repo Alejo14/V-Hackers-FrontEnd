@@ -160,7 +160,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-listar',
-              url: '/evaluacion-herramienta-listar/:proyectoId/:proyectoNombre',
+              url: '/evaluacion-herramienta-listar/:cursoId/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
@@ -223,7 +223,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'alumnoCursos',
-              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',
+              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
             },
             {
@@ -232,13 +232,13 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Proyecto/vistaGestiónProyecto.html'
             },
             {
-              name: 'evaluacion-herramienta-listar-a',
-              url: '/evaluacion-herramienta-listar-a/:proyectoId/:proyectoNombre',
+              name: 'listar-entregables-alumno',
+              url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
               name: 'detalle-entregable',
-              url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId',
+              url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/detalleEntregable.html'
             },
           ]

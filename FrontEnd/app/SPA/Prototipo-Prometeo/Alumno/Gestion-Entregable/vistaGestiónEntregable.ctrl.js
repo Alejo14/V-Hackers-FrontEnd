@@ -116,44 +116,6 @@ function toBase64(file) {
   }
 
 
-
-  //
-  // var reader = new FileReader();
-  // reader.readAsDataURL(new Blob([respuesta], {type:'application/pdf'}));
-  // reader.onload = function(e) {
-  //   console.log(reader.result);
-  //   var file=dataURLtoFile(reader.result,'Archivo.pdf');
-  //   console.log(file);
-
-
-
-  // function readFile(respuesta, onLoadCallback){
-  //   var reader = new FileReader();
-  //   reader.onload = onLoadCallback;
-  //   reader.readAsDataURL(new Blob([respuesta], {type:'application/pdf'}));
-  // };
-
-  // ctrl.obtenerIdArchivo = function ( parametros) { //Prueba
-  //   var id="bc81263d-aee8-4c08-bf5a-81e274730dca";
-  //   entregableAlumnoService.mostrarAvanceEntregable(id).then(function (respuesta) {
-  //       var blob=new Blob([respuesta], {type:'application/pdf'});
-  //       var url1 = window.URL.createObjectURL(blob);
-  //       ctrl.url=url1;
-  //       console.log(ctrl.url);
-  //           // linkElement.setAttribute('href', url);
-  //           // linkElement.setAttribute("download", filename);
-  //           //
-  //           // var clickEvent = new MouseEvent("click", {
-  //           //     "view": window,
-  //           //     "bubbles": true,
-  //           //     "cancelable": false
-  //           // });
-  //           //linkElement.dispatchEvent(clickEvent);
-  //       swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
-  //   });
-
-  //}
-
   ctrl.elminarArchivo= function (archivo){
     ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
   }
