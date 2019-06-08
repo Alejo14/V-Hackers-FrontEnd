@@ -1,0 +1,52 @@
+<!-- Anderson -->
+<section id="main">
+  <div ng-controller="listarEntrgxProyAlumnoCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2>{{ctrl.tituloVer}}</h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Entregables</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-12">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group">
+                        <div class="col-sm-8">
+                          <ul>
+                            <div ng-repeat="entregable in ctrl.entregablesLista">
+                              <div class="row">
+                                <li class="col-md-5" ng-click="ctrl.ingresarEntregable()">
+                                  <a href=""> {{entregable.nombre}} </a>
+                                </li>
+                                <div class="col-md-3" >
+                                  <a> {{entregable.fechaCreacionStr}} </a>
+                                </div>
+                              </div>
+                            </div>
+                          </ul
+                        </div>
+                      </div>
+                </div>
+              </form>
+
+                </div>
+                <div class="col-md-12" align="right">
+                  <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+                  <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
+                </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

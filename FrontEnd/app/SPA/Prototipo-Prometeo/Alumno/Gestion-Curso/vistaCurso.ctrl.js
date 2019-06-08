@@ -103,7 +103,7 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
   }
 
   ctrl.ingresarProyecto = function(proyecto){
-    $state.go('evaluacion-herramienta-listar-a', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
+    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   }
 
   ctrl.init();

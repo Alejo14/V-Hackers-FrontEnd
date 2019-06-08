@@ -232,8 +232,8 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Proyecto/vistaGestiónProyecto.html'
             },
             {
-              name: 'evaluacion-herramienta-listar-a',
-              url: '/evaluacion-herramienta-listar-a/:proyectoId/:proyectoNombre',
+              name: 'listar-entregables-alumno',
+              url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
             },
             {
