@@ -274,16 +274,17 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         }
       });
     });
-    entregableM.id=0;
-    entregableM.tieneAlarma=1;
-    entregableM.nombre="";
-    entregableM.fechaHabilitacion="";
-    entregableM.horaInicio="";
-    entregableM.fechaEntrega="";
-    entregableM.horaFin="";
-    entregableM.descripcion="";
-    entregableM.ponderacion="";
-    entregableM.puntajeMaximo="";
+    // entregableM.id=0;
+    // entregableM.tieneAlarma=1;
+    // entregableM.nombre="";
+    // entregableM.fechaHabilitacion="";
+    // entregableM.horaInicio="";
+    // entregableM.fechaEntrega="";
+    // entregableM.horaFin="";
+    // entregableM.descripcion="";
+    // entregableM.ponderacion="";
+    // entregableM.puntajeMaximo="";
+    ctrl.entregableCreado = true;
 };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
@@ -364,6 +365,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       month = fecha.getMonth();
       day = fecha.getDate();
       ctrl.entregableG.fechaHabilitacion = (new Date(year, month, day));
+      ctrl.entregableCreado = false;
+      ctrl.modificar = false;
     } else {                  //Modificación de Entregable
       ctrl.titulo = "Modificar entregable";
       //ctrl.botonGrabar="Modificar";
@@ -373,6 +376,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.entregableG.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
       ctrl.entregableG.descripcion=$stateParams.descripcion;
       ctrl.entregableG.ponderacion=Number($stateParams.ponderacion);
+      ctrl.entregableCreado = true;
+      ctrl.modificar = true;
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"
