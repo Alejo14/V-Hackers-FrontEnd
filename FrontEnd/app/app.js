@@ -175,7 +175,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-rubrica',
-              url: '/nueva-rubrica/:id',
+              url: '/nueva-rubrica/:id/:nivelesCreados',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
             },
             {
