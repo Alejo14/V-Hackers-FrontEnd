@@ -228,6 +228,9 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   ctrl.cargarEntregables = function (proyectoId) {
     entregableAlumnoService.listarEntregablesXProyecto(proyectoId).then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
+      angular.forEach(ctrl.entregablesLista, function(entrgbAccordion){
+        entrgbAccordion.AccordionOpen=False;
+      });
     });
   };
 
