@@ -36,7 +36,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.crearGrupo = function (grupoNuevo) {
     console.log("hola");
     console.log(ctrl.alumnosSinGrupo);
-      if (grupoNuevo==""){
+      if (ctrl.grupo.nombre==""){
         swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
       }
       else{
@@ -77,8 +77,54 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
       }
     }
 
-  ctrl.actualizarGrupo = function(grupo){
-    $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
+  ctrl.actualizarGrupo = function(){
+    console.log("hola");
+      if (ctrl.grupo.nombre==""){
+        swal("¡Opss!", "Ingrese un nombre para el grupo por favor" , "error");
+      }
+      else{
+        swal({
+          title: "¿Esta seguro de que desea actualizar el grupo " + ctrl.grupo.nombre + "?",
+          text: "",
+          icon: "warning",
+          //buttons: ["Cancelar", "Sí, agregar"],
+          buttons: {
+            cancelar: {
+              text: "Cancelar",
+              className: "btn btn-lg btn-danger"
+            },
+            confirm: {
+              text: "Sí, agregar",
+              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+            }
+          },
+          closeModal: false
+        }).then(function (agrupacionNuevoConfirmado) {
+          if (agrupacionNuevoConfirmado !== "cancelar") {
+
+
+            listaAlumnos = [];
+            for(let i = 0; i < ctrl.alumnosGrupo.length; i++){
+              idRolUsuarioAlumno = {
+                "idRolUsuario": ctrl.alumnosGrupo[i].idRolUsuario
+              }
+              listaAlumnos.push(idRolUsuarioAlumno);
+            }
+            console.log(listaAlumnos);
+
+            data={
+              "id": ctrl.grupo.id,
+              "rolUsuarioIds": listaAlumnos
+              }
+              console.log(angular.toJson(data));
+
+              vistaGruposService.actualizarGrupo(data).then(function () {
+                swal("¡Bien hecho!", "El grupo se actualizo correctamente" , "success");
+              });
+              //$state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
+          }
+        });
+      }
   }
 
   ctrl.obtenerAlumnosSinGrupo = function (horarioId) {

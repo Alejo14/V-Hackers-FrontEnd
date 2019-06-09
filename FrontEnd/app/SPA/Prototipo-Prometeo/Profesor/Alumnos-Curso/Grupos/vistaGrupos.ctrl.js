@@ -167,7 +167,6 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               vistaGruposService.crearGrupo(angular.toJson(data)).then(function () {
                 swal("¡Bien hecho!", "El nuevo grupo se genero exitosamente" , "success");
               });
-              $state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
         });
       }
@@ -184,7 +183,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
 
     ctrl.obtenerAlumnos(ctrl.horario.horarioId);
     //ctrl.obtenerConjuntosGrupo(ctrl.horario.horarioId);
-    ctrl.obtenerGrupos("6398aeef-e27f-4d9c-b8ef-52e6e4d48142");
+    ctrl.obtenerGrupos(ctrl.horario.horarioId);
   }
 
   ctrl.init();
