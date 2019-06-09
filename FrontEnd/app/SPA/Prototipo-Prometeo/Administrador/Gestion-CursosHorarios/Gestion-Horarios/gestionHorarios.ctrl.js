@@ -87,7 +87,7 @@ function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTablePa
     $state.go('asignar-horarios',{idCursoCiclo:curso.cursoCicloId,idCurso:curso.id,idSemestre:curso.cicloId,nombreCurso:curso.nombre,codigoCurso:curso.codigo});
   }
 
-  ctrl.eliminarCursoCiclo = function(curso){
+  ctrl.eliminarCursoCiclo = function(curso,indice){
     swal({
       title: "¿Esta seguro de que desea eliminar el curso?",
       text: "",
@@ -106,9 +106,10 @@ function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTablePa
       closeModal: false
     }).then(function (eliminar) {
       if (eliminar !== "cancelar") {
-          gestionHorariosService.eliminarCursoCiclo(angular.toJson(curso));
+          console.log("Se procederá a eliminar cursociclo");
+          gestionHorariosService.eliminarCursoCiclo(curso);
           swal("¡Listo!", "El curso se eliminó exitosamente" , "success");
-          ctrl.obtenerCursos();
+          ctrl.cursosLista.splice(indice,1);
       }
     });
   }

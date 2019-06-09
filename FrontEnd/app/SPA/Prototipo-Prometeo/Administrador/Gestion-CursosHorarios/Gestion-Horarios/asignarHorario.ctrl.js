@@ -49,7 +49,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
     });
   };
 
-  ctrl.agregarHorario = function (modo) {
+  ctrl.agregarHorario = function (modo,index) {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
     //console.log(modo);
     var modalInstance = $uibModal.open({
@@ -71,19 +71,23 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
         },
         idCiclo: function(){
           return ctrl.idCiclo;
+        },
+        idHorario: function(){
+          return ctrl.horariosLista[index].id;
         }
       }
     });
     modalInstance.result.then( function (parametroRetorno) {
         ctrl.listarHorarios(ctrl.idCursoCiclo);
+        console.log("Se debe actualizar la pantalla");
     });
   };
 
-  ctrl.editarHorario = function(horario) {
-    ctrl.agregarHorario(horario);//con parámetros para editarlos
+  ctrl.editarHorario = function(horario,index) {
+    ctrl.agregarHorario(horario,index);//con parámetros para editarlos
   }
 
-  ctrl.eliminarHorario = function (horario) {
+  ctrl.eliminarHorario = function (horario,indice) {
     swal({
       title: "¿Esta seguro de que desea eliminar el horario?",
       text: "",
@@ -103,8 +107,8 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
     }).then(function (eliminar) {
       if (eliminar !== "cancelar") {
           asignarHorarioService.eliminarHorario(angular.toJson(horario));
+          ctrl.horariosLista.splice(indice,1);
           swal("¡Listo!", "El horario se eliminó exitosamente" , "success");
-          ctrl.listarHorarios(ctrl.idCursoCiclo);
       }
     });
   }
