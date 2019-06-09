@@ -157,7 +157,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
     profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
       ctrl.listaMisCursos = misCursosListaData;
-      var cursoEncontrado = ctrl.listaMisCursos.find(i => i.id === $stateParams.id);
+      var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
       ctrl.curso = cursoEncontrado;
       console.log(ctrl.curso);
     });
