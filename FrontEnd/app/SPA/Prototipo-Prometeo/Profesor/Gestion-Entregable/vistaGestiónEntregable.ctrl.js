@@ -10,6 +10,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.entregableM=[];
   ctrl.entregableG={ };
   ctrl.mensajeFecha = "Complete las fechas correctamente.";
+  ctrl.entregablesLista = [];
   $scope.fechaActual = new Date();
 
   ctrl.id=0;
@@ -140,7 +141,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.crearEntregable = function (entregable) {
-    console.log(angular.toJson(entregable));//Envio el json para crear el entregable
     yearH=entregable.fechaHabilitacion.getFullYear();
     monthH=entregable.fechaHabilitacion.getMonth();
     dateH=entregable.fechaHabilitacion.getDate();
@@ -152,7 +152,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     date=entregable.fechaEntrega.getDate();
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
-    if(entregable.cursoCicloId==0){
+    if(entregable.proyectoId != 0){
       data={
         "id": null, //Defecto
         "nombre": entregable.nombre,
@@ -161,14 +161,14 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "tieneAlarma": 1,
         "ponderacion": entregable.ponderacion,
         "descripcion": entregable.descripcion,
-        "idCursoCiclo": null,
+        "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": entregable.proyectoId,
-        // "notificaciones": $scope.events
+        "notificaciones": $scope.events
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
-          swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success").then(function () {
-            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre});
+          swal("¡Bien hecho!", "El entregable del proyecto se creó exitosamente" , "success").then(function () {
+            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
           });
       });
     }else{
@@ -182,7 +182,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "descripcion": entregable.descripcion,
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": null,
-        // "notificaciones": $scope.events
+        "notificaciones": $scope.events
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
@@ -220,7 +220,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
         if (ctrl.entregableG.proyectoId != 0) {
-          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre});
+          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
         }
         // else {
         //   $state.go('curso', {cursoCicloId: ctrl.entregableG.proyectoId});
@@ -244,7 +244,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.modificarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
-    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
     year=entregableM.fechaEntrega.getFullYear();
     month=entregableM.fechaEntrega.getMonth();
     date=entregableM.fechaEntrega.getDate();
@@ -264,13 +263,14 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
-      // "notificaciones": $scope.events
+      "notificaciones": $scope.events
       }
+    console.log(angular.toJson($scope.events));
     console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
       swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success").then(function () {
         if (ctrl.entregableG.proyectoId != 0) {
-            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre});
+            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
         }
       });
     });
@@ -288,7 +288,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
-    console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
     swal({
       title: "¿Está seguro que quiere eliminar el entregable?",
       text: "Los cambios no se guardarán",
@@ -322,12 +321,12 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   };
 
-  ctrl.entregablesLista = [];
-  ctrl.cargarEntregables = function () {
-    entregableService.listarEntregables().then(function (entregablesListaData) {
-      ctrl.entregablesLista = entregablesListaData;
-    });
-  };
+  // ctrl.entregablesLista = [];
+  // ctrl.cargarEntregables = function () {
+  //   entregableService.listarEntregables().then(function (entregablesListaData) {
+  //     ctrl.entregablesLista = entregablesListaData;
+  //   });
+  // };
 
   ctrl.verReutilizarHerramienta = function() {
     if (!ctrl.entregableM.id) {
@@ -357,7 +356,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.init = function (){
-    ctrl.cargarEntregables();
+    ctrl.fechasIniciadas = false;
+    // ctrl.cargarEntregables();
     if ($stateParams.id == 0){ //Creación de Entregable
       ctrl.titulo = "Nuevo entregable";
       fecha = new Date();
@@ -367,6 +367,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.entregableG.fechaHabilitacion = (new Date(year, month, day));
       ctrl.entregableCreado = false;
       ctrl.modificar = false;
+      ctrl.fechasIniciadas = true;
     } else {                  //Modificación de Entregable
       ctrl.titulo = "Modificar entregable";
       //ctrl.botonGrabar="Modificar";
@@ -381,16 +382,33 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"
-      ctrl.entregableG.cursoCicloId=0;
       ctrl.entregableG.proyectoId=$stateParams.proyectoId;
       ctrl.entregableG.proyectoNombre = $stateParams.proyectoNombre;
+      if ($stateParams.id != 0){
+        entregableService.listarEntregablesXProyecto($stateParams.proyectoId).then(function (entregablesListaData) {
+          ctrl.entregablesLista = entregablesListaData;
+          var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
+          $scope.events = entregableEncontrado.notificaciones;
+          ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
+          // console.log(ctrl.entregableG.notificaciones);
+          ctrl.fechasIniciadas = true;
+        });
+      }
     } else {                            //Entregable pertence a un cursoCiclo
       ctrl.entregableG.proyectoId=0;
-      ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
       ctrl.entregableG.proyectoNombre = 0;
+      // if ($stateParams.id != 0){
+      //   entregableService.listarEntregables($stateParams.cursoCicloId).then(function (entregablesListaData) {
+      //     ctrl.entregablesLista = entregablesListaData;
+      //     var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
+      //     $scope.events = entregableEncontrado.notificaciones;
+      //     ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
+      //     console.log(ctrl.entregableG.notificaciones);
+          ctrl.fechasIniciadas = true;
+      //   });
+      // }
     }
+    ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
   }
-
-
   ctrl.init();
 }]);

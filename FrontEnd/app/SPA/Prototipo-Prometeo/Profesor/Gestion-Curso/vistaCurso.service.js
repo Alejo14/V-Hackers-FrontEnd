@@ -19,7 +19,6 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.listarEntregables = function(codigoCurso){
-
     var urlListarEntregables = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregablesxcursociclo/' + codigoCurso;
     var $defer = $q.defer();
     $http({

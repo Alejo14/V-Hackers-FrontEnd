@@ -19,7 +19,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.proyectosLista[i].fechaFinStr = fechCrStr;
       };
-
+      console.log(ctrl.proyectosLista);
     });
   };
 
@@ -47,6 +47,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.entregablesLista[i].fechaFinStr = fechCrStr;
       };
+      console.log(ctrl.entregablesLista);
     });
   };
 
@@ -165,7 +166,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.ingresarProyecto = function(proyecto){
-    $state.go('evaluacion-herramienta-listar', {cursoId:ctrl.curso.cursoCicloId  ,proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
+    $state.go('evaluacion-herramienta-listar', {cursoId:ctrl.curso.cursoCicloId, proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   }
 
   ctrl.init();
