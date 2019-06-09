@@ -19,4 +19,18 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarEspecialidades = function(){
+    var urlListarEspecialidades = variablesAmbiente.apiUrl + variablesAmbiente.puertoSemestre + '/semestre';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarEspecialidades
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

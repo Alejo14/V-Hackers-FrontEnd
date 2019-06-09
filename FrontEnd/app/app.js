@@ -76,6 +76,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaCrearSemestre.html'
             },
             {
+              name: 'listar-semestres',
+              url: '/listar-semestres',
+              templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-semestres/vistaListarSemestres.html'
+            },
+            {
               name: 'crear-especialidad',
               url: '/crear-especialidad',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaCrearEspecialidad.html'

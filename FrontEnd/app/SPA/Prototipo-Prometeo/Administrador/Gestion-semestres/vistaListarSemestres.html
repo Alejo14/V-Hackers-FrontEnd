@@ -1,0 +1,76 @@
+<!-- César -->
+<section id="main">
+  <div ng-controller="administradorSemestreCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2></h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Semestres</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-12">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group">
+                        <div class="col-md-12">
+                          <div class="row" align="center" style="padding:10px;">
+                            <div class="col-md-3">NOMBRE DEL CICLO</div>
+                            <div class="col-md-3">FECHA CREACIÓN</div>
+                            <div class="col-md-3">FECHA INICIO</div>
+                            <div class="col-md-3">FECHA FIN</div>
+                          </div>
+                          <div ng-repeat="semestre in ctrl.semestresLista" >
+                            <div class="row" align="center">
+                              <div class="col-md-3">
+                                <a> {{semestre.nombreCiclo}} </a>
+                              </div>
+                              <div class="col-md-3" align="center">
+                                <a> {{semestre.fechaCreacionStr}} </a>
+                              </div>
+                              <div class="col-md-3" align="center">
+                                <a> {{semestre.fechaInicioStr}} </a>
+                              </div>
+                              <div class="col-md-3" align="center">
+                                <a> {{semestre.fechaFinStr}} </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class="col-sm-8"> -->
+
+                          <!-- <ul> -->
+                            <!-- <li ng-repeat="semestre in ctrl.semestresLista"> -->
+                              <!-- {{semestre.nombreCiclo}} -->
+                              <!-- <a style="float:right" ng-click="ctrl.eliminarsemestre(semestre)">
+                                <i class="fas fa-trash-alt"></i>
+                              </a>
+                              <a style="float:right" ng-click="ctrl.versemestre(semestre)">
+                                <i class="fas fa-pencil-alt"></i>
+                              </a> -->
+                            <!-- </li>
+                          </ul> -->
+                        <!-- </div> -->
+                      </div>
+                </div>
+              </form>
+
+                </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

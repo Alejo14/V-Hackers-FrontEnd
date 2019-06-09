@@ -63,6 +63,11 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     });
   };
 
-
+  ctrl.semestresLista = [ ];
+  ctrl.cargarEspecialidades = function () {
+    administradorSemestreService.listarSemestres().then(function (semestresListaData) {
+      ctrl.semestresLista = semestresListaData;
+    });
+  };
 
 }]);

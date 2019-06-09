@@ -7,8 +7,16 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('crear-semestre');
   }
 
-  ctrl.crearEspecialidad = function(semestre){
+  ctrl.listarSemestres = function(semestre){
+    $state.go('listar-semestres')
+  }
+
+  ctrl.crearEspecialidad = function(especialidad){
     $state.go('crear-especialidad');
+  }
+
+  ctrl.listarEspecialidades = function(especialidades){
+    $state.go('listar-especialidades')
   }
 
   ctrl.crearCurso = function(curso){
@@ -22,9 +30,4 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
   ctrl.gestionUsuarios = function(cursos){
     $state.go('gestion-usuarios');
   }
-
-  ctrl.listarEspecialidades = function(especialidades){
-    $state.go('listar-especialidades')
-  }
-
 }]);
