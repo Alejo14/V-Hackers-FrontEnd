@@ -188,39 +188,39 @@ function toBase64(file) {
         entregableAlumnoService.eliminarArchivo(id).then(function () {
             swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
         });
+
         ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
       }
     });
 }
 
-// ctrl.elminarURL= function (url){
-//   // var id=archivo.id;
-//   //
-//   // swal({
-//   //   title: "¿Está seguro que quiere eliminar el archivo?",
-//   //   text: "Los cambios se guardarán",
-//   //   icon: "warning",
-//   //   buttons: {
-//   //     cancelar: {
-//   //       text: "Cancelar",
-//   //       className: "btn btn-lg btn-danger"
-//   //     },
-//   //     confirm: {
-//   //       text: "Sí, eliminar",
-//   //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-//   //     }
-//   //   }
-//   // }).then(function (eliminarArchivoConfirmacion) {
-//   //   if (eliminarArchivoConfirmacion !== "cancelar") {
-//   //     entregableAlumnoService.eliminarArchivo(id).then(function () {
-//   //         swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
-//   //     });
-//   //     ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
-//   //   }
-//   // });
-//   ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(url),1);
-// }
+ctrl.elminarURL= function (archivo){
+  var id=archivo.id;
 
+  swal({
+    title: "¿Está seguro que quiere eliminar el URL?",
+    text: "Los cambios se guardarán",
+    icon: "warning",
+    buttons: {
+      cancelar: {
+        text: "Cancelar",
+        className: "btn btn-lg btn-danger"
+      },
+      confirm: {
+        text: "Sí, eliminar",
+        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+      }
+    }
+  }).then(function (eliminarURLConfirmacion) {
+    if (eliminarURLConfirmacion !== "cancelar") {
+      entregableAlumnoService.eliminarArchivo(id).then(function () {
+          swal("¡Bien hecho!", "El URL se elimino exitosamente" , "success");
+      });
+      
+      ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(archivo),1);
+    }
+  });
+}
   ctrl.agregarArchivo = function () {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
     var modalInstance = $uibModal.open({
