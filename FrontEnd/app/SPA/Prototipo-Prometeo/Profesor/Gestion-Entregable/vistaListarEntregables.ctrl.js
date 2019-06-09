@@ -16,7 +16,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.proyectoId="";
 
   ctrl.regresarProyectos = function () {
-        // $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
+        $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
   };
 
   ctrl.regresarEntregables = function () {

@@ -140,7 +140,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'curso',
-              url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario/:idHorario',
+              url: '/curso/:cursoCicloId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Curso/vistaCurso.html'
             },
             {

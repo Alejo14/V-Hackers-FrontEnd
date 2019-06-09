@@ -221,10 +221,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       if (usuarioNuevoConfirmado !== "cancelar") {
         if (ctrl.entregableG.proyectoId != 0) {
           $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
+        } else {
+          $state.go('curso', {cursoCicloId: ctrl.entregableG.cursoCicloId});
         }
-        // else {
-        //   $state.go('curso', {cursoCicloId: ctrl.entregableG.proyectoId});
-        // }
       }
     });
   };
@@ -274,16 +273,16 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         }
       });
     });
-    // entregableM.id=0;
-    // entregableM.tieneAlarma=1;
-    // entregableM.nombre="";
-    // entregableM.fechaHabilitacion="";
-    // entregableM.horaInicio="";
-    // entregableM.fechaEntrega="";
-    // entregableM.horaFin="";
-    // entregableM.descripcion="";
-    // entregableM.ponderacion="";
-    // entregableM.puntajeMaximo="";
+    entregableM.id=0;
+    entregableM.tieneAlarma=1;
+    entregableM.nombre="";
+    entregableM.fechaHabilitacion="";
+    entregableM.horaInicio="";
+    entregableM.fechaEntrega="";
+    entregableM.horaFin="";
+    entregableM.descripcion="";
+    entregableM.ponderacion="";
+    entregableM.puntajeMaximo="";
     ctrl.entregableCreado = true;
 };
 
@@ -397,16 +396,16 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     } else {                            //Entregable pertence a un cursoCiclo
       ctrl.entregableG.proyectoId=0;
       ctrl.entregableG.proyectoNombre = 0;
-      // if ($stateParams.id != 0){
-      //   entregableService.listarEntregables($stateParams.cursoCicloId).then(function (entregablesListaData) {
-      //     ctrl.entregablesLista = entregablesListaData;
-      //     var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
-      //     $scope.events = entregableEncontrado.notificaciones;
-      //     ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
-      //     console.log(ctrl.entregableG.notificaciones);
+      if ($stateParams.id != 0){
+        entregableService.listarEntregables($stateParams.cursoCicloId).then(function (entregablesListaData) {
+          ctrl.entregablesLista = entregablesListaData;
+          var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
+          $scope.events = entregableEncontrado.notificaciones;
+          ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
+          // console.log(ctrl.entregableG.notificaciones);
           ctrl.fechasIniciadas = true;
-      //   });
-      // }
+        });
+      }
     }
     ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
   }

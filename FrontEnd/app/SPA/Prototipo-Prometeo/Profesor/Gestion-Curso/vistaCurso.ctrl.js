@@ -148,15 +148,19 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         $state.go('profesorMisCursos', {rolUsuario: "P"});
   };
 
+  ctrl.misCursosInfo = {
+    "cicloId" : "85271594-c48c-4d69-b785-c365277c91e6",
+    "rolUsuarioId" : "a23b0031-64f6-4ce0-8b03-5f577d16d06c"
+  };
+
   ctrl.init = function (){
     ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
-    ctrl.curso.nombreCurso=$stateParams.nombreCurso;
-    ctrl.curso.codigoCurso=$stateParams.codigoCurso;
-    ctrl.curso.creditos=$stateParams.creditos;
-    ctrl.curso.cantidadAlumnos=$stateParams.cantidadAlumnos;
-    ctrl.curso.horario=$stateParams.horario;
-    ctrl.curso.horarioId=$stateParams.idHorario;
-
+    profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
+      ctrl.listaMisCursos = misCursosListaData;
+      var cursoEncontrado = ctrl.listaMisCursos.find(i => i.id === $stateParams.id);
+      ctrl.curso = cursoEncontrado;
+      console.log(ctrl.curso);
+    });
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();
   }
