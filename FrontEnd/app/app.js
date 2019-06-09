@@ -87,7 +87,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'modificar-especialidad',
-              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultadId/:responsableId/:responsableNombre',
+              url: '/modificar-especialidad/:codigo/:id/:nombre/:facultadId/:responsableId',
               templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-especialidades/vistaModificarEspecialidad.html'
             },
             {

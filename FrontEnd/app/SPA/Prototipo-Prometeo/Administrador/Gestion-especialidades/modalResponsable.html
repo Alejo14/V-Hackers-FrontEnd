@@ -15,10 +15,11 @@
         <div class="col-md-12">
           <table ng-Table="ctrl.tablaResponsables" class="table table-bordered">
             <tr ng-repeat="responsable in ctrl.responsablesLista">
-              <td data-title="">{{responsable.n}}</td>
+              <td data-title="" align="center">{{$index+1}}</td>
               <td data-title="'Código'">{{responsable.codigo}}</td>
-              <td data-title="'Nombre'">{{responsable.nombre}}</td>
+              <td data-title="'Nombre'">{{responsable.nombreCompleto}}</td>
               <td data-title="'Correo'">{{responsable.correo}}</td>
+              <td data-title="'Especialidad'">{{responsable.nombreEspecialidad}}</td>
               <td data-title="'Selecionar'">
                 <div class="radio m-b-15" align="center">
                 <label>

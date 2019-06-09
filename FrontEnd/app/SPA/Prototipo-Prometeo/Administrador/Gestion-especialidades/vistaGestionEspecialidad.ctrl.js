@@ -3,6 +3,7 @@ angular.module('vHackersModule').controller('administradorEspecialidadCtrl', ['$
 function($scope, $state,$stateParams, administradorEspecialidadService, $uibModal){
   var ctrl = this;
   ctrl.cargaUnitaria = true;
+  ctrl.especialidadesArchivoNombre = null;
 
   ctrl.especialidad = {
     id : "",
@@ -13,10 +14,8 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       codigo : "",
       nombre : ""
     },
-    responsable : {
-      id : "",
-      nombre : ""
-    }
+    responsableId : "",
+    responsableNombre : ""
   };
 
   ctrl.cambiarVista = function(indice) {
@@ -28,7 +27,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     data = {
       "id": null,
       "facultadId": especialidad.facultad.id,
-      "responsableId": especialidad.responsable.id,
+      "responsableId": especialidad.responsableId,
       "codigo": especialidad.codigo,
       "nombre": especialidad.nombre
     }
@@ -53,12 +52,8 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     //Recibo parametro de retorno
     modalInstance.result.then( function (parametroRetorno) {
       if (parametroRetorno) {
-        var responsableSeleccionado = {
-          "id": parametroRetorno.id,
-          "nombre": parametroRetorno.nombre,
-        };
-        ctrl.especialidad.responsable.id = responsableSeleccionado.id;
-        ctrl.especialidad.responsable.nombre = responsableSeleccionado.nombre;
+        ctrl.especialidad.responsableId = parametroRetorno.id;
+        ctrl.especialidad.responsableNombre = parametroRetorno.nombreCompleto;
         swal("¡Listo!", "Responsable seleccionado con éxito" , "success");
         ctrl.validarRegistroValido();
       }
@@ -87,7 +82,6 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   }
 
-
   ctrl.verEspecialidad = function (especialidad) {
     $state.go('modificar-especialidad', {id : especialidad.id, codigo : especialidad.codigo,
       nombre : especialidad.nombre, facultadId : especialidad.facultadId,
@@ -99,10 +93,13 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     ctrl.especialidad.id = $stateParams.id;
     ctrl.especialidad.codigo = $stateParams.codigo;
     ctrl.especialidad.nombre = $stateParams.nombre;
-    ctrl.especialidad.responsable.id = $stateParams.responsableId;
-    ctrl.especialidad.responsable.nombre = $stateParams.responsableNombre;
+    ctrl.especialidad.responsableId = $stateParams.responsableId;
     administradorEspecialidadService.obtenerFacultades().then(function (facultadesListaData) {
       ctrl.especialidad.facultad = facultadesListaData.find(fac => fac.id === $stateParams.facultadId);
+    });
+    administradorEspecialidadService.listarResponsables().then(function (responsablesListaData) {
+      var responsable = responsablesListaData.find(i => i.id === $stateParams.responsableId);
+      ctrl.especialidad.responsableNombre = responsable.nombreCompleto;
     });
   }
 
@@ -112,7 +109,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       "facultadId": especialidad.facultad.id,
       "nombre": especialidad.nombre,
       "codigo": especialidad.codigo,
-      "responsableId": especialidad.responsable.id
+      "responsableId": especialidad.responsableId
     }
     administradorEspecialidadService.modificoEspecialidad(angular.toJson(data)).then(function () {
       swal("¡Bien hecho!", "La especialidad fue modificada exitosamente" , "success").then(function () {
@@ -147,7 +144,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   };
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad.id !== "" && ctrl.especialidad.responsable.id !== "";
+    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad.id !== "" && ctrl.especialidad.responsableId !== "";
   };
 
   ctrl.regresarAdministradorSwal = function () {

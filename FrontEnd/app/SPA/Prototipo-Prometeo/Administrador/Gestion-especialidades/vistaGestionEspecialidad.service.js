@@ -79,5 +79,18 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
+  servicio.listarResponsables = function () {
+    var urlObtenerFacultades = variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/listar/administradores';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerFacultades
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
 
 }]);
