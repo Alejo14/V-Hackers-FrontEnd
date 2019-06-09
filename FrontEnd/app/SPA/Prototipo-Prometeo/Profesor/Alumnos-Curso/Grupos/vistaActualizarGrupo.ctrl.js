@@ -33,50 +33,6 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
       return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
   }
 
-  ctrl.crearGrupo = function (grupoNuevo) {
-    console.log("hola");
-    console.log(ctrl.alumnosSinGrupo);
-      if (ctrl.grupo.nombre==""){
-        swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
-      }
-      else{
-        swal({
-          title: "¿Esta seguro de que desea crear el grupo " + grupoNuevo + "?",
-          text: "",
-          icon: "warning",
-          //buttons: ["Cancelar", "Sí, agregar"],
-          buttons: {
-            cancelar: {
-              text: "Cancelar",
-              className: "btn btn-lg btn-danger"
-            },
-            confirm: {
-              text: "Sí, agregar",
-              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-            }
-          },
-          closeModal: false
-        }).then(function (agrupacionNuevoConfirmado) {
-          if (agrupacionNuevoConfirmado !== "cancelar") {
-
-            console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
-            data={
-              "id": uuid(),
-              "nombre": grupoNuevo,
-              "fechaCreacion": (new Date())*1,
-              "conjuntoGrupos_id": "6398aeef-e27f-4d9c-b8ef-52e6e4d48142",
-              "horario_id": ctrl.horario.horarioId
-              }
-              console.log(angular.toJson(data));
-              vistaGruposService.crearGrupo(angular.toJson(data)).then(function () {
-                swal("¡Bien hecho!", "El nuevo grupo se genero exitosamente" , "success");
-              });
-              $state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
-          }
-        });
-      }
-    }
-
   ctrl.actualizarGrupo = function(){
     console.log("hola");
       if (ctrl.grupo.nombre==""){
@@ -119,7 +75,22 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               console.log(angular.toJson(data));
 
               vistaGruposService.actualizarGrupo(data).then(function () {
-                swal("¡Bien hecho!", "El grupo se actualizo correctamente" , "success");
+                if(ctrl.grupo.nombre != ctrl.grupo.nombreOriginal){
+                  ctrl.grupo.nombreOriginal = ctrl.grupo.nombre;
+                  data={
+                    "id": ctrl.grupo.id,
+                    "nombre": ctrl.grupo.nombre,
+                    "fechaCreacion": (new Date())*1,
+                    "conjuntoGrupos_id": uuid(),
+                    "horario_id": ctrl.horario.horarioId
+                    }
+                    console.log(angular.toJson(data));
+                    vistaGruposService.modificarNombreGrupo(angular.toJson(data)).then(function () {
+                        swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizo correctamente" , "success");
+                    });
+                }else{
+                  swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizo correctamente" , "success");
+                }
               });
               //$state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
@@ -128,7 +99,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   }
 
   ctrl.obtenerAlumnosSinGrupo = function (horarioId) {
-    vistaGruposService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
+    vistaGruposService.obtenerAlumnosSinGrupo(horarioId).then(function (alumnosListaData) {
       ctrl.alumnosSinGrupo = alumnosListaData;
       for(let i = 0; i < ctrl.alumnosSinGrupo.length; i++){
         ctrl.alumnosSinGrupo[i].marcado = false;
@@ -168,6 +139,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
     ctrl.horario.horarioId = $stateParams.horarioId;
 
     ctrl.grupo.nombre = $stateParams.grupoNombre;
+    ctrl.grupo.nombreOriginal = $stateParams.grupoNombre;
     ctrl.grupo.id = $stateParams.grupoId;
 
 

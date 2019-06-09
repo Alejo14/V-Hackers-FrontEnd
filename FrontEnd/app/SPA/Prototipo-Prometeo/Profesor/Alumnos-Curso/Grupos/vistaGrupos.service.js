@@ -75,6 +75,21 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
+  servicio.modificarNombreGrupo = function(data){
+    var urlmodificarNombreGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/modificargrupo';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlmodificarNombreGrupo,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
   servicio.eliminarGrupo = function(data){
     var urlEliminarGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/eliminargrupo';
     var $defer = $q.defer();
@@ -104,4 +119,17 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
+  servicio.obtenerAlumnosSinGrupo = function(horarioId){
+    var urlObtenerAlumnos = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listaralumnossingrupo/' + horarioId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerAlumnos
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
 }]);
