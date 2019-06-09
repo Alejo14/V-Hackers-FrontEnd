@@ -19,7 +19,6 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.listarEntregables = function(codigoCurso){
-
     var urlListarEntregables = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregablesxcursociclo/' + codigoCurso;
     var $defer = $q.defer();
     $http({
@@ -55,6 +54,23 @@ function($q, $http, variablesAmbiente) {
         method: 'POST',
         url: urlEnviarCalificacion,
         data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  var servicio = this;
+
+  servicio.listarMisCursos = function(misCursoInfo){
+    var urlListarMisCursos = 'http://localhost:7004/cursos/listarhorariocursociclorolusuario/'
+                              + misCursoInfo.cicloId + '?RolUsuarioID=' + misCursoInfo.rolUsuarioId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarMisCursos
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

@@ -22,7 +22,7 @@
       <div class="block-container">
         <h2></h2>
       </div>
-      <div class="card" ng-init="init()">
+      <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
@@ -43,7 +43,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="form-group"><!--fechaI horaI-->
+                      <div class="form-group" ng-if="ctrl.fechasIniciadas"><!--fechaI horaI-->
                         <label class="col-sm-4 control-label">Fecha y Hora habilitación*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">
@@ -56,7 +56,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="form-group"><!--fechaF horaF-->
+                      <div class="form-group" ng-if="ctrl.fechasIniciadas"><!--fechaF horaF-->
                         <label class="col-sm-4 control-label">Fecha y Hora Entrega*:</label>
                         <div class="col-sm-4">
                           <div class="fg-line">

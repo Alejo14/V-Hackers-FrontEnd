@@ -19,4 +19,18 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarSemestres = function(){
+    var urllistarSemestres = variablesAmbiente.apiUrl + variablesAmbiente.puertoSemestre + '/semestres';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urllistarSemestres
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

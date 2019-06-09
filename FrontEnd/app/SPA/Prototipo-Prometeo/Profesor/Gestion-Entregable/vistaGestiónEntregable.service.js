@@ -95,9 +95,8 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
-    servicio.listarEntregables = function(){
-
-      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
+    servicio.listarEntregables = function(codigoCurso){
+      var urlListarEntregables = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregablesxcursociclo/' + codigoCurso;
       var $defer = $q.defer();
       $http({
           method: 'GET',
@@ -111,7 +110,7 @@ function($q, $http,variablesAmbiente) {
     }
 
     servicio.listarEntregablesXProyecto = function(idProyecto){
-      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregablesxproyecto/' + idProyecto; //'http://localhost:7002/entregables';
+      var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregablesxproyecto/' + idProyecto;
       var $defer = $q.defer();
       $http({
           method: 'GET',

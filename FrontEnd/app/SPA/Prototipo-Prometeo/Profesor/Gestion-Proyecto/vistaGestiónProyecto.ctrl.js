@@ -34,26 +34,26 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   };
 
   ctrl.volverCurso = function () {
-    // swal({
-    //   title: "¿Está seguro de que quieres volver?",
-    //   text: "Los cambios no se guardaran",
-    //   icon: "warning",
-    //   buttons: {
-    //     cancelar: {
-    //       text: "Cancelar",
-    //       className: "btn btn-lg btn-danger"
-    //     },
-    //     confirm: {
-    //       text: "Sí, volver",
-    //       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-    //     }
-    //   }
-    // }).then(function (usuarioNuevoConfirmado) {
-    //   if (usuarioNuevoConfirmado !== "cancelar") {
-    //     // $state.go('profesorMisCursos', {rolUsuario: "P"});
-    //     //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
-    //   }
-    // });
+    swal({
+      title: "¿Está seguro de que quieres volver?",
+      text: "Los cambios no se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (usuarioNuevoConfirmado) {
+      if (usuarioNuevoConfirmado !== "cancelar") {
+        $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCicloId});
+        //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
+      }
+    });
   };
 
   ctrl.proyectoG = {};
@@ -132,20 +132,21 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
           }
           console.log(angular.toJson(data));
-          console.log(data);
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "El proyecto fue creado exitosamente" , "success");
+            swal("¡Bien hecho!", "El proyecto fue creado exitosamente" , "success").then(function () {
+              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCicloId});
+            });
           });
 
-          proyectoNuevo.nombre="";
-          proyectoNuevo.fechaCreacion="";
-          proyectoNuevo.fechaInicio="";
-          proyectoNuevo.fechaFin="";
-          proyectoNuevo.ponderacion="";
-          $("textarea#desTA").val("");
-          $("#ts1").attr("checked", false);
-          $("#ts2").attr("checked", false);
-          $("input[name=metodo][value=0]").prop('checked', true);
+          // proyectoNuevo.nombre="";
+          // proyectoNuevo.fechaCreacion="";
+          // proyectoNuevo.fechaInicio="";
+          // proyectoNuevo.fechaFin="";
+          // proyectoNuevo.ponderacion="";
+          // $("textarea#desTA").val("");
+          // $("#ts1").attr("checked", false);
+          // $("#ts2").attr("checked", false);
+          // $("input[name=metodo][value=0]").prop('checked', true);
       }
     });
   }

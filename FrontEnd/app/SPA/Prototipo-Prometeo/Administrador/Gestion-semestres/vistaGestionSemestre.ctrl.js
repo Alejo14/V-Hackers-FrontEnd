@@ -63,6 +63,33 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     });
   };
 
+  ctrl.semestresLista = [ ];
+  ctrl.cargarSemestres = function () {
+    administradorSemestreService.listarSemestres().then(function (semestresListaData) {
+      ctrl.semestresLista = semestresListaData;
+      console.log(ctrl.semestresLista);
+      for(let i = 0; i < ctrl.semestresLista.length; i++){
+        fechCr = new Date(Number(ctrl.semestresLista[i].fechaCreacion));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.semestresLista[i].fechaCreacionStr = fechCrStr;
+      }
+      for(let i = 0; i < ctrl.semestresLista.length; i++){
+        fechCr = new Date(Number(ctrl.semestresLista[i].fechaInicio));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.semestresLista[i].fechaInicioStr = fechCrStr;
+      }
+      for(let i = 0; i < ctrl.semestresLista.length; i++){
+        fechCr = new Date(Number(ctrl.semestresLista[i].fechaFin));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.semestresLista[i].fechaFinStr = fechCrStr;
+      };
+    });
+  };
 
+  ctrl.init = function (){
+    ctrl.cargarSemestres();
+  };
+
+  ctrl.init();
 
 }]);
