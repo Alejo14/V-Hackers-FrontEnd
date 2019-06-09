@@ -19,12 +19,12 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.listarEspecialidades = function(){
-    var urlListarEspecialidades = variablesAmbiente.apiUrl + variablesAmbiente.puertoSemestre + '/semestre';
+  servicio.listarSemestres = function(){
+    var urllistarSemestres = variablesAmbiente.apiUrl + variablesAmbiente.puertoSemestre + '/semestres';
     var $defer = $q.defer();
     $http({
         method: 'GET',
-        url: urlListarEspecialidades
+        url: urllistarSemestres
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
