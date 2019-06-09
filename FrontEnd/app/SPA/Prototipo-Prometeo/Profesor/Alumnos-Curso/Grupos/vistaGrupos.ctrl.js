@@ -65,7 +65,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
           }
           console.log(angular.toJson(data));
           vistaGruposService.eliminarGrupo(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "El nuevo grupo se elimino exitosamente" , "success");
+            swal("El grupo se elimino exitosamente", "¡Los miembros ahora no tienen grupo!" , "success");
           });
           ctrl.gruposLista.splice(ctrl.gruposLista.indexOf(grupoElim),1);
       }
@@ -164,14 +164,34 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               "horario_id": ctrl.horario.horarioId
               }
               console.log(angular.toJson(data));
-              vistaGruposService.crearGrupo(angular.toJson(data)).then(function () {
-                swal("¡Bien hecho!", "El nuevo grupo se genero exitosamente" , "success");
+              vistaGruposService.crearGrupo(angular.toJson(data)).then(function (grupoNuevo) {
+
+                swal({
+                  title: "El nuevo grupo se genero exitosamente",
+                  text: "¿Desea agregar los integrantes ahora?",
+                  icon: "success",
+                  //buttons: ["Cancelar", "Sí, agregar"],
+                  buttons: {
+                    cancelar: {
+                      text: "Despues, gracias",
+                      className: "btn btn-lg btn-danger"
+                    },
+                    confirm: {
+                      text: "Sí, agregar",
+                      className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+                    }
+                  },
+                  closeModal: false
+                }).then(function (agrupacionNuevoConfirmado) {
+                  if (agrupacionNuevoConfirmado != "cancelar") {
+                    $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupoNuevo.id, grupoNombre: grupoNuevo.nombre});
+                  }
+                });
               });
-              $state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
         });
       }
-    }
+  }
 
   ctrl.actualizarGrupo = function(grupo){
     $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupo.id, grupoNombre: grupo.nombre});
@@ -184,7 +204,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
 
     ctrl.obtenerAlumnos(ctrl.horario.horarioId);
     //ctrl.obtenerConjuntosGrupo(ctrl.horario.horarioId);
-    ctrl.obtenerGrupos("6398aeef-e27f-4d9c-b8ef-52e6e4d48142");
+    ctrl.obtenerGrupos(ctrl.horario.horarioId);
   }
 
   ctrl.init();

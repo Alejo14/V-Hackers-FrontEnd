@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="col-md-5 m-t-50" align="right">
-          <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.gestionarProyecto(ctrl.proyectoG)"><i class="fa fa-save"></i> Guardar</button>
+          <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.actualizarGrupo()"><i class="fa fa-save"></i> Guardar</button>
           <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         </div>
       </div>
@@ -19,11 +19,11 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="col-md-5">
-                      <h4>Nombre grupo:</h4>
+                    <div class="col-md-6">
+                      <h3> Nombre grupo:</h3>
                     </div>
-                    <div class="col-md-5" align="right">
-                      <input class="form-control input-sm" rows="1" placeholder="Ingrese nombre del grupo" ng-model = "ctrl.grupo.nombre">
+                    <div class="col-md-6" align="left">
+                      <h3>  <input class="form-control input-sm" rows="1" placeholder="Ingrese nombre del grupo" ng-model = "ctrl.grupo.nombre"> </h3>
                     </div>
                   </div>
                 </div>
@@ -60,12 +60,12 @@
               <div class="<col-md-12 m-t-50>">
                 <div class="row">
                   <div class="col-md-12 m-t-30">
-                    <label ng-click="ctrl.agregarAlGrupo()" class="btn bgm-gray"><i class="fa fa-caret-left">  </i></label>
+                    <label ng-click="ctrl.agregarAlGrupo()" class="btn bgm-blue"><i class="fa fa-arrow-left">  </i></label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 m-t-30">
-                    <label ng-click="ctrl.sacarDelGrupo()" class="btn bgm-gray"><i class="fa fa-caret-right">  </i></label>
+                    <label ng-click="ctrl.sacarDelGrupo()" class="btn bgm-blue"><i class="fa fa-arrow-right">  </i></label>
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@
               <div class="card-header">
                 <div class="row">
                   <div class="col-md-12">
-                    <h3> Lista Alumnos </h3>
+                    <h3> Alumnos sin grupo </h3>
                     <!--button class="btn btn-primary" ng-click = ""><i class="fa fa-users"></i> Grupos </button-->
                   </div>
                 </div>
