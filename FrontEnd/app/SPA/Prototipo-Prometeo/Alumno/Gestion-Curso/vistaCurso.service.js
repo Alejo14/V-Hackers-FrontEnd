@@ -63,4 +63,20 @@ function($q, $http) {
     return $defer.promise;
   }
 
+  servicio.mostrarAvanceProyecto = function(data){ //trae el id del avanceProyecto
+    var urlListarProyectos = 'http://localhost:7001/proyectos/avance';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlListarProyectos,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

@@ -89,10 +89,17 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
   };
 
   ctrl.verProyecto = function (proyecto) {
-    // $state.go('gestion-proyecto-alumno' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
-    //   fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
-    //   descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
-    //   metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
+    data={
+      "idProyecto": proyecto.id,
+  		"idRolUsuario": ctrl.idRolusuario
+    }
+    // data={
+    //   "idProyecto": "8d0c38f4-64aa-4c43-9e5e-4fe096462319",
+  	// 	"idRolUsuario": "cd2b6dd9-370b-42b7-bdb4-f7ee293289c4"
+    // }
+    alumnoCursoService.mostrarAvanceProyecto(data).then(function (avanceProyectoId) {
+      //console.log(avanceProyectoId);
+    })
     $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   };
 
@@ -155,6 +162,7 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
     ctrl.curso.creditos=//$stateParams.creditos;
     ctrl.curso.cantidadAlumnos=//$stateParams.cantidadAlumnos;
     ctrl.curso.horario=$stateParams.horario;
+    ctrl.idRolusuario=$stateParams.rolusuarioId;
 
     ctrl.cargarProyectos();
     ctrl.cargarEntregables();
