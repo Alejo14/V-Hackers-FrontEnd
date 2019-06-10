@@ -149,10 +149,10 @@ ctrl.agregarArchivo = function () {
     //console.log(parametroRetorno);
     if (parametroRetorno) {
       if (parametroRetorno[0]==1){
-        swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
+        //swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
         //ctrl.listaURLs.push(parametroRetorno[1]);
       }else {
-        swal("¡Bien hecho!", "El archivo se subió exitosamente" , "success");
+        swal("¡Bien hecho!", "La carga masiva se realizó exitosamente" , "success");
         //ctrl.listaArchivos.push(parametroRetorno[1]);
       }
 

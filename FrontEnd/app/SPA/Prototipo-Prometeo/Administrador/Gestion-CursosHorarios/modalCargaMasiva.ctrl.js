@@ -1,10 +1,10 @@
-angular.module('vHackersModule').controller('modalCargaMasivaCtrl', modalAgregarArchivoCtrl);
+angular.module('vHackersModule').controller('modalCargaMasivaCtrl', modalCargaMasivaCtrl);
 
-modalAgregarArchivoCtrl.$inject = ['$scope', '$uibModalInstance', 'parametrosModalArchivo'];
-function modalAgregarArchivoCtrl ($scope , $uibModalInstance, parametrosModalArchivo){
+modalCargaMasivaCtrl.$inject = ['$scope', '$uibModalInstance', 'parametrosModalArchivo'];
+function modalCargaMasivaCtrl ($scope , $uibModalInstance, parametrosModalArchivo){
 
   var ctrl = this;
-  ctrl.titulo="Subir archivos o URL";
+  ctrl.titulo="Subir archivo";
   ctrl.tipoArchivo="Nombre de Archivo";
   ctrl.registroValido = false;
 
@@ -34,7 +34,6 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, parametrosModalArc
     arch.nombre=archivo.nombre;
     arch.fecha=archivo.fechaCreacion;
     arch.tamano=archivo.tamano;
-    console.log(arch.nombre);
 
 
     ctrl.archivoURL=arch.nombre;

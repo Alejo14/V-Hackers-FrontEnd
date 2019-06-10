@@ -1,4 +1,4 @@
-angular.module('vHackersModule').directive('cargaMasivaCurso', ['httpPostFactory','variablesAmbiente',function (httpPostFactory,variablesAmbiente) {
+angular.module('vHackersModule').directive('cargaMasiva', ['httpPostFactory','variablesAmbiente',function (httpPostFactory,variablesAmbiente) {
     return {
 
         restrict: 'A',
@@ -20,7 +20,7 @@ angular.module('vHackersModule').directive('cargaMasivaCurso', ['httpPostFactory
                 //formData.append('id', element[0].files[0]);scope.parametros
 
                //agregar referencua a httpPostFactorypara la siguiente sección
-
+                //console.log(scope.parametros);
                 httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cargamasiva', formData, function (callback) {
                   // recieve image name to use in a ng-src
                   //console.log(callback);
