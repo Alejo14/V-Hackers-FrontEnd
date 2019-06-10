@@ -12,6 +12,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.mensajeFecha = "Complete las fechas correctamente.";
   ctrl.entregablesLista = [];
   $scope.fechaActual = new Date();
+  ctrl.mostrarMetodoTrabajo=0; //Se activa en caso sea un entregableCursoCiclo
 
   ctrl.id=0;
 
@@ -152,6 +153,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     date=entregable.fechaEntrega.getDate();
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
+    if(ctrl.mostrarMetodoTrabajo==1){
+      var metodo = parseInt($('input[name=metodo]:checked').val());
+    }else{
+      var metodo = 0;
+    }
     if(entregable.proyectoId != 0){
       data={
         "id": null, //Defecto
@@ -164,7 +170,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": entregable.proyectoId,
         "notificaciones": $scope.events,
-        "metodoTrabajo": 0
+        "metodoTrabajo": metodo
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
@@ -173,6 +179,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
           });
       });
     }else{
+
       data={
         "id": null, //Defecto
         "nombre": entregable.nombre,
@@ -184,7 +191,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": null,
         "notificaciones": $scope.events,
-        "metodoTrabajo": 0
+        "metodoTrabajo": metodo
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
@@ -256,6 +263,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     dateH=entregableM.fechaHabilitacion.getDate();
     if (!entregableM.horaEntrega) {hours=0} else {hours=entregableM.horaEntrega.getHours();}
     if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
+
+    if(ctrl.mostrarMetodoTrabajo==1){
+      var metodo = parseInt($('input[name=metodo]:checked').val());
+    }else{
+      var metodo = 0;
+    }
+
     data={
       "id": entregableM.id, //Defecto
       "nombre": entregableM.nombre,
@@ -265,7 +279,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
       "notificaciones": $scope.events,
-      "metodoTrabajo": 0
+      "metodoTrabajo": metodo
       }
     console.log(angular.toJson($scope.events));
     console.log(angular.toJson(data));
@@ -396,7 +410,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
           ctrl.fechasIniciadas = true;
         });
       }
-    } else {                            //Entregable pertence a un cursoCiclo
+    } else {
+      ctrl.mostrarMetodoTrabajo=1;                            //Entregable pertence a un cursoCiclo
       ctrl.entregableG.proyectoId=0;
       ctrl.entregableG.proyectoNombre = 0;
       if ($stateParams.id != 0){
@@ -405,6 +420,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
           var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
           $scope.events = entregableEncontrado.notificaciones;
           ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
+          if(entregableEncontrado.metodoTrabajo==1){
+            $("input[name=metodo][value=1]").prop('checked', true);
+          }else{
+            $("input[name=metodo][value=0]").prop('checked', true);
+          }
           // console.log(ctrl.entregableG.notificaciones);
           ctrl.fechasIniciadas = true;
         });
