@@ -16,7 +16,7 @@ angular.module('vHackersModule').directive('subirArchivoEspecialidad', ['httpPos
 
           //agregar referencua a httpPostFactorypara la siguiente sección
 
-          httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/guardar', formData, function (callback) {
+          httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/cargamasiva', formData, function (callback) {
           // httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoEspecialidad + '/especialidad/cargaMasiva', formData, function (callback) {
           // recieve image name to use in a ng-src
           console.log(callback);

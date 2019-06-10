@@ -16,47 +16,6 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-12">
-    <form class="form-horizontal ng-pristine ng-valid">
-      <div class="card-body card-padding">
-            <div class="form-group">
-              <table ng-table="ctrl.tablaDetalleArchivo" class="table table-bordered">
-                <tr ng-repeat="especialidadArchivo in ctrl.especialidadesArchivoLista">
-                  <td data-title="'Código'">{{especialidadArchivo.codigo}}
-                  </td>
-                  <td data-title="'Nombre'">{{especialidadArchivo.nombre}}
-                      <!-- <a href="" ng-click="ctrl.obtenerIdArchivo(archi)"> {{archi.nombre}} </a> -->
-                  </td>
-                  <td data-title="'Facultad'">{{especialidadArchivo.facultad}}</td>
-                  <!-- <td data-title="'Fecha y Hora de Última modificación'">
-                    {{archi.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
-                  </td> -->
-                  <!-- <td data-title="'Tamaño'">
-                    {{archi.tamano/1000}} KB
-                  </td> -->
-                  <td data-title="'Responsable'">{{especialidadArchivo.responsable}}
-                  </td>
-                </tr>
-              </table>
-            </div>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="row">
-  <div id="tableContainer">
-    <table>
-      <tr ng-repeat="title in Elements |limitTo:1 ">
-        <th ng-repeat="(key,val) in title " ng-if="key != 'rowIndex'">{{key}}</th>
-      </tr>
-      <tr ng-repeat="elemnt in Elements" id="{{elemnt['rowIndex']}}">
-        <td ng-change="changedCeld(val,$event)"  ng-model="val" contenteditable="true" strip-br="true" strip-tags="true" select-non-editable="true" id="{{$index}}" ng-repeat="(key,val) in elemnt " ng-if="key != 'rowIndex'">{{val}}</td>
-      </tr>
-    </table>
-    <button ng-hide="saveButton" ng-click="saveData()">Guardar</button>
-  </div>
-</div>
-<div class="row">
     <div class="col-sm-12" align="right">
     <button type="button" ng-click = "" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
     <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
