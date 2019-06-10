@@ -5,6 +5,8 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   ctrl.alumnosLista = [];
   ctrl.alumnosListaModal = [];
   ctrl.mensajeNuevo = "Go V-Hackers";
+  ctrl.proyectoO={};
+  $scope.fechaActual = new Date();
   ctrl.probar = function () {
     hackersService.listarAlumnos().then(function (alumnosListaData) {
       ctrl.alumnosLista = alumnosListaData;
@@ -50,7 +52,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCicloId});
+        $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });
@@ -62,13 +64,17 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
     if (!proyectoG || !(proyectoG.nombre) || !(proyectoG.fechaInicio) || !(proyectoG.fechaFin) || !(proyectoG.ponderacion)){
       swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
     }else{
-      if ($stateParams.id==0) {
-        ctrl.guardarProyecto(proyectoG);
-      }else {
-        ctrl.modificarProyecto(proyectoG);
+      if(proyectoG.fechaInicio > proyectoG.fechaFin){
+        swal("¡Opss!", "La fecha de Inicio debe ser menor o igual a la fecha de Fin" , "error");
+      }else{
+        if ($stateParams.id==0) {
+          ctrl.guardarProyecto(proyectoG);
+        }else {
+          ctrl.modificarProyecto(proyectoG);
+        }
       }
     }
-  }
+  };
 
   ctrl.guardarProyecto = function (proyectoNuevo) {
     swal({
@@ -129,12 +135,12 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
+          "cursoCiclo_id": ctrl.proyectoG.cursoCiclo_id
           }
           console.log(angular.toJson(data));
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             swal("¡Bien hecho!", "El proyecto fue creado exitosamente" , "success").then(function () {
-              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCicloId});
+              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
             });
           });
 
@@ -210,7 +216,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "visible": vis,
           "registroHoras": horas,
           "metodoTrabajo": metodo,
-          "cursoCiclo_id": ctrl.proyectoG.cursoCicloId
+          "cursoCiclo_id": ctrl.proyectoG.cursoCiclo_id
           }
           console.log(angular.toJson(data));
           gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
@@ -227,20 +233,37 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
     });
   }
 
+  ctrl.obtenerProyecto = function (idProyecto) {
+    gestionProyectoService.obtenerProyecto(idProyecto).then(function (proyectoObtenido) {
+      console.log(proyectoObtenido);
+      ctrl.proyectoG.nombre=proyectoObtenido.nombre;
+      ctrl.proyectoG.fechaCreacion=new Date(Number(proyectoObtenido.fechaCreacion));
+      ctrl.proyectoG.fechaInicio=new Date(Number(proyectoObtenido.fechaInicio));;
+      ctrl.proyectoG.fechaFin=new Date(Number(proyectoObtenido.fechaFin));;
+      ctrl.proyectoG.ponderacion=parseInt(proyectoObtenido.ponderacion);
+      ctrl.proyectoG.cursoCiclo_id = proyectoObtenido.cursoCiclo_id;
+      ctrl.proyectoG.visible = proyectoObtenido.visible;
+      ctrl.proyectoG.registroHoras =parseInt(proyectoObtenido.registroHoras);
+      ctrl.proyectoG.metodoTrabajo =parseInt(proyectoObtenido.metodoTrabajo);
+      ctrl.proyectoG.descripcion = proyectoObtenido.descripcion;
+    });
+  }
+
+
   ctrl.init = function (){
     if ($stateParams.id==0){
       ctrl.titulo = "Nuevo Proyecto";
-      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
+      ctrl.proyectoG.cursoCiclo_id=$stateParams.cursoCiclo_id;
     }else{
       ctrl.titulo = "Modificar Proyecto";
+
       ctrl.proyectoG.id=$stateParams.id;
       ctrl.proyectoG.nombre=$stateParams.nombre;
       ctrl.proyectoG.fechaCreacion=new Date(Number($stateParams.fechaCreacion));
       ctrl.proyectoG.fechaInicio=new Date(Number($stateParams.fechaInicio));;
       ctrl.proyectoG.fechaFin=new Date(Number($stateParams.fechaFin));;
-      ctrl.proyectoG.ponderacion=$stateParams.ponderacion;
-      ctrl.proyectoG.cursoCicloId=$stateParams.cursoCiclo_id;
-
+      ctrl.proyectoG.ponderacion=parseInt($stateParams.ponderacion);
+      ctrl.proyectoG.cursoCiclo_id=$stateParams.cursoCiclo_id;
 
       if($stateParams.visible==1){
         $("#ts1").attr("checked", true);

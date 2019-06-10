@@ -163,7 +163,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "descripcion": entregable.descripcion,
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": entregable.proyectoId,
-        "notificaciones": $scope.events
+        "notificaciones": $scope.events,
+        "metodoTrabajo": 0
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
@@ -182,7 +183,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "descripcion": entregable.descripcion,
         "idCursoCiclo": entregable.cursoCicloId,
         "idProyecto": null,
-        "notificaciones": $scope.events
+        "notificaciones": $scope.events,
+        "metodoTrabajo": 0
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
@@ -262,7 +264,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
-      "notificaciones": $scope.events
+      "notificaciones": $scope.events,
+      "metodoTrabajo": 0
       }
     console.log(angular.toJson($scope.events));
     console.log(angular.toJson(data));
