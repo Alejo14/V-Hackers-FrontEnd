@@ -89,10 +89,11 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
   };
 
   ctrl.verProyecto = function (proyecto) {
-    $state.go('gestion-proyecto-alumno' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
-      fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
-      descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
-      metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
+    // $state.go('gestion-proyecto-alumno' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
+    //   fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
+    //   descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
+    //   metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
+    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
   };
 
 
