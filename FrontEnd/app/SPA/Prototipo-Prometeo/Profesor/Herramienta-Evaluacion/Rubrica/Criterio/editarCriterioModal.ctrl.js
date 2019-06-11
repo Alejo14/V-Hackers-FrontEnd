@@ -1,34 +1,10 @@
-angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros',
-function($scope, $uibModalInstance, parametros){
+angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevoAspectoServicio',
+function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
   var ctrl = this;
-
-  ctrl.criterio = parametros.criterio;
-
-  ctrl.rubricaId = parametros.id;
-
-  console.log(ctrl.criterio);
-  console.log(ctrl.rubricaId);
 
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
   };
-  ctrl.nivelesRubrica = [
-      {
-        id: "",
-        descripcion: "Alta",
-        puntaje: 10
-      },
-      {
-        id: "",
-        descripcion: "Media",
-        puntaje: 5
-      },
-      {
-        id: "",
-        descripcion: "Baja",
-        puntaje: 0
-      }
-    ];
   ctrl.guardarCriterio = function () {
     swal({
       title: "¿Esta seguro de que desea modificar este criterio?",
@@ -57,5 +33,22 @@ function($scope, $uibModalInstance, parametros){
       }
     });
   };
+
+  ctrl.listarNiveles = function (){
+      idRubrica = {
+        "herramientaID" : ctrl.rubricaId
+      };
+      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+        ctrl.nivelesLista = nivelesListaData;
+      });
+    }
+
+  ctrl.init = function(){
+    ctrl.criterio = parametros.criterio;
+    ctrl.rubricaId = parametros.idRubrica;
+    ctrl.listarNiveles();
+  }
+
+  ctrl.init();
 
 }])

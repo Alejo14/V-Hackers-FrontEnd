@@ -1,16 +1,6 @@
-angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService',
-function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
+angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService', 'nuevoAspectoServicio',
+function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoAspectoServicio){
   var ctrl = this;
-  console.log($stateParams.id);
-  ctrl.titulo = 'Nueva rúbrica';
-  ctrl.rubrica = {
-    id: $stateParams.id,
-    tipo: "seleccion",
-    numeroNiveles: 0,
-    niveles: [],
-    aspecto: []
-  };
-  ctrl.puedoAgregarNivel = true;
 
   ctrl.agregarNivel = function () {
     ctrl.rubrica.numeroNiveles += 1;
@@ -71,7 +61,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
         }
 
         nuevaRubricaService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
-           swal("Felicidades","Se guardó su configuración con éxito" + ctrl.rubrica.id,"success");
+           swal("Felicidades","Se guardó su configuración con éxito","success");
         });
         $scope.$apply();
       }
@@ -86,4 +76,67 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService){
   ctrl.regresarEntregable = function (){
     $state.go('evaluacion-herramienta');
   }
+
+  ctrl.eliminarAspecto = function (indice) {
+
+  }
+
+  ctrl.editarAspecto  = function (indice) {
+
+  }
+
+  ctrl.guardarRubrica = function(){
+    swal({
+      title: "¿Esta seguro de que desea guardar la rúbrica?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (guardarRubricaConfirmado) {
+      if (guardarRubricaConfirmado !== "cancelar") {
+        confirmarRubrica = {
+          "rubricaID" : ctrl.rubrica.id,
+          "estado": "publico"
+        };
+        nuevaRubricaService.guardarRubrica(confirmarRubrica).then(function(){
+          $state.go('inicioProfes');
+        });
+      }
+    });
+  }
+
+  ctrl.init = function () {  ctrl.titulo = 'Nueva rúbrica';
+    ctrl.rubrica = {
+      id: $stateParams.id,
+      tipo: "seleccion",
+      numeroNiveles: 0,
+      niveles: [],
+      aspecto: []
+    };
+    ctrl.puedoAgregarNivel = true;
+    if(parseInt($stateParams.nivelesCreados)){
+      ctrl.puedoAgregarNivel = false;
+      herramientaId = {
+        "herramientaID": ctrl.rubrica.id
+      }
+      nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
+        ctrl.rubrica.niveles = niveles;
+      });
+      nuevaRubricaService.listarAspectos(herramientaId).then(function(aspectos){
+        ctrl.aspectoLista = aspectos;
+        ctrl.aspectoTabla = new NgTableParams({}, { dataset: ctrl.aspectoLista });
+        console.log(ctrl.aspectoLista);
+      });
+    }
+  }
+
+  ctrl.init();
 }]);

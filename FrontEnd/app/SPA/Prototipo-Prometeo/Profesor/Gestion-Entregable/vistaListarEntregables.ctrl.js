@@ -44,15 +44,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.crearEntregable = function () {
     //entregable de un proyecto
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0 ,fechaHabilitacion: 0,
-    fechaEntrega: 0, descripcion: 0, ponderacion: 0,
-    cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});//ctrl.curso.cursoCicloId
+    $state.go('evaluacion-herramienta-gestionar' , {id: 0, cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});//ctrl.curso.cursoCicloId
   };
 
   ctrl.irModificarEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
-    fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
-    cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, proyectoNombre: ctrl.proyectoNombre});
+    $state.go('evaluacion-herramienta-gestionar' , {id: entregable.id,cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});
   };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
@@ -98,20 +94,20 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
-  ctrl.herramientasEvaluacion = [];
-  ctrl.cargarHerramientas = function (){
-    entregableService.listarHerramientas().then(function (herramientasLista){
-      ctrl.herramientasEvaluacion = herramientasLista;
-      ctrl.herramientasTabla = new NgTableParams({}, { dataset: ctrl.herramientasEvaluacion });
-    });
-  };
-
-  ctrl.crearHerramienta = function(){
-      if (!ctrl.entregableM.id) {
-        ctrl.entregableM.id = '859e054f-ae56-4e68-9a40-cfee27cf8b2a';
-      }
-      $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
-  }
+  // ctrl.herramientasEvaluacion = [];
+  // ctrl.cargarHerramientas = function (){
+  //   entregableService.listarHerramientas().then(function (herramientasLista){
+  //     ctrl.herramientasEvaluacion = herramientasLista;
+  //     ctrl.herramientasTabla = new NgTableParams({}, { dataset: ctrl.herramientasEvaluacion });
+  //   });
+  // };
+  //
+  // ctrl.crearHerramienta = function(){
+  //     if (!ctrl.entregableM.id) {
+  //       ctrl.entregableM.id = '859e054f-ae56-4e68-9a40-cfee27cf8b2a';
+  //     }
+  //     $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
+  // }
 
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
     console.log(archivo.nombre)

@@ -6,47 +6,24 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
     descripcion: "",
     indicaciones: "",
     puntaje_maximo: 0,
-    niveles: []
+    nivelesCriterio: []
   }
 
   ctrl.rubricaId = parametros;
 
-  console.log(ctrl.criterio);
-  console.log(ctrl.rubricaId);
-
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
   };
-  ctrl.nivelesRubrica = [
-      {
-        id: "",
-        descripcion: "Alta",
-        puntaje: 10
-      },
-      {
-        id: "",
-        descripcion: "Media",
-        puntaje: 5
-      },
-      {
-        id: "",
-        descripcion: "Baja",
-        puntaje: 0
-      }
-    ];
 
   ctrl.listarNiveles = function (){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      console.log(angular.toJson(idRubrica));
-      console.log(idRubrica);
       nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
         for(let i = 0; i < ctrl.nivelesLista.length; i++){
           ctrl.nivelesLista[i].puntaje = 0;
         }
-        console.log(nivelesListaData);
       });
     }
 
@@ -68,7 +45,8 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
-        ctrl.criterio.puntaje_maximo = ctrl.criterio.niveles[0].puntaje;
+        console.log(ctrl.criterio);
+        ctrl.criterio.puntaje_maximo = ctrl.criterio.nivelesCriterio[0].puntaje;
         angular.forEach(ctrl.criterio.niveles, function(nivel,indice){
           if(ctrl.criterio.puntaje_maximo < nivel.puntaje){
             ctrl.criterio.puntaje_maximo = nivel.puntaje;

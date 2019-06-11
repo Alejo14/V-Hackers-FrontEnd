@@ -123,18 +123,33 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
-    servicio.listarHerramientas = function(){
+    servicio.listarHerramientas = function(data){
       //Hay que definir el microservicio para la tabla y también el JSON
-      var urlListarHerramientas = '';
+      var urlListarHerramientas = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramientas/listarherramientas';
       var $defer = $q.defer();
       $http({
-        method: 'GET',
-        url: urlListarHerramientas
+        method: 'POST',
+        url: urlListarHerramientas,
+        data: data
       }).then(function (respuesta){
         $defer.resolve(respuesta.data);
       }).catch(function(error){
         $defer.reject(error);
       });
+      return $defer.promise;
+    }
+
+    servicio.mostrarEntregable = function(idEntregable){
+      var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/' + idEntregable;
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlEntregableAlumno
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
       return $defer.promise;
     }
 
