@@ -1,47 +1,17 @@
 <section id="main">
+  <style>
+    .full button span {
+      background-color: red;
+      border-radius: 32px;
+      color: black;
+    }
+  </style>
   <div ng-controller="alumnoCursoCtrl as ctrl">
     <div class="container">
       <div class="block-container">
         <h2> {{ctrl.curso.codigoCurso}} - {{ctrl.curso.nombreCurso}} - {{ctrl.curso.horario}}</h2>
       </div>
-      <!-- <div class="col-md-4">
-        <div class="card ">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-md-8">
-                <h2> Acciones </h2>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="col-md-12">
-              <div class="<col-md-12 m-t-50>">
-                <div class="row">
-                  <div class="col-md-12">
-                    <button ng-click = "ctrl.crearProyecto()" ><i class="fa fa-plus"></i> Crear Proyecto</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 m-t-30">
-                    <button ng-click = "ctrl.crearEntregable()" ><i class="fa fa-plus"></i> Crear Entregable</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 m-t-30">
-                    <button ng-click = "" ><i class="fa fa-plus"></i> Encuestas</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 m-t-30">
-                    <button ng-click = "" ><i class="fa fa-plus"></i> Lista Alumnos</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <div class="col-md-12">
+      <div class="col-md-9">
           <div class="card">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
@@ -63,7 +33,11 @@
             <div ng-if="ctrl.cargaUnitaria2" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/cardEncuestas.html'">
             </div>
           </div>
-
+      </div>
+      <div class="col-md-3">
+        <div style="display:inline-block; min-height:290px;">
+          <div ng-if="ctrl.fechasCargadas" uib-datepicker ng-model="dt" ng-click="" class="well well-sm" datepicker-options="options"></div>
+        </div>
       </div>
       <div class="col-md-12 m-t-20" align="right">
         <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>

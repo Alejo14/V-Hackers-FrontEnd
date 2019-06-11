@@ -108,7 +108,7 @@
 
         <div class="col-md-12">
           <div class="table-responsive">
-            <table ng-table="ctrl.tablaCursos" class="table table-bordered">
+            <table ng-table="ctrl.tablaCursos" class="table table-bordered" show-filter="true">
               <tr ng-repeat="curso in ctrl.cursosLista">
                 <!-- <td data-title="'Rol'">
                   {{usuario.rolesUsuario[0].rol.descripcion}}
@@ -127,7 +127,7 @@
                 </td>
                 <td data-title="'Eliminar  /  Ver Horarios  /  Editar'">
                   <div class = "col-md-4">
-                    <a style="float:right"  ng-click="ctrl.eliminarCurso(curso)">
+                    <a style="float:right"  ng-click="ctrl.eliminarCursoCiclo(curso,$index)">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                   </div>

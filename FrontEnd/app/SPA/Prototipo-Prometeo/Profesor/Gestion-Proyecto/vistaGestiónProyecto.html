@@ -27,7 +27,7 @@
                     <label class="col-sm-3 control-label">Fecha Inicio*:</label>
                     <div class="col-sm-5">
                       <div class="fg-line">
-                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaInicio">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaInicio" min="{{fechaActual | date:'yyyy-MM-dd'}}">
                       </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <label class="col-sm-3 control-label">Fecha Fin*:</label>
                     <div class="col-sm-5">
                       <div class="fg-line">
-                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaFin">
+                        <input type="date" class="form-control input-sm" placeholder="e.g: 11/04/2019" ng-model = "ctrl.proyectoG.fechaFin" min="{{fechaActual | date:'yyyy-MM-dd'}}">
                       </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                       <label class="control-label">Ponderado*:</label>
                     </div>
                     <div class="col-md-4 m-t-30">
-                      <input class="form-control input-sm" rows="1" ng-model = "ctrl.proyectoG.ponderacion">
+                      <input type="number" class="form-control input-sm" rows="1" ng-model = "ctrl.proyectoG.ponderacion">
                     </div>
                   </div>
                 </div>

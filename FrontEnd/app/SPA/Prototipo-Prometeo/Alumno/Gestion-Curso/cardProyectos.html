@@ -1,12 +1,22 @@
 <div class="col-md-12">
+  <div class="row" align="center">
+    <div class="col-md-4">PROYECTO</div>
+    <div class="col-md-3">FECHA CREACIÓN</div>
+    <div class="col-md-3">FECHA DE ENTREGA</div>
+    <div class="col-md-2">NOTA</div>
+  </div>
   <div ng-repeat="proyecto in ctrl.proyectosLista" >
     <div class="row">
-      <li class="col-md-6" ng-click="ctrl.ingresarProyecto(proyecto)">
-        <a href=""> {{proyecto.nombre}}</a>
-      </li>
-      <div class="col-md-3" >
+      <div class="col-md-4" >
+        <a href="" ng-click="ctrl.verProyecto(proyecto)"> {{proyecto.nombre}}</a>
+      </div>
+      <div class="col-md-3" align="center">
         <a> {{proyecto.fechaCreacionStr}} </a>
       </div>
+      <div class="col-md-3" align="center">
+        <a> {{proyecto.fechaFinStr}} </a>
+      </div>
+      <div class="col-md-2" align="center">-</div>
     </div>
   </div>
 </div>

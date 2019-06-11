@@ -93,11 +93,11 @@ function especialidadCargaMasivaCtrl ($scope , $uibModalInstance, administradorE
   ctrl.cerrar = function () {
     var metodo = parseInt($('input[name=metodo]:checked').val());
     if (metodo==0){
-      entregableAlumnoService.eliminarArchivo(arch.id);//Si cierra lo debo eliminar el archivo
+      //entregableAlumnoService.eliminarArchivo(arch.id);//Si cierra lo debo eliminar el archivo
       $uibModalInstance.close(0);
     }else {
         //Eliminar URL si cancela
-        entregableAlumnoService.eliminarArchivo(ctrl.idURL);//Si cierra lo debo eliminar el archivo
+        //entregableAlumnoService.eliminarArchivo(ctrl.idURL);//Si cierra lo debo eliminar el archivo
         $uibModalInstance.close(0);
     }
   };

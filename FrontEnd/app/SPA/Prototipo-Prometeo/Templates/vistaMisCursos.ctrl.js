@@ -13,7 +13,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
     "cicloId" : "85271594-c48c-4d69-b785-c365277c91e6", //Falta agregar un cicloId por alumno
     "rolUsuarioId" : "cfb6b116-e7c9-43b6-9ad8-ff073bd954d7"
   };
-
+  ctrl.rolUsuarioId="cfb6b116-e7c9-43b6-9ad8-ff073bd954d7";
 
   ctrl.cargarMisCursos = function () {
     if($stateParams.rolUsuario=='P'){
@@ -34,7 +34,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
     if($stateParams.rolUsuario=='P'){
       $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
     }else {
-      $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario}); //Aca podemos enviar el RolUsuarioId tambien
+      $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario, rolusuarioId: ctrl.rolUsuarioId}); //Aca podemos enviar el RolUsuarioId tambien
     }
   }
 

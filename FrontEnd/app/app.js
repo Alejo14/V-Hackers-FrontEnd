@@ -228,7 +228,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'alumnoCursos',
-              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:horario',
+              url: '/alumnoCursos/:cursoCicloId/:nombreCurso/:codigoCurso/:horario/:rolusuarioId',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/vistaCurso.html'
             },
             {
