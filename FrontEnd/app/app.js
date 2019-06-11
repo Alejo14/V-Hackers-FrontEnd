@@ -180,12 +180,12 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-rubrica',
-              url: '/nueva-rubrica/:id/:nivelesCreados/:cursoId/:proyectoId',
+              url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
             },
             {
               name: 'nuevo-aspecto',
-              url: '/nuevo-aspecto/:id/:cursoCicloId/:proyectoId',
+              url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             },
             {
