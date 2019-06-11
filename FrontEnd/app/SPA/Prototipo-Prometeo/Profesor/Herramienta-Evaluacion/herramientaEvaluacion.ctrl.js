@@ -62,7 +62,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
           }
         }).then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
-          $state.go('nueva-rubrica', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados, cursoId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          
         });
       }
     });
