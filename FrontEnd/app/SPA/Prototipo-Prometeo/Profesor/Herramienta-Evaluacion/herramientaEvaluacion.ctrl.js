@@ -62,7 +62,12 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
           }
         }).then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
-          
+          if (ctrl.herramienta.tipo=="Rubrica"){
+            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados, cursoId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          }else if(ctrl.herramienta.tipo=="Escala") {
+            $state.go('nueva-escala', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados});
+          }else{ //Lista de Cotejo
+          }
         });
       }
     });
