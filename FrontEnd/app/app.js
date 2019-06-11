@@ -160,7 +160,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-gestionar',
-              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaHabilitacion/:fechaEntrega/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
+              url: '/evaluacion-herramienta-gestionar/:id/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
             },
             {
