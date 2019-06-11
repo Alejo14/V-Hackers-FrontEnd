@@ -116,7 +116,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
       if (aspectoGuardarConfirmado !== "cancelar") {
         nuevoAspectoServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
-           $state.go('nueva-rubrica', {id: ctrl.rubricaId, nivelesCreados: ctrl.nivelesCreados});
+           $state.go('nueva-rubrica', {id: ctrl.rubricaId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
         // $scope.$apply();
       }
@@ -128,7 +128,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   }
 
   ctrl.regresar = function () {
-    $state.go('nueva-rubrica', {id: ctrl.rubricaId});
+    $state.go('nueva-rubrica', {id: ctrl.rubricaId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
   }
 
   ctrl.init = function () {

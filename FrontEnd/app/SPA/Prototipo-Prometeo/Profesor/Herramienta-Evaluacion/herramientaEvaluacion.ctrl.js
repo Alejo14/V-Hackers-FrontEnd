@@ -91,7 +91,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
       closeModal: false
     }).then(function (regresarConfirmado){
       if(regresarConfirmado !== "cancelar"){
-        $state.go('evaluacion-herramienta');
+        $state.go('evaluacion-herramienta-gestionar',{id: $stateParams.id ,cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
       }
     });
   }

@@ -70,11 +70,30 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id});
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+
   }
 
   ctrl.regresarEntregable = function (){
-    $state.go('evaluacion-herramienta');
+    swal({
+      title: "¿Esta seguro de que desea regresar?",
+      text: "La rúbrica estará guardada pero solo podrá verse por usted",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (confirmarRegreso) {
+      if (confirmarRegreso !== "cancelar") {
+        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+      }
+    });
   }
 
   ctrl.eliminarAspecto = function (indice) {
