@@ -202,6 +202,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'actualizarGrupo',
               url: '/actualizarGrupo/:cursoNombre/:horarioId/:horarioNombre/:grupoId/:grupoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/Grupos/vistaActualizarGrupo.html'
+            },
+            {
+              name: 'nueva-escala',
+              url: '/nueva-escala/:id/:nivelesCreados',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
             }
           ]
         },
