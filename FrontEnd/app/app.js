@@ -160,7 +160,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'evaluacion-herramienta-gestionar',
-              url: '/evaluacion-herramienta-gestionar/:nombre/:id/:fechaHabilitacion/:fechaEntrega/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:proyectoNombre',
+              url: '/evaluacion-herramienta-gestionar/:id/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
             },
             {
@@ -175,17 +175,17 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-herramienta',
-              url: '/:id/nueva-herramienta',
+              url: '/:id/nueva-herramienta/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {
               name: 'nueva-rubrica',
-              url: '/nueva-rubrica/:id/:nivelesCreados',
+              url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
             },
             {
               name: 'nuevo-aspecto',
-              url: '/nuevo-aspecto/:id',
+              url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             },
             {
@@ -202,6 +202,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               name: 'actualizarGrupo',
               url: '/actualizarGrupo/:cursoNombre/:horarioId/:horarioNombre/:grupoId/:grupoNombre',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/Grupos/vistaActualizarGrupo.html'
+            },
+            {
+              name: 'nueva-escala',
+              url: '/nueva-escala/:id/:nivelesCreados',
+              templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
             }
           ]
         },

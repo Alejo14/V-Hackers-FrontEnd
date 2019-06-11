@@ -1,4 +1,4 @@
-angular.module("vHackersModule").service('nuevaRubricaService', ['$q', '$http', 'variablesAmbiente',
+angular.module("vHackersModule").service('nuevaEscalaService', ['$q', '$http', 'variablesAmbiente',
 function($q, $http, variablesAmbiente) {
 
   var servicio = this;
@@ -48,5 +48,39 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   }
+
+
+  /* Servicios de Criterios*/
+  servicio.listarNiveles = function(data){
+    var urlListarNiveles = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarNiveles';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlListarNiveles,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.listarCriteriosXAspecto = function(data){
+    console.log(data);
+    var urlListarCriterios = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarCriterios';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlListarCriterios,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+  /*------------*/
 
 }]);

@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevoAspectoServicio',
-function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
+angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevaEscalaService',
+function($scope, $uibModalInstance, parametros, nuevaEscalaService){
   var ctrl = this;
 
   ctrl.cerrar = function(){
@@ -38,7 +38,7 @@ function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      nuevaEscalaService.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
       });
     }

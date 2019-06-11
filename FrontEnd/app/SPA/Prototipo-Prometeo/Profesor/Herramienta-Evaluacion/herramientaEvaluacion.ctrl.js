@@ -8,11 +8,26 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  //ctrl.herramienta.usoOtrosEvaluadores = false;
  ctrl.herramienta.tipo = "";
  ctrl.herramienta.entregableId = $stateParams.id;
- console.log(ctrl.herramienta.entregableId);
+//Esta variable sirve para ejecutar el servicio de listar Niveles
+ ctrl.nivelesCreados = 0;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 
-ctrl.crearHerramienta = function () {
+ function uuid() {
+     function randomDigit() {
+         if (crypto && crypto.getRandomValues) {
+             var rands = new Uint8Array(1);
+             crypto.getRandomValues(rands);
+             return (rands[0] % 16).toString(16);
+         } else {
+             return ((Math.random() * 16) | 0).toString(16);
+         }
+     }
+     var crypto = window.crypto || window.msCrypto;
+     return 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, randomDigit);
+ }
+
+ ctrl.crearHerramienta = function () {
   swal({
     title: "¿Esta seguro de que desea crear esta herramienta?",
     text: "Una vez creada, no podrá modificar el tipo de herramienta",
@@ -31,7 +46,7 @@ ctrl.crearHerramienta = function () {
     }).then(function (crearHerramientaConfirmada) {
       if (crearHerramientaConfirmada !== "cancelar") {
         //Llamada al servicio parar crear herramienta de evaluación
-        console.log(ctrl.herramienta);
+        ctrl.herramienta.id = uuid();
         herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
           ctrl.herramienta.id = id.herramientaID;
         });
@@ -47,7 +62,12 @@ ctrl.crearHerramienta = function () {
           }
         }).then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
-          $state.go('nueva-rubrica', {id: ctrl.herramienta.id});
+          if (ctrl.herramienta.tipo=="Rubrica"){
+            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          }else if(ctrl.herramienta.tipo=="Escala") {
+            $state.go('nueva-escala', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados});
+          }else{ //Lista de Cotejo
+          }
         });
       }
     });
@@ -71,7 +91,7 @@ ctrl.crearHerramienta = function () {
       closeModal: false
     }).then(function (regresarConfirmado){
       if(regresarConfirmado !== "cancelar"){
-        $state.go('evaluacion-herramienta');
+        $state.go('evaluacion-herramienta-gestionar',{id: $stateParams.id ,cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
       }
     });
   }

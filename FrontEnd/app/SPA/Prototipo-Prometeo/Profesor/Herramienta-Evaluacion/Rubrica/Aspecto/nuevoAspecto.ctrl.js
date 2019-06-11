@@ -8,9 +8,9 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
     criterios: []
   };
   ctrl.rubricaId = $stateParams.id;
-  console.log("Aspecto - RubricaId: " + ctrl.rubricaId);
   ctrl.criteriosLista = [];
   ctrl.nivelesLista = [];
+  ctrl.nivelesCreados = 1;
 
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
@@ -113,14 +113,12 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
 	      "titulo": ctrl.aspecto.titulo,
 	      "criterios": ctrl.criteriosLista
       }
-      console.log("Lista de criterios");
-      console.log(ctrl.criteriosLista);
-
       if (aspectoGuardarConfirmado !== "cancelar") {
         nuevoAspectoServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
+           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
-        $scope.$apply();
+        // $scope.$apply();
       }
     });
   }
@@ -130,7 +128,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
   }
 
   ctrl.regresar = function () {
-    $state.go('nueva-rubrica', {id: ctrl.rubricaId});
+    $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
   }
 
   ctrl.init = function () {

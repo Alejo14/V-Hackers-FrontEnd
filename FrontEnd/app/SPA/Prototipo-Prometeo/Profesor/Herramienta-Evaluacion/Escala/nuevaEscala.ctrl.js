@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaEscalaService', 'nuevoAspectoServicio',
+function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaService,nuevoAspectoServicio){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -60,7 +60,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
           "niveles": ctrl.rubrica.niveles
         }
 
-        nuevaRubricaService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
+        nuevaEscalaService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito","success");
         });
         $scope.$apply();
@@ -70,30 +70,11 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
-
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id});
   }
 
   ctrl.regresarEntregable = function (){
-    swal({
-      title: "¿Esta seguro de que desea regresar?",
-      text: "La rúbrica estará guardada pero solo podrá ser vista por usted",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, regresar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      },
-      closeModal: false
-    }).then(function (confirmarRegreso) {
-      if (confirmarRegreso !== "cancelar") {
-        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
-      }
-    });
+    $state.go('evaluacion-herramienta');
   }
 
   ctrl.eliminarAspecto = function (indice) {
@@ -125,14 +106,15 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
           "rubricaID" : ctrl.rubrica.id,
           "estado": "publico"
         };
-        nuevaRubricaService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+        nuevaEscalaService.guardarRubrica(confirmarRubrica).then(function(){
+          $state.go('inicioProfes');
         });
       }
     });
   }
 
-  ctrl.init = function () {  ctrl.titulo = 'Nueva rúbrica';
+  ctrl.init = function () {  ctrl.titulo = 'Nueva escala';
+    ctrl.inicializarTabla();
     ctrl.rubrica = {
       id: $stateParams.id,
       tipo: "seleccion",
@@ -149,13 +131,101 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
       nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
       });
-      nuevaRubricaService.listarAspectos(herramientaId).then(function(aspectos){
+      nuevaEscalaService.listarAspectos(herramientaId).then(function(aspectos){
         ctrl.aspectoLista = aspectos;
         ctrl.aspectoTabla = new NgTableParams({}, { dataset: ctrl.aspectoLista });
         console.log(ctrl.aspectoLista);
       });
     }
   }
+
+/* Funciones de Criterio  */
+ctrl.criteriosLista = [];
+ctrl.nivelesLista = [];
+ctrl.nivelesCreados = 1;
+
+ctrl.inicializarTabla = function () {
+  ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
+}
+
+ctrl.agregarCriterio = function () {
+  var modalInstance = $uibModal.open({
+    animation: false,
+    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/Criterio/nuevoCriterioModal.html',
+    controller: 'nuevoCriterioCtrl as ctrl',
+    size: 'lg',
+    backdrop: true,
+    keyboard: true,
+    resolve: {
+      parametros:  function(){
+        return ctrl.rubricaId;
+      }
+    }
+  });
+
+  modalInstance.result.then( function (parametroRetorno) {
+    if (parametroRetorno) {
+      var nuevoCriterio = {
+        "id": parametroRetorno.id,
+        "descripcion": parametroRetorno.descripcion,
+        "indicaciones": parametroRetorno.indicaciones,
+        "nivelesCriterio": parametroRetorno.nivelesCriterio
+      };
+      ctrl.criteriosLista.push(nuevoCriterio);
+    }
+  });
+};
+
+ctrl.editarCriterio = function(indiceCriterio){
+  var modalInstance = $uibModal.open({
+    animation: false,
+    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/Criterio/nuevoCriterioModal.html',
+    controller: 'editarCriterioModalCtrl as ctrl',
+    size: 'lg',
+    backdrop: true,
+    keyboard: true,
+    resolve: {
+      parametros:  function(){
+        return {
+          idRubrica: ctrl.rubricaId,
+          criterio: ctrl.criteriosLista[indiceCriterio]
+        };
+      }
+    }
+
+  });
+
+  modalInstance.result.then( function (parametroRetorno) {
+    if (parametroRetorno) {
+        ctrl.criteriosLista[indiceCriterio] = parametroRetorno;
+    }
+  });
+}
+
+ctrl.eliminarCriterio = function (indiceCriterio){
+  swal({
+    title: "¿Esta seguro de que desea eliminar este criterio?",
+    text: "No podrá recuperar el criterio en el futuro",
+    icon: "warning",
+    buttons: {
+      cancelar: {
+        className: "btn btn-lg btn-danger"
+      },
+      confirm: {
+        text: "Sí, eliminar",
+        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+      }
+    },
+    closeModal: false
+  }).then(function (eliminarCriterioConfirmado) {
+    if (eliminarCriterioConfirmado !== "cancelar") {
+      ctrl.criteriosLista.splice(indiceCriterio,1);
+      $scope.$apply();
+    }
+  });
+}
+/*------------------------*/
+
 
   ctrl.init();
 }]);

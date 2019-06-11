@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoServicio', 'parametros',
-function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
+angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'nuevaEscalaService', 'parametros',
+function($scope, $uibModalInstance, nuevaEscalaService, parametros){
   var ctrl = this;
 
   ctrl.criterio = {
@@ -19,7 +19,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      nuevaEscalaService.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
         for(let i = 0; i < ctrl.nivelesLista.length; i++){
           ctrl.nivelesLista[i].puntaje = 0;

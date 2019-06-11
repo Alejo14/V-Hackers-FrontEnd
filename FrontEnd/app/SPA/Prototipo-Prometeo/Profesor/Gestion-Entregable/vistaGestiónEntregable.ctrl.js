@@ -290,16 +290,16 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         }
       });
     });
-    entregableM.id=0;
-    entregableM.tieneAlarma=1;
-    entregableM.nombre="";
-    entregableM.fechaHabilitacion="";
-    entregableM.horaInicio="";
-    entregableM.fechaEntrega="";
-    entregableM.horaFin="";
-    entregableM.descripcion="";
-    entregableM.ponderacion="";
-    entregableM.puntajeMaximo="";
+    // entregableM.id=0;
+    // entregableM.tieneAlarma=1;
+    // entregableM.nombre="";
+    // entregableM.fechaHabilitacion="";
+    // entregableM.horaInicio="";
+    // entregableM.fechaEntrega="";
+    // entregableM.horaFin="";
+    // entregableM.descripcion="";
+    // entregableM.ponderacion="";
+    // entregableM.puntajeMaximo="";
     ctrl.entregableCreado = true;
 };
 
@@ -351,20 +351,19 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     $state.go('reutilizar-herramienta', {id: ctrl.entregableM.id});
   }
 
-  ctrl.herramientasEvaluacion = [];
-  ctrl.cargarHerramientas = function (){
-    entregableService.listarHerramientas().then(function (herramientasLista){
+  ctrl.cargarHerramientas = function (id){
+    idEntregable =
+    {
+      "entregableID":id
+    }
+    entregableService.listarHerramientas(idEntregable).then(function (herramientasLista){
       ctrl.herramientasEvaluacion = herramientasLista;
       ctrl.herramientasTabla = new NgTableParams({}, { dataset: ctrl.herramientasEvaluacion });
     });
   };
 
   ctrl.crearHerramienta = function(){
-
-      if (!ctrl.entregableM.id) {
-        ctrl.entregableM.id = '074b668b-6a29-4331-bc2d-797795784f3b';
-      }
-      $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
+      $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
   }
 
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
@@ -384,17 +383,23 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.entregableCreado = false;
       ctrl.modificar = false;
       ctrl.fechasIniciadas = true;
+      ctrl.herramientasEvaluacion = [];
     } else {                  //Modificación de Entregable
       ctrl.titulo = "Modificar entregable";
       //ctrl.botonGrabar="Modificar";
-      ctrl.entregableG.nombre=$stateParams.nombre;
-      ctrl.entregableG.id=$stateParams.id;
-      ctrl.entregableG.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
-      ctrl.entregableG.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
-      ctrl.entregableG.descripcion=$stateParams.descripcion;
-      ctrl.entregableG.ponderacion=Number($stateParams.ponderacion);
       ctrl.entregableCreado = true;
       ctrl.modificar = true;
+      console.log($stateParams.id);
+      entregableService.mostrarEntregable($stateParams.id).then(function(entregable){
+        console.log(entregable);
+        ctrl.entregableG.nombre=entregable.nombre;
+        ctrl.entregableG.id=entregable.id;
+        ctrl.entregableG.fechaHabilitacion=new Date(Number(entregable.fechaHabilitacion));
+        ctrl.entregableG.fechaEntrega=new Date(Number(entregable.fechaEntrega));
+        ctrl.entregableG.descripcion=entregable.descripcion;
+        ctrl.entregableG.ponderacion=Number(entregable.ponderacion);
+        ctrl.cargarHerramientas($stateParams.id);
+      });
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"

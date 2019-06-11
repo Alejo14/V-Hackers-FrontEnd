@@ -128,9 +128,13 @@
                           <table ng-table="ctrl.herramientasTabla" class="table table-bordered">
                             <tr ng-repeat="herramienta in ctrl.herramientasEvaluacion">
                               <td data-title="'Nombre'">
+                                {{herramienta.descripcion}}
                               </td>
-                              <td data-title="'Detalle'">
-                                <a ng-click = "">Ver detalle</a>
+                              <td data-title="'Tipo'">
+                                {{herramienta.tipo}}
+                              </td>
+                              <td data-title="'Detalle'"><a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                              <a ng-click="ctrl.eliminarCriterio($index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
                               </td>
                             </tr>
                           </table>

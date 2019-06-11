@@ -24,8 +24,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   };
 
   ctrl.crearEntregable = function(entregable){
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaHabilitacion: 0, fechaEntrega: 0,
-      descripcion: 0, ponderacion: 0, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
+    $state.go('evaluacion-herramienta-gestionar' , {id: 0,cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
   }
   ctrl.crearProyecto = function () {
     $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
@@ -97,9 +96,7 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
   }
 
   ctrl.verEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: entregable.nombre, id: entregable.id ,fechaHabilitacion: entregable.fechaHabilitacion,
-       fechaEntrega: entregable.fechaEntrega, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion,
-       cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0, proyectoNombre: 0});
+    $state.go('evaluacion-herramienta-gestionar' , {id: entregable.id, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0});
   };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
