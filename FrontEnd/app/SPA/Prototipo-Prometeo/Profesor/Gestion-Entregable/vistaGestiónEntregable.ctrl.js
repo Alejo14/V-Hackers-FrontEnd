@@ -351,10 +351,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     $state.go('reutilizar-herramienta', {id: ctrl.entregableM.id});
   }
 
-  ctrl.cargarHerramientas = function (){
-    console.log(ctrl.entregableG);
-    var idEntregable = {
-      "entregableID" : ctrl.entregableG.id
+  ctrl.cargarHerramientas = function (id){
+    idEntregable =
+    {
+      "entregableID":id
     }
     entregableService.listarHerramientas(idEntregable).then(function (herramientasLista){
       ctrl.herramientasEvaluacion = herramientasLista;
@@ -363,11 +363,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.crearHerramienta = function(){
-
-      if (!ctrl.entregableM.id) {
-        ctrl.entregableM.id = '074b668b-6a29-4331-bc2d-797795784f3b';
-      }
-      $state.go('nueva-herramienta', {id: ctrl.entregableM.id});
+      $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
   }
 
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
@@ -402,8 +398,8 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         ctrl.entregableG.fechaEntrega=new Date(Number(entregable.fechaEntrega));
         ctrl.entregableG.descripcion=entregable.descripcion;
         ctrl.entregableG.ponderacion=Number(entregable.ponderacion);
+        ctrl.cargarHerramientas($stateParams.id);
       });
-      ctrl.cargarHerramientas();
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"

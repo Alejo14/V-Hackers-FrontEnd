@@ -175,17 +175,17 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-herramienta',
-              url: '/:id/nueva-herramienta',
+              url: '/:id/nueva-herramienta/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
             },
             {
               name: 'nueva-rubrica',
-              url: '/nueva-rubrica/:id/:nivelesCreados',
+              url: '/nueva-rubrica/:id/:nivelesCreados/:cursoId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
             },
             {
               name: 'nuevo-aspecto',
-              url: '/nuevo-aspecto/:id',
+              url: '/nuevo-aspecto/:id/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
             },
             {

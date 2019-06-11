@@ -62,7 +62,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
           }
         }).then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
-          $state.go('nueva-rubrica', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados});
+          $state.go('nueva-rubrica', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados, cursoId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
       }
     });
@@ -86,7 +86,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
       closeModal: false
     }).then(function (regresarConfirmado){
       if(regresarConfirmado !== "cancelar"){
-        $state.go('evaluacion-herramienta');
+        $state.go('evaluacion-herramienta-gestionar',{id: $stateParams.id ,cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
       }
     });
   }
