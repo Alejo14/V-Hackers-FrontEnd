@@ -70,28 +70,28 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
 
   }
 
   ctrl.regresarEntregable = function (){
     swal({
       title: "¿Esta seguro de que desea regresar?",
-      text: "La rúbrica estará guardada pero solo podrá verse por usted",
+      text: "La rúbrica estará guardada pero solo podrá ser vista por usted",
       icon: "warning",
       buttons: {
         cancelar: {
           className: "btn btn-lg btn-danger"
         },
         confirm: {
-          text: "Sí, guardar",
+          text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function (confirmarRegreso) {
       if (confirmarRegreso !== "cancelar") {
-        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
       }
     });
   }
@@ -126,7 +126,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
           "estado": "publico"
         };
         nuevaRubricaService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('inicioProfes');
+          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
       }
     });
