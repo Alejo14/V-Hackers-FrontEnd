@@ -29,7 +29,19 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
 
     //Recibo parametro de retorno
     modalInstance.result.then( function (parametroRetorno) {
-      if (parametroRetorno) {
+      if (parametroRetorno == "masivo"){
+        swal({
+          title: "¡Listo!",
+          text: "Carga masiva de usuarios realizada con éxito",
+          icon: "success",
+          buttons: {
+            confirm: {
+              text: "ok",
+              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+            }
+          }
+        });
+      } else if (parametroRetorno) {
         var usuarioRegistro = {
           "id": parametroRetorno.id,
           "idEspecialidad": parametroRetorno.especialidad.id,
