@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaEscalaService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams, nuevaEscalaService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaEscalaService', 'nuevoAspectoServicio',
+function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaService,nuevoAspectoServicio){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -113,7 +113,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaEscalaService,nuevoAs
     });
   }
 
-  ctrl.init = function () {  ctrl.titulo = 'Nueva rúbrica';
+  ctrl.init = function () {  ctrl.titulo = 'Nueva escala';
     ctrl.inicializarTabla();
     ctrl.rubrica = {
       id: $stateParams.id,
