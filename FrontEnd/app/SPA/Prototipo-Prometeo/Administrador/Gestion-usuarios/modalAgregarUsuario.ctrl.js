@@ -11,40 +11,6 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
     correo: "",
     codigo: ""
   };
-  ctrl.facultadesLista = [
-    {
-      id: '',
-      nombre: 'Ciencias e ingeniería'
-    },
-    {
-      id: '',
-      nombre: 'Estudios Generales Ciencias'
-    }
-  ];
-  ctrl.especialidadesLista = [
-    {
-      id: '',
-      nombre: 'Ingenieria Informatica'
-    },
-    {
-      id: '',
-      nombre: 'Ingenieria Industrial'
-    }
-  ];
-  ctrl.rolesUsuarioLista = [
-    {
-      id: "",
-      nombre: "Profesor"
-    },
-    {
-      id: "",
-      nombre: "Asistente de docencia"
-    },
-    {
-      id: "",
-      nombre: "Alumnos"
-    }
-  ];
   ctrl.registroValido = false;
   ctrl.cargaUnitaria = true;
   ctrl.modo ='c';
@@ -52,9 +18,14 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
     ctrl.cargaUnitaria = indice == 0;
   };
   ctrl.facultad = {};
+  ctrl.rolesUsuarioNuevo = [];
+  ctrl.modoSoloLectura = false;
   ctrl.obtenerFacultades = function () {
     gestionUsuariosService.obtenerFacultades().then(function (facultadesListaData) {
       ctrl.facultadesLista = facultadesListaData;
+      if (parametrosModalUsuario.actualizarRoles){
+        ctrl.inicializarFacultadEspecialidadUsuario();
+      }
     });
   };
 
@@ -65,13 +36,21 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
   };
 
   ctrl.obtenerRoles = function () {
-    gestionUsuariosService.obtenerRoles().then(function (rolesListaData) {
-      ctrl.rolesUsuarioLista = rolesListaData;
-    });
+    if (parametrosModalUsuario.actualizarRoles){
+      gestionUsuariosService.obtenerRolesActivos().then(function (rolesListaData) {
+        ctrl.rolesUsuarioLista = rolesListaData;
+        ctrl.inicializarRolesUsuario();
+      });
+    }
+    else {
+      gestionUsuariosService.obtenerRoles().then(function (rolesListaData) {
+        ctrl.rolesUsuarioLista = rolesListaData;
+      });
+    }
   }
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && ctrl.facultad && ctrl.usuarioNuevo.apellidos !== "" && ctrl.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && ctrl.rolesUsuarioNuevo;
+    ctrl.registroValido = ctrl.usuarioNuevo.nombres !== "" && ctrl.facultad && ctrl.usuarioNuevo.apellidos !== "" && ctrl.especialidad && ctrl.usuarioNuevo.correo !== "" && ctrl.usuarioNuevo.codigo !== "" && ctrl.rolesUsuarioNuevo && ctrl.rolesUsuarioNuevo.length;
   };
 
   ctrl.guardarUsuario = function () {
@@ -106,7 +85,89 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
       }
     });
   };
+
+  ctrl.inicializarUsuario = function () {
+    if (parametrosModalUsuario.actualizarRoles) {
+      ctrl.usuarioNuevo = parametrosModalUsuario.usuarioModificar;
+      ctrl.modoSoloLectura = true;
+    }
+  }
+
+  ctrl.inicializarFacultadEspecialidadUsuario = function () {
+    var numFacultades = ctrl.facultadesLista.length;
+    for (var i = 0; i < numFacultades; i++) {
+      if (ctrl.facultadesLista[i].id == ctrl.usuarioNuevo.idFacultad){
+        ctrl.facultad = ctrl.facultadesLista[i];
+        gestionUsuariosService.obtenerEspecialidades(ctrl.facultad.id).then(function (especialidadesListaData) {
+          ctrl.especialidadesLista = especialidadesListaData;
+          var numEspecialidades = ctrl.especialidadesLista.length;
+          for (var i = 0; i < numEspecialidades; i++){
+            if (ctrl.especialidadesLista[i].id == ctrl.usuarioNuevo.idEspecialidad){
+              ctrl.especialidad = ctrl.especialidadesLista[i];
+            }
+          }
+        });
+        break;
+      }
+    }
+  }
+
+  ctrl.inicializarRolesUsuario = function () {
+    var numRoles = ctrl.rolesUsuarioLista.length;
+    var numRolesUsuario = ctrl.usuarioNuevo.roles.length;
+    for (var i = 0; i < numRoles; i++) {
+      for (var j = 0; j < numRolesUsuario; j++) {
+        if (ctrl.rolesUsuarioLista[i].id == ctrl.usuarioNuevo.roles[j].id) {
+          ctrl.rolesUsuarioNuevo.push(ctrl.usuarioNuevo.roles[j]);
+        }
+      }
+    }
+  };
+
+  ctrl.actualizarRoles = function () {
+    swal({
+      title: "¿Esta seguro de que desea actualizar los roles de este usuario?",
+      text: "",
+      icon: "warning",
+      //buttons: ["Cancelar", "Sí, agregar"],
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, actualizar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (usuarioActualizadoConfirmado) {
+      if (usuarioActualizadoConfirmado !== "cancelar") {
+        var numRoles = ctrl.rolesUsuarioNuevo.length;
+        var numRolesUsuario = ctrl.usuarioNuevo.roles.length;
+        for (var i = 0; i < numRolesUsuario; i++) {
+          var rolUsuarioMantenido = false;
+          for (var j = 0; j < numRoles; j++) {
+            rolUsuarioMantenido = ctrl.usuarioNuevo.roles[i].id === ctrl.rolesUsuarioNuevo[j].id;
+            if (rolUsuarioMantenido) {
+              ctrl.rolesUsuarioNuevo[j].activo = false;
+              break;
+            }
+          }
+          ctrl.usuarioNuevo.roles[i].activo = rolUsuarioMantenido;
+        }
+
+        var usuarioListaNuevosRolesJson = {
+          "usuario": ctrl.usuarioNuevo,
+          "rolesNuevos": ctrl.rolesUsuarioNuevo
+        };
+        $uibModalInstance.close(usuarioListaNuevosRolesJson);
+      }
+    });
+  };
+
   ctrl.init = function(){
+    ctrl.inicializarUsuario();
     ctrl.obtenerFacultades();
     ctrl.obtenerRoles();
   };

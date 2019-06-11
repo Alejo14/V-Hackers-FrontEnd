@@ -33,6 +33,7 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
         var usuarioRegistro = {
           "id": parametroRetorno.id,
           "idEspecialidad": parametroRetorno.especialidad.id,
+          "idFacultad": parametroRetorno.especialidad.facultad.id,
           "codigo": parametroRetorno.codigo,
           "nombres": parametroRetorno.nombres,
           "apellidos": parametroRetorno.apellidos,
@@ -77,6 +78,25 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
             usuarioModificar: usuario
           };
         }
+      }
+    });
+
+    modalInstance.result.then(function(usuarioListaNuevosRolesJson){
+      if (usuarioListaNuevosRolesJson) {
+        gestionUsuariosService.actualizarRoles(usuarioListaNuevosRolesJson).then(function (resultadoActualizacion) {
+          ctrl.obtenerUsuarios();
+          swal({
+            title: "¡Listo!",
+            text: "Usuario agregado con éxito",
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "ok",
+                className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+              }
+            }
+          });
+        });
       }
     });
   }

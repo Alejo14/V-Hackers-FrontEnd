@@ -4,7 +4,7 @@
       <label class="col-sm-4 control-label m-t-10 m-b-0">Nombres*: </label>
       <div class="col-sm-8">
         <div class="fg-line">
-          <input class="form-control input-sm" placeholder="Ingrese los nombres del usuario" ng-model = "ctrl.usuarioNuevo.nombres" ng-change="ctrl.validarRegistroValido()">
+          <input class="form-control input-sm" placeholder="Ingrese los nombres del usuario" ng-model = "ctrl.usuarioNuevo.nombres" ng-change="ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
             data-placeholder="Seleccione una facultad"
             ng-model="ctrl.facultad"
             ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista"
-            ng-change="ctrl.obtenerEspecialidades(); ctrl.validarRegistroValido()">
+            ng-change="ctrl.obtenerEspecialidades(); ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
             <option value=""></option>
           </select>
         </div>
@@ -32,7 +32,7 @@
       <label class="col-sm-4 control-label m-t-10 m-b-0">Apellidos*: </label>
       <div class="col-sm-8">
         <div class="fg-line">
-          <input class="form-control input-sm" placeholder="Ingrese los apellidos del usuario" ng-model = "ctrl.usuarioNuevo.apellidos" ng-change="ctrl.validarRegistroValido()">
+          <input class="form-control input-sm" placeholder="Ingrese los apellidos del usuario" ng-model = "ctrl.usuarioNuevo.apellidos" ng-change="ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
             ng-model="ctrl.especialidad"
             ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista"
             ng-disabled="!ctrl.facultad"
-            ng-change="ctrl.validarRegistroValido()">
+            ng-change="ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
             <option value=""></option>
           </select>
         </div>
@@ -61,7 +61,7 @@
       <label class="col-sm-4 control-label m-t-10 m-b-0">Correo*: </label>
       <div class="col-sm-8">
         <div class="fg-line">
-          <input class="form-control input-sm" placeholder="Ingrese el correo del usuario" ng-model = "ctrl.usuarioNuevo.correo" ng-change="ctrl.validarRegistroValido()">
+          <input class="form-control input-sm" placeholder="Ingrese el correo del usuario" ng-model = "ctrl.usuarioNuevo.correo" ng-change="ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@
       <label class="col-sm-4 control-label m-t-10 m-b-0">C&oacute;digo*: </label>
       <div class="col-sm-8">
         <div class="fg-line">
-          <input class="form-control input-sm" placeholder="Ingrese el código del usuario" ng-model = "ctrl.usuarioNuevo.codigo" ng-change="ctrl.validarRegistroValido()">
+          <input class="form-control input-sm" placeholder="Ingrese el código del usuario" ng-model = "ctrl.usuarioNuevo.codigo" ng-change="ctrl.validarRegistroValido()" ng-readonly="ctrl.modoSoloLectura">
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <ul class="nav nav-tabs card-header-tabs">
+          <ul class="nav nav-tabs card-header-tabs" ng-if="!ctrl.modoSoloLectura">
             <li class="nav-item">
               <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Crear nuevo curso</a>
             </li>
@@ -35,7 +35,8 @@
       </div>
       <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
         <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
-        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarUsuario()" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
+        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarUsuario()" ng-disabled="!ctrl.registroValido" ng-if="!ctrl.modoSoloLectura"><i class="fa fa-save"></i> Guardar</button>
+        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.actualizarRoles()" ng-disabled="!ctrl.registroValido" ng-if="ctrl.modoSoloLectura"><i class="fa fa-save"></i> Actualizar</button>
       </div>
     </div>
   </div>

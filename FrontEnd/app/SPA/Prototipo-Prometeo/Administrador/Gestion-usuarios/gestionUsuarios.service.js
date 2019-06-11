@@ -62,6 +62,20 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   };
+
+  servicio.obtenerRolesActivos = function () {
+    var urlObtenerRolesActivos = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/rolesactivos';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerRolesActivos,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
   servicio.regitstrarUsuario = function (usuarioNuevo) {
     var urlRegistrarUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/crear';
     var $defer = $q.defer();
@@ -84,6 +98,35 @@ function($q, $http, variablesAmbiente) {
         method: 'POST',
         url: urlRegistrarUsuario,
         data: usuarioEliminar
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  servicio.obtenerUsuario = function (idUsuario) {
+    var urlRegistrarUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/obtenerusuario/' + idUsuario;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlRegistrarUsuario
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  servicio.actualizarRoles = function (usuarioListaNuevosRolesJson) {
+    var urlActualizarRoles = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/actualizarroles';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlActualizarRoles,
+        data: usuarioListaNuevosRolesJson
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
