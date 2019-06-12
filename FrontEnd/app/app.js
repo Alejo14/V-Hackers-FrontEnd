@@ -208,9 +208,9 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
             },
-            {//app\SPA\Prototipo-Prometeo\Profesor\Herramienta-Evaluacion\ListaCotejo\nuevaListaCotejo.html
+            {
               name: 'nueva-lista-cotejo',
-              url: '/nueva-lista-cotejo/:id/:nivelesCreados',
+              url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
             }
           ]

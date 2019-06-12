@@ -70,7 +70,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
           }else if(ctrl.herramienta.tipo=="Escala") {
             $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
           }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados});
+            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
           }
         });
       }

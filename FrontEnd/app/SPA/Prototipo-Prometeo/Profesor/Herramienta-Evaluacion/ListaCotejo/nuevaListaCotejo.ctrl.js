@@ -107,7 +107,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejo
           "estado": "publico"
         };
         nuevaListaCotejoService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('inicioProfes');
+          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
       }
     });
@@ -151,7 +151,7 @@ ctrl.inicializarTabla = function () {
 ctrl.agregarCriterio = function () {
   var modalInstance = $uibModal.open({
     animation: false,
-    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/Criterio/nuevoCriterioModal.html',
+    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
     controller: 'nuevoCriterioCtrl as ctrl',
     size: 'lg',
     backdrop: true,
@@ -179,7 +179,7 @@ ctrl.agregarCriterio = function () {
 ctrl.editarCriterio = function(indiceCriterio){
   var modalInstance = $uibModal.open({
     animation: false,
-    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/Criterio/nuevoCriterioModal.html',
+    templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
     controller: 'editarCriterioModalCtrl as ctrl',
     size: 'lg',
     backdrop: true,
