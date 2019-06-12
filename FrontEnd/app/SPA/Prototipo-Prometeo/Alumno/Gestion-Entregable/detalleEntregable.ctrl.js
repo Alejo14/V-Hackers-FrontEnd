@@ -293,7 +293,17 @@ ctrl.regresarCursoAlumno = function () {
     ctrl.detalleE.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
     ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
     ctrl.detalleE.descripcion=$stateParams.descripcion;
+    ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
+    data={
+      "idEntregable":ctrl.detalleE.id,
+      "idRolUsuarioId":ctrl.detalleE.idRolUsuario
+    }
 
+    //Tengo que probarlo
+    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+        swal("¡Bien hecho!", "Se obtuvo el idAvanceEntregable" , "success");
+        console.log(respuesta.data);
+    });
      //este debe ser el id que se debe usar para registrar el archivo
 
     if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto

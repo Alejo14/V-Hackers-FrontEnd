@@ -110,6 +110,20 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.mostrarAvanceEntregables = function(data){
+    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuarioId; //'http://localhost:7002/entregables';
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarEntregables
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   // servicio.entregableAlumno = function(){
   //
   //   var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
