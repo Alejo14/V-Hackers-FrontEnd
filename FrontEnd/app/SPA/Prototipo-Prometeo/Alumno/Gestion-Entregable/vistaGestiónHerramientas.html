@@ -1,0 +1,78 @@
+<!-- Anderson -->
+<section id="main">
+  <style>
+    .full button span {
+      background-color: yellow;
+      border-radius: 32px;
+      color: black;
+    }
+    .start button span {
+      background-color: green;
+      border-radius: 32px;
+      color: black;
+    }
+    .finish button span {
+      background-color: red;
+      border-radius: 32px;
+      color: black;
+    }
+  </style>
+  <div ng-controller="herramientaCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2></h2>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <h2>{{ctrl.herramientas}}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form class="form-horizontal ng-pristine ng-valid">
+                <div class="card-body card-padding">
+                      <div class="form-group" ng-if="ctrl.entregableCreado">
+                        <div class="table-responsive p-t-30">
+                          <table ng-table="ctrl.herramientasTabla" class="table table-bordered">
+                            <tr ng-repeat="herramienta in ctrl.herramientasEvaluacion">
+                              <td data-title="'Nombre'">
+                                {{herramienta.descripcion}}
+                              </td>
+                              <td data-title="'Tipo'">
+                                {{herramienta.tipo}}
+                              </td>
+                              <td data-title="'Detalle'"><a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                              <a ng-click="ctrl.eliminarCriterio($index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <!--<button type="button" class="btn btn-primary waves-effect" ng-click = "ctrl.probar()"><i class="fa fa-file"></i> Probar Swal</button>-->
+            </div>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              <ul>
+                <li ng-repeat="alumno in ctrl.alumnosLista">
+                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
+                </li>
+              </ul>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

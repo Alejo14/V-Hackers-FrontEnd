@@ -262,6 +262,12 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   };
 
+//Herramienta de Evaluacion//
+  ctrl.verHerramientas = function (entregable) {
+    $state.go('detalle-herramientas' , {id: entregable.id}); //Temporal, deberia usar un servicio para traerme esa info
+
+  };
+
   ctrl.init = function (){
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;

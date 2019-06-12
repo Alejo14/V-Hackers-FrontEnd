@@ -256,6 +256,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/detalleEntregable.html'
             },
+            {
+              name: 'detalle-herramientas',
+              url: '/detalle-herramientas/:id',
+              templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaGestiónHerramientas.html'
+            },
           ]
         },
         //LOGIN
