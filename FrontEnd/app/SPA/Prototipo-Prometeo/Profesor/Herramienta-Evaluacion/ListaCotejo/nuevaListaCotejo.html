@@ -1,0 +1,101 @@
+<section id="main">
+  <div ng-controller="nuevaListaCotejoCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-10">
+                <h2>{{ctrl.titulo}}<h2>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <label class="col-sm-2 control-label m-t-15 m-b-20">Niveles de la escala</label>
+                <label style="z-index:2;" class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarNivel()" ng-if="ctrl.puedoAgregarNivel"><i class="fa fa-plus"></i></label>
+              </div>
+            </div>
+            <form role="form" class="ng-pristine ng-valid ng-submitted" ng-repeat="nivel in ctrl.rubrica.niveles">
+              <div class="form-group">
+                <div class="col-sm-8 p-t-10 m-b-10">
+                  <label class="col-sm-2 control-label p-t-5">Descripci&oacute;n</label>
+                    <div class="col-sm-10">
+                        <div class="fg-line">
+                            <input class="form-control input-sm" placeholder="Ingrese descripción del nivel" ng-model="nivel.descripcion">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 p-t-15">
+                  <a ng-click="ctrl.eliminarNivel($index)" ng-if="ctrl.puedoAgregarNivel"><i class="zmdi zmdi-delete"></i></a>
+                  <!-- <a ng-click="ctrl.eliminarNivel($index)" ng-if="!ctrl.puedoAgregarNivel"><i class="zmdi zmdi-edit"></i></a> -->
+                </div>
+              </div>
+            </form>
+            <div class="col-md-12" align="right" ng-if="ctrl.rubrica.numeroNiveles >= 1">
+              <button type="button" ng-if="ctrl.puedoAgregarNivel" ng-click = "ctrl.guardarNiveles()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar n&uacutemero de niveles</button>
+            </div>
+
+            <!-- <div class="form-group p-t-20">
+              <div class="col-sm-12">
+                <label class="col-sm-2 control-label m-t-15">Aspectos de la r&uacute;brica</label>
+                <label style="z-index:2;" class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarAspecto()"><i class="fa fa-plus"></i></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="table-responsive p-t-30">
+                <table ng-table="ctrl.aspectoTabla" class="table table-bordered">
+                  <tr ng-repeat="aspecto in ctrl.aspectoLista">
+                    <td data-title="'Nombre'">
+                      {{aspecto.titulo}}
+                    </td>
+                    <td data-title="'Descripción'">
+                      {{aspecto.descripcion}}
+                    </td>
+                    <td data-title="'Detalle'" align="center">
+                      <a ng-click="ctrl.editarAspecto($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                      <a ng-click="ctrl.eliminarAspecto($index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div> -->
+
+            <!-- Criterios -->
+            <div class="form-group p-t-20">
+              <div class="col-sm-12">
+                <label class="col-sm-2 control-label m-t-15">Criterios</label>
+                <label style="z-index:2;" class="btn bgm-blue btn-float waves-effect waves-circle" ng-click="ctrl.agregarCriterio()"><i class="fa fa-plus"></i></label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="table-responsive p-t-30">
+                <table ng-table="ctrl.criteriosTabla" class="table table-bordered">
+                  <tr ng-repeat="criterio in ctrl.criteriosLista">
+                    <td data-title="'Descripción del Criterio'">
+                      {{criterio.descripcion}}
+                    </td>
+                    <td data-title="'Indicaciones del Criterio'">
+                      {{criterio.indicaciones}}
+                    </td>
+                    <td data-title="'Detalle'" align="center">
+                      <a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                      <a ng-click="ctrl.eliminarCriterio($index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!--------->
+
+            <div class="col-md-12" align="right">
+              <button type="button" ng-click = "ctrl.guardarRubrica()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" ng-click = "ctrl.regresarEntregable()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
