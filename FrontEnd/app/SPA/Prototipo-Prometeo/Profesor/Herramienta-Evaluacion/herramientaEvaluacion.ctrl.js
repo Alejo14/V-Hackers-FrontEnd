@@ -28,8 +28,11 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  }
 
  ctrl.crearHerramienta = function () {
+   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntajeMax){
+     swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
+   }else{
   swal({
-    title: "¿Esta seguro de que desea crear esta herramienta?",
+    title: "¿Está seguro de que desea crear esta herramienta?",
     text: "Una vez creada, no podrá modificar el tipo de herramienta",
     icon: "warning",
     buttons: {
@@ -72,6 +75,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
         });
       }
     });
+  }
   }
 
   ctrl.regresarEntregable = function (){

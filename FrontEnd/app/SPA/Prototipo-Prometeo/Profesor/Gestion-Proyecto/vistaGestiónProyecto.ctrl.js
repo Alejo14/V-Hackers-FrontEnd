@@ -38,7 +38,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
   ctrl.volverCurso = function () {
     swal({
       title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {
