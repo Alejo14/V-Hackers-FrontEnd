@@ -254,6 +254,14 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     console.log(archivo.nombre)
   }
 
+
+  ctrl.verArchivos = function (entregable) {
+    $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: "", proyectoId: 0,
+    nombreCurso: "",codigoCurso:"" ,horario: "",idRolUsuario: ""}); //Temporal, deberia usar un servicio para traerme esa info
+
+  };
+
   ctrl.init = function (){
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;

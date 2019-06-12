@@ -205,7 +205,7 @@ function ($urlRouterProvider,stateHelperProvider) {
             },
             {
               name: 'nueva-escala',
-              url: '/nueva-escala/:id/:nivelesCreados',
+              url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
             },
             {//app\SPA\Prototipo-Prometeo\Profesor\Herramienta-Evaluacion\ListaCotejo\nuevaListaCotejo.html
