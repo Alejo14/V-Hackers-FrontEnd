@@ -11,6 +11,28 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     fechaFin : ""
   };
 
+
+  ctrl.obtenerInfoArchivo = function (archivo,parametros) {
+    //console.log(parametros);
+    var id=parametros.data;
+    data={
+          "archivoId":id,
+        	"entregableId":ctrl.idAvanceEntregable
+    }
+    //console.log(ctrl.idAvanceEntregable);
+    arch.id=parametros.data;
+    arch.nombre=archivo.nombre;
+    arch.fecha=archivo.fechaCreacion;
+    arch.tamano=archivo.tamano;
+
+
+    ctrl.archivoURL=arch.nombre;
+    //console.log(arch);
+    //ctrl.listaArchivos.push(arch);
+
+    // //$state.go('cargar-archivos');
+  }
+  
   ctrl.crearSemestre = function(semestre){
     yearI = semestre.fechaInicio.getFullYear();
     monthI = semestre.fechaInicio.getMonth();
