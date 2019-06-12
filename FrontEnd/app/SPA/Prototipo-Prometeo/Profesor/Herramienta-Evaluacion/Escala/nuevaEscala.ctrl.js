@@ -107,7 +107,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
           "estado": "publico"
         };
         nuevaEscalaService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('inicioProfes');
+          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
       }
     });
@@ -158,7 +158,7 @@ ctrl.agregarCriterio = function () {
     keyboard: true,
     resolve: {
       parametros:  function(){
-        return ctrl.rubricaId;
+        return ctrl.rubrica.id;
       }
     }
   });

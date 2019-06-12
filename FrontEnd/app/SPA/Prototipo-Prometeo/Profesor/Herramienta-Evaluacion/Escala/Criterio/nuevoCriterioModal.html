@@ -26,13 +26,13 @@
           <label class="col-sm-8 p-t-10 p-l-0">Descripci&oacute;n del nivel {{nivel.descripcion}}</label>
           <label class="col-sm-2 p-t-10">Puntaje</label>
           <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.criterio.nivelesCriterio[$index].puntaje" placeholder="Ingrese el puntaje">
-          <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la descripción del nivel de este criterio" ng-model="ctrl.criterio.nivelesCriterio[$index].descripcion">
-          </textarea>
         </div>
-      </div>
-      <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
+
+      <div class="form-group fg-line col-sm-12" align="right">
         <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
         <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarCriterio()" ng-disabled=""><i class="fa fa-save"></i> Guardar</button>
+      </div>
+
       </div>
     </div>
   </div>

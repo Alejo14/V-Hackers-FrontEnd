@@ -302,6 +302,7 @@ ctrl.regresarCursoAlumno = function () {
     //Tengo que probarlo
     entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
         swal("¡Bien hecho!", "Se obtuvo el idAvanceEntregable" , "success");
+        console.log(respuesta);
         console.log(respuesta.data);
     });
      //este debe ser el id que se debe usar para registrar el archivo
