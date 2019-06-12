@@ -125,7 +125,7 @@ function($q, $http,variablesAmbiente) {
 
     servicio.listarHerramientas = function(data){
       //Hay que definir el microservicio para la tabla y también el JSON
-      var urlListarHerramientas = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramientas/listarherramientas';
+      var urlListarHerramientas = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarHerramientas';
       var $defer = $q.defer();
       $http({
         method: 'POST',
