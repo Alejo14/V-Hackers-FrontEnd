@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('loginCtrl', ['$scope', 'variablesAmbiente', '$cookies', 'loginService',
-function ($scope, variablesAmbiente, $cookies, loginService) {
+angular.module('vHackersModule').controller('loginCtrl', ['$scope', '$state', 'variablesAmbiente', '$cookies', 'loginService',
+function ($scope, $state, variablesAmbiente, $cookies, loginService) {
   var ctrl = this;
 
   ctrl.usuario = {
@@ -26,7 +26,14 @@ function ($scope, variablesAmbiente, $cookies, loginService) {
               };
 
               loginService.login(correoLogin).then(function (respuestaCookie) {
-                $cookies.put('usuarioID', respuestaCookie);
+                if (respuestaCookie === 'Usuario no existe') {
+                  swal("¡Opss!", "El usuario no se encuentra en base de datos" , "error");
+                }
+                else {
+                  $cookies.put('usuarioID', respuestaCookie);
+                  $cookies.put('inicioSesion', true);
+                  $state.go('raiz');
+                }
               });
             });
           });
