@@ -1,13 +1,6 @@
-angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoServicio', 'parametros',
-function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
+angular.module('vHackersModule').controller('nuevoCriterioRubricaCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoRubricaServicio', 'parametros',
+function($scope, $uibModalInstance, nuevoAspectoRubricaServicio, parametros){
   var ctrl = this;
-
-  ctrl.criterio = {
-    descripcion: "",
-    indicaciones: "",
-    puntaje_maximo: 0,
-    niveles: []
-  }
 
   ctrl.rubricaId = parametros;
 
@@ -19,7 +12,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      nuevoAspectoRubricaServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
         console.log(nivelesListaData);
         for(let i = 0; i < ctrl.nivelesLista.length; i++){
@@ -68,6 +61,12 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
   }
 
   ctrl.init = function(){
+    ctrl.criterio = {
+      descripcion: "",
+      indicaciones: "",
+      puntaje_maximo: 0,
+      niveles: []
+    }
     ctrl.listarNiveles();
     ctrl.nivelesPorCriterio();
   }
