@@ -357,6 +357,35 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     $state.go('reutilizar-herramienta', {id: ctrl.entregableM.id});
   }
 
+  ctrl.eliminarHerramienta= function(herramienta,indice){
+    console.log(angular.toJson(herramienta));//Envio el json para crear el entregable
+    swal({
+      title: "¿Está seguro que quiere eliminar la herramienta?",
+      text: "Los cambios se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (eliminarRubrica) {
+      if (eliminarRubrica !== "cancelar") {
+        data={
+          "herramientaID":herramienta.id
+        }
+        entregableService.eliminarHerramienta(data).then(function () {
+            swal("¡Bien hecho!", "La herramienta se elimino exitosamente" , "success");
+        });
+        ctrl.herramientasEvaluacion.splice(indice,1);
+      }
+    });
+  }
+
   ctrl.cargarHerramientas = function (id){
     idEntregable =
     {

@@ -153,4 +153,19 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
+    servicio.eliminarHerramienta = function(data){
+      var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion +'/herramienta/eliminar';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCalificacion,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
 }]);
