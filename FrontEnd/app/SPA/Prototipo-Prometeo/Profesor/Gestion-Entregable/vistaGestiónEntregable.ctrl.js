@@ -269,7 +269,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     }else{
       var metodo = 0;
     }
-
+    if (ctrl.entregableG.proyectoId == 0) {
+        var proyecto = null;
+    } else {
+      var proyecto = ctrl.entregableG.proyectoId;
+    }
     data={
       "id": entregableM.id, //Defecto
       "nombre": entregableM.nombre,
@@ -278,10 +282,12 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
+      "idCursoCiclo": ctrl.entregableG.cursoCicloId,
+      "idProyecto": proyecto,
       "notificaciones": $scope.events,
       "metodoTrabajo": metodo
       }
-    console.log(angular.toJson($scope.events));
+    // console.log(angular.toJson($scope.events));
     console.log(angular.toJson(data));
     entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
       swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success").then(function () {

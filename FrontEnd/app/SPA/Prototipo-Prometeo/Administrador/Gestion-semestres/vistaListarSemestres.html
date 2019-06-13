@@ -62,13 +62,88 @@
                 </div>
               </form>
 
+
+
                 </div>
           </div>
+          <div class="row">
+            <div class="col-md-12 m-t-2">
+              <div class="radio m-b-15">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="form-group">
+                <label class="col-sm-3 control-label m-t-10 m-b-0">Carga masiva curso ciclo*: </label>
+                <div class="col-sm-5">
+                  <div class="fg-line">
+                    <input class="form-control input-sm" placeholder="{{ctrl.descripcion}}" ng-model = "ctrl.archivoURL1" >
+                    <!-- ng-change="ctrl.validarRegistroValido()" -->
+                  </div>
+                </div>
+                <div class="col-sm-2" ng-hide="ctrl.tipoCarga">
+                  <div class="fg-line" >
+                    <label for="archivoCargaMasivaCC" class="btn bgm-blue float-sm-none waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                    <input type="file" id="archivoCargaMasivaCC" carga-masiva-curso-ciclo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row"><h1></h1></div>
+
+
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="form-group">
+                <label class="col-sm-3 control-label m-t-10 m-b-0">Carga masiva horarios*: </label>
+                <div class="col-sm-5">
+                  <div class="fg-line">
+                    <input class="form-control input-sm" placeholder="{{ctrl.descripcion}}" ng-model = "ctrl.archivoURL2" >
+                    <!-- ng-change="ctrl.validarRegistroValido()" -->
+                  </div>
+                </div>
+                <div class="col-sm-2" ng-hide="ctrl.tipoCarga">
+                  <div class="fg-line" >
+                    <label for="archivoCargaMasivaHorarios" class="btn bgm-blue float-sm-none waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                    <input type="file" id="archivoCargaMasivaHorarios" carga-masiva-horarios parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row"><h1></h1></div>
+
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="form-group">
+                <label class="col-sm-3 control-label m-t-10 m-b-0">Carga masiva usuarios por ciclo*: </label>
+                <div class="col-sm-5">
+                  <div class="fg-line">
+                    <input class="form-control input-sm" placeholder="{{ctrl.descripcion}}" ng-model = "ctrl.archivoURL3" >
+                    <!-- ng-change="ctrl.validarRegistroValido()" -->
+                  </div>
+                </div>
+                <div class="col-sm-2" ng-hide="ctrl.tipoCarga">
+                  <div class="fg-line" >
+                    <label for="archivoCargaMasivaUsuarios" class="btn bgm-blue float-sm-none waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                    <input type="file" id="archivoCargaMasivaUsuario" carga-masiva-rol-usuario-horario parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row"><h1></h1></div>
+
           <div class="row">
             <div class="col-md-12" align="right">
               <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
