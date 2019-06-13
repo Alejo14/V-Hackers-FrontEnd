@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaEscalaService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaEscalaService',
+function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaService){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -180,7 +180,7 @@ ctrl.editarCriterio = function(indiceCriterio){
   var modalInstance = $uibModal.open({
     animation: false,
     templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/Criterio/nuevoCriterioModal.html',
-    controller: 'editarCriterioEscalaModalCtrl as ctrl',
+    controller: 'editarCriterioEscalaCtrl as ctrl',
     size: 'lg',
     backdrop: true,
     keyboard: true,

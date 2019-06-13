@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaListaCotejoService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaListaCotejoService',
+function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -128,7 +128,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejo
       herramientaId = {
         "herramientaID": ctrl.rubrica.id
       }
-      nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
+      nuevaListaCotejoService.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
       });
       nuevaListaCotejoService.listarAspectos(herramientaId).then(function(aspectos){
