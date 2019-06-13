@@ -113,6 +113,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
 	      "titulo": ctrl.aspecto.titulo,
 	      "criterios": ctrl.criteriosLista
       }
+      console.log(data);
       if (aspectoGuardarConfirmado !== "cancelar") {
         nuevoAspectoServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");

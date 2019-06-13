@@ -31,7 +31,7 @@
                   {{($index+1) + '. ' + criterio.descripcion}}
                   <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
                     <label>
-                        <input type="radio" name="{{criterio.id}}" value="">
+                        <input type="radio" name="{{criterio.id}}" ng-change="ctrl.cambiarPuntaje(aspecto.puntajeAsignado,criterio.nivelesCriterios[$index].puntajeAsignado)" ng-model="criterio.nivelesCriterios[$index].puntajeAsignado" value="{{criterio.nivelesCriterios[$index].puntajeSeleccion}}">
                         <i class="input-helper"></i>
                         {{nivel.descripcion}} : {{criterio.nivelesCriterios[$index].descripcion}}
                     </label>

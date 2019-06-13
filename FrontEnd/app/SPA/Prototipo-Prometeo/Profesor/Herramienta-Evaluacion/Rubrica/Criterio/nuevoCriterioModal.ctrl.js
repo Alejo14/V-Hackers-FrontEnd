@@ -6,7 +6,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
     descripcion: "",
     indicaciones: "",
     puntaje_maximo: 0,
-    nivelesCriterio: []
+    niveles: []
   }
 
   ctrl.rubricaId = parametros;
@@ -21,6 +21,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       };
       nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
+        console.log(nivelesListaData);
         for(let i = 0; i < ctrl.nivelesLista.length; i++){
           ctrl.nivelesLista[i].puntaje = 0;
         }
@@ -45,8 +46,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
-        console.log(ctrl.criterio);
-        ctrl.criterio.puntaje_maximo = ctrl.criterio.nivelesCriterio[0].puntaje;
+        ctrl.criterio.puntaje_maximo = ctrl.criterio.niveles[0].puntaje;
         angular.forEach(ctrl.criterio.niveles, function(nivel,indice){
           if(ctrl.criterio.puntaje_maximo < nivel.puntaje){
             ctrl.criterio.puntaje_maximo = nivel.puntaje;
@@ -59,11 +59,11 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
 
   ctrl.nivelesPorCriterio = function(){
     angular.forEach(ctrl.nivelesLista, function(nivel,indice){
-      var nivelCriterio = {
+      var nivel = {
         descripcion: "",
         puntaje: 0
       }
-      ctrl.criterio.niveles.push(nivelCriterio);
+      ctrl.criterio.niveles.push(nivel);
     });
   }
 

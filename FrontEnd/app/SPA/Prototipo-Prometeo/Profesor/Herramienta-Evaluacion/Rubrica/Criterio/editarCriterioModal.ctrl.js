@@ -23,10 +23,10 @@ function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
-        ctrl.criterio.puntajeMaximo = ctrl.criterio.nivelesCriterio[0].puntaje;
-        angular.forEach(ctrl.criterio.nivelesCriterio, function(nivel,indice){
-          if(ctrl.criterio.puntajeMaximo < nivel.puntaje){
-            ctrl.criterio.puntajeMaximo = nivel.puntaje;
+        ctrl.criterio.puntaje_maximo = ctrl.criterio.niveles[0].puntaje;
+        angular.forEach(ctrl.criterio.niveles, function(nivel,indice){
+          if(ctrl.criterio.puntaje_maximo < nivel.puntaje){
+            ctrl.criterio.puntaje_maximo = nivel.puntaje;
           }
         });
         $uibModalInstance.close(ctrl.criterio);
