@@ -152,7 +152,7 @@ ctrl.agregarCriterio = function () {
   var modalInstance = $uibModal.open({
     animation: false,
     templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
-    controller: 'nuevoCriterioCtrl as ctrl',
+    controller: 'nuevoCriterioListaCtrl as ctrl',
     size: 'lg',
     backdrop: true,
     keyboard: true,
@@ -180,7 +180,7 @@ ctrl.editarCriterio = function(indiceCriterio){
   var modalInstance = $uibModal.open({
     animation: false,
     templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
-    controller: 'editarCriterioModalCtrl as ctrl',
+    controller: 'editarCriterioListaModalCtrl as ctrl',
     size: 'lg',
     backdrop: true,
     keyboard: true,
