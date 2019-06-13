@@ -28,8 +28,11 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  }
 
  ctrl.crearHerramienta = function () {
+   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntajeMax){
+     swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
+   }else{
   swal({
-    title: "¿Esta seguro de que desea crear esta herramienta?",
+    title: "¿Está seguro de que desea crear esta herramienta?",
     text: "Una vez creada, no podrá modificar el tipo de herramienta",
     icon: "warning",
     buttons: {
@@ -67,11 +70,12 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
           }else if(ctrl.herramienta.tipo=="Escala") {
             $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
           }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, nivelesCreados: ctrl.nivelesCreados});
+            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
           }
         });
       }
     });
+  }
   }
 
   ctrl.regresarEntregable = function (){

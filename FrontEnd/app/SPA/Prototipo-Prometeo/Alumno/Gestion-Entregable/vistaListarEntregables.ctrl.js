@@ -258,7 +258,13 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   ctrl.verArchivos = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
     fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: "", proyectoId: 0,
-    nombreCurso: "",codigoCurso:"" ,horario: "",idRolUsuario: ""}); //Temporal, deberia usar un servicio para traerme esa info
+    nombreCurso: "",codigoCurso:"" ,horario: "",idRolUsuario: ctrl.rolusuarioId, estadoEntregable: "D"}); //Temporal, deberia usar un servicio para traerme esa info
+
+  };
+
+//Herramienta de Evaluacion//
+  ctrl.verHerramientas = function (entregable) {
+    $state.go('detalle-herramientas' , {id: entregable.id}); //Temporal, deberia usar un servicio para traerme esa info
 
   };
 
@@ -266,6 +272,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
+    ctrl.rolusuarioId=$stateParams.rolusuarioId;
     ctrl.cargarEntregables(ctrl.proyectoId);
 
     }

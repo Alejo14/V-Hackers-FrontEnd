@@ -299,9 +299,14 @@ ctrl.regresarCursoAlumno = function () {
       "idRolUsuarioId":ctrl.detalleE.idRolUsuario
     }
 
+    if ($stateParams.estadoEntregable=="I"){
+      ctrl.mostrarBoton=true;
+    }else {
+      ctrl.mostrarBoton=false;
+    }
+
     //Tengo que probarlo
     entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
-        swal("¡Bien hecho!", "Se obtuvo el idAvanceEntregable" , "success");
         console.log(respuesta);
         console.log(respuesta.data);
     });

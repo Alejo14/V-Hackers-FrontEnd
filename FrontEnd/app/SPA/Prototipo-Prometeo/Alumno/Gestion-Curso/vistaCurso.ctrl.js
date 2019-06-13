@@ -100,14 +100,14 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal){
     alumnoCursoService.mostrarAvanceProyecto(data).then(function (avanceProyectoId) {
       //console.log(avanceProyectoId);
     })
-    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
+    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre,rolusuarioId: ctrl.idRolusuario });
   };
 
 
   ctrl.verEntregable = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
     fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: ctrl.curso.cursoCicloId, proyectoId: 0,
-    nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.idRolusuario}); //Temporal, deberia usar un servicio para traerme esa info
+    nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.idRolusuario, estadoEntregable: "I"}); //Temporal, deberia usar un servicio para traerme esa info
 
   };
 

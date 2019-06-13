@@ -124,6 +124,23 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
+
+  servicio.listarHerramientas = function(data){
+    //Hay que definir el microservicio para la tabla y también el JSON
+    var urlListarHerramientas = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/listarHerramientas';
+    var $defer = $q.defer();
+    $http({
+      method: 'POST',
+      url: urlListarHerramientas,
+      data: data
+    }).then(function (respuesta){
+      $defer.resolve(respuesta.data);
+    }).catch(function(error){
+      $defer.reject(error);
+    });
+    return $defer.promise;
+  }
+
   // servicio.entregableAlumno = function(){
   //
   //   var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';

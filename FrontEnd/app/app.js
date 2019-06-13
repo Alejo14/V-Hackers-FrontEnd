@@ -213,9 +213,9 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
-                {//app\SPA\Prototipo-Prometeo\Profesor\Herramienta-Evaluacion\ListaCotejo\nuevaListaCotejo.html
+                {
                   name: 'nueva-lista-cotejo',
-                  url: '/nueva-lista-cotejo/:id/:nivelesCreados',
+                  url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
                 }
               ]
@@ -253,13 +253,18 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'listar-entregables-alumno',
-                  url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre',
+                  url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre/:rolusuarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
                 },
                 {
                   name: 'detalle-entregable',
-                  url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario',
+                  url: '/detalle-entregable/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/detalleEntregable.html'
+                },
+                {
+                  name: 'detalle-herramientas',
+                  url: '/detalle-herramientas/:id',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaGestiónHerramientas.html'
                 },
               ]
             }

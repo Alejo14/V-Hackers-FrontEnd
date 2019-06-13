@@ -9,7 +9,7 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
       raizService.obtenerUsuarioLogin(ctrl.idUsuario).then(function (usuario){
         ctrl.usuario = usuario;
         var inicioSesion = $cookies.get('inicioSesion');
-        if (inicioSesion) {
+        if (inicioSesion && inicioSesion !== 'false') {
           $cookies.put('inicioSesion', false);
           var descripcionRol = ctrl.usuario.roles[0].descripcion;
           var state = '';
