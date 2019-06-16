@@ -15,7 +15,7 @@
                     <label class="col-sm-6 control-label m-t-10 m-b-0">Código*: </label>
                     <div class="col-sm-6">
                       <div class="fg-line">
-                        <input class="form-control input-sm" placeholder="Ingrese el código del curso" ng-model = "ctrl.cursoNuevo.claveCurso">
+                        <input class="form-control input-sm" rows="1" placeholder="Ingrese el código del curso" ng-model = "ctrl.filtro.claveCurso">
                       </div>
                     </div>
                   </div>
@@ -27,26 +27,7 @@
                     <label class="col-sm-6 control-label m-t-10 m-b-0">Nombre curso*: </label>
                     <div class="col-sm-6" >
                       <div class="fg-line">
-                        <input class="form-control input-sm" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.cursoNuevo.nombreCurso">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6" align="left">
-                  <div class="form-group">
-                    <label class="col-sm-6 control-label m-t-10 m-b-0"align="left">Facultad*: </label>
-                    <div class="col-sm-6">
-                      <div class="fg-line">
-                        <div class="select">
-                          <select class="form-control"
-                            data-placeholder="Seleccione una facultad"
-                            ng-model="facultad"
-                            ng-options="facultad as facultad.nombre for facultad in ctrl.facultadesLista">
-                            <option value=""></option>
-                          </select>
-                        </div>
+                        <input class="form-control input-sm" rows = "1" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.filtro.nombreCurso">
                       </div>
                     </div>
                   </div>
@@ -60,9 +41,9 @@
                       <div class="fg-line">
                         <div class="select">
                           <select class="form-control"
-                            data-placeholder="Seleccione una especialidad"
-                            ng-model="especialidad"
-                            ng-options="especialidad as especialidad.nombre for especialidad in ctrl.especialidadesLista">
+                            rows = "1" placeholder="Seleccione una especialidad"
+                            ng-model="ctrl.filtro.especialidad"
+                            ng-options="especialidad.nombre as especialidad.nombre for especialidad in ctrl.especialidadesLista">
                             <option value=""></option>
                           </select>
                         </div>
@@ -74,14 +55,14 @@
               <div class="row">
                 <div class="col-sm-6" align="left">
                   <div class="form-group">
-                    <label class="col-sm-6 control-label m-t-10 m-b-0"align="left">Semestre*: </label>
+                    <label class="col-sm-6 control-label m-t-10 m-b-0"align="left">Ciclo*: </label>
                     <div class="col-sm-6">
                       <div class="fg-line">
                         <div class="select">
                           <select class="form-control"
-                            data-placeholder="Seleccione un semestre"
-                            ng-model="ciclo"
-                            ng-options="ciclo.id as ciclo.nombreCiclo for ciclo in ctrl.ciclosLista"
+                            rows = "1" placeholder="Seleccione un semestre"
+                            ng-model="ctrl.filtro.ciclo"
+                            ng-options="ciclo.nombreCiclo as ciclo.nombreCiclo for ciclo in ctrl.ciclosLista"
                             ng-change="">
                             <option value=""></option>
                           </select>
@@ -97,7 +78,7 @@
               <div class="row">
                 <div class="col" align="left">
         <!--          <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                  <button type="button" ng-click = "ctrl.guardarCurso(curso)" class="btn btn-primary waves-effect"><i class="fa fa-search"></i> Buscar</button>
+                  <button type="button" ng-click = "ctrl.filtrar()" class="btn btn-primary waves-effect"><i class="fa fa-search"></i> Buscar</button>
                   <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-file-excel"></i> Exportar</button>
                 </div>
               </div>
@@ -113,6 +94,12 @@
                 <!-- <td data-title="'Rol'">
                   {{usuario.rolesUsuario[0].rol.descripcion}}
                 </td> -->
+                <td data-title="'Especialidad'">
+                  {{curso.especialidad}}
+                </td>
+                <td data-title="'Ciclo'">
+                  {{curso.ciclo}}
+                </td>
                 <td data-title="'Código'">
                   {{curso.codigo}}
                 </td>
@@ -125,6 +112,7 @@
                 <td data-title="'Créditos'">
                   {{curso.creditos}}
                 </td>
+
                 <td data-title="'Eliminar  /  Ver Horarios  /  Editar'">
                   <div class = "col-md-4">
                     <a style="float:right"  ng-click="ctrl.eliminarCursoCiclo(curso,$index)">
