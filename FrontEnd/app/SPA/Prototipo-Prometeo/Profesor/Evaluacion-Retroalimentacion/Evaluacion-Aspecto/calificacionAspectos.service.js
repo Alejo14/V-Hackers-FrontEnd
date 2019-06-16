@@ -32,7 +32,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.guardarAspecto = function(aspectos){
-     var urlGuardarAspectoCalificado = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacion'
+     var urlGuardarAspectoCalificado = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacionAspectosCriterioRubrica'
      var $defer = $q.defer();
      $http({
        method: 'POST',

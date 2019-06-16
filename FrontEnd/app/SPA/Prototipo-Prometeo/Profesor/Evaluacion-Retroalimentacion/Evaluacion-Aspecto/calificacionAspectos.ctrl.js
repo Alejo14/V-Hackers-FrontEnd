@@ -73,13 +73,12 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
   }
 
   ctrl.guardarAspecto = function(){
-    data =
-    {
-      "evaluacion":ctrl.evaluacionAspecto
-    };
-    console.log(data);
+    var data = {
+      "aspectos":ctrl.evaluacionAspecto
+    }
     calificacionAspectoService.guardarAspecto(data).then(function(){
       swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
+      $state.go('calificacion', {avanceEntregableId: $stateParams.avanceEntregableId});
     });
   }
 

@@ -18,7 +18,7 @@
                 {{aspecto.titulo}} : {{aspecto.descripcion}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
                 </uib-accordion-heading>
                 <div class="form-group fg-line">
-                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
+                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n del aspecto</label>
                   <label class="col-sm-2 p-t-10">Puntaje</label>
                   <input type="number" step="any" class="col-sm-2 form-control input-sm"  ng-model="aspecto.puntajeManual" placeholder="Ingrese el puntaje">
                   <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
@@ -36,7 +36,7 @@
                         {{nivel.descripcion}}  ({{criterio.nivelesCriterios[$index].puntajeAsignado}} ptos): {{criterio.nivelesCriterios[$index].descripcion}}
                     </label>
                   </div>
-                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
+                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n del criterio</label>
                   <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
                   </textarea>
                 </div>
