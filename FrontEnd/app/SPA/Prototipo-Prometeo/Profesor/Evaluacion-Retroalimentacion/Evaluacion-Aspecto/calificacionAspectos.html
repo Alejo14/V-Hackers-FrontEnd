@@ -19,8 +19,8 @@
                 </uib-accordion-heading>
                 <div class="form-group fg-line">
                   <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
-                  <label class="col-sm-2 p-t-10" ng-model="aspecto.puntajeAsignado">Puntaje</label>
-                  <input type="number" step="any" class="col-sm-2 form-control input-sm" ng-model="aspecto.puntajeAsignado" placeholder="Ingrese el puntaje">
+                  <label class="col-sm-2 p-t-10">Puntaje</label>
+                  <input type="number" step="any" class="col-sm-2 form-control input-sm"  ng-model="aspecto.puntajeManual" placeholder="Ingrese el puntaje">
                   <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
                   </textarea>
                 </div>
@@ -31,20 +31,23 @@
                   {{($index+1) + '. ' + criterio.descripcion}}
                   <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
                     <label>
-                        <input type="radio" name="{{criterio.id}}" value="">
+                        <input type="radio" name="{{criterio.id}}" ng-model="criterio.nivelesCriterios[$index].puntajeAsignado" value="{{criterio.nivelesCriterios[$index].puntajeSeleccion}}">
                         <i class="input-helper"></i>
-                        {{nivel.descripcion}} : {{criterio.nivelesCriterios[$index].descripcion}}
+                        {{nivel.descripcion}}  ({{criterio.nivelesCriterios[$index].puntajeAsignado}} ptos): {{criterio.nivelesCriterios[$index].descripcion}}
                     </label>
                   </div>
                   <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n Aspecto</label>
                   <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
                   </textarea>
                 </div>
+                <div class="col-md-12" align="right">
+                  <button type="button" ng-click = "ctrl.calcularPuntajeCriterio(aspecto.id)" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
+                </div>
               </div>
             </uib-accordion>
           </div>
           <div class="col-md-12" align="right">
-            <button type="button" ng-click = "" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
+            <button type="button" ng-click = "ctrl.guardarAspecto()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
             <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
           </div>
         </div>

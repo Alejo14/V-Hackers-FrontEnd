@@ -8,7 +8,7 @@ function($scope, $state,$stateParams, $uibModal){
   }
 
   ctrl.calificacionEntregable = function(){
-    $state.go('calificacion', {avanceEntregableId:"3afae04d-9fb7-4b92-939a-012a169fda08"});
+    $state.go('calificacion', {avanceEntregableId:"2f4827c3-b97d-4b36-9c91-088d034b795b"});
   }
 
   ctrl.listarEntregables = function(){

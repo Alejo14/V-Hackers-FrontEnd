@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevoAspectoCtrl', ['$scope','$state', '$stateParams','nuevoAspectoServicio','$uibModal', 'NgTableParams',
-function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('nuevoAspectoRubricaCtrl', ['$scope','$state', '$stateParams','nuevoAspectoRubricaServicio','$uibModal', 'NgTableParams',
+function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.titulo = 'Nueva aspecto';
   ctrl.aspecto = {
@@ -16,7 +16,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
     var modalInstance = $uibModal.open({
       animation: false,
       templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Criterio/nuevoCriterioModal.html',
-      controller: 'nuevoCriterioCtrl as ctrl',
+      controller: 'nuevoCriterioRubricaCtrl as ctrl',
       size: 'lg',
       backdrop: true,
       keyboard: true,
@@ -30,10 +30,10 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
     modalInstance.result.then( function (parametroRetorno) {
       if (parametroRetorno) {
         var nuevoCriterio = {
-          "id": parametroRetorno.id,
           "descripcion": parametroRetorno.descripcion,
           "indicaciones": parametroRetorno.indicaciones,
-          "nivelesCriterio": parametroRetorno.nivelesCriterio
+          "niveles": parametroRetorno.niveles,
+          "puntaje_maximo": parametroRetorno.puntaje_maximo
         };
         ctrl.criteriosLista.push(nuevoCriterio);
       }
@@ -44,7 +44,7 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
     var modalInstance = $uibModal.open({
       animation: false,
       templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Criterio/nuevoCriterioModal.html',
-      controller: 'editarCriterioModalCtrl as ctrl',
+      controller: 'editarCriterioRubricaModalCtrl as ctrl',
       size: 'lg',
       backdrop: true,
       keyboard: true,
@@ -113,8 +113,9 @@ function($scope, $state, $stateParams, nuevoAspectoServicio, $uibModal, NgTableP
 	      "titulo": ctrl.aspecto.titulo,
 	      "criterios": ctrl.criteriosLista
       }
+      console.log(data);
       if (aspectoGuardarConfirmado !== "cancelar") {
-        nuevoAspectoServicio.enviarAspecto(data).then(function(){
+        nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
            $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });

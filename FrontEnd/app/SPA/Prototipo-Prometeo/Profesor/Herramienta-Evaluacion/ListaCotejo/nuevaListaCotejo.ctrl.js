@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaListaCotejoService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaListaCotejoService',
+function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -128,7 +128,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejo
       herramientaId = {
         "herramientaID": ctrl.rubrica.id
       }
-      nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
+      nuevaListaCotejoService.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
       });
       nuevaListaCotejoService.listarAspectos(herramientaId).then(function(aspectos){
@@ -152,7 +152,7 @@ ctrl.agregarCriterio = function () {
   var modalInstance = $uibModal.open({
     animation: false,
     templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
-    controller: 'nuevoCriterioCtrl as ctrl',
+    controller: 'nuevoCriterioListaCtrl as ctrl',
     size: 'lg',
     backdrop: true,
     keyboard: true,
@@ -180,7 +180,7 @@ ctrl.editarCriterio = function(indiceCriterio){
   var modalInstance = $uibModal.open({
     animation: false,
     templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/Criterio/nuevoCriterioModal.html',
-    controller: 'editarCriterioModalCtrl as ctrl',
+    controller: 'editarCriterioListaModalCtrl as ctrl',
     size: 'lg',
     backdrop: true,
     keyboard: true,

@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevoAspectoServicio',
-function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
+angular.module('vHackersModule').controller('editarCriterioRubricaModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevoAspectoRubricaServicio',
+function($scope, $uibModalInstance, parametros, nuevoAspectoRubricaServicio){
   var ctrl = this;
 
   ctrl.cerrar = function(){
@@ -23,10 +23,10 @@ function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
-        ctrl.criterio.puntajeMaximo = ctrl.criterio.nivelesCriterio[0].puntaje;
-        angular.forEach(ctrl.criterio.nivelesCriterio, function(nivel,indice){
-          if(ctrl.criterio.puntajeMaximo < nivel.puntaje){
-            ctrl.criterio.puntajeMaximo = nivel.puntaje;
+        ctrl.criterio.puntaje_maximo = ctrl.criterio.niveles[0].puntaje;
+        angular.forEach(ctrl.criterio.niveles, function(nivel,indice){
+          if(ctrl.criterio.puntaje_maximo < nivel.puntaje){
+            ctrl.criterio.puntaje_maximo = nivel.puntaje;
           }
         });
         $uibModalInstance.close(ctrl.criterio);
@@ -38,7 +38,7 @@ function($scope, $uibModalInstance, parametros, nuevoAspectoServicio){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      nuevoAspectoRubricaServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
       });
     }

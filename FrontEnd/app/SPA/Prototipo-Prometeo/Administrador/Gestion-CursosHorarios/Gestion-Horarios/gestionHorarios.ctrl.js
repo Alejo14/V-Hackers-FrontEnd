@@ -2,20 +2,53 @@ angular.module('vHackersModule').controller('gestionHorariosCtrl', ['$scope','$s
 function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTableParams){
   var ctrl = this;
   ctrl.cursosLista = [];
+  ctrl.listaAux = [];
   ctrl.idCurso = "0";
   ctrl.idSemestre = "0";
   ctrl.nombreCurso = "0",
   ctrl.codigoCurso = "0";
   ctrl.idCursoCiclo = "0";
+  ctrl.filtro = {};
 
 
   ctrl.obtenerCursos = function () {
     gestionHorariosService.obtenerCursos().then(function (cursosListaData) {
       ctrl.cursosLista = cursosListaData;
+      ctrl.listaAux = cursosListaData;
       //console.log("HOLAA");
       ctrl.cursosTabla = new NgTableParams({}, { dataset: ctrl.cursosLista });
     });
   };
+
+  ctrl.filtrar = function () {
+
+    ctrl.cursosLista = ctrl.listaAux.filter(function(curso) {
+      var codigo = true;
+      var nombre = true;
+      var ciclo = true;
+      var especialidad = true;
+
+      if(ctrl.filtro.ciclo){
+        ciclo = curso.ciclo.toLowerCase().includes(ctrl.filtro.ciclo.toLowerCase());
+      }
+      if(ctrl.filtro.nombreCurso){
+        nombre = curso.nombre.toLowerCase().includes(ctrl.filtro.nombreCurso.toLowerCase());
+      }
+      if(ctrl.filtro.claveCurso){
+        codigo = curso.codigo.toLowerCase().includes(ctrl.filtro.claveCurso.toLowerCase());
+      }
+      if(ctrl.filtro.especialidad){
+        especialidad = curso.especialidad.toLowerCase().includes(ctrl.filtro.especialidad.toLowerCase());
+      }
+
+      return codigo & nombre & ciclo & especialidad;
+    });
+
+  };
+  ctrl.limpiarFiltro = function (){
+    ctrl.filtro = {};
+    ctrl.filtrar();
+  }
 
   function uuid() {
       function randomDigit() {
@@ -120,6 +153,7 @@ function($scope,$state,$stateParams, gestionHorariosService, $uibModal,NgTablePa
     ctrl.obtenerFacultades();
     ctrl.obtenerEspecialidades();
     ctrl.obtenerCiclos();
+    ctrl.limpiarFiltro();
   };
 
   ctrl.init();

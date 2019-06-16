@@ -14,8 +14,10 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   ctrl.herramientaEvaluacionLista = [];
   ctrl.obtenerEvaluacion = function () {
     ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientaEvaluacionLista });
+    console.log(ctrl.avanceEntregableId);
     calificacionHerramientaEvaluacionServicio.obtenerEvaluacion(ctrl.avanceEntregableId).then(function (evaluacion) {
         ctrl.evaluacion = evaluacion;
+        console.log(evaluacion);
         ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
     });
   };

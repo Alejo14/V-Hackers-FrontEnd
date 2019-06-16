@@ -1,4 +1,4 @@
-angular.module('vHackersModule').controller('editarCriterioModalCtrl', ['$scope','$uibModalInstance', 'parametros','nuevaEscalaService',
+angular.module('vHackersModule').controller('editarCriterioEscalaCtrl', ['$scope','$uibModalInstance', 'parametros','nuevaEscalaService',
 function($scope, $uibModalInstance, parametros, nuevaEscalaService){
   var ctrl = this;
 

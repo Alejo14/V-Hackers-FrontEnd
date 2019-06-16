@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService', 'nuevoAspectoServicio',
-function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoAspectoServicio){
+angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService', 'nuevoAspectoRubricaServicio',
+function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoAspectoRubricaServicio){
   var ctrl = this;
 
   ctrl.agregarNivel = function () {
@@ -146,7 +146,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
       herramientaId = {
         "herramientaID": ctrl.rubrica.id
       }
-      nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
+      nuevoAspectoRubricaServicio.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
       });
       nuevaRubricaService.listarAspectos(herramientaId).then(function(aspectos){

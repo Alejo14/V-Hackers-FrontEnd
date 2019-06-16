@@ -1,13 +1,6 @@
-angular.module('vHackersModule').controller('nuevoCriterioCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoServicio', 'parametros',
-function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
+angular.module('vHackersModule').controller('nuevoCriterioRubricaCtrl', ['$scope','$uibModalInstance', 'nuevoAspectoRubricaServicio', 'parametros',
+function($scope, $uibModalInstance, nuevoAspectoRubricaServicio, parametros){
   var ctrl = this;
-
-  ctrl.criterio = {
-    descripcion: "",
-    indicaciones: "",
-    puntaje_maximo: 0,
-    nivelesCriterio: []
-  }
 
   ctrl.rubricaId = parametros;
 
@@ -19,8 +12,9 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       idRubrica = {
         "herramientaID" : ctrl.rubricaId
       };
-      nuevoAspectoServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
+      nuevoAspectoRubricaServicio.listarNiveles(idRubrica).then(function(nivelesListaData) {
         ctrl.nivelesLista = nivelesListaData;
+        console.log(nivelesListaData);
         for(let i = 0; i < ctrl.nivelesLista.length; i++){
           ctrl.nivelesLista[i].puntaje = 0;
         }
@@ -45,8 +39,7 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
       closeModal: false
     }).then(function (criterioNuevoConfirmado) {
       if (criterioNuevoConfirmado !== "cancelar") {
-        console.log(ctrl.criterio);
-        ctrl.criterio.puntaje_maximo = ctrl.criterio.nivelesCriterio[0].puntaje;
+        ctrl.criterio.puntaje_maximo = ctrl.criterio.niveles[0].puntaje;
         angular.forEach(ctrl.criterio.niveles, function(nivel,indice){
           if(ctrl.criterio.puntaje_maximo < nivel.puntaje){
             ctrl.criterio.puntaje_maximo = nivel.puntaje;
@@ -59,15 +52,21 @@ function($scope, $uibModalInstance, nuevoAspectoServicio, parametros){
 
   ctrl.nivelesPorCriterio = function(){
     angular.forEach(ctrl.nivelesLista, function(nivel,indice){
-      var nivelCriterio = {
+      var nivel = {
         descripcion: "",
         puntaje: 0
       }
-      ctrl.criterio.niveles.push(nivelCriterio);
+      ctrl.criterio.niveles.push(nivel);
     });
   }
 
   ctrl.init = function(){
+    ctrl.criterio = {
+      descripcion: "",
+      indicaciones: "",
+      puntaje_maximo: 0,
+      niveles: []
+    }
     ctrl.listarNiveles();
     ctrl.nivelesPorCriterio();
   }
