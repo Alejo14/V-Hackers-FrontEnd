@@ -31,17 +31,18 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  // servicio.guardarEvaluacionHerramienta = function(herramientaEvaluacionId, calificacionHerramientaEvaluacionId){
-  //   var urlObtenerEvaluacionAspecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/mostrarCalificacionRubrica/' + calificacionHerramientaEvaluacionId + '?herramientaEvaluacionId=' + herramientaEvaluacionId;
-  //   var $defer = $q.defer();
-  //   $http({
-  //       method: 'GET',
-  //       url: urlObtenerEvaluacionAspecto
-  //    }).then(function (respuesta) {
-  //      $defer.resolve(respuesta.data);
-  //    }).catch(function (error) {
-  //      $defer.reject(error);
-  //    });
-  //   return $defer.promise;
-  // }
+  servicio.guardarAspecto = function(aspectos){
+     var urlGuardarAspectoCalificado = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacion'
+     var $defer = $q.defer();
+     $http({
+       method: 'POST',
+       url: urlGuardarAspectoCalificado,
+       data: aspectos
+    }).then(function (respuesta) {
+      $defer.resolve(respuesta.data);
+    }).catch(function (error) {
+        $defer.reject(error);
+    });
+   return $defer.promise;
+  }
 }]);
