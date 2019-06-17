@@ -7,7 +7,8 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.idCursoCiclo = "";
   ctrl.idCurso = "";
   ctrl.idCiclo = "";
-  ctrl.horariosLista = [{"codigo":"H-8081","codigoProfesor":"a19992314","nombreProfesor":"Luis Flores"}];
+  ctrl.idHorario = "";
+  ctrl.horariosLista = [];
 
 
   function uuid() {
@@ -52,6 +53,11 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.agregarHorario = function (modo,index) {
     //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
     //console.log(modo);
+    if(index == -1){
+      ctrl.idHorario = "";
+    }else{
+      ctrl.idHorario = ctrl.horariosLista[index].id;
+    }
     var modalInstance = $uibModal.open({
       animation: false,
       templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/modalAgregarHorario.html',
@@ -73,7 +79,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
           return ctrl.idCiclo;
         },
         idHorario: function(){
-          return ctrl.horariosLista[index].id;
+          return ctrl.idHorario;
         }
       }
     });
