@@ -54,7 +54,6 @@ var devMode = false;
 
 gulp.task('browser-sync', function(){
   browserSync.init(null, {
-    port: 8070,
     open: false,
     server: {
       baseDir: 'app'
