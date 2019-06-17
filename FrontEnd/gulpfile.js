@@ -54,7 +54,8 @@ var devMode = false;
 
 gulp.task('browser-sync', function(){
   browserSync.init(null, {
-    open: false,
+    port: 8070,
+    open: true,
     server: {
       baseDir: 'app'
     }
@@ -64,6 +65,7 @@ gulp.task('browser-sync', function(){
 gulp.task('start', function() {
   devMode = true;
   gulp.start(['browser-sync']);
+  //gulp.start(['build', 'browser-sync']);
   // gulp.watch(['./app/**/*.css'],['css']);
   // gulp.watch(['./app/**/*.js'],['js']);
   // gulp.watch(['./app/**/*.ctrl.js'],['ctrl.js']);
