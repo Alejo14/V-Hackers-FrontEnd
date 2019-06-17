@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Prometeo",
   "dependencies": {
+    "angular": "^1.7.8",
     "angular-chosen-localytics": "^1.9.3",
+    "angular-route": "^1.7.8",
     "express": "*",
     "oclazyload": "^1.1.0"
   },
@@ -21,5 +23,11 @@
   "bugs": {
     "url": ""
   },
-  "homepage": ""
+  "homepage": "",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect-multi": "^1.0.8"
+  }
 }
