@@ -68,6 +68,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
         //armar horarioNuevo para devolver a pantalla anterior
         if( ctrl.horarioNuevo.profesorId!=='' && ctrl.horarioNuevo.asistenteId!=='' && ctrl.horarioNuevo.codigo !== '' && ctrl.horarioNuevo.cantidadAlumnos !== ''){
           if(ctrl.modo == "c"){
+            console.log("Modo crear");
             var horario = {
               "id": uuid(),
               "cursoCicloId": ctrl.horarioNuevo.cursoCicloId,
@@ -77,6 +78,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
             }
             //guardar horario
             asignarHorarioService.crearHorario(horario).then(function () {
+              console.log("se creó el horario");
             });
             //guardar relación de horario y rolusuario
             var profesorXHorario = {
@@ -118,6 +120,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
             });
             swal("¡Bien hecho!", "El curso se creó exitosamente" , "success");
           } else {
+            console.log("Modo modificar");
             var horario = {
               "id": ctrl.horarioNuevo.id,
               "cursoCicloId": ctrl.horarioNuevo.cursoCicloId,
