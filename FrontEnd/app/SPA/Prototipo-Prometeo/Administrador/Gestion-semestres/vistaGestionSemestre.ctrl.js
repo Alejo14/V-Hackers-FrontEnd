@@ -12,9 +12,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
   };
 
   arch=[];
-  ctrl.archivoURL = "";
-  ctrl.archivoURL2 = "";
-  ctrl.archivoURL3 = "";
+
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
     //console.log(parametros);
     var id=parametros.data;
