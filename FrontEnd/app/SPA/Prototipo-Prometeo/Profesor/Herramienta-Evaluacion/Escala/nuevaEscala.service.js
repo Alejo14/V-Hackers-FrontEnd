@@ -81,6 +81,21 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   }
+
+  servicio.agregarCriterios = function(data){
+    var urlEnviarCriterios = 'http://localhost:7008/herramienta/agregarCriterios'; //url a donde se envían los niveles seleccionados
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlEnviarCriterios,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
   /*------------*/
 
 }]);

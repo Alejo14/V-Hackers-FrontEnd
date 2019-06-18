@@ -107,6 +107,13 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
           "estado": "publico"
         };
         nuevaEscalaService.guardarRubrica(confirmarRubrica).then(function(){
+          //Agregar criterios
+          dataCriterios={
+            "herramientaId":ctrl.rubrica.id,
+            "lista":ctrl.criteriosLista
+          }
+          nuevaEscalaService.agregarCriterios(dataCriterios);
+          //------------------//
           $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
         });
       }
