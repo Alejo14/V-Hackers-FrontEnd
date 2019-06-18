@@ -35,5 +35,7 @@ Icon
 .Spotlight-V100
 .Trashes
 
-#carpeta que se crea al desplegar
+#carpetas y archivos que se crea al desplegar
 node_modules/
+
+package-lock.json
