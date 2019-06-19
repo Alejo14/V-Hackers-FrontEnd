@@ -5,8 +5,6 @@ function($scope, $uibModalInstance, nuevaEscalaService, parametros){
   ctrl.criterio = {
     descripcion: "",
     indicaciones: "",
-    puntaje_maximo: 0,
-    nivelesCriterio: []
   }
 
   ctrl.rubricaId = parametros;
@@ -14,18 +12,6 @@ function($scope, $uibModalInstance, nuevaEscalaService, parametros){
   ctrl.cerrar = function(){
       $uibModalInstance.close(0);
   };
-
-  ctrl.listarNiveles = function (){
-      idRubrica = {
-        "herramientaID" : ctrl.rubricaId
-      };
-      nuevaEscalaService.listarNiveles(idRubrica).then(function(nivelesListaData) {
-        ctrl.nivelesLista = nivelesListaData;
-        for(let i = 0; i < ctrl.nivelesLista.length; i++){
-          ctrl.nivelesLista[i].puntaje = 0;
-        }
-      });
-    }
 
   ctrl.guardarCriterio = function () {
     swal({
@@ -51,19 +37,8 @@ function($scope, $uibModalInstance, nuevaEscalaService, parametros){
     });
   };
 
-  ctrl.nivelesPorCriterio = function(){
-    angular.forEach(ctrl.nivelesLista, function(nivel,indice){
-      var nivelCriterio = {
-        descripcion: "",
-        puntaje: 0
-      }
-      ctrl.criterio.niveles.push(nivelCriterio);
-    });
-  }
 
   ctrl.init = function(){
-    ctrl.listarNiveles();
-    ctrl.nivelesPorCriterio();
   }
   ctrl.init();
 

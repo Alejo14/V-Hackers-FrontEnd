@@ -2,87 +2,8 @@ angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$
 function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService){
   var ctrl = this;
 
-  ctrl.agregarNivel = function () {
-    ctrl.rubrica.numeroNiveles += 1;
-    var nivel = {
-      descripcion: ""
-    };
-    ctrl.rubrica.niveles.push(nivel);
-  };
-
-  ctrl.eliminarNivel = function (indiceNivel) {
-    swal({
-      title: "¿Esta seguro de que desea eliminar este nivel?",
-      text: "No podrá recuperar el nivel en el futuro",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, eliminar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      },
-      closeModal: false
-    }).then(function (eliminarNivelConfirmado) {
-      if (eliminarNivelConfirmado !== "cancelar") {
-        ctrl.rubrica.numeroNiveles -= 1;
-        ctrl.rubrica.niveles.splice(indiceNivel, 1);
-        $scope.$apply();
-      }
-    });
-  }
-
-  ctrl.guardarNiveles = function (){
-    swal({
-      title: "¿Esta seguro de que desea guardar estos niveles?",
-      text: "No podrá modificar el número de niveles",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, guardar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      },
-      closeModal: false
-    }).then(function (confirmarNiveles) {
-      if (confirmarNiveles !== "cancelar") {
-        ctrl.puedoAgregarNivel = false;
-
-        console.log(ctrl.rubrica.niveles);
-        ctrl.nivelesRubrica = {
-          "tipo": "seleccion",
-          "rubricaID": ctrl.rubrica.id,
-          "niveles": ctrl.rubrica.niveles
-        }
-
-        nuevaListaCotejoService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
-           swal("Felicidades","Se guardó su configuración con éxito","success");
-        });
-        $scope.$apply();
-      }
-    });
-
-  }
-
-  ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id});
-  }
-
   ctrl.regresarEntregable = function (){
     $state.go('evaluacion-herramienta');
-  }
-
-  ctrl.eliminarAspecto = function (indice) {
-
-  }
-
-  ctrl.editarAspecto  = function (indice) {
-
   }
 
   ctrl.guardarRubrica = function(){
@@ -106,43 +27,31 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejo
           "rubricaID" : ctrl.rubrica.id,
           "estado": "publico"
         };
+
+        cotejos = {
+          "herramientaId" : ctrl.rubrica.id,
+          "lista" : ctrl.criteriosLista
+        };
         nuevaListaCotejoService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          nuevaListaCotejoService.guardarCotejos(cotejos).then(function(cotejoData){
+            console.log(cotejoData);
+            $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          });
         });
       }
     });
-  }
+  };
 
   ctrl.init = function () {  ctrl.titulo = 'Nueva lista de cotejo';
     ctrl.inicializarTabla();
     ctrl.rubrica = {
       id: $stateParams.id,
       tipo: "seleccion",
-      numeroNiveles: 0,
-      niveles: [],
-      aspecto: []
     };
-    ctrl.puedoAgregarNivel = true;
-    if(parseInt($stateParams.nivelesCreados)){
-      ctrl.puedoAgregarNivel = false;
-      herramientaId = {
-        "herramientaID": ctrl.rubrica.id
-      }
-      nuevaListaCotejoService.listarNiveles(herramientaId).then(function(niveles){
-        ctrl.rubrica.niveles = niveles;
-      });
-      nuevaListaCotejoService.listarAspectos(herramientaId).then(function(aspectos){
-        ctrl.aspectoLista = aspectos;
-        ctrl.aspectoTabla = new NgTableParams({}, { dataset: ctrl.aspectoLista });
-        console.log(ctrl.aspectoLista);
-      });
-    }
   }
 
 /* Funciones de Criterio  */
 ctrl.criteriosLista = [];
-ctrl.nivelesLista = [];
-ctrl.nivelesCreados = 1;
 
 ctrl.inicializarTabla = function () {
   ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
@@ -166,12 +75,11 @@ ctrl.agregarCriterio = function () {
   modalInstance.result.then( function (parametroRetorno) {
     if (parametroRetorno) {
       var nuevoCriterio = {
-        "id": parametroRetorno.id,
         "descripcion": parametroRetorno.descripcion,
-        "indicaciones": parametroRetorno.indicaciones,
-        "nivelesCriterio": parametroRetorno.nivelesCriterio
+        "indicaciones": parametroRetorno.indicaciones
       };
       ctrl.criteriosLista.push(nuevoCriterio);
+      console.log(ctrl.criteriosLista);
     }
   });
 };
@@ -200,7 +108,7 @@ ctrl.editarCriterio = function(indiceCriterio){
         ctrl.criteriosLista[indiceCriterio] = parametroRetorno;
     }
   });
-}
+};
 
 ctrl.eliminarCriterio = function (indiceCriterio){
   swal({
@@ -223,7 +131,7 @@ ctrl.eliminarCriterio = function (indiceCriterio){
       $scope.$apply();
     }
   });
-}
+};
 /*------------------------*/
 
 
