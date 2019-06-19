@@ -59,7 +59,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
           "rubricaID": ctrl.rubrica.id,
           "niveles": ctrl.rubrica.niveles
         }
-
+        console.log(ctrl.nivelesRubrica);
         nuevaEscalaService.enviarNiveles(ctrl.nivelesRubrica).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito","success");
         });
@@ -112,6 +112,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
             "herramientaId":ctrl.rubrica.id,
             "lista":ctrl.criteriosLista
           }
+          console.log(dataCriterios);
           nuevaEscalaService.agregarCriterios(dataCriterios);
           //------------------//
           $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
@@ -138,11 +139,11 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
       nuevoAspectoServicio.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
       });
-      nuevaEscalaService.listarAspectos(herramientaId).then(function(aspectos){
-        ctrl.aspectoLista = aspectos;
-        ctrl.aspectoTabla = new NgTableParams({}, { dataset: ctrl.aspectoLista });
-        console.log(ctrl.aspectoLista);
-      });
+      // nuevaEscalaService.listarAspectos(herramientaId).then(function(aspectos){
+      //   ctrl.aspectoLista = aspectos;
+      //   ctrl.aspectoTabla = new NgTableParams({}, { dataset: ctrl.aspectoLista });
+      //   console.log(ctrl.aspectoLista);
+      // });
     }
   }
 
@@ -176,7 +177,7 @@ ctrl.agregarCriterio = function () {
         "id": parametroRetorno.id,
         "descripcion": parametroRetorno.descripcion,
         "indicaciones": parametroRetorno.indicaciones,
-        "nivelesCriterio": parametroRetorno.nivelesCriterio
+        "niveles": parametroRetorno.nivelesCriterio
       };
       ctrl.criteriosLista.push(nuevoCriterio);
     }
