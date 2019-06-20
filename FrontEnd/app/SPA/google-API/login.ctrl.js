@@ -9,6 +9,7 @@ function ($scope, $state, variablesAmbiente, $cookies, loginService) {
   ctrl.googleLogin = function () {
     var params = {
       "clientid": variablesAmbiente.clienteLogin,
+      "apiKey": variablesAmbiente.llaveApiLogin,
       "cookiepolicy": "single_host_origin",
       "callback": function (result) {
         if (result['status']['signed_in']) {

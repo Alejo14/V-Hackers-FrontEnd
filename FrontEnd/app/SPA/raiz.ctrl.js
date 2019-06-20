@@ -4,6 +4,20 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
   var ctrl = this;
 
   ctrl.idUsuario = $cookies.get('usuarioID');
+  ctrl.logOut = function () {
+    var token = gapi.auth.getToken();
+    if (token) {
+      var accessToken = gapi.auth.getToken().access_token;
+      if (accessToken) {
+        raizService.logOut(accessToken).then(function (respuesta) {
+          gapi.auth.setToken(null);
+          gapi.auth.signOut();
+          $state.go('login');
+        });
+      }
+    }
+
+  };
   ctrl.init = function () {
     if (!ctrl.usuario) {
       raizService.obtenerUsuarioLogin(ctrl.idUsuario).then(function (usuario){
