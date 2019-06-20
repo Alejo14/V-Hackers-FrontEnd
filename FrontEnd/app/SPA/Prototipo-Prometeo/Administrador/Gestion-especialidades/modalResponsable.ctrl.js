@@ -1,8 +1,8 @@
 angular.module('vHackersModule').controller('especialidadResponsableCtrl', especialidadResponsableCtrl);
 
-especialidadResponsableCtrl.$inject = ['$scope', '$uibModalInstance', 'NgTableParams','administradorEspecialidadService'];
+especialidadResponsableCtrl.$inject = ['$scope', '$uibModalInstance', 'NgTableParams','administradorEspecialidadService','parametros'];
 
-function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, administradorEspecialidadService){
+function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, administradorEspecialidadService,parametros){
 
   var ctrl = this;
 
@@ -47,6 +47,9 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.init = function(){
     ctrl.listarResponsables();
+    // if (responsableNombre.length > 1) {
+    //
+    // }
   };
 
   ctrl.cerrar = function () {

@@ -91,6 +91,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     entregableService.listarEntregablesXProyecto(proyectoId).then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
       console.log(ctrl.entregablesLista);
+      for(let i = 0; i < ctrl.entregablesLista.length; i++){
+        fechCr = new Date(Number(ctrl.entregablesLista[i].fechaHabilitacion));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.entregablesLista[i].fechaHabilitacionStr = fechCrStr;
+      };
     });
   };
 

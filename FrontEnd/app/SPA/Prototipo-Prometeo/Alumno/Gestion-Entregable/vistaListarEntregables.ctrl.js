@@ -103,7 +103,8 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
 
   ctrl.regresarProyectos = function () {
-        // $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
+    //CORREGIR
+        $state.go('alumnoMisCursos', {rolUsuario:ctrl.rolusuarioId});
   };
 
   ctrl.regresarEntregables = function () {

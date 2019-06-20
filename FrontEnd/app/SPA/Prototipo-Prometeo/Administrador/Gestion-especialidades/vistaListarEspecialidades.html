@@ -21,7 +21,27 @@
                 <div class="card-body card-padding">
                       <div class="form-group">
                         <div class="col-sm-8">
-                          <ul>
+                          <div class="row" align="center" style="padding:10px;">
+                            <div class="col-md-8">ESPECIALIDAD</div>
+                            <div class="col-md-4">ACCIONES</div>
+                          </div>
+                          <div ng-repeat="especialidad in ctrl.especialidadesLista">
+                            <div class="row" style="padding:5px;">
+                              <div class="col-md-8" ng-click="ctrl.ingresarEntregable()">
+                                {{especialidad.nombre}}
+                              </div>
+                              <div class="col-md-4" align="center">
+                                <a style="padding:10px;" ng-click="ctrl.verEspecialidad(especialidad)">
+                                  <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a style="padding:10px;" ng-click="ctrl.eliminarEspecialidad(especialidad)">
+                                  <i class="fas fa-trash-alt"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- <ul>
                             <li ng-repeat="especialidad in ctrl.especialidadesLista">
                               {{especialidad.nombre}}
                               <a style="float:right" ng-click="ctrl.eliminarEspecialidad(especialidad)">
@@ -31,7 +51,7 @@
                                 <i class="fas fa-pencil-alt"></i>
                               </a>
                             </li>
-                          </ul>
+                          </ul> -->
                         </div>
                       </div>
                 </div>
