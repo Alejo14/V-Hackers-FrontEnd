@@ -20,10 +20,6 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
-        aspecto.observacion = "";
-        angular.forEach(aspecto.criterios, function(criterio,indice){
-          criterio.observacion = "";
-        });
       });
       console.log(ctrl.evaluacionAspecto);
     });
@@ -46,7 +42,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
+        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
       }
     });
   }
@@ -73,12 +69,17 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
   }
 
   ctrl.guardarAspecto = function(){
+    ctrl.puntajeHerramienta = 0;
+    angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+      ctrl.puntajeHerramienta += aspecto.puntajeManual;
+    });
     var data = {
       "aspectos":ctrl.evaluacionAspecto
     }
+    console.log(data);
     calificacionAspectoService.guardarAspecto(data).then(function(){
       swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
-      $state.go('calificacion', {avanceEntregableId: $stateParams.avanceEntregableId});
+      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
     });
   }
 

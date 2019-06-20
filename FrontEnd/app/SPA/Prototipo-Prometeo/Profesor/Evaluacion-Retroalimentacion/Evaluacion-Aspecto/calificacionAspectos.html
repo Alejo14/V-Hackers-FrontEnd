@@ -31,9 +31,9 @@
                   {{($index+1) + '. ' + criterio.descripcion}}
                   <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
                     <label>
-                        <input type="radio" name="{{criterio.id}}" ng-model="criterio.nivelesCriterios[$index].puntajeAsignado" value="{{criterio.nivelesCriterios[$index].puntajeSeleccion}}">
+                        <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
                         <i class="input-helper"></i>
-                        {{nivel.descripcion}}  ({{criterio.nivelesCriterios[$index].puntajeAsignado}} ptos): {{criterio.nivelesCriterios[$index].descripcion}}
+                        {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos: {{criterio.nivelesCriterios[$index].descripcion}}
                     </label>
                   </div>
                   <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n del criterio</label>

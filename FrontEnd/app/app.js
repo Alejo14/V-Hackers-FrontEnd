@@ -140,13 +140,18 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacion',
-                  url: '/calificacion/:avanceEntregableId',
+                  url: '/calificacion/:avanceEntregableId/:herramientaCalificada',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
                   name: 'calificacionAspectos',
                   url: '/calificacionAspectos/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Aspecto/calificacionAspectos.html'
+                },
+                {
+                  name: 'calificacionHerramienta',
+                  url: '/calificacion/:avanceEntregableId/:herramientaCalificada/:calificacionHerramientaEvaluacionId/:puntajeHerramienta',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
                   name: 'curso',

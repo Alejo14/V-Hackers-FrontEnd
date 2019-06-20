@@ -19,6 +19,23 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
         ctrl.evaluacion = evaluacion;
         console.log(evaluacion);
         ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
+        if(parseInt($stateParams.herramientaCalificada)){
+          var puntaje = 0;
+          var herramientas = 0;
+          angular.forEach(ctrl.herramientaEvaluacionLista,function(herramienta,indice){
+            if(herramienta.calificacionHerramientaEvaluacionId == $stateParams.calificacionHerramientaEvaluacionId){
+              herramienta.puntaje = parseFloat($stateParams.puntajeHerramienta);
+            }
+            puntaje += herramienta.puntaje;
+            herramientas++;
+          });
+          angular.forEach(ctrl.evaluacion.herramientas,function(herramienta,indice){
+            if(herramienta.calificacionHerramientaEvaluacionId == $stateParams.calificacionHerramientaEvaluacionId){
+              herramienta.puntaje = parseFloat($stateParams.puntajeHerramienta);
+            }
+          });
+          ctrl.evaluacion.calificacionEvaluacion.puntaje = puntaje/herramientas;
+        }
     });
   };
 
