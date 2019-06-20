@@ -54,6 +54,7 @@ var devMode = false;
 
 gulp.task('browser-sync', function(){
   browserSync.init(null, {
+    host: "200.16.7.187",
     port: 8070,
     open: true,
     server: {
