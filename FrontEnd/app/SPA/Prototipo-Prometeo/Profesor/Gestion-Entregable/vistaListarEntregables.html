@@ -38,10 +38,34 @@
               <form class="form-horizontal ng-pristine ng-valid">
                 <div class="card-body card-padding">
                       <div class="form-group">
-                        <div class="col-sm-8">
-                          <ul>
+                        <div class="col-sm-12">
+                          <div class="row" align="center" style="padding:10px;">
+                            <div class="col-md-4">ENTREGABLE</div>
+                            <div class="col-md-3">FECHA CREACIÓN</div>
+                            <div class="col-md-2">ACCIONES</div>
+                          </div>
+                          <div ng-repeat="entregable in ctrl.entregablesLista">
+                            <div class="row" style="padding:5px;">
+                              <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
+                                <a href=""> {{entregable.nombre}} </a>
+                              </div>
+                              <div class="col-md-3" align="center">
+                                {{entregable.fechaHabilitacionStr}}
+                              </div>
+                              <div class="col-md-2" align="center">
+                                <a style="padding:10px;" ng-click="ctrl.irModificarEntregable(entregable)">
+                                  <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a style="padding:10px;" ng-click="ctrl.elminarEntregable(entregable)">
+                                  <i class="fas fa-trash-alt"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <ul>
                             <div ng-repeat="entregable in ctrl.entregablesLista">
                               <div class="row">
+
                                 <li class="col-md-5" ng-click="ctrl.ingresarEntregable()">
                                   <a href=""> {{entregable.nombre}} </a>
                                 </li>
@@ -56,7 +80,7 @@
                                 </a>
                               </div>
                             </div>
-                          </ul
+                          </ul> -->
                         </div>
                       </div>
                 </div>

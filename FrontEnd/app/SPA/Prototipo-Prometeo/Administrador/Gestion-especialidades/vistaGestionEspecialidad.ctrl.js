@@ -47,6 +47,13 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       size: 'lg',
       backdrop: true,
       keyboard: true,
+      resolve: {
+        parametros: function (){
+          return {
+            responsableNombre: ctrl.especialidad.responsableNombre
+          };
+        }
+      }
     });
 
     //Recibo parametro de retorno
