@@ -10,6 +10,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     fechaInicio : "",
     fechaFin : ""
   };
+  
 
   arch=[];
 

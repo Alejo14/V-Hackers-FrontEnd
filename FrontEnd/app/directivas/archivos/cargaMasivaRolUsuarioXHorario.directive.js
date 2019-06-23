@@ -15,7 +15,7 @@ angular.module('vHackersModule').directive('cargaMasivaRolUsuarioHorario', ['htt
 
                 var formData = new FormData();
                 formData.append('files', element[0].files[0]);
-                console.log(scope.parametros);
+        
                 //formData.append('id',scope.parametros);
                 console.log(formData);
                 //formData.append('id', element[0].files[0]);scope.parametros

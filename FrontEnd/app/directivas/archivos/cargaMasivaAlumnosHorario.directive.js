@@ -14,7 +14,10 @@ angular.module('vHackersModule').directive('cargaMasivaAlumnosHorario', ['httpPo
 
 
                 var formData = new FormData();
+                console.log(scope.parametros.id);
+                formData.append('id',scope.parametros.id);
                 formData.append('files', element[0].files[0]);
+
 
                 //formData.append('id',scope.parametros);
                 console.log(formData);

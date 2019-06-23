@@ -5,6 +5,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.codigo = "Código";
   ctrl.nombre = "Nombre Curso";
   ctrl.idCursoCiclo = "";
+  ctrl.idCursoCicloJSON = {"id":""};
   ctrl.idCurso = "";
   ctrl.idCiclo = "";
   ctrl.idHorario = "";
@@ -135,6 +136,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
     ctrl.idCursoCiclo = $stateParams.idCursoCiclo;
     ctrl.idCurso = $stateParams.idCurso;
     ctrl.idCiclo = $stateParams.idSemestre;
+    ctrl.idCursoCicloJSON.id = $stateParams.idCursoCiclo;
   };
 
 
