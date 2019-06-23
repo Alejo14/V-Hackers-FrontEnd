@@ -18,90 +18,57 @@
             <div class="col-md-8">
               <form class="form-horizontal ng-pristine ng-valid">
                 <div class="card-body card-padding">
-                      <div class="form-group">
-                        <h4 class="col-sm-3">Crear Entregable</h4>
-
-                        <div class="col-sm-9">
-                          <div class="fg-line">
-                              <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
-                          </div>
-                        </div>
-
+                  <div class="form-group">
+                    <h4 class="col-sm-3">Crear Entregable</h4>
+                    <div class="col-sm-9">
+                      <div class="fg-line">
+                        <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
                       </div>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
           <div class="row">
-
             <div class="col-md-8">
               <form class="form-horizontal ng-pristine ng-valid">
                 <div class="card-body card-padding">
-                      <div class="form-group">
-                        <div class="col-sm-12">
-                          <div class="row" align="center" style="padding:10px;">
-                            <div class="col-md-4">ENTREGABLE</div>
-                            <div class="col-md-3">FECHA CREACIÓN</div>
-                            <div class="col-md-2">ACCIONES</div>
+                  <div class="form-group">
+                    <div class="col-sm-12">
+                      <div class="row" align="center" style="padding:10px;">
+                        <div class="col-md-4">ENTREGABLE</div>
+                        <div class="col-md-3">FECHA CREACIÓN</div>
+                        <div class="col-md-2">ACCIONES</div>
+                      </div>
+                      <div ng-repeat="entregable in ctrl.entregablesLista">
+                        <div class="row" style="padding:5px;">
+                          <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
+                            <a href=""> {{entregable.nombre}} </a>
                           </div>
-                          <div ng-repeat="entregable in ctrl.entregablesLista">
-                            <div class="row" style="padding:5px;">
-                              <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
-                                <a href=""> {{entregable.nombre}} </a>
-                              </div>
-                              <div class="col-md-3" align="center">
-                                {{entregable.fechaHabilitacionStr}}
-                              </div>
-                              <div class="col-md-2" align="center">
-                                <a style="padding:10px;" ng-click="ctrl.irModificarEntregable(entregable)">
-                                  <i class="fas fa-pencil-alt"></i>
-                                </a>
-                                <a style="padding:10px;" ng-click="ctrl.elminarEntregable(entregable)">
-                                  <i class="fas fa-trash-alt"></i>
-                                </a>
-                              </div>
-                            </div>
+                          <div class="col-md-3" align="center">
+                            {{entregable.fechaHabilitacionStr}}
                           </div>
-                          <!-- <ul>
-                            <div ng-repeat="entregable in ctrl.entregablesLista">
-                              <div class="row">
-
-                                <li class="col-md-5" ng-click="ctrl.ingresarEntregable()">
-                                  <a href=""> {{entregable.nombre}} </a>
-                                </li>
-                                <div class="col-md-3" >
-                                  <a> {{entregable.fechaCreacionStr}} </a>
-                                </div>
-                                <a style="float:right" ng-click="ctrl.irModificarEntregable(entregable)">
-                                  <i class="fas fa-pencil-alt"></i>
-                                </a>
-                                <a style="float:right" ng-click="ctrl.elminarEntregable(entregable)">
-                                  <i class="fas fa-trash-alt"></i>
-                                </a>
-                              </div>
-                            </div>
-                          </ul> -->
+                          <div class="col-md-2" align="center">
+                            <a style="padding:10px;" ng-click="ctrl.irModificarEntregable(entregable)">
+                              <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a style="padding:10px;" ng-click="ctrl.elminarEntregable(entregable)">
+                              <i class="fas fa-trash-alt"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
                 </div>
               </form>
-
-                </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
               <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-              <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
             </div>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <ul>
-                <li ng-repeat="alumno in ctrl.alumnosLista">
-                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
-                </li>
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>

@@ -1,4 +1,3 @@
-//El $q aún se está evaluando si se va a emplear
 angular.module("vHackersModule").service('entregableService', ['$q', '$http','variablesAmbiente',
 function($q, $http,variablesAmbiente) {
 
