@@ -42,3 +42,23 @@ body{
 .dropdown-toggle::after{
   content: none !important;
 }
+
+.label-letra-prometeo {
+  font-size: 15px !important;
+  font-weight: bold !important;
+}
+
+.titulo-letra-prometeo {
+  font-size: 20px !important;
+  font-weight: normal !important;
+}
+
+.input-letra-prometeo {
+  font-size: 15px !important;
+  font-weight: normal !important;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td {
+  font-weight: bold;
+}

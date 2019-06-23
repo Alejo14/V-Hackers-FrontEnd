@@ -26,152 +26,145 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <h2>{{ctrl.titulo}}</h2>
+              <h2 class="titulo-letra-prometeo">{{ctrl.titulo}}</h2>
             </div>
           </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-8">
-              <form class="form-horizontal ng-pristine ng-valid">
-                <div class="card-body card-padding">
-                      <div class="form-group">
-                        <label class="col-sm-4 control-label">Nombre*:</label>
-                        <div class="col-sm-8">
-                          <div class="fg-line">
-                              <input type="text" class="form-control input-sm" ng-model="ctrl.entregableG.nombre" placeholder="e.g: Entregable de Ingeniería de Software">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group" ng-if="ctrl.fechasIniciadas"><!--fechaI horaI-->
-                        <label class="col-sm-4 control-label">Fecha y Hora habilitación*:</label>
-                        <div class="col-sm-4">
-                          <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaHabilitacion" placeholder="e.g: 11/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaInicio(ctrl.entregableG.fechaHabilitacion)" ng-change="ctrl.marcarFechaInicio(ctrl.entregableG.fechaHabilitacion)">
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaHabilitacion">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group" ng-if="ctrl.fechasIniciadas"><!--fechaF horaF-->
-                        <label class="col-sm-4 control-label">Fecha y Hora Entrega*:</label>
-                        <div class="col-sm-4">
-                          <div class="fg-line">
-                              <input type="date" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)" ng-change="ctrl.marcarFechaFin(ctrl.entregableG.fechaEntrega)">
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="fg-line">
-                              <input type="time" class="form-control input-sm" ng-model="ctrl.entregableG.fechaEntrega">
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group"><!--descrEntrg-->
-                        <label class="col-sm-4 control-label">Descripción*:</label>
-                        <div class="col-sm-8">
-                          <div class="fg-line">
-                              <textarea class="form-control" rows="5" ng-model="ctrl.entregableG.descripcion"  placeholder="......."></textarea>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group" ng-if="ctrl.mostrarMetodoTrabajo">
-                        <label class="col-sm-4 control-label">Metodo de Trabajo:</label>
-                        <div class="col-sm-4">
-                          <div class="radio m-b-15">
-                            <label>
-                              <input type="radio" name="metodo" value="0" checked>
-                              <i class="input-helper"></i>
-                              Individual
-                            </label>
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                          <div class="radio m-b-15">
-                            <label>
-                              <input type="radio" name="metodo" value="1">
-                              <i class="input-helper"></i>
-                              Grupal
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group"><!--puntaje-->
-                        <label class="col-sm-4 control-label">Ponderación*:</label>
-                        <div class="col-sm-8">
-                          <div class="fg-line">
-                              <input type="number" ng-model="ctrl.entregableG.ponderacion" class="form-control input-sm">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group" ng-if="ctrl.entregableCreado">
-                        <label class="col-sm-4 control-label">Herramienta de Evaluación:</label>
-                        <div class="col-sm-2">
-                          <div class="fg-line">
-                              <label ng-click="ctrl.crearHerramienta()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
-                              <!-- for="archivoEntregable" <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none">-->
-                          </div>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="fg-line">
-                            <label ng-click="ctrl.verReutilizarHerramienta()" class="btn bgm-green btn-float waves-effect waves-circle"><i class="fa fa-recycle"></i></label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group" ng-if="ctrl.entregableCreado">
-                        <div class="table-responsive p-t-30">
-                          <table ng-table="ctrl.herramientasTabla" class="table table-bordered">
-                            <tr ng-repeat="herramienta in ctrl.herramientasEvaluacion">
-                              <td data-title="'Nombre'">
-                                {{herramienta.descripcion}}
-                              </td>
-                              <td data-title="'Tipo'">
-                                {{herramienta.tipo}}
-                              </td>
-                              <td data-title="'Detalle'"><a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
-                              <a ng-click="ctrl.eliminarHerramienta(herramienta,$index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
-                              </td>
-                            </tr>
-                          </table>
-                        </div>
-                      </div>
+          <div class="col-md-8">
+            <form class="form-horizontal ng-pristine ng-valid">
+              <div class="card-body">
+                <div class="form-group m-b-30">
+                  <label class="col-sm-4 control-label label-letra-prometeo">Nombre<strong class="text-danger">*</strong>:</label>
+                  <div class="col-sm-8">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm input-letra-prometeo" ng-model="ctrl.entregable.nombre" placeholder="e.g: Entregable de Ingeniería de Software">
+                    </div>
+                  </div>
                 </div>
-              </form>
+                <div class="form-group m-b-30"><!--descrEntrg-->
+                  <label class="col-sm-4 control-label label-letra-prometeo">Descripci&oacute;n:</label>
+                  <div class="col-sm-8">
+                    <div class="fg-line">
+                        <textarea class="form-control input-letra-prometeo" rows="3" ng-model="ctrl.entregable.descripcion"  placeholder="Ingrese una descripción para el entregable"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group m-b-30" ng-if="ctrl.fechasIniciadas"><!--fechaI horaI-->
+                  <label class="col-sm-4 control-label label-letra-prometeo">Fecha y hora habilitaci&oacute;n<strong class="text-danger">*</strong>:</label>
+                  <div class="col-sm-4">
+                    <div class="fg-line">
+                        <input type="date" class="form-control input-sm input-letra-prometeo" ng-model="ctrl.entregable.fechaHabilitacion" placeholder="e.g: 11/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaInicio(ctrl.entregable.fechaHabilitacion)" ng-change="ctrl.marcarFechaInicio(ctrl.entregable.fechaHabilitacion)">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="fg-line">
+                        <input type="time" class="form-control input-sm input-letra-prometeo" ng-model="ctrl.entregable.fechaHabilitacion">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group m-b-30" ng-if="ctrl.fechasIniciadas"><!--fechaF horaF-->
+                  <label class="col-sm-4 control-label label-letra-prometeo">Fecha y hora entrega<strong class="text-danger">*</strong>:</label>
+                  <div class="col-sm-4">
+                    <div class="fg-line">
+                        <input type="date" class="form-control input-sm input-letra-prometeo" ng-model="ctrl.entregable.fechaEntrega" placeholder="e.g: 20/04/2019" min="{{fechaActual | date:'yyyy-MM-dd'}}" ng-init="ctrl.marcarFechaFin(ctrl.entregable.fechaEntrega)" ng-change="ctrl.marcarFechaFin(ctrl.entregable.fechaEntrega)">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="fg-line">
+                        <input type="time" class="form-control input-sm input-letra-prometeo" ng-model="ctrl.entregable.fechaEntrega">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group m-b-30" ng-if="ctrl.mostrarMetodoTrabajo">
+                  <label class="col-sm-4 control-label label-letra-prometeo">M&eacute;todo de trabajo:</label>
+                  <div class="col-sm-4">
+                    <div class="radio m-b-15">
+                      <label class="input-letra-prometeo">
+                        <input type="radio" ng-model="ctrl.metodoTrabajo" name="metodo" ng-value="'individual'">
+                        <i class="input-helper"></i>
+                        Individual
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="radio m-b-15">
+                      <label class="input-letra-prometeo">
+                        <input type="radio" ng-model="ctrl.metodoTrabajo" name="metodo" ng-value="'grupal'">
+                        <i class="input-helper"></i>
+                        Grupal
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group m-b-30"><!--puntaje-->
+                  <label class="col-sm-4 control-label label-letra-prometeo">Ponderaci&oacute;n<strong class="text-danger">*</strong>:</label>
+                  <div class="col-sm-8">
+                    <div class="fg-line">
+                        <input type="number" ng-model="ctrl.entregable.ponderacion" class="form-control input-letra-prometeo input-sm">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4">
+            <form class="form-horizontal ng-pristine ng-valid">
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="control-label label-letra-prometeo">Notificaciones</label>
+                </div>
+                <div style="display:inline-block; min-height:290px;">
+                  <div ng-if="ctrl.fechasCargadas" uib-datepicker ng-model="dt" ng-click="ctrl.marcarFecha(dt)" class="well well-sm" datepicker-options="options"></div>
+                  <div ng-if="!ctrl.fechasCargadas">{{ctrl.mensajeFecha}}</div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group" ng-if="ctrl.entregableCreado">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card-body">
+                    <div class="fg-line">
+                      <label class="col-sm-4 control-label label-letra-prometeo">Herramienta de evaluaci&oacute;n:</label>
+                      <div class="col-sm-8 p-r-0">
+                        <button ng-click="ctrl.crearHerramienta()" class="btn btn-primary waves-effect float-right m-l-5"><i class="fa fa-plus"></i> Agregar herramienta</button>
+                        <button ng-click="ctrl.verReutilizarHerramienta()" class="btn bgm-green waves-effect float-right m-r-5"><i class="fa fa-recycle"></i> Reutilizar herramienta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
-              <form class="form-horizontal ng-pristine ng-valid">
-                <div class="card-body card-padding">
-                  <div class="form-group">
-                    <label class="control-label">Notificaciones</label>
-                  </div>
-                  <div style="display:inline-block; min-height:290px;">
-                    <div ng-if="ctrl.fechasCargadas" uib-datepicker ng-model="dt" ng-click="ctrl.marcarFecha(dt)" class="well well-sm" datepicker-options="options"></div>
-                    <div ng-if="!ctrl.fechasCargadas">{{ctrl.mensajeFecha}}</div>
-                  </div>
-                </div>
-              </form>
+            <div class="form-group" ng-if="ctrl.entregableCreado">
+              <div class="table-responsive input-letra-prometeo">
+                <table ng-table="ctrl.herramientasTabla" class="table table-bordered">
+                  <tr ng-repeat="herramienta in ctrl.herramientasEvaluacion">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'Nombre'">
+                      {{herramienta.descripcion}}
+                    </td>
+                    <td data-title="'Tipo'">
+                      {{herramienta.tipo}}
+                    </td>
+                    <td data-title="'Acciones'" align="center" widht="25%">
+                      <a ng-click="ctrl.editarCriterio($index)" class="m-r-10"><i class="fa fa-pencil-alt"></i></a>
+                      <a ng-click="ctrl.eliminarHerramienta(herramienta,$index)" class="m-l-10"><i class="fa fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12" align="right">
-              <button type="button" ng-if="!ctrl.entregableCreado || ctrl.modificar" ng-click = "ctrl.gestionarEntregable(ctrl.entregableG)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Grabar </button>
-              <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-              <!--<button type="button" class="btn btn-primary waves-effect" ng-click = "ctrl.probar()"><i class="fa fa-file"></i> Probar Swal</button>-->
+          <div class="col-md-12">
+            <div class="card-body">
+              <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn bgm-yellow text-dark waves-effect m-r-5 m-l-5 float-right"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-if="!ctrl.entregableCreado || ctrl.modificar" ng-click = "ctrl.gestionarEntregable(ctrl.entregable)" class="btn btn-primary waves-effect m-r-5 float-right"><i class="fa fa-save"></i> Grabar </button>
             </div>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <ul>
-                <li ng-repeat="alumno in ctrl.alumnosLista">
-                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
-                </li>
-              </ul>
-            </div> -->
           </div>
         </div>
       </div>
