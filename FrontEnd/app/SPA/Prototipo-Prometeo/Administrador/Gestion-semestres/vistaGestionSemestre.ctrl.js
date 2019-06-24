@@ -10,7 +10,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     fechaInicio : "",
     fechaFin : ""
   };
-  
+
 
   arch=[];
 
@@ -97,6 +97,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.semestresLista[i].fechaFinStr = fechCrStr;
       };
+      ctrl.semestresTabla = new NgTableParams({}, { dataset: ctrl.semestresLista });
     });
   };
 

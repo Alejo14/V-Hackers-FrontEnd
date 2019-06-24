@@ -31,6 +31,9 @@
               <div class="table-responsive">
                 <table ng-table="ctrl.tablaHorarios" class="table table-bordered">
                   <tr ng-repeat="horario in ctrl.horariosLista" align = "center">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
                     <td data-title="'Código Horario'">
                       {{horario.codigo}}
                     </td>
