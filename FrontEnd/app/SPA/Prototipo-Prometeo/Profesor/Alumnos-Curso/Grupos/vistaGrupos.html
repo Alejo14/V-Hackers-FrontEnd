@@ -25,6 +25,9 @@
               <div class="table-responsive">
                 <table ng-table="" class="table table-striped">
                   <tr ng-repeat="grupo in ctrl.gruposLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
                     <td data-title="'Nombre'">
                       <div class="col-md-4" align="center" ng-click="ctrl.verGrupo(grupo)">
                         <a href=""> {{grupo.nombre}} </a>

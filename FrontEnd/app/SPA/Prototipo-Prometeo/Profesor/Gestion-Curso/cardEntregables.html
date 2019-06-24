@@ -1,13 +1,17 @@
 <div class="col-md-12">
   <div class="row" align="center" style="padding:10px;">
-    <div class="col-md-4">ENTREGABLE</div>
+    <div class="col-md-1">NRO.</div>
+    <div class="col-md-3">ENTREGABLE</div>
     <div class="col-md-3">FECHA CREACIÓN</div>
     <div class="col-md-3">FECHA FIN</div>
     <div class="col-md-2">ACCIONES</div>
   </div>
   <div ng-repeat="entregable in ctrl.entregablesLista" >
     <div class="row" style="padding:5px;">
-      <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
+      <div class="col-md-1" align="center" width="5%">
+        {{$index + 1}}
+      </div>
+      <div class="col-md-3" ng-click="ctrl.ingresarEntregable()">
         <a href=""> {{entregable.nombre}} </a>
       </div>
       <div class="col-md-3" align="center">

@@ -63,6 +63,9 @@
               <div class="table-responsive">
                 <table ng-table="ctrl.alumnosTabla" class="table table-hover">
                   <tr ng-repeat="alumno in ctrl.alumnosLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
                     <td data-title="'Código'">
                       {{alumno.codigo}}
                     </td>
