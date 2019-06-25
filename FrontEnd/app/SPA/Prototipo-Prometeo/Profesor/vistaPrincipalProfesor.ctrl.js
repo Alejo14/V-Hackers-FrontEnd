@@ -11,10 +11,6 @@ function($scope, $state,$stateParams, $uibModal){
     $state.go('calificacion', {avanceEntregableId:"2f4827c3-b97d-4b36-9c91-088d034b795b", herramientaCalificada: 0});
   }
 
-  ctrl.listarEntregables = function(){
-    $state.go('evaluacion-herramienta-listar');
-  }
-
   ctrl.misCursos = function(rol){
     $state.go('profesorMisCursos',{rolUsuario: rol});
   }

@@ -18,14 +18,6 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
     });
   };
 
-  ctrl.obtenerConjuntosGrupo = function (horarioId) {
-    listarAlumnosService.obtenerConjuntosGrupo(horarioId).then(function (conjuntosListaData) {
-      ctrl.conjuntosLista = conjuntosListaData;
-      console.log(conjuntosListaData);
-      ctrl.conjuntosTabla = new NgTableParams({}, { dataset: ctrl.conjuntosLista });
-    });
-  };
-
   ctrl.verDetalleAlumno = function (alumno) {
   };
 
@@ -84,7 +76,6 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
     ctrl.horario.horarioId = $stateParams.horarioId;
 
     ctrl.obtenerAlumnos(ctrl.horario.horarioId);
-    ctrl.obtenerConjuntosGrupo(ctrl.horario.horarioId);
   };
 
   ctrl.init();

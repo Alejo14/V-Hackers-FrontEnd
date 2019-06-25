@@ -167,4 +167,31 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     }
 
+    servicio.obtenerAlumnos = function(horarioId){
+      var urlObtenerAlumnos = variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/listaralumnosxhorario/' + horarioId;
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlObtenerAlumnos
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    };
+
+    servicio.obtenerGrupos = function(horarioId){
+      var urlObtenerGrupos = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listargruposxhorario/' + horarioId;
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlObtenerGrupos
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    };
 }]);

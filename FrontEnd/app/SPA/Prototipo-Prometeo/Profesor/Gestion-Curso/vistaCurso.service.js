@@ -65,7 +65,7 @@ function($q, $http, variablesAmbiente) {
   var servicio = this;
 
   servicio.listarMisCursos = function(misCursoInfo){
-    var urlListarMisCursos = 'http://localhost:7004/cursos/listarhorariocursociclorolusuario/'
+    var urlListarMisCursos = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/listarhorariocursociclorolusuario/'
                               + misCursoInfo.cicloId + '?RolUsuarioID=' + misCursoInfo.rolUsuarioId;
     var $defer = $q.defer();
     $http({

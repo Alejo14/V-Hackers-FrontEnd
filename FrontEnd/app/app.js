@@ -227,6 +227,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'gestion-competencias',
                   url: '/gestion-competencias/:id/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Rubrica-Competencias/vistaGestionCompetencias.html'
+                },
+                {
+                  name: 'avances-entregable',
+                  url: '/avances-entregable/:id/:nombre/:metodo/:horarioId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 }
               ]
             },

@@ -125,7 +125,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     date=entregable.fechaEntrega.getDate();
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
-    if(ctrl.mostrarMetodoTrabajo === 1){
+    if(ctrl.mostrarMetodoTrabajo == 1){
       var metodo = 0;
       if(ctrl.metodoTrabajo !== "individual") metodo = 1;
     }else{

@@ -17,48 +17,5 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
-  servicio.obtenerConjuntosGrupo = function(horarioId){
-    var urlObtenerConjuntosGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listarconjuntogruposxhorario/' + horarioId;
-    var $defer = $q.defer();
-    $http({
-        method: 'GET',
-        url: urlObtenerConjuntosGrupo
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
-  servicio.obtenerConjuntosGrupo = function(horarioId){
-    var urlObtenerConjuntosGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/listarconjuntogruposxhorario/' + horarioId;
-    var $defer = $q.defer();
-    $http({
-        method: 'GET',
-        url: urlObtenerConjuntosGrupo
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
-  servicio.crearConjuntosGrupo = function(data){
-    var urlCrearConjuntosGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/crearconjuntogrupos';
-    var $defer = $q.defer();
-    $http({
-        method: 'POST',
-        url: urlCrearConjuntosGrupo,
-        data: data
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
 
 }]);
