@@ -62,3 +62,7 @@ body{
 .table > thead > tr > td {
   font-weight: bold;
 }
+
+.z-indice-prometeo {
+  z-index: 2;
+}

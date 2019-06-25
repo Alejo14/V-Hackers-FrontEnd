@@ -20,9 +20,14 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
+        aspecto.activarPuntajeManual = false;
       });
       console.log(ctrl.evaluacionAspecto);
     });
+  }
+
+  ctrl.editarPuntaje = function (indice) {
+    ctrl.evaluacionAspecto[indice].activarPuntajeManual = !ctrl.evaluacionAspecto[indice].activarPuntajeManual;
   }
 
   ctrl.regresar = function (){

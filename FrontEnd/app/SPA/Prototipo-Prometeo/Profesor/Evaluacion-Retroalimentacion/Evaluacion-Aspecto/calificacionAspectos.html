@@ -6,7 +6,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-                <h4>Aspectos</h4>
+                <h4 class="titulo-letra-prometeo">Aspectos</h4>
             </div>
           </div>
         </div>
@@ -14,39 +14,56 @@
           <div class="form-group fg-line">
             <uib-accordion close-others="true">
               <div uib-accordion-group class="panel-default" ng-repeat="aspecto in ctrl.evaluacionAspecto" is-open="aspecto.accordionOpen">
-                <uib-accordion-heading>
-                {{aspecto.titulo}} : {{aspecto.descripcion}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
+                <uib-accordion-heading class="label-letra-prometeo">
+                <label class="label-letra-prometeo">{{aspecto.titulo}} : {{aspecto.descripcion}}</label><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
                 </uib-accordion-heading>
-                <div class="form-group fg-line">
-                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n del aspecto</label>
-                  <label class="col-sm-2 p-t-10">Puntaje</label>
-                  <input type="number" step="any" class="col-sm-2 form-control input-sm"  ng-model="aspecto.puntajeManual" placeholder="Ingrese el puntaje">
-                  <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
-                  </textarea>
+                <div  class="form-group fg-line m-b-0">
+                  <label class="control-label label-letra-prometeo p-t-10" align="right">Puntaje</label>
                 </div>
-                <div class="form-group fg-line">
-                  <p>Criterios</p>
-                </div>
-                <div class="form-group fg-line p-l-10" ng-repeat="criterio in aspecto.criterios">
-                  {{($index+1) + '. ' + criterio.descripcion}}
-                  <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
-                    <label>
-                        <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
-                        <i class="input-helper"></i>
-                        {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos: {{criterio.nivelesCriterios[$index].descripcion}}
-                    </label>
+                <div class="form-group fg-line m-b-10">
+                  <input type="number" step="any" class="z-indice-prometeo texto-centrado col-sm-1 form-control input-sm input-letra-prometeo m-r-10" ng-model="aspecto.puntajeManual" placeholder="Ingrese el puntaje" ng-disabled="!aspecto.activarPuntajeManual">
+                  <input type="text" class="z-indice-prometeo form-control input-sm input-letra-prometeo col-sm-9 m-r-10" placeholder="Ingresar comentario por cambio de puntaje" ng-disabled="!aspecto.activarPuntajeManual" ng-model="aspecto.descripcionPuntajeManual">
+                  <div class="checkbox col-sm-1">
+                    <input type="checkbox" ng-click="ctrl.editarPuntaje($index)" class="z-indice-prometeo">
+                    <i class="input-helper"></i>
                   </div>
-                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n del criterio</label>
-                  <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
+                </div>
+                <div class="form-group fg-line">
+                  <label class="control-label label-letra-prometeo p-t-10 p-l-0">Observaci&oacute;n del aspecto</label>
+                  <textarea class="form-control p-t-10 input-letra-prometeo" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
                   </textarea>
                 </div>
-                <div class="col-md-12" align="right">
+                <div class="form-group fg-line">
+                  <label class="control-label label-letra-prometeo">Criterios</label>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group fg-line p-l-10 p-b-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
+                      {{($index+1) + '. ' + criterio.descripcion}}
+                      <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
+                        <label class="control-label input-letra-prometeo">
+                            <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
+                            <i class="input-helper"></i>
+                            {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos: {{criterio.nivelesCriterios[$index].descripcion}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group fg-line p-l-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
+                      <label class="col-sm-6 p-t-10 p-l-0 control-label label-letra-prometeo">Observaci&oacute;n del criterio {{$index+1}}</label>
+                      <textarea class="form-control p-t-10 input-letra-prometeo" rows="4" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12" align="right">
                   <button type="button" ng-click = "ctrl.calcularPuntajeCriterio(aspecto.id)" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
                 </div>
               </div>
             </uib-accordion>
           </div>
-          <div class="col-md-12" align="right">
+          <div class="col-sm-12" align="right">
             <button type="button" ng-click = "ctrl.guardarAspecto()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
             <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
           </div>
