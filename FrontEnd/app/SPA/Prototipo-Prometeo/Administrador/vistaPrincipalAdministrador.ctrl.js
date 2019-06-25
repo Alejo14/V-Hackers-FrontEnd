@@ -15,6 +15,10 @@ function($scope, $state,$stateParams, administadorService, $uibModal){
     $state.go('crear-especialidad');
   }
 
+  ctrl.crearFacultad = function(){
+    $state.go('creacion-facultad');
+  }
+
   ctrl.listarEspecialidades = function(especialidades){
     $state.go('listar-especialidades')
   }
