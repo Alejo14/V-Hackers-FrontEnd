@@ -8,28 +8,36 @@
           </div>
         </div>
       </div>
-
-
-      <div class="table-responsive m-t-20">
-        <table ng-Table="ctrl.tablaMisCursos" class="table table-striped">
-          <tr ng-repeat="miCurso in ctrl.listaMisCursos">
-            <td data-title="'Código'">
-              {{miCurso.codigoCurso}}
-            </td>
-            <td data-title="'Nombre'">
-              <a href="" ng-click = "ctrl.verCurso(miCurso)">{{miCurso.nombreCurso}}</a>
-            </td>
-            <td data-title="'Créditos'">
-              {{miCurso.creditos}}
-            </td>
-            <td data-title="'N° Alumnos'">
-              {{miCurso.cantidadAlumnos}}
-            </td>
-            <td data-title="'Horario'">
-              {{miCurso.horario}}
-            </td>
-          </tr>
-        </table>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive m-t-20">
+            <table ng-Table="ctrl.tablaMisCursos" class="table table-striped">
+              <tr ng-repeat="miCurso in ctrl.listaMisCursos">
+                <td data-title="'Código'">
+                  {{miCurso.codigoCurso}}
+                </td>
+                <td data-title="'Nombre'">
+                  <a href="" ng-click = "ctrl.verCurso(miCurso)">{{miCurso.nombreCurso}}</a>
+                </td>
+                <td data-title="'Créditos'">
+                  {{miCurso.creditos}}
+                </td>
+                <td data-title="'N° Alumnos'">
+                  {{miCurso.cantidadAlumnos}}
+                </td>
+                <td data-title="'Horario'">
+                  {{miCurso.horario}}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <hc-chart options="ctrl.opcionesReporteCursos"></hc-chart>
+        </div>
+      </div>
+
   </div>
 </section>
