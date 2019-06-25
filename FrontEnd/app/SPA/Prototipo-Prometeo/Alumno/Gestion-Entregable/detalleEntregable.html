@@ -29,6 +29,9 @@
                         <h4><label class="control-label">Archivos:</h4>
                         <table ng-table="ctrl.tablaArchivos" class="table table-bordered">
                           <tr ng-repeat="archi in ctrl.listaArchivos">
+                            <td data-title="'Nro.'" align="center" width="5%">
+                              {{$index + 1}}
+                            </td>
                             <td data-title="'Ícono'">
                             </td>
                             <td data-title="'Nombre del Archivo'">
@@ -52,6 +55,9 @@
                         <h4><label class="control-label">URLs:</h4>
                         <table ng-table="ctrl.tablaURLs" class="table table-bordered">
                           <tr ng-repeat="url in ctrl.listaURLs">
+                            <td data-title="'Nro.'" align="center" width="5%">
+                              {{$index + 1}}
+                            </td>
                             <td data-title="'Link'">
                               <a href="{{url.nombre}}" > {{url.nombre}} </a>
                             </td>
