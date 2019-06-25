@@ -1,4 +1,4 @@
-angular.module('vHackersModule').directive('cargaMasivaRolUsuarioHorario', ['httpPostFactory','variablesAmbiente',function (httpPostFactory,variablesAmbiente) {
+angular.module('vHackersModule').directive('cargaMasivaAlumnosHorario', ['httpPostFactory','variablesAmbiente',function (httpPostFactory,variablesAmbiente) {
     return {
 
         restrict: 'A',
@@ -14,15 +14,18 @@ angular.module('vHackersModule').directive('cargaMasivaRolUsuarioHorario', ['htt
 
 
                 var formData = new FormData();
+                console.log(scope.parametros.id);
+                formData.append('id',scope.parametros.id);
                 formData.append('files', element[0].files[0]);
-        
+
+
                 //formData.append('id',scope.parametros);
                 console.log(formData);
                 //formData.append('id', element[0].files[0]);scope.parametros
 
                //agregar referencua a httpPostFactorypara la siguiente sección
                 //console.log(scope.parametros);
-                httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/cargamasiva/rolusuarios', formData, function (callback) {
+                httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/cargamasiva/alumnos', formData, function (callback) {
                   // recieve image name to use in a ng-src
                   //console.log(callback);
                   scope.parametros=callback;
@@ -41,6 +44,7 @@ angular.module('vHackersModule').directive('cargaMasivaRolUsuarioHorario', ['htt
 
         }
     };
+
 }])
 
 

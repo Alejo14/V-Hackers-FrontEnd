@@ -76,10 +76,10 @@
                 <h1></h1>
               </div>
               <div class="row">
-                <div class="col" align="left">
+                <div class="col" align="right">
         <!--          <a href="#" class="btn btn-primary">Go somewhere</a> -->
                   <button type="button" ng-click = "ctrl.filtrar()" class="btn btn-primary waves-effect"><i class="fa fa-search"></i> Buscar</button>
-                  <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-file-excel"></i> Exportar</button>
+
                 </div>
               </div>
             </div>
@@ -87,13 +87,16 @@
         </div>
       </div>
 
-        <div class="col-md-12">
+        <div class="col-md-13">
           <div class="table-responsive">
             <table ng-table="ctrl.tablaCursos" class="table table-bordered" show-filter="true">
               <tr ng-repeat="curso in ctrl.cursosLista">
                 <!-- <td data-title="'Rol'">
                   {{usuario.rolesUsuario[0].rol.descripcion}}
                 </td> -->
+                <td data-title="'Nro.'" align="center" width="5%">
+                  {{$index + 1}}
+                </td>
                 <td data-title="'Especialidad'">
                   {{curso.especialidad}}
                 </td>
@@ -109,11 +112,11 @@
                 <!-- <td data-title="'Unidad académica'">
                   {{usuario.especialidad.facultad.nombre}}
                 </td> -->
-                <td data-title="'Créditos'">
+                <td data-title="'Créditos'" align="center">
                   {{curso.creditos}}
                 </td>
 
-                <td data-title="'Eliminar  /  Ver Horarios  /  Editar'">
+                <td data-title="'Acciones'">
                   <div class = "col-md-4">
                     <a style="float:right"  ng-click="ctrl.eliminarCursoCiclo(curso,$index)">
                       <i class="fas fa-trash-alt"></i>

@@ -2,13 +2,10 @@
 angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
 function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
   var ctrl = this;
-  ctrl.tituloNuevo = "Nuevo Entregable";
-  ctrl.tituloModificado= "Entregable";
-  ctrl.tituloVer="Entregables";
   ctrl.titulo="";
   ctrl.botonGrabar="";
   ctrl.entregableM=[];
-  ctrl.entregableG={ };
+  ctrl.entregable={};
   ctrl.mensajeFecha = "Complete las fechas correctamente.";
   ctrl.entregablesLista = [];
   $scope.fechaActual = new Date();
@@ -97,7 +94,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       };
       $scope.events.push(dato);
       $scope.options.maxDate = fecha.setDate(fecha.getDate()-1);
-      ctrl.entregableG.fechaEntrega = new Date(Number(ctrl.entregableG.fechaEntrega.setDate(fecha.getDate()+1)));
+      ctrl.entregable.fechaEntrega = new Date(Number(ctrl.entregable.fechaEntrega.setDate(fecha.getDate()+1)));
       ctrl.fechasCargadas = true;
     } catch (e) {
       ctrl.mensajeFecha = "Completar con una fecha válida mayor a la fecha de fecha de habilitación";
@@ -105,7 +102,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.marcarFecha = function(fecha) {
-    // ctrl.fechasCargadas = false;
     year = fecha.getFullYear();
     month = fecha.getMonth();
     day = fecha.getDate();
@@ -117,25 +113,22 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         status: "full"
       };
       $scope.events.push(dato);
-      // ctrl.fechasCargadas = true;
     } else if ($scope.events[ind].status !== 'start') {
       $scope.events.splice(ind,1);
-      // ctrl.fechasCargadas = true;
     };
-    // ctrl.fechasCargadas = true;
   };
 
-  ctrl.gestionarEntregable = function (entregableG){
-    if (!entregableG || !(entregableG.nombre) || !(entregableG.descripcion) || !(entregableG.fechaHabilitacion) || !(entregableG.ponderacion)){
+  ctrl.gestionarEntregable = function (entregable){
+    if (!entregable || !(entregable.nombre) || !(entregable.descripcion) || !(entregable.fechaHabilitacion) || !(entregable.ponderacion)){
       swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
     }else{
-      if (entregableG.fechaEntrega < entregableG.fechaHabilitacion){
+      if (entregable.fechaEntrega < entregable.fechaHabilitacion){
         swal("¡Opss!", "La fecha de habilitación debe ser menor o igual a la fecha de entrega" , "error");
       }else{
         if ($stateParams.id == 0) {
-          ctrl.crearEntregable(entregableG);
+          ctrl.crearEntregable(entregable);
         }else {
-          ctrl.modificarEntregable(entregableG);
+          ctrl.modificarEntregable(entregable);
         }
       }
     }
@@ -153,8 +146,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     date=entregable.fechaEntrega.getDate();
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
-    if(ctrl.mostrarMetodoTrabajo==1){
-      var metodo = parseInt($('input[name=metodo]:checked').val());
+    if(ctrl.mostrarMetodoTrabajo === 1){
+      var metodo = 0;
+      if(ctrl.metodoTrabajo !== "individual") metodo = 1;
     }else{
       var metodo = 0;
     }
@@ -174,12 +168,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         }
       console.log(angular.toJson(data));
       entregableService.registroentregableAlumnoXProyecto(angular.toJson(data)).then(function () {
-          swal("¡Bien hecho!", "El entregable del proyecto se creó exitosamente" , "success").then(function () {
-            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
-          });
+          swal("¡Bien hecho!", "El entregable del proyecto se creó exitosamente" , "success");
+          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, proyectoNombre: ctrl.entregable.proyectoNombre, cursoId: ctrl.entregable.cursoCicloId});
       });
     }else{
-
       data={
         "id": null, //Defecto
         "nombre": entregable.nombre,
@@ -193,22 +185,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "notificaciones": $scope.events,
         "metodoTrabajo": metodo
         }
-      console.log(angular.toJson(data));
-      entregableService.registroentregableAlumnoXCurso(angular.toJson(data)).then(function () {
+      entregableService.registroentregableAlumnoXCurso(data).then(function () {
           swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
+          $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId});
       });
     }
-
-    entregable.id=0;
-    entregable.tieneAlarma=1;
-    entregable.nombre="";
-    entregable.fechaHabilitacion="";
-    entregable.horaInicio="";
-    entregable.fechaEntrega="";
-    entregable.horaFin="";
-    entregable.descripcion="";
-    entregable.ponderacion="";
-
   };
 
   ctrl.regresarEntregables = function () {
@@ -228,20 +209,14 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (usuarioNuevoConfirmado) {
       if (usuarioNuevoConfirmado !== "cancelar") {
-        if (ctrl.entregableG.proyectoId != 0) {
-          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
+        if (ctrl.entregable.proyectoId != 0) {
+          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, proyectoNombre: ctrl.entregable.proyectoNombre, cursoId: ctrl.entregable.cursoCicloId});
         } else {
-          $state.go('curso', {cursoCicloId: ctrl.entregableG.cursoCicloId});
+          $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId});
         }
       }
     });
   };
-
-  ctrl.regresarEntregable = function () {
-    $state.go('evaluacion-herramienta-gestionar' , {nombre: 0, id: 0, fechaHabilitacion: 0, fechaEntrega: 0,
-      descripcion: 0, ponderacion: 0, cursoCicloId: 0, proyectoId: 0});//ctrl.curso.cursoCicloId
-  };
-
 
   if ($stateParams.nombre){
     ctrl.entregableM.nombre=$stateParams.nombre;
@@ -265,14 +240,14 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     if (!entregableM.horaEntrega) {minutes=0} else {minutes=entregableM.horaEntrega.getMinutes();}
 
     if(ctrl.mostrarMetodoTrabajo==1){
-      var metodo = parseInt($('input[name=metodo]:checked').val());
+      var metodo = parseInt(ctrl.mostrarMetodoTrabajo);
     }else{
       var metodo = 0;
     }
-    if (ctrl.entregableG.proyectoId == 0) {
+    if (ctrl.entregable.proyectoId == 0) {
         var proyecto = null;
     } else {
-      var proyecto = ctrl.entregableG.proyectoId;
+      var proyecto = ctrl.entregable.proyectoId;
     }
     data={
       "id": entregableM.id, //Defecto
@@ -282,31 +257,18 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       "tieneAlarma": 1,
       "ponderacion": entregableM.ponderacion,
       "descripcion": entregableM.descripcion,
-      "idCursoCiclo": ctrl.entregableG.cursoCicloId,
+      "idCursoCiclo": ctrl.entregable.cursoCicloId,
       "idProyecto": proyecto,
       "notificaciones": $scope.events,
       "metodoTrabajo": metodo
       }
-    // console.log(angular.toJson($scope.events));
-    console.log(angular.toJson(data));
-    entregableService.modificarentregableAlumno(angular.toJson(data)).then(function () {
+    entregableService.modificarentregableAlumno(data).then(function () {
       swal("¡Bien hecho!", "El entregable se modificó exitosamente" , "success").then(function () {
-        if (ctrl.entregableG.proyectoId != 0) {
-            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregableG.proyectoId, proyectoNombre: ctrl.entregableG.proyectoNombre, cursoId: ctrl.entregableG.cursoCicloId});
+        if (ctrl.entregable.proyectoId != 0) {
+            $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId});
         }
       });
     });
-    // entregableM.id=0;
-    // entregableM.tieneAlarma=1;
-    // entregableM.nombre="";
-    // entregableM.fechaHabilitacion="";
-    // entregableM.horaInicio="";
-    // entregableM.fechaEntrega="";
-    // entregableM.horaFin="";
-    // entregableM.descripcion="";
-    // entregableM.ponderacion="";
-    // entregableM.puntajeMaximo="";
-    ctrl.entregableCreado = true;
 };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
@@ -342,13 +304,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
 
   };
-
-  // ctrl.entregablesLista = [];
-  // ctrl.cargarEntregables = function () {
-  //   entregableService.listarEntregables().then(function (entregablesListaData) {
-  //     ctrl.entregablesLista = entregablesListaData;
-  //   });
-  // };
 
   ctrl.verReutilizarHerramienta = function() {
     if (!ctrl.entregableM.id) {
@@ -401,76 +356,65 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
   }
 
-  ctrl.obtenerInfoArchivo = function (archivo,parametros) {
-    console.log(archivo.nombre)
-  }
-
   ctrl.init = function (){
     ctrl.fechasIniciadas = false;
-    // ctrl.cargarEntregables();
     if ($stateParams.id == 0){ //Creación de Entregable
       ctrl.titulo = "Nuevo entregable";
       fecha = new Date();
       year = fecha.getFullYear();
       month = fecha.getMonth();
       day = fecha.getDate();
-      ctrl.entregableG.fechaHabilitacion = (new Date(year, month, day));
+      ctrl.entregable.fechaHabilitacion = (new Date(year, month, day));
       ctrl.entregableCreado = false;
       ctrl.modificar = false;
       ctrl.fechasIniciadas = true;
       ctrl.herramientasEvaluacion = [];
     } else {                  //Modificación de Entregable
       ctrl.titulo = "Modificar entregable";
-      //ctrl.botonGrabar="Modificar";
       ctrl.entregableCreado = true;
       ctrl.modificar = true;
       console.log($stateParams.id);
       entregableService.mostrarEntregable($stateParams.id).then(function(entregable){
         console.log(entregable);
-        ctrl.entregableG.nombre=entregable.nombre;
-        ctrl.entregableG.id=entregable.id;
-        ctrl.entregableG.fechaHabilitacion=new Date(Number(entregable.fechaHabilitacion));
-        ctrl.entregableG.fechaEntrega=new Date(Number(entregable.fechaEntrega));
-        ctrl.entregableG.descripcion=entregable.descripcion;
-        ctrl.entregableG.ponderacion=Number(entregable.ponderacion);
+        ctrl.entregable.nombre=entregable.nombre;
+        ctrl.entregable.id=entregable.id;
+        ctrl.entregable.fechaHabilitacion=new Date(Number(entregable.fechaHabilitacion));
+        ctrl.entregable.fechaEntrega=new Date(Number(entregable.fechaEntrega));
+        ctrl.entregable.descripcion=entregable.descripcion;
+        ctrl.entregable.ponderacion=Number(entregable.ponderacion);
         ctrl.cargarHerramientas($stateParams.id);
       });
     }
     if($stateParams.proyectoId != 0) { //Entregable pertence a un proyecto
       ctrl.titulo = ctrl.titulo + " de un proyecto"
-      ctrl.entregableG.proyectoId=$stateParams.proyectoId;
-      ctrl.entregableG.proyectoNombre = $stateParams.proyectoNombre;
+      ctrl.entregable.proyectoId=$stateParams.proyectoId;
+      ctrl.entregable.proyectoNombre = $stateParams.proyectoNombre;
       if ($stateParams.id != 0){
         entregableService.listarEntregablesXProyecto($stateParams.proyectoId).then(function (entregablesListaData) {
           ctrl.entregablesLista = entregablesListaData;
           var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
           $scope.events = entregableEncontrado.notificaciones;
-          ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
-          // console.log(ctrl.entregableG.notificaciones);
+          ctrl.entregable.notificaciones = entregableEncontrado.notificaciones;
           ctrl.fechasIniciadas = true;
         });
       }
-    } else {
-      ctrl.mostrarMetodoTrabajo=1;                            //Entregable pertence a un cursoCiclo
-      ctrl.entregableG.proyectoId=0;
-      ctrl.entregableG.proyectoNombre = 0;
+    } else { //Entregable pertence a un cursoCiclo
+      ctrl.metodoTrabajo = "individual";
+      ctrl.entregable.proyectoId=0;
+      ctrl.entregable.proyectoNombre = "";
       if ($stateParams.id != 0){
         entregableService.listarEntregables($stateParams.cursoCicloId).then(function (entregablesListaData) {
           ctrl.entregablesLista = entregablesListaData;
           var entregableEncontrado = ctrl.entregablesLista.find(i => i.id === $stateParams.id);
           $scope.events = entregableEncontrado.notificaciones;
-          ctrl.entregableG.notificaciones = entregableEncontrado.notificaciones;
-          if(entregableEncontrado.metodoTrabajo==1){
-            $("input[name=metodo][value=1]").prop('checked', true);
-          }else{
-            $("input[name=metodo][value=0]").prop('checked', true);
-          }
-          // console.log(ctrl.entregableG.notificaciones);
+          ctrl.entregable.notificaciones = entregableEncontrado.notificaciones;
           ctrl.fechasIniciadas = true;
         });
+      }else{
+        ctrl.mostrarMetodoTrabajo=1;
       }
     }
-    ctrl.entregableG.cursoCicloId=$stateParams.cursoCicloId;
+    ctrl.entregable.cursoCicloId=$stateParams.cursoCicloId;
   }
   ctrl.init();
 }]);

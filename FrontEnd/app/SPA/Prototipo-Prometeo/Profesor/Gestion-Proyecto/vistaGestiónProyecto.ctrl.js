@@ -107,21 +107,17 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
         hoursF=proyectoNuevo.fechaFin.getHours();
         minutesF=proyectoNuevo.fechaFin.getMinutes();
 
-        if($('#ts1').is(':checked')){
-            var vis = 1
+        if (proyectoNuevo.metodoTrabajo=="individual"){
+          metodo = 0;
         }else{
-            var vis = 0;
+          metodo = 1;
         }
 
-        if($('#ts2').is(':checked')){
-            var horas = 1
+        if (proyectoNuevo.visible=="si"){
+          visible = 1;
         }else{
-            var horas = 0;
+          visible = 0;
         }
-
-        var descripcion = $('textarea#desTA').val()
-
-        var metodo = parseInt($('input[name=metodo]:checked').val())
 
         console.log(angular.toJson(proyectoNuevo));//Envio el json para crear el entregable
         data={
@@ -131,9 +127,9 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
           "fechaFin": (new Date(yearF, monthF, dateF, hoursF, minutesF,0))*1,
           "ponderacion": parseInt(proyectoNuevo.ponderacion),
-          "descripcion": descripcion,
-          "visible": vis,
-          "registroHoras": horas,
+          "descripcion": proyectoNuevo.descripcion,
+          "visible": visible,
+          "registroHoras": 0,
           "metodoTrabajo": metodo,
           "cursoCiclo_id": ctrl.proyectoG.cursoCiclo_id
           }
@@ -188,21 +184,17 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
         hoursF=proyectoModif.fechaFin.getHours();
         minutesF=proyectoModif.fechaFin.getMinutes();
 
-        if($('#ts1').is(':checked')){
-            var vis = 1
+        if (proyectoModif.metodoTrabajo=="individual"){
+          metodo = 0;
         }else{
-            var vis = 0;
+          metodo = 1;
         }
 
-        if($('#ts2').is(':checked')){
-            var horas = 1
+        if (proyectoModif.visible=="si"){
+          visible = 1;
         }else{
-            var horas = 0;
+          visible = 0;
         }
-
-        var descripcion = $('textarea#desTA').val()
-
-        var metodo = parseInt($('input[name=metodo]:checked').val())
 
         console.log(angular.toJson(proyectoModif));//Envio el json para crear el entregable
         data={
@@ -212,23 +204,19 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           "fechaInicio": (new Date(yearI, monthI, dateI, hoursI, minutesI,0))*1,
           "fechaFin": (new Date(yearF, monthF, dateF, hoursF, minutesF,0))*1,
           "ponderacion": parseInt(proyectoModif.ponderacion),
-          "descripcion": descripcion,
-          "visible": vis,
-          "registroHoras": horas,
+          "descripcion": proyectoModif.descripcion,
+          "visible": visible,
+          "registroHoras": 0,
           "metodoTrabajo": metodo,
           "cursoCiclo_id": ctrl.proyectoG.cursoCiclo_id
           }
           console.log(angular.toJson(data));
           gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "El proyecto fue modificado exitosamente" , "success");
+            swal("¡Bien hecho!", "El proyecto fue modificado exitosamente" , "success").then(function () {
+              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
+            });
           });
 
-          proyectoModif.nombre="";
-          proyectoModif.fechaCreacion="";
-          proyectoModif.fechaInicio="";
-          proyectoModif.fechaFin="";
-          proyectoModif.ponderacion="";
-          $("textarea#desTA").val("");
       }
     });
   }
@@ -243,7 +231,6 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       ctrl.proyectoG.ponderacion=parseInt(proyectoObtenido.ponderacion);
       ctrl.proyectoG.cursoCiclo_id = proyectoObtenido.cursoCiclo_id;
       ctrl.proyectoG.visible = proyectoObtenido.visible;
-      ctrl.proyectoG.registroHoras =parseInt(proyectoObtenido.registroHoras);
       ctrl.proyectoG.metodoTrabajo =parseInt(proyectoObtenido.metodoTrabajo);
       ctrl.proyectoG.descripcion = proyectoObtenido.descripcion;
     });
@@ -254,9 +241,12 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
     if ($stateParams.id==0){
       ctrl.titulo = "Nuevo Proyecto";
       ctrl.proyectoG.cursoCiclo_id=$stateParams.cursoCiclo_id;
+      ctrl.proyectoG.visible="no";
+      ctrl.proyectoG.metodoTrabajo="individual";
+      ctrl.mostrarMetodoTrabajo=true;
     }else{
       ctrl.titulo = "Modificar Proyecto";
-
+      ctrl.mostrarMetodoTrabajo=false;
       ctrl.proyectoG.id=$stateParams.id;
       ctrl.proyectoG.nombre=$stateParams.nombre;
       ctrl.proyectoG.fechaCreacion=new Date(Number($stateParams.fechaCreacion));
@@ -264,25 +254,20 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       ctrl.proyectoG.fechaFin=new Date(Number($stateParams.fechaFin));;
       ctrl.proyectoG.ponderacion=parseInt($stateParams.ponderacion);
       ctrl.proyectoG.cursoCiclo_id=$stateParams.cursoCiclo_id;
+      ctrl.proyectoG.descripcion = $stateParams.descripcion;
 
       if($stateParams.visible==1){
-        $("#ts1").attr("checked", true);
+        ctrl.proyectoG.visible="si";
       }else{
-        $("#ts1").attr("checked", false);
-      }
-
-      if($stateParams.registroHoras==1){
-        $("#ts2").attr("checked", true);
-      }else{
-        $("#ts2").attr("checked", false);
+        ctrl.proyectoG.visible="no";
       }
 
       if($stateParams.metodoTrabajo==1){
-        $("input[name=metodo][value=1]").prop('checked', true);
+        ctrl.proyectoG.metodoTrabajo="grupal";
       }else{
-        $("input[name=metodo][value=0]").prop('checked', true);
+        ctrl.proyectoG.metodoTrabajo="individual";
       }
-      $("textarea#desTA").val($stateParams.descripcion);
+
     }
   }
 

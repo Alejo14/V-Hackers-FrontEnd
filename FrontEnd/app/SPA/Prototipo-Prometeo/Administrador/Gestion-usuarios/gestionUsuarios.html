@@ -25,7 +25,10 @@
               <div class="table-responsive">
                 <table ng-table="ctrl.tablaUsuarios" class="table table-bordered">
                   <tr ng-repeat="usuario in ctrl.usuariosLista">
-                    <td data-title="'Código'">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'Código'" align="center">
                       {{usuario.codigo}}
                     </td>
                     <td data-title="'Nombre'">

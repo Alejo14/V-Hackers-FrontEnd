@@ -175,7 +175,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'evaluacion-herramienta-listar',
-                  url: '/evaluacion-herramienta-listar/:cursoId/:proyectoId/:proyectoNombre',
+                  url: '/evaluacion-herramienta-listar/:cursoId/:proyectoId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaListarEntregables.html'
                 },
                 {
@@ -222,6 +222,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'nueva-lista-cotejo',
                   url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
+                },
+                {
+                  name: 'gestion-competencias',
+                  url: '/gestion-competencias/:id/:cursoCicloId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Rubrica-Competencias/vistaGestionCompetencias.html'
                 }
               ]
             },

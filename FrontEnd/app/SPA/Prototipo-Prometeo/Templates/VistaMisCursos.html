@@ -13,6 +13,9 @@
           <div class="table-responsive m-t-20">
             <table ng-Table="ctrl.tablaMisCursos" class="table table-striped">
               <tr ng-repeat="miCurso in ctrl.listaMisCursos">
+                <td data-title="'Nro.'" align="center" width="5%">
+                  {{$index + 1}}
+                </td>
                 <td data-title="'Código'">
                   {{miCurso.codigoCurso}}
                 </td>

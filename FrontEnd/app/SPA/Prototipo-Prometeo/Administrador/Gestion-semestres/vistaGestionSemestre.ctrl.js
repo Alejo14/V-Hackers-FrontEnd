@@ -11,6 +11,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
     fechaFin : ""
   };
 
+
   arch=[];
 
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
@@ -96,6 +97,7 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.semestresLista[i].fechaFinStr = fechCrStr;
       };
+      ctrl.semestresTabla = new NgTableParams({}, { dataset: ctrl.semestresLista });
     });
   };
 

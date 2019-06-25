@@ -48,38 +48,8 @@
                 <div class="col-md-12">
                     <div class="toggle-switch">
                         <label for="ts1" class="ts-label">Proyecto visible:</label>
-                        <input id="ts1" type="checkbox"   hidden="hidden">
+                        <input type="checkbox" ng-model="ctrl.proyectoG.visible" name="visible" ng-true-value="'si'" ng-true-value="'no'">
                         <label for="ts1" class="ts-helper"></label>
-                    </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 m-t-30">
-                  <label for="ts1" class="ts-label">Metodo de Trabajo:</label>
-                  <div class="radio m-b-15">
-                    <label>
-                      <input type="radio" name="metodo" value="0" checked>
-                      <i class="input-helper"></i>
-                      Individual
-                    </label>
-                  </div>
-                  <div class="radio m-b-15">
-                    <label>
-                      <input type="radio" name="metodo" value="1">
-                      <i class="input-helper"></i>
-                      Grupal
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="toggle-switch">
-                        <label for="ts2" class="ts-label">Registro de horas:</label>
-                        <input id="ts2" type="checkbox" hidden="hidden">
-                        <label for="ts2" class="ts-helper"></label>
                     </div>
                 </div>
               </div>
@@ -96,6 +66,27 @@
                 </div>
               </div>
             </div>
+            <div class="col-sm-3">
+              <div class="row">
+                <div class="col-md-12" ng-if="ctrl.mostrarMetodoTrabajo">
+                  <label for="ts1" class="ts-label">Metodo de Trabajo:</label>
+                  <div class="radio m-b-15">
+                    <label>
+                      <input type="radio" ng-model="ctrl.proyectoG.metodoTrabajo" name="metodo" ng-value="'individual'" checked>
+                      <i class="input-helper"></i>
+                      Individual
+                    </label>
+                  </div>
+                  <div class="radio m-b-15">
+                    <label>
+                      <input type="radio" ng-model="ctrl.proyectoG.metodoTrabajo" name="metodo" ng-value="'grupal'">
+                      <i class="input-helper"></i>
+                      Grupal
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-12 m-t-10">
@@ -106,7 +97,7 @@
               </div>
               <div class="row-sm-3">
                 <div class="col-sm-11">
-                    <textarea id="desTA" class="form-control" cols="10" rows="5" style="border:solid 1px gray;"
+                    <textarea ng-model="ctrl.proyectoG.descripcion" class="form-control" cols="10" rows="5" style="border:solid 1px gray;"
                       placeholder="Ingrese descripción aqui..."></textarea>
                 </div>
               </div>
