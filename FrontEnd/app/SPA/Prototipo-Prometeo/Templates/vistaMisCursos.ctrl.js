@@ -4,26 +4,28 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
   ctrl.listaMisCursos = [];
   ctrl.opcionesReporteCursos = {};
-//a23b0031-64f6-4ce0-8b03-5f577d16d06c	343a3ea8-a0c8-4a73-9f81-6df07737b673
-  ctrl.misCursosInfo = {
-    "cicloId" : "85271594-c48c-4d69-b785-c365277c91e6",
-    "rolUsuarioId" : "a23b0031-64f6-4ce0-8b03-5f577d16d06c"
-  };
 
-  ctrl.misCursosInfoAlumno = {
-    "cicloId" : "85271594-c48c-4d69-b785-c365277c91e6", //Falta agregar un cicloId por alumno
-    "rolUsuarioId" : "505b1b8c-aed2-49c8-9724-3879469afb02"
-  };
-  ctrl.rolUsuarioId="505b1b8c-aed2-49c8-9724-3879469afb02";
 
-  ctrl.cargarMisCursos = function () {
+  ctrl.cargarMisCursos = function (ciclo) {
     if($stateParams.rolUsuario=='P'){
+
+      ctrl.misCursosInfo = {
+        "cicloId" : ciclo,
+        "rolUsuarioId" : "a23b0031-64f6-4ce0-8b03-5f577d16d06c"
+      };
+
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
         console.log(misCursosListaData);
         ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
       });
     }else {
+
+      ctrl.misCursosInfoAlumno = {
+        "cicloId" : ciclo,
+        "rolUsuarioId" : "505b1b8c-aed2-49c8-9724-3879469afb02"
+      };
+
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfoAlumno).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
         ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
@@ -45,7 +47,13 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
   }
 
   ctrl.init = function () {
-    ctrl.cargarMisCursos();
+    ctrl.rolUsuarioId="505b1b8c-aed2-49c8-9724-3879469afb02";
+    vistaMisCursosService.cicloActual().then(function(ciclo){
+      ctrl.cicloActual=ciclo;
+      ctrl.cargarMisCursos(ctrl.cicloActual);
+    });
+
+
     ctrl.opcionesReporteCursos = {
       title: {
         text: 'Historial de promedio de notas en el año'
