@@ -2,6 +2,11 @@ angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scop
 function($scope, $state, $stateParams, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
+
+if ($stateParams.id==0){
+  ctrl.titulo = 'Nueva co-evaluación';
+}
+
  ctrl.herramienta = {};
  ctrl.herramienta.descripcion = "";
  ctrl.herramienta.puntajeMax = 0;

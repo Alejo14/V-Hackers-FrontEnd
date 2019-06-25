@@ -31,6 +31,10 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
     descripcion: 0, visible: 0, registroHoras: 0, metodoTrabajo: 0, cursoCiclo_id: ctrl.curso.cursoCicloId});
   };
 
+  ctrl.crearCoEvaluacion = function () {
+      $state.go('nueva-herramienta', {id: 0, cursoCicloId: $stateParams.cursoCicloId, proyectoId: 0});
+  };
+
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
     var idCursoCiclo = ctrl.curso.cursoCicloId;
