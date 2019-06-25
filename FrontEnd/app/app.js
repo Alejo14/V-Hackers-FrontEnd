@@ -119,6 +119,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'asignar-horarios',
                   url: '/asignar-horarios/:idCursoCiclo/:idCurso/:idSemestre/:nombreCurso/:codigoCurso',
                   templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/asignarHorario.html'
+                },
+                {
+                  name: 'creacion-facultad',
+                  url: '/creacion-facultad',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Facultad/creacionFacultad.html'
                 }
               ]
             },
