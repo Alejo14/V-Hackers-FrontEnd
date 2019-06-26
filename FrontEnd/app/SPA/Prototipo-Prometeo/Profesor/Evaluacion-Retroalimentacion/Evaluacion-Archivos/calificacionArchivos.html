@@ -1,6 +1,6 @@
 <!-- Anderson -->
 <section id="main">
-  <div ng-controller="detalleEntregableCtrl as ctrl">
+  <div ng-controller="calificarArchivosCtrl as ctrl">
     <div class="container">
       <div class="block-container">
         <h2></h2>
@@ -10,9 +10,8 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="fg-line">
-                <label class="col-sm-4  "><h2>{{ctrl.titulo}}</h2></label>
+                <label class="col-sm-4  "><h2>Archivos del Avance</h2></label>
                 <div class="col-sm-8 p-r-0">
-                <button ng-click = "ctrl.agregarArchivo()" class="btn btn-primary waves-effect float-right m-l-5"><i class="fa fa-plus"></i> Agregar archivo</button>
                 </div>
               </div>
 
@@ -53,11 +52,6 @@
                             <td data-title="'Tamaño'">
                               {{archi.tamano/1000}} KB
                             </td>
-                            <td data-title="'Eliminar'">
-                              <a style="float:left" ng-click="ctrl.elminarArchivo(archi)">
-                                <i class="fas fa-trash-alt"></i>
-                              </a>
-                            </td>
                           </tr>
                         </table>
                       </div>
@@ -74,11 +68,6 @@
                             <td data-title="'Fecha y Hora de Última modificación'">
                               {{url.fecha | date:"MM/dd/yyyy ' ' h:mma"}}
                             </td>
-                            <td data-title="'Eliminar'">
-                              <a style="float:left" ng-click="ctrl.elminarURL(url)">
-                                <i class="fas fa-trash-alt"></i>
-                              </a>
-                            </td>
                           </tr>
                         </table>
                       </div>
@@ -89,7 +78,6 @@
           <div class="row">
             <div class="col-md-12" align="right">
               <button type="button" ng-click = "" class="btn btn-primary" ng-if="ctrl.mostrarBoton"><i class="far fa-edit"></i> Evaluación</button>
-              <button type="button" ng-click = "" class="btn bgm-brown waves-effect" ng-if="ctrl.mostrarBoton"><i class="fas fa-vote-yea"></i> Encuesta</button>
               <button type="button" ng-click = "ctrl.regresarCursoAlumno()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
               <!-- <button ng-click = "ctrl.probar()" class="btn btn-primary waves-effect"> Probar</button> -->
             </div>

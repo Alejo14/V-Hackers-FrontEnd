@@ -235,7 +235,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificar-archivos',
-                  url: '/calificar-archivos/:avanceEntregableId',
+                  url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Archivos/calificacionArchivos.html'
                 }
               ]

@@ -1,39 +1,19 @@
-angular.module('vHackersModule').controller('detalleEntregableCtrl', ['$scope', '$state', '$stateParams' , 'calificacionHerramientaEvaluacionServicio', '$uibModal', 'NgTableParams',
-function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('calificarArchivosCtrl', ['$scope', '$state', '$stateParams' , 'calificacionHerramientaEvaluacionServicio', '$uibModal', 'NgTableParams',
+function($scope, $state,$stateParams, calificacionHerramientaEvaluacionServicio, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.mensaje = "Hola Mundo";
   ctrl.alumnosLista = [];
   ctrl.alumnosListaModal = [];
   ctrl.mensajeNuevo = "Go V-Hackers";
   ctrl.obtenerCalificacionEntregable = function () {
-    entregableAlumnoService.obtenerCalificacionEntregable().then(function (calificacionEntregableData) {
+    calificacionHerramientaEvaluacionServicio.obtenerCalificacionEntregable().then(function (calificacionEntregableData) {
       ctrl.calificacionEntregable = alumnosListaData;
     });
   };
   ctrl.detalleE=[];
   $scope.fechaActual=new Date();
+      //Recibo parametro de retorno
 
-  ctrl.probarModal = function () {
-    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'SPA/Prototipo-Prometeo/modalListarAlumnos.html',
-      controller: 'modalAgregarArchivoCtrl as ctrl',
-      size: 'lg',
-      backdrop: true,
-      keyboard: true,
-      resolve: {
-        parametrosModalAgregarUsuario: function (){
-          return "V Hackers"
-        }
-      }
-    });
-
-    //Recibo parametro de retorno
-    modalInstance.result.then( function (parametroRetorno) {
-      ctrl.alumnosLista.push(parametroRetorno);
-    });
-  };
 
   ctrl.probarSwal = function () {
     swal("¡Felicidades!", "Has ejecutado un swal", "success");
@@ -64,7 +44,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
         	"entregableId":ctrl.idAvanceEntregable
     }
     console.log(ctrl.idAvanceEntregable);
-    entregableAlumnoService.registroAvanceEntregable(data);
+    calificacionHerramientaEvaluacionServicio.registroAvanceEntregable(data);
     arch=[];
     arch.id=parametros.data;
     arch.nombre=archivo.nombre;
@@ -121,7 +101,7 @@ function toBase64(file) {
   ctrl.listaArchivos = [];
   ctrl.cargarArchivos = function (id) {
     //console.log(id);
-    entregableAlumnoService.mostrarArchivosAvanceEntregable(id).then(function (respuesta) {
+    calificacionHerramientaEvaluacionServicio.mostrarArchivosAvanceEntregable(id).then(function (respuesta) {
       //console.log("RESPUESTA");
         //console.log(respuesta);
        for (i=0;i<respuesta.length;i++) {
@@ -137,7 +117,7 @@ function toBase64(file) {
   }
 
   ctrl.cargarURLs = function (id) {
-    entregableAlumnoService.mostrarURLsAvanceEntregable(id).then(function (respuesta) {
+    calificacionHerramientaEvaluacionServicio.mostrarURLsAvanceEntregable(id).then(function (respuesta) {
           //console.log(respuesta);
        for (i=0;i<respuesta.length;i++) {
          //console.log(respuesta[i].id);
@@ -158,7 +138,7 @@ function toBase64(file) {
   ctrl.obtenerIdArchivo = function (archivo) { //Prueba
     var id=archivo.id;//"688f4990-fffe-4761-a178-62a2ce86837c";
     console.log(id);
-    entregableAlumnoService.descargarArchivoEntregable(id).then(function (respuesta) {
+    calificacionHerramientaEvaluacionServicio.descargarArchivoEntregable(id).then(function (respuesta) {
       console.log(respuesta);
       if (respuesta.extension){
         downloadFromBase64(respuesta.datos,respuesta.nombreArchivo,respuesta.extension);
@@ -167,95 +147,6 @@ function toBase64(file) {
 
       //swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
   }
-
-  ctrl.elminarArchivo= function (archivo){
-    var id=archivo.id;
-
-    swal({
-      title: "¿Está seguro que quiere eliminar el archivo?",
-      text: "Los cambios se guardarán",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, eliminar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (eliminarArchivoConfirmacion) {
-      if (eliminarArchivoConfirmacion !== "cancelar") {
-        entregableAlumnoService.eliminarArchivo(id).then(function () {
-            swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
-        });
-
-        ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
-      }
-    });
-}
-
-ctrl.elminarURL= function (archivo){
-  var id=archivo.id;
-
-  swal({
-    title: "¿Está seguro que quiere eliminar el URL?",
-    text: "Los cambios se guardarán",
-    icon: "warning",
-    buttons: {
-      cancelar: {
-        text: "Cancelar",
-        className: "btn btn-lg btn-danger"
-      },
-      confirm: {
-        text: "Sí, eliminar",
-        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-      }
-    }
-  }).then(function (eliminarURLConfirmacion) {
-    if (eliminarURLConfirmacion !== "cancelar") {
-      entregableAlumnoService.eliminarArchivo(id).then(function () {
-          swal("¡Bien hecho!", "El URL se elimino exitosamente" , "success");
-      });
-
-      ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(archivo),1);
-    }
-  });
-}
-  ctrl.agregarArchivo = function () {
-    //En este caso el controlador del modal se debe declarar en el JSON que pasa como parametro de open
-    var modalInstance = $uibModal.open({
-      animation: false,
-      templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/modalAgregarArchivo.html',
-      controller: 'modalAgregarArchivoCtrl as ctrl',
-      size: 'lg',
-      backdrop: true,
-      keyboard: true,
-      resolve: {
-        parametrosModalArchivo:  function(){
-          return ctrl.idAvanceEntregable;
-        }
-      }
-    });
-
-
-    //Recibo parametro de retorno
-    modalInstance.result.then( function (parametroRetorno) {
-      //console.log(parametroRetorno);
-      if (parametroRetorno) {
-        if (parametroRetorno[0]==1){
-          swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
-          ctrl.listaURLs.push(parametroRetorno[1]);
-        }else {
-          swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
-          ctrl.listaArchivos.push(parametroRetorno[1]);
-        }
-
-      }
-    });
-}
-
 
 ctrl.regresarCursoAlumno = function () {
   swal({
@@ -274,7 +165,7 @@ ctrl.regresarCursoAlumno = function () {
     }
   }).then(function (regresarVistaCurso) {
     if (regresarVistaCurso !== "cancelar") {
-      $state.go('alumnoCursos', {cursoCicloId: $stateParams.cursoCicloId, nombreCurso: $stateParams.nombreCurso, codigoCurso: $stateParams.codigoCurso, horario: $stateParams.horario}); //Aca podemos enviar el RolUsuarioId tambien
+
     }
   });
 
@@ -283,14 +174,8 @@ ctrl.regresarCursoAlumno = function () {
 }
 
   ctrl.init = function () {
-
-    ctrl.titulo = $stateParams.nombre;
           //ctrl.botonGrabar="Modificar";
-    ctrl.detalleE.nombre=$stateParams.nombre;
-    ctrl.detalleE.id=$stateParams.id;
-    ctrl.detalleE.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
-    ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
-    ctrl.detalleE.descripcion=$stateParams.descripcion;
+    ctrl.detalleE.id=$stateParams.idEntregable;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idAvanceEntregable="";
     data={
@@ -299,12 +184,8 @@ ctrl.regresarCursoAlumno = function () {
     }
     console.log("EntregableId y RolUsuarioIdUsuario");
     console.log(data);
-    if ($stateParams.estadoEntregable=="I"){
-      ctrl.mostrarBoton=true;
-    }else {
-      ctrl.mostrarBoton=false;
-    }
-    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+
+    calificacionHerramientaEvaluacionServicio.mostrarAvanceEntregables(data).then(function (respuesta) {
         ctrl.idAvanceEntregable=respuesta;
         console.log(ctrl.idAvanceEntregable);
         ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
@@ -317,18 +198,7 @@ ctrl.regresarCursoAlumno = function () {
 
     //Tengo que probarlo
 
-     //este debe ser el id que se debe usar para registrar el archivo
-
-    if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto
-      ctrl.detalleE.cursoCicloId=0;
-      ctrl.detalleE.proyectoId=$stateParams.proyectoId;
-    }else{                            //Entregable pertence a un cursoCiclo
-      ctrl.detalleE.proyectoId=0;
-      ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
-      ctrl.detalleE.nombreCurso=$stateParams.nombreCurso;
-      ctrl.detalleE.codigoCurso=$stateParams.codigoCurso;
-      ctrl.detalleE.horario=$stateParams.horario;
-    }
+     //este debe ser el id que se debe usar para registrar el arch
 
 
   }

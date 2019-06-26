@@ -49,6 +49,18 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0});
   };
 
+  ctrl.irArchivos = function(avance){
+    if(ctrl.esIndividual){
+      idRolUsuario=avance.idRolUsuario;
+      idGrupo="0";
+    }else{
+      idRolUsuario="0";
+      idGrupo=avance.id;
+    }
+    idEntregable=ctrl.entregable.id;
+    $state.go('calificar-archivos', {idEntregable: idEntregable, idRolUsuario: idRolUsuario, idGrupo: idGrupo});
+  };
+
   ctrl.init = function (){
     ctrl.entregable.id = $stateParams.id;
     ctrl.entregable.nombre = $stateParams.nombre;
