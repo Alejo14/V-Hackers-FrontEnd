@@ -3,8 +3,8 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.registroCurso = function(data){
-    var urlEnviarCurso = 'http://localhost:7004/cursos/crear';
+  servicio.registroFacultad = function(data){
+    var urlEnviarCurso = 'http://localhost:7005/facultad/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -16,14 +16,15 @@ function($q, $http) {
        $defer.reject(error);
      });
     return $defer.promise;
-  }
+  };
 
-  servicio.obtenerFacultades = function () {
-    var urlObtenerFacultades = 'http://localhost:7005/facultad';
+  servicio.modificarFacultad = function(data){
+    var urlEnviarCurso = 'http://localhost:7005/facultad/modificar';
     var $defer = $q.defer();
     $http({
-        method: 'GET',
-        url: urlObtenerFacultades
+        method: 'POST',
+        url: urlEnviarCurso,
+        data: data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
@@ -32,12 +33,27 @@ function($q, $http) {
     return $defer.promise;
   };
 
-  servicio.obtenerEspecialidades = function () {
-    var urlObtenerEspecialidades = 'http://localhost:7005/especialidad';
+  servicio.eliminarFacultad = function(data){
+    var urlEnviarCurso = 'http://localhost:7005/facultad/eliminar';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlEnviarCurso,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  servicio.obtenerFacultades = function () {
+    var urlObtenerFacultades = 'http://localhost:7005/facultad';
     var $defer = $q.defer();
     $http({
         method: 'GET',
-        url: urlObtenerEspecialidades,
+        url: urlObtenerFacultades
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

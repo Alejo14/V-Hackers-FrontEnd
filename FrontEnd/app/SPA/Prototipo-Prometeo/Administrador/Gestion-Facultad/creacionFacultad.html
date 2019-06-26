@@ -1,5 +1,5 @@
 <section id="main">
-  <div ng-controller="creacionCursosCtrl as ctrl">
+  <div ng-controller="creacionFacultadCtrl as ctrl">
     <div class="container">
 
       <div class="row">
@@ -7,18 +7,39 @@
           <h2>{{ctrl.titulo}}</h2>
           <div class="card text-center">
             <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
                   <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Crear nuevo curso</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)" ng-style="{'visibility': ctrl.modo =='c'  ? 'visible' : 'hidden'}">Carga masiva</a>
-                </li>
-              </ul>
             </div>
-            <div ng-if="ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/cardCrearCurso.html'">
-            </div>
-            <div ng-if="!ctrl.cargaUnitaria" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/cardCargaMasivaCurso.html'">
+            <div class="card-body">
+
+                <div class="row">
+                  <div class="col-sm-6" align="left">
+                    <div class="form-group">
+                      <label class="col-sm-6 control-label m-t-10 m-b-0" aligned="left">Código*: </label>
+                      <div class="col-sm-6">
+                        <div class="fg-line">
+                          <input class="form-control input-sm" placeholder="Ingrese la clave del curso" ng-model = "ctrl.facultadActual.codigo">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6" align="left">
+                    <div class="form-group">
+                      <label class="col-sm-6 control-label m-t-10 m-b-0">Nombre Facultad*: </label>
+                      <div class="col-sm-6" >
+                        <div class="fg-line">
+                          <input class="form-control input-sm" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.facultadActual.nombre">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col" align='right'>
+                    <button type="button" ng-click = "ctrl.guardarFacultad()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar Facultad</button>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -29,9 +50,41 @@
             <h5>Campos obligatorios *</h5>
         </div>
         <div class="col" align="right">
-<!--          <a href="#" class="btn btn-primary">Go somewhere</a> -->
-          <button type="button" ng-click = "ctrl.guardarCurso(curso)" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
           <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+        </div>
+      </div>
+      <div class="row"><h1></h1></div>
+
+      <div class="col-md-13">
+        <div class="table-responsive">
+          <table ng-table="ctrl.tablaFacultades" class="table table-bordered">
+            <tr ng-repeat="facultad in ctrl.facultadesLista">
+              <!-- <td data-title="'Rol'">
+                {{usuario.rolesUsuario[0].rol.descripcion}}
+              </td> -->
+              <td data-title="'Nro.'" align="center" width="5%">
+                {{$index + 1}}
+              </td>
+              <td data-title="'Código'">
+                {{facultad.codigo}}
+              </td>
+              <td data-title="'Facultad'">
+                {{facultad.nombre}}
+              </td>
+              <td data-title="'Acciones'">
+                <div class = "col-md-5">
+                  <a style="float:right"  ng-click="ctrl.eliminarFacultad(facultad,$index)">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </div>
+                <div class="col-md-4" >
+                  <a style="float:right" ng-click="ctrl.editarFacultad(facultad)">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
 
