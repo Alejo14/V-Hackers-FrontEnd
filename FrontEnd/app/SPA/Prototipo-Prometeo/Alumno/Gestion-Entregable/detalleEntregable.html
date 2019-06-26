@@ -8,14 +8,24 @@
       <div class="card">
         <div class="card-header">
           <div class="row">
-            <div class="col-sm-4">
-                <label ><h2>{{ctrl.titulo}}</h2></label>
-                <div class="fg-line">
-                  <!-- <label for="archivoEntregable" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
-                  <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none"> -->
-                  <label class="btn bgm-blue btn-float waves-effect waves-circle" ng-click = "ctrl.agregarArchivo()"><i class="fa fa-plus"></i></label>
+            <div class="col-sm-12">
+              <div class="fg-line">
+                <label class="col-sm-4  "><h2>{{ctrl.titulo}}</h2></label>
+                <div class="col-sm-8 p-r-0">
+                <button ng-click = "ctrl.agregarArchivo()" class="btn btn-primary waves-effect float-right m-l-5"><i class="fa fa-plus"></i> Agregar archivo</button>
                 </div>
+              </div>
 
+
+              <!-- <div class="fg-line">
+                <label ><h2>{{ctrl.titulo}}</h2></label>
+              </div>
+              <div class="fg-line">
+                <!-- <label for="archivoEntregable" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></label>
+                <input type="file" id="archivoEntregable" subir-archivo parametros="" evento-post-subida="" evento-post-seleccion="ctrl.obtenerInfoArchivo" style="display:none"> -->
+                <!--<label class="btn bgm-blue btn-float waves-effect waves-circle" ng-click = "ctrl.agregarArchivo()"><i class="fa fa-plus"></i></label>-->
+                <!-- <button ng-click = "ctrl.agregarArchivo()" class="btn btn-primary waves-effect float-right m-l-5"><i class="fa fa-plus"></i> Agregar archivo</button> -->
+              <!-- </div> -->
 
             </div>
           </div>
