@@ -73,10 +73,60 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
     }
   }
 
+  ctrl.crearMensaje = function (longitud) {
+    var mensaje = "Los puntajes de los aspectos ";
+    if(longitud === 1) mensaje = mensaje + indices[0] + " ha sido modificado, pero no hay explicación alguna.";
+    else{
+      for(let i = 0; i < longitud; i++){
+        var j = i + 1;
+        if(i === longitud - 2) mensaje = mensaje + j + " y ";
+        else if (i === longitud - 1) mensaje = mensaje + j + ", ";
+        else mensaje = mensaje + j + " han sido modificados pero no hay explicación alguna."
+      }
+    }
+    return mensaje;
+  }
+
+  ctrl.hayPuntajesManuales = function () {
+    var puntajesManuales = true;
+    var indices = [];
+    var contador = 0;
+    angular.forEach(ctrl.evaluacionAspecto, function (aspecto,indice) {
+      if(aspecto.activarPuntajeManual){
+        if (aspecto.descripcionPuntajeManual === null || aspecto.descripcionPuntajeManual === ''){
+          indices.push(indice);
+        }else{
+          contador++;
+        }
+      }
+    });
+    var n = indices.length;
+    if(n > 0){
+      var mensaje = ctrl.crearMensaje(n);
+      swal("¡Opss!", mensaje , "error");
+    }
+    if(contador > 0) return puntajesManuales;
+    return !puntajesManuales;
+  }
+
   ctrl.guardarAspecto = function(){
     ctrl.puntajeHerramienta = 0;
     angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-      ctrl.puntajeHerramienta += aspecto.puntajeManual;
+      var puntajesManuales = ctrl.hayPuntajesManuales;
+      var puntaje = 0;
+      angular.forEach(aspecto.criterios, function(criterio,indice){
+        puntaje += criterio.puntajeAsignado;
+      });
+      aspecto.puntajeAsignado = puntaje;
+      if(!puntajesManuales){
+        ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
+        aspecto.puntajeManual = 0;
+        angular.forEach(aspecto.criterios, function(criterio,indice){
+          criterio.puntajeManual = 0;
+        });
+      }else{
+        ctrl.puntajeHerramienta += aspecto.puntajeManual;
+      }
     });
     var data = {
       "aspectos":ctrl.evaluacionAspecto
