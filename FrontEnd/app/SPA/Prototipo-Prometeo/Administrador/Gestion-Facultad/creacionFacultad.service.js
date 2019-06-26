@@ -3,19 +3,24 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.registroFacultad = function(data){
-    var urlEnviarCurso = 'http://localhost:7005/facultad/crear';
-    var $defer = $q.defer();
-    $http({
-        method: 'POST',
-        url: urlEnviarCurso,
-        data: data
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
+  servicio.registroFacultad = function(data,modo){
+    if(modo == 'c'){
+      var urlEnviarCurso = 'http://localhost:7005/facultad/crear';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCurso,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+    else{
+      servicio.modificarFacultad(data);
+    }
   };
 
   servicio.modificarFacultad = function(data){

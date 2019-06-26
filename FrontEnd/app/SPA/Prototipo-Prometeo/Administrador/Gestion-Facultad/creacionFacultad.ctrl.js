@@ -12,6 +12,7 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
     codigo:"",
     nombre:""
   };
+  ctrl.modo = 'c';
 
 
   function uuid() {
@@ -55,7 +56,7 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
   ctrl.guardarFacultad = function(){
       swal({
         title: "¿Está seguro de que quiere registrar la facultad?",
-        text: "Los cambios no se guardaran",
+        text: "Los cambios se guardarán",
         icon: "warning",
         buttons: {
           cancelar: {
@@ -72,12 +73,14 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
       }).then(function(regresar){
         if (regresar == "confirm") {
           ctrl.facultadActual.id = uuid();
-          creacionFacultadService.registroFacultad(ctrl.facultadActual).then(function () {
-            ctrl.facultadesLista.push(ctrl.facultadActual);
+          creacionFacultadService.registroFacultad(ctrl.facultadActual,ctrl.modo).then(function () {
             ctrl.facultadActual.id = '';
             ctrl.facultadActual.nombre = '';
             ctrl.facultadActual.codigo = '';
+            ctrl.obtenerFacultades();
+            ctrl.modo = 'c';
           });
+
         }
       });
   }
@@ -88,10 +91,44 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
     });
   }
 
+  ctrl.eliminarFacultad = function(facultad,$index){
+    swal({
+      title: "¿Está seguro de que quiere eliminar la facultad?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger",
+          value: "cancelar"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
+          value: "confirm"
+        }
+      }
+    }).then(function(regresar){
+      if (regresar == "confirm") {
+        creacionFacultadService.eliminarFacultad(facultad);
+        ctrl.facultadesLista.splice($index,1);
+      }
+    });
+
+  }
+
+  ctrl.editarFacultad = function(facultad){
+    ctrl.facultadActual.codigo = facultad.codigo;
+    ctrl.facultadActual.id = facultad.id;
+    ctrl.facultadActual.nombre = facultad.nombre;
+    ctrl.modo = 'm';
+  }
+
 
 
   ctrl.init = function (){
     ctrl.obtenerFacultades();
+    ctrl.modo ='c';
   };
 
 
