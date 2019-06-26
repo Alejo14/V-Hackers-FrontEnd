@@ -120,8 +120,10 @@ function toBase64(file) {
 
   ctrl.listaArchivos = [];
   ctrl.cargarArchivos = function (id) {
+    //console.log(id);
     entregableAlumnoService.mostrarArchivosAvanceEntregable(id).then(function (respuesta) {
-          //console.log(respuesta);
+      //console.log("RESPUESTA");
+        //console.log(respuesta);
        for (i=0;i<respuesta.length;i++) {
          //console.log(respuesta[i].id);
          var arch1=[];
@@ -144,7 +146,7 @@ function toBase64(file) {
          // linkURL.nombre=respuesta[i];
          // linkURL.fecha=Date.now(); //debe traer la fecha el servicio
          // ctrl.listaURLs.push(linkURL);
-        console.log(respuesta[i]);
+        //console.log(respuesta[i]);
          linkURL.id=respuesta[i].idUrl;
          linkURL.nombre=respuesta[i].url;
          linkURL.fecha=respuesta[i].fecha;
@@ -231,10 +233,8 @@ ctrl.elminarURL= function (archivo){
       backdrop: true,
       keyboard: true,
       resolve: {
-        parametrosModalArchivo: function () {
-          return {
-            //actualizarRoles: false
-          };
+        parametrosModalArchivo:  function(){
+          return ctrl.idAvanceEntregable;
         }
       }
     });
@@ -283,9 +283,7 @@ ctrl.regresarCursoAlumno = function () {
 }
 
   ctrl.init = function () {
-    ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
-    ctrl.cargarArchivos(ctrl.idAvanceEntregable);
-    ctrl.cargarURLs(ctrl.idAvanceEntregable); //Falta traer la fecha
+
     ctrl.titulo = $stateParams.nombre;
           //ctrl.botonGrabar="Modificar";
     ctrl.detalleE.nombre=$stateParams.nombre;
@@ -294,22 +292,31 @@ ctrl.regresarCursoAlumno = function () {
     ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
     ctrl.detalleE.descripcion=$stateParams.descripcion;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
+    ctrl.idAvanceEntregable="";
     data={
       "idEntregable":ctrl.detalleE.id,
-      "idRolUsuarioId":ctrl.detalleE.idRolUsuario
+      "idRolUsuario":ctrl.detalleE.idRolUsuario
     }
-
+    console.log("EntregableId y RolUsuarioIdUsuario");
+    console.log(data);
     if ($stateParams.estadoEntregable=="I"){
       ctrl.mostrarBoton=true;
     }else {
       ctrl.mostrarBoton=false;
     }
+    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+        ctrl.idAvanceEntregable=respuesta;
+        console.log(ctrl.idAvanceEntregable);
+        ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
+        ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
+    });
+    //ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
+
+
+
 
     //Tengo que probarlo
-    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
-        console.log(respuesta);
-        console.log(respuesta.data);
-    });
+
      //este debe ser el id que se debe usar para registrar el archivo
 
     if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto

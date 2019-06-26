@@ -4,13 +4,17 @@ modalAgregarArchivoCtrl.$inject = ['$scope', '$uibModalInstance', 'entregableAlu
 function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoService, parametrosModalArchivo){
 
   var ctrl = this;
+  ctrl.idAvanceEntregable = parametrosModalArchivo;
+
+
   ctrl.titulo="Subir archivos o URL";
   ctrl.tipoArchivo="Nombre de Archivo";
   ctrl.registroValido = false;
-
-  ctrl.cargarArchivo=function (){
-    var metodo = parseInt($('input[name=metodo]:checked').val());
-    if(metodo==1){
+  ctrl.estado=0;
+  ctrl.cargarRadio=function (estado){
+    //var metodo = parseInt($('input[name=metodo]:checked').val());
+    ctrl.estado=estado;
+    if(estado==1){
       ctrl.descripcion="Ingrese un URL";
       ctrl.tipoCarga=1;
       ctrl.tipoArchivo="URL";
@@ -27,7 +31,7 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
     var id=parametros.data;
     data={
           "archivoId":id,
-        	"entregableId":ctrl.idAvanceEntregable
+        	"entregableId":ctrl.idAvanceEntregable.id
     }
     //console.log(ctrl.idAvanceEntregable);
     arch.id=parametros.data;
@@ -67,8 +71,10 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
   ctrl.idURL="";
   ctrl.guardarArchivo = function () {
     var tipoArch=[];
-    var metodo = parseInt($('input[name=metodo]:checked').val());
-    if (metodo==0){
+    //var metodo = parseInt($('input[name=metodo]:checked').val());
+
+    console.log(data);
+    if (ctrl.estado==0){
       entregableAlumnoService.registroAvanceEntregable(data);
       tipoArch.push(0);
       tipoArch.push(arch);
@@ -82,8 +88,9 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
             ctrl.idURL=idURL;
             dataURL={
                   "archivoId":idURL,
-                  "entregableId":ctrl.idAvanceEntregable
+                  "entregableId":ctrl.idAvanceEntregable.id
             }
+            console.log(dataURL);
             entregableAlumnoService.registroAvanceEntregable(dataURL);
             //console.log(idURL);
             linkURL=[];
@@ -100,7 +107,8 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
 
   };
   ctrl.init = function(){
-    ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
+    //ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
+    //console.log(ctrl.idAvanceEntregable);
     ctrl.tipoCarga=0;
     ctrl.descripcion="Nombre del archivo";
     ctrl.archivoURL="";
@@ -108,8 +116,8 @@ function modalAgregarArchivoCtrl ($scope , $uibModalInstance, entregableAlumnoSe
     // ctrl.obtenerRoles();
   };
   ctrl.cerrar = function () {
-    var metodo = parseInt($('input[name=metodo]:checked').val());
-    if (metodo==0){
+    //var metodo = //parseInt($('input[name=metodo]:checked').val());
+    if (ctrl.estado==0){
       entregableAlumnoService.eliminarArchivo(arch.id);//Si cierra lo debo eliminar el archivo
       $uibModalInstance.close(0);
     }else {

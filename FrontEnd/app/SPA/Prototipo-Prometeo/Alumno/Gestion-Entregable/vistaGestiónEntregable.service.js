@@ -111,7 +111,7 @@ function($q, $http,variablesAmbiente) {
   }
 
   servicio.mostrarAvanceEntregables = function(data){
-    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuarioId; //'http://localhost:7002/entregables';
+    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuario; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',
