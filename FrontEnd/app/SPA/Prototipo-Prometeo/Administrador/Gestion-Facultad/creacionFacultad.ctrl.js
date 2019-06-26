@@ -4,7 +4,6 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
 
   ctrl.titulo = 'Creación de Facultad';
   ctrl.cargaUnitaria = 1;
-  ctrl.modo = 'm';
   ctrl.tablaFacultades=[];
   ctrl.facultadesLista=[];
   ctrl.facultadActual = {
@@ -72,14 +71,24 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
         }
       }).then(function(regresar){
         if (regresar == "confirm") {
-          ctrl.facultadActual.id = uuid();
-          creacionFacultadService.registroFacultad(ctrl.facultadActual,ctrl.modo).then(function () {
-            ctrl.facultadActual.id = '';
-            ctrl.facultadActual.nombre = '';
-            ctrl.facultadActual.codigo = '';
-            ctrl.obtenerFacultades();
-            ctrl.modo = 'c';
-          });
+          if(ctrl.modo == 'c'){
+            ctrl.facultadActual.id = uuid();
+            creacionFacultadService.registroFacultad(ctrl.facultadActual, ctrl.modo).then(function () {
+              ctrl.facultadActual.id = '';
+              ctrl.facultadActual.nombre = '';
+              ctrl.facultadActual.codigo = '';
+              ctrl.obtenerFacultades();
+              ctrl.modo = 'c';
+            });
+          } else {
+            creacionFacultadService.modificarFacultad(ctrl.facultadActual).then(function () {
+              ctrl.facultadActual.id = '';
+              ctrl.facultadActual.nombre = '';
+              ctrl.facultadActual.codigo = '';
+              ctrl.obtenerFacultades();
+              ctrl.modo = 'c';
+            });
+          }
 
         }
       });

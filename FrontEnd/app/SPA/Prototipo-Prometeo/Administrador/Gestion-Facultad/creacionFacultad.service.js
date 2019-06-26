@@ -3,8 +3,8 @@ function($q, $http) {
 
   var servicio = this;
 
-  servicio.registroFacultad = function(data,modo){
-    if(modo == 'c'){
+  servicio.registroFacultad = function(data){
+
       var urlEnviarCurso = 'http://localhost:7005/facultad/crear';
       var $defer = $q.defer();
       $http({
@@ -17,10 +17,7 @@ function($q, $http) {
          $defer.reject(error);
        });
       return $defer.promise;
-    }
-    else{
-      servicio.modificarFacultad(data);
-    }
+
   };
 
   servicio.modificarFacultad = function(data){
