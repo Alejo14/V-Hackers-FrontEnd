@@ -2,8 +2,9 @@
   <div class="row" align="center" style="padding:10px;">
     <div class="col-md-1">NRO.</div>
     <div class="col-md-3">ENTREGABLE</div>
-    <div class="col-md-3">FECHA CREACIÓN</div>
-    <div class="col-md-3">FECHA FIN</div>
+    <div class="col-md-2">METODO</div>
+    <div class="col-md-2">FECHA CREACIÓN</div>
+    <div class="col-md-2">FECHA FIN</div>
     <div class="col-md-2">ACCIONES</div>
   </div>
   <div ng-repeat="entregable in ctrl.entregablesLista" >
@@ -14,10 +15,16 @@
       <div class="col-md-3" ng-click="ctrl.avancesEntregable(entregable)">
         <a href=""> {{entregable.nombre}} </a>
       </div>
-      <div class="col-md-3" align="center">
+      <div class="col-md-2" align="center" ng-if="entregable.metodoTrabajo==0">
+        <a> Indiv. </a>
+      </div>
+      <div class="col-md-2" align="center" ng-if="entregable.metodoTrabajo==1">
+        <a> Grupal </a>
+      </div>
+      <div class="col-md-2" align="center">
         <a> {{entregable.fechaCreacionStr}} </a>
       </div>
-      <div class="col-md-3" align="center">
+      <div class="col-md-2" align="center">
         <a> {{entregable.fechaFinStr}} </a>
       </div>
       <div class="col-md-2" align="center">

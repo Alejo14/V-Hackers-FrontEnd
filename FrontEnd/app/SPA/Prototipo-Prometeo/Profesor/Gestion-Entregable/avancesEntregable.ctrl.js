@@ -4,6 +4,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.titulo = "";
   ctrl.subtitulo = "Avances "
   ctrl.entregable = {};
+  ctrl.avanceSeleccionado = {};
   ctrl.avancesLista = [];
   ctrl.horarioId = "";
   ctrl.esIndividual = false;
@@ -25,6 +26,28 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
+  ctrl.obtenerAvance = function (avance) {
+    if(ctrl.esIndividual){
+      idRolUsuario=avance.idRolUsuario;
+      idGrupo="0";
+    }else{
+      idRolUsuario="0";
+      idGrupo=avance.id;
+    }
+    idEntregable=ctrl.entregable.id;
+    console.log("idRolUsuario: " + idRolUsuario);
+    console.log("idGrupo: " + idGrupo);
+    console.log("idEntregable: " + idEntregable);
+    entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
+      ctrl.avanceSeleccionado = avanceData;
+    });
+    console.log(ctrl.avanceSeleccionado);
+  };
+
+  ctrl.irCalificacion = function (avance) {
+    ctrl.obtenerAvance(avance);
+    $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0});
+  };
 
   ctrl.init = function (){
     ctrl.entregable.id = $stateParams.id;

@@ -194,4 +194,20 @@ function($q, $http,variablesAmbiente) {
        });
       return $defer.promise;
     };
+
+    servicio.obtenerAvance = function(idEntregable, idRolUsuario, idGrupo){
+      var urlobtenerAvance = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/mostrarAvanceEntregable/'
+      + idEntregable+"?idRolUsuario=" + idRolUsuario + "&idGrupo=" + idGrupo;
+      console.log(urlobtenerAvance);
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlobtenerAvance
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    };
 }]);
