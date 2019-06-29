@@ -268,7 +268,18 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
 //Herramienta de Evaluacion//
   ctrl.verHerramientas = function (entregable) {
-    $state.go('detalle-herramientas' , {id: entregable.id}); //Temporal, deberia usar un servicio para traerme esa info
+    //$state.go('detalle-herramientas' , {id: entregable.id}); //Temporal, deberia usar un servicio para traerme esa info
+    data={
+      "idEntregable":entregable.id,
+      "idRolUsuario":$stateParams.rolusuarioId
+    }
+    // console.log("EntregableId y RolUsuarioIdUsuario");
+    // console.log(data);
+    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+        ctrl.idAvanceEntregable=respuesta;
+        //console.log(ctrl.idAvanceEntregable);
+        $state.go('calificacion' , {avanceEntregableId: ctrl.idAvanceEntregable, herramientaCalificada: 0 });
+    });
 
   };
 
@@ -324,6 +335,10 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   }
 
   ctrl.init = function (){
+
+    ctrl.idAvanceEntregable="";
+
+
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
