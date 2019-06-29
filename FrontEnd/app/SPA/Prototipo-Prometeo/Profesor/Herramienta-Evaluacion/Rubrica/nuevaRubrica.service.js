@@ -49,4 +49,19 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.eliminarAspecto = function(data){
+    var urlConfirmarHerramienta = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/eliminarAspecto';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlConfirmarHerramienta,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);
