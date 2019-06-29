@@ -13,7 +13,7 @@ function($scope, $state, $stateParams, $cookies, $uibModal, vistaMisCursosServic
         "cicloId" : ciclo,
         "rolUsuarioId" : ctrl.rolUsuarioId
       };
-
+      console.log(ctrl.misCursosInfo);
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
         console.log(misCursosListaData);

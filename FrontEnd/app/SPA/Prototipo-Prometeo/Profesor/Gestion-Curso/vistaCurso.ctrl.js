@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams' ,'profesorCursoService', '$uibModal',
+angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams', '$cookies' ,'profesorCursoService', '$uibModal',
 
-function($scope, $state, $stateParams, profesorCursoService, $uibModal){
+function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal){
   var ctrl = this;
   ctrl.curso = {};
   ctrl.proyectosLista = [];
@@ -153,21 +153,39 @@ function($scope, $state, $stateParams, profesorCursoService, $uibModal){
         $state.go('profesorMisCursos', {rolUsuario: "P"});
   };
 
-  ctrl.misCursosInfo = {
-    "cicloId" : "85271594-c48c-4d69-b785-c365277c91e6",
-    "rolUsuarioId" : "a23b0031-64f6-4ce0-8b03-5f577d16d06c"
-  };
+  ctrl.misCursosInfo = {};
+
 
   ctrl.init = function (){
-    ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
-    profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
-      ctrl.listaMisCursos = misCursosListaData;
-      var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
-      ctrl.curso = cursoEncontrado;
-      console.log(ctrl.curso);
+    ctrl.idUsuario = $cookies.get('usuarioID');
+
+    profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, 'Profesor').then(function(rolUsuario){
+      ctrl.rolUsuarioId=rolUsuario;
+      ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
+
+      profesorCursoService.cicloActual().then(function(ciclo){
+        ctrl.cicloActual=ciclo;
+        ctrl.misCursosInfo = {
+          "cicloId" : ctrl.cicloActual,
+          "rolUsuarioId" : ctrl.rolUsuarioId
+        };
+        console.log(ctrl.misCursosInfo);
+        profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
+          ctrl.listaMisCursos = misCursosListaData;
+          console.log("listar cursos");
+          console.log(misCursosListaData);
+          var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
+          ctrl.curso = cursoEncontrado;
+          console.log("curso");
+          console.log(ctrl.curso);
+        });
+        ctrl.cargarProyectos();
+        ctrl.cargarEntregables();
+
+      });
+
+
     });
-    ctrl.cargarProyectos();
-    ctrl.cargarEntregables();
   }
 
   ctrl.listaAlumnos = function () {
