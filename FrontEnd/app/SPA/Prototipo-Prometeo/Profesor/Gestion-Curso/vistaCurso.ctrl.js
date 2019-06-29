@@ -181,7 +181,8 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
         });
         ctrl.cargarProyectos();
         ctrl.cargarEntregables();
-
+        ctrl.proyectosTabla = new NgTableParams({}, { dataset: ctrl.proyectosLista });
+        ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
       });
 
 
