@@ -2,7 +2,7 @@ angular.module('vHackersModule').controller('creacionFacultadCtrl', ['$scope','$
 function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
   var ctrl = this;
 
-  ctrl.titulo = 'Creación de Facultad';
+  ctrl.titulo = 'Gestión de facultad';
   ctrl.cargaUnitaria = 1;
   ctrl.tablaFacultades=[];
   ctrl.facultadesLista=[];
