@@ -73,3 +73,7 @@ body{
 .placeholder-select{
   display: contents !important;
 }
+
+.letra-tabs{
+  font-weight: bold;
+}

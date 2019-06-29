@@ -4,35 +4,34 @@
 
       <div class="row">
         <div class="col">
-          <h2>{{ctrl.titulo}}</h2>
-          <div class="card text-center">
+          <div class="card">
             <div class="card-header">
-                  
+              <h2>{{ctrl.titulo}}</h2>
             </div>
             <div class="card-body">
 
                 <div class="row">
                   <div class="col-sm-6" align="left">
-                    <div class="form-group">
-                      <label class="col-sm-6 control-label m-t-10 m-b-0" aligned="left">Código*: </label>
-                      <div class="col-sm-6">
-                        <div class="fg-line">
-                          <input class="form-control input-sm" placeholder="Ingrese la clave del curso" ng-model = "ctrl.facultadActual.codigo">
+                    <form class="form-horizontal ng-pristine ng-valid">
+                      <div class="card-body card-padding">
+                        <div class="form-group">
+                          <label class="col-sm-6 control-label m-t-10 m-b-0" aligned="left">Código*: </label>
+                          <div class="col-sm-6">
+                            <div class="fg-line">
+                              <input class="form-control input-sm" placeholder="Ingrese la clave del curso" ng-model = "ctrl.facultadActual.codigo">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-6 control-label m-t-10 m-b-0">Nombre Facultad*: </label>
+                          <div class="col-sm-6" >
+                            <div class="fg-line">
+                              <input class="form-control input-sm" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.facultadActual.nombre">
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6" align="left">
-                    <div class="form-group">
-                      <label class="col-sm-6 control-label m-t-10 m-b-0">Nombre Facultad*: </label>
-                      <div class="col-sm-6" >
-                        <div class="fg-line">
-                          <input class="form-control input-sm" placeholder="Ingrese el nombre del curso" ng-model = "ctrl.facultadActual.nombre">
-                        </div>
-                      </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
                 <div class="row">
@@ -50,7 +49,7 @@
             <h5>Campos obligatorios *</h5>
         </div>
         <div class="col" align="right">
-          <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+          <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect bgm-green"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         </div>
       </div>
       <div class="row"><h1></h1></div>

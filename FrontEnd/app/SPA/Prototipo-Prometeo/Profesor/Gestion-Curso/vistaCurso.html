@@ -18,12 +18,12 @@
               <div class="<col-md-12 m-t-50>" align="center">
                 <div class="row">
                   <div class="col-md-12">
-                    <button ng-click = "ctrl.crearProyecto()" style= "width:150px"><i class="fa fa-plus"></i> Nuevo proyecto</button>
+                    <button ng-click = "ctrl.crearProyecto()" style= "width:160px"><i class="fa fa-plus"></i> Nuevo proyecto</button>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12 m-t-30">
-                    <button ng-click = "ctrl.crearEntregable()" style= "width:150px"><i class="fa fa-plus"></i> Nuevo entregable</button>
+                    <button ng-click = "ctrl.crearEntregable()" style= "width:160px"><i class="fa fa-plus"></i> Nuevo entregable</button>
                   </div>
                 </div>
                 <div class="row">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12 m-t-30">
-                    <button ng-click = "ctrl.listaAlumnos()" style= "width:150px"><i class="fa fa-plus"></i> Lista Alumnos</button>
+                    <button ng-click = "ctrl.listaAlumnos()" style= "width:160px"><i class="fa fa-plus"></i> Lista Alumnos</button>
                   </div>
                 </div>
               </div>
@@ -43,12 +43,12 @@
       </div>
       <div class="col-md-9">
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" >
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                  <a class="nav-link" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Proyectos</a>
+                  <a class="nav-link letra-tabs" ng-class="{active:ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(0)">Proyectos</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item letra-tabs">
                   <a class="nav-link" ng-class="{active:!ctrl.cargaUnitaria}" href="" ng-click="ctrl.cambiarVista(1)">Entregables</a>
                 </li>
               </ul>
@@ -61,7 +61,7 @@
 
       </div>
       <div class="col-md-12 m-t-20" align="right">
-        <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+        <button type="button" class="btn btn-default waves-effect bgm-green" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         <!-- <button ng-click = "ctrl.probarSwal()"><i class="fa fa-file"></i> Probar Swal</button> -->
       </div>
     </div>
