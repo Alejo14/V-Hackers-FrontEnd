@@ -290,7 +290,23 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.crearHerramienta = function(){
-      $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+    $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+  }
+
+  ctrl.editarCriterio = function(indice){
+    switch (ctrl.herramientaEvaluacion[indice].tipo) {
+      case 'Rubrica':
+        $state.go('editar-rubrica', {id: ctrl.herramienta[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, editar: 'editar'})
+        break;
+      case 'Lista de Cotejo':
+
+        break;
+      case 'Escala':
+
+        break;
+      default:
+
+    }
   }
 
   ctrl.inicializarVariables = function () {

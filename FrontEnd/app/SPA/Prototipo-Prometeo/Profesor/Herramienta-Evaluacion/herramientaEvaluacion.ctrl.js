@@ -3,9 +3,9 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
 
-if ($stateParams.id==0){
+ if ($stateParams.id==0){
   ctrl.titulo = 'Nueva co-evaluación';
-}
+ }
 
  ctrl.herramienta = {};
  ctrl.herramienta.descripcion = "";
@@ -71,11 +71,11 @@ if ($stateParams.id==0){
         }).then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
           if (ctrl.herramienta.tipo=="Rubrica"){
-            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
           }else if(ctrl.herramienta.tipo=="Escala") {
-            $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+            $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
           }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
           }
         });
       }

@@ -132,7 +132,9 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
     });
   }
 
-  ctrl.init = function () {  ctrl.titulo = 'Nueva rúbrica';
+  ctrl.init = function () {
+    if($stateParams.estado !== 'editar') ctrl.titulo = 'Nueva rúbrica';
+    else ctrl.titulo = 'Editar rúbrica'
     ctrl.rubrica = {
       id: $stateParams.id,
       tipo: "seleccion",
@@ -148,6 +150,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
       }
       nuevoAspectoRubricaServicio.listarNiveles(herramientaId).then(function(niveles){
         ctrl.rubrica.niveles = niveles;
+        ctrl.numeroNiveles = niveles.length;
       });
       nuevaRubricaService.listarAspectos(herramientaId).then(function(aspectos){
         ctrl.aspectoLista = aspectos;

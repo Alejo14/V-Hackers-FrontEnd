@@ -99,7 +99,19 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   *==================================================
   */
   ctrl.calificarHerramienta = function(indice){
-    $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+    switch (ctrl.herramienta.evaluacion[indice].tipoHerramientaEvaluacion) {
+      case 'Rubrica':
+        $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        break;
+      case 'Lista de Cotejo':
+      break;
+      case 'Escala':
+      break;
+      default:
+        swall('Opss', 'Hubo un error en la creación de la herramienta', 'error');
+      break;
+    }
+
   }
 
   ctrl.init = function (){

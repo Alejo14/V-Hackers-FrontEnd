@@ -195,12 +195,22 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'nueva-rubrica',
-                  url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
+                  url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
+                },
+                {
+                  name: 'editar-rubrica',
+                  url: '/editar-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
                 },
                 {
                   name: 'nuevo-aspecto',
-                  url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId',
+                  url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
+                },
+                {
+                  name: 'editar-aspecto',
+                  url: '/editar-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
                 },
                 {
@@ -220,12 +230,23 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'nueva-escala',
-                  url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
+                  url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
+                },
+
+                {
+                  name: 'editar-escala',
+                  url: '/editar-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
                 {
                   name: 'nueva-lista-cotejo',
-                  url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId',
+                  url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
+                },
+                {
+                  name: 'editar-lista-cotejo',
+                  url: '/editar-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
                 },
                 {

@@ -124,12 +124,19 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, N
     });
   }
 
+  ctrl.modificarAspecto = function(indice) {
+    
+  }
+
   ctrl.inicializarTabla = function () {
     ctrl.criteriosTabla = new NgTableParams({}, { dataset: ctrl.criteriosLista });
   }
 
   ctrl.regresar = function () {
-    $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+    if($stateParams.estado === 'nuevo')
+      $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado});
+    else
+      $state.go('editar-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado});
   }
 
   ctrl.init = function () {
