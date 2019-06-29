@@ -50,14 +50,6 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
     $state.go('inicioProfes');
   }
 
-$scope.$on('usuarioListo', function (event, args) {
-  var usuarioModelo = args;
-  var usuario = {
-    "idUsuario": usuarioModelo.id,
-    "idRol": usuarioModelo.roles[0].id
-  };
- });
-
   ctrl.listarPromediosEntregablesCursoCiclo = function () {
     var usuario = {
       "idUsuario": $cookies.get('usuarioID'),
