@@ -8,7 +8,7 @@
   //Puerto de usuarios
   window.__env.puertoUsuarios = ':7003';
   //Puerto de Cursos
-  window.__env.puertoCursos = ':7004';  
+  window.__env.puertoCursos = ':7004';
   //Puerto de Facultados
   window.__env.puertoFacultades = ':7005';
   //Puerto de especialidades
@@ -32,6 +32,8 @@
   window.__env.puertoHorarios = ':7010';
   //Puerto de grupos
   window.__env.puertoGrupos = ':7011';
+  //Puerto de reportes
+  window.__env.puertoReportes = ':7012';
   //Permite depurar la aplicacion
   window.__env.enableDebug = true;
 }(this));

@@ -32,13 +32,16 @@
                   {{miCurso.horario}}
                 </td>
               </tr>
+              <tr ng-if="ctrl.listaMisCursos.length == 0">
+                <td colspan = "6" align="center">{{ctrl.mensajeError}}</td>
+              </tr>
             </table>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <hc-chart options="ctrl.opcionesReporteCursos"></hc-chart>
+          <highchart config="ctrl.opcionesReporteCursos2"></highchart>
         </div>
       </div>
 
