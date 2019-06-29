@@ -45,24 +45,24 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   */
   ctrl.enviarCalificacion = function() {
     swal({
-      title: "¿Está seguro de que quieres enviar la calificación realizada?",
-      text: "",
+      title: "¿Estás seguro de que quieres enviar la calificación realizada?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, guardar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
-          swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
-          $state.go('inicioProfes');
+          swal("¡Felicidades!","Se guardó la calificación exitosamente","success").then(function(){
+            $state.go('inicioProfes');
+          });
         });
       }
     });
@@ -74,7 +74,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   */
   ctrl.atras = function(){
     swal({
-      title: "¿Está seguro de que quiere volver?",
+      title: "¿Estás seguro de que quieres volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
