@@ -99,7 +99,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   *==================================================
   */
   ctrl.calificarHerramienta = function(indice){
-    switch (ctrl.herramienta.evaluacion[indice].tipoHerramientaEvaluacion) {
+    switch (ctrl.herramientaEvaluacionLista[indice].tipoHerramientaEvaluacion) {
       case 'Rubrica':
         $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
