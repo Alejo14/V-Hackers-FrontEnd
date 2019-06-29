@@ -37,21 +37,21 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
 
   ctrl.volverCurso = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Está seguro de que quiere volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
