@@ -61,29 +61,23 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
         ctrl.rolUsuarioId="";
         herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
           ctrl.rolUsuarioId=rolUsuario;
+          //Llamada al servicio parar crear herramienta de evaluación
+          ctrl.herramienta.id = uuid();
+          ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
+          herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
+            ctrl.herramienta.id = id.herramientaID;
+            swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
+              console.log("Id herramienta: "+ ctrl.herramienta.id);
+              if (ctrl.herramienta.tipo=="Rubrica"){
+                $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }else if(ctrl.herramienta.tipo=="Escala") {
+                $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
+                $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }
+            });
+          });
         });
-
-        //Llamada al servicio parar crear herramienta de evaluación
-        ctrl.herramienta.id = uuid();
-
-        ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
-        herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
-          ctrl.herramienta.id = id.herramientaID;
-        });
-        swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
-          console.log("Id herramienta: "+ ctrl.herramienta.id);
-          if (ctrl.herramienta.tipo=="Rubrica"){
-            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }else if(ctrl.herramienta.tipo=="Escala") {
-            $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }
-        });
-
-
-
-
       }
     });
   }

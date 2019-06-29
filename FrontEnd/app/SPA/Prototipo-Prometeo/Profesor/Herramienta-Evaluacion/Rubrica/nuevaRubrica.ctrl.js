@@ -123,7 +123,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.editarAspecto  = function (indice) {
-    $state.go('editar-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, idAspecto: ctrl.aspectoLista[indice].id});)
+    $state.go('editar-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, idAspecto: ctrl.aspectoLista[indice].id});
   }
 
   ctrl.guardarRubrica = function(){
