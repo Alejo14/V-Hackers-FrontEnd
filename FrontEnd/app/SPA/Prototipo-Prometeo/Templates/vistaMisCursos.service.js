@@ -34,4 +34,19 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.obtenerRolUsuario = function(idUsuario, descripcionRol){
+
+    var urlObtenerRolUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/rolusuario/'+ idUsuario + '?descripcionrol=' + descripcionRol;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerRolUsuario
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);
