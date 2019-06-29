@@ -16,32 +16,32 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 m-b-10">
               <h5> Código: </h5>
             </div>
             <div class="col-md-2">
               <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.codigo">
             </div>
             <div class="col-md-4">
-              <button class="btn btn-primary" ng-click = "ctrl.filtrarListaAlumnos(ctrl.filtro)"><i class="fa fa-filter"></i>  Filtrar </button>
+              <button class="btn btn-primary color-fondo-azul-pucp" ng-click = "ctrl.filtrarListaAlumnos(ctrl.filtro)"><i class="fa fa-filter"></i>  Filtrar </button>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 m-b-10">
               <h5> Nombre: </h5>
             </div>
             <div class="col-md-2">
               <input class="form-control input-sm" rows="1" ng-model = "ctrl.filtro.nombre">
             </div>
             <div class="col-md-4">
-              <button class="btn btn-primary" ng-click = "ctrl.limpiarFiltroAlumnos()"><i class="fa fa-broom"></i> Limpiar </button>
+              <button class="btn btn-primary color-fondo-azul-pucp"  ng-click = "ctrl.limpiarFiltroAlumnos()"><i class="fa fa-broom"></i> Limpiar </button>
             </div>
             <div class="col-md-1" align="right">
-              <button class="btn btn-primary" ng-click = "ctrl.verGrupos()"><i class="fa fa-users"></i> Grupos </button>
+              <button class="btn btn-primary color-fondo-azul-pucp" ng-click = "ctrl.verGrupos()"><i class="fa fa-users"></i> Grupos </button>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 m-b-10">
               <h5> Correo: </h5>
             </div>
             <div class="col-md-2">
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 m-b-10">
               <h5> Especialidad: </h5>
             </div>
             <div class="col-md-2">
@@ -61,12 +61,12 @@
           <div class="row">
             <div class="col-md-12">
               <div class="table-responsive">
-                <table ng-table="ctrl.alumnosTabla" class="table table-hover">
+                <table ng-table="ctrl.alumnosTabla" class="table table-bordered">
                   <tr ng-repeat="alumno in ctrl.alumnosLista">
                     <td data-title="'Nro.'" align="center" width="5%">
                       {{$index + 1}}
                     </td>
-                    <td data-title="'Código'">
+                    <td data-title="'Código'" align="center">
                       {{alumno.codigo}}
                     </td>
                     <td data-title="'Nombre'">

@@ -37,22 +37,22 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
    }else{
   swal({
-    title: "¿Está seguro de que desea crear esta herramienta?",
+    title: "¿Estás seguro de que quieres crear esta herramienta?",
     text: "Una vez creada, no podrá modificar el tipo de herramienta",
     icon: "warning",
     buttons: {
-      cancelar: {
+      Cancel: {
         text: "Cancelar",
         className: "btn btn-lg btn-danger"
       },
-      confirm: {
+      Confirm: {
         text: "Sí, agregar",
         className: "btn btn-lg color-fondo-azul-pucp color-blanco"
       }
     },
     closeModal: false
-    }).then(function (crearHerramientaConfirmada) {
-      if (crearHerramientaConfirmada !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         //Obtener RolUsuarioId
         ctrl.idUsuario = $cookies.get('usuarioID');
 
@@ -70,17 +70,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
         herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
           ctrl.herramienta.id = id.herramientaID;
         });
-        swal({
-          title: "¡Listo!",
-          text: "Herramienta creada con éxito",
-          icon: "success",
-          buttons: {
-            confirm: {
-              text: "ok",
-              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-            }
-          }
-        }).then(function(){
+        swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
           console.log("Id herramienta: "+ ctrl.herramienta.id);
           if (ctrl.herramienta.tipo=="Rubrica"){
             $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});

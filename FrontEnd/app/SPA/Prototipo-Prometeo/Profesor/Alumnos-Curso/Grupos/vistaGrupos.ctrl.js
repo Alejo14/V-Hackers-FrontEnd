@@ -137,7 +137,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
       }
       else{
         swal({
-          title: "¿Esta seguro de que desea crear el grupo " + grupoNuevo + "?",
+          title: "¿Estás seguro de que deseas crear el grupo " + grupoNuevo + "?",
           text: "",
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
@@ -167,13 +167,13 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               vistaGruposService.crearGrupo(angular.toJson(data)).then(function (grupoNuevo) {
 
                 swal({
-                  title: "El nuevo grupo se genero exitosamente",
-                  text: "¿Desea agregar los integrantes ahora?",
+                  title: "El nuevo grupo se generó exitosamente ¿Deseas agregar los integrantes ahora?",
+                  text: "",
                   icon: "success",
                   //buttons: ["Cancelar", "Sí, agregar"],
                   buttons: {
                     cancelar: {
-                      text: "Despues, gracias",
+                      text: "Después, gracias",
                       className: "btn btn-lg btn-danger"
                     },
                     confirm: {

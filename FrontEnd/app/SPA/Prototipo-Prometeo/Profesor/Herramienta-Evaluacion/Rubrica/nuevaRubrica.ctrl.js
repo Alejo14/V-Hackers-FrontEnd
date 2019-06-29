@@ -70,7 +70,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
   }
 
   ctrl.regresarEntregable = function (){
@@ -96,11 +96,34 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.eliminarAspecto = function (indice) {
-
+    swal({
+      title: "¿Estás seguro de que deseas eliminar el aspecto?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, eliminar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (confirmarAspectoEliminado) {
+      if (confirmarAspectoEliminado === "confirm") {
+        var data = {
+          "aspectoID" : ctrl.aspectoLista[indice].id
+        };
+        nuevoAspectoRubricaServicio.eliminarAspecto(data).then(function(eliminado) {
+          swal('Éxito', 'El aspecto ha sido eliminado', 'success');
+        });
+      }
+    });
   }
 
   ctrl.editarAspecto  = function (indice) {
-
+    $state.go('editar-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, idAspecto: ctrl.aspectoLista[indice].id});)
   }
 
   ctrl.guardarRubrica = function(){

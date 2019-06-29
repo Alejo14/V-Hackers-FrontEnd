@@ -36,11 +36,11 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.actualizarGrupo = function(){
     console.log("hola");
       if (ctrl.grupo.nombre==""){
-        swal("¡Opss!", "Ingrese un nombre para el grupo por favor" , "error");
+        swal("¡Opss! Ingresa un nombre para el grupo", "" , "error");
       }
       else{
         swal({
-          title: "¿Esta seguro de que desea actualizar el grupo " + ctrl.grupo.nombre + "?",
+          title: "¿Estás seguro de que deseas modificar el grupo " + ctrl.grupo.nombre + "?",
           text: "",
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
@@ -50,7 +50,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               className: "btn btn-lg btn-danger"
             },
             confirm: {
-              text: "Sí, agregar",
+              text: "Sí",
               className: "btn btn-lg color-fondo-azul-pucp color-blanco"
             }
           },
@@ -86,10 +86,10 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
                     }
                     console.log(angular.toJson(data));
                     vistaGruposService.modificarNombreGrupo(angular.toJson(data)).then(function () {
-                        swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizo correctamente" , "success");
+                        swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizó correctamente" , "success");
                     });
                 }else{
-                  swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizo correctamente" , "success");
+                  swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizó correctamente" , "success");
                 }
               });
               //$state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});

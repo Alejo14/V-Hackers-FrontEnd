@@ -61,8 +61,15 @@ body{
 .table > thead > tr > th,
 .table > thead > tr > td {
   font-weight: bold;
+  background-color: #2b78e4 !important;
+  border-color: white !important;
+  color: white !important;
 }
 
 .z-indice-prometeo {
   z-index: 2;
+}
+
+.placeholder-select{
+  display: contents !important;
 }

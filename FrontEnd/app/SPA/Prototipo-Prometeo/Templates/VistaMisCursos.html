@@ -11,24 +11,24 @@
       <div class="row">
         <div class="col-md-12">
           <div class="table-responsive m-t-20">
-            <table ng-Table="ctrl.tablaMisCursos" class="table table-striped">
+            <table ng-Table="ctrl.tablaMisCursos" class="table table-bordered">
               <tr ng-repeat="miCurso in ctrl.listaMisCursos">
                 <td data-title="'Nro.'" align="center" width="5%">
                   {{$index + 1}}
                 </td>
-                <td data-title="'Código'">
+                <td data-title="'Clave'" align="center">
                   {{miCurso.codigoCurso}}
                 </td>
-                <td data-title="'Nombre'">
+                <td data-title="'Curso'">
                   <a href="" ng-click = "ctrl.verCurso(miCurso)">{{miCurso.nombreCurso}}</a>
                 </td>
-                <td data-title="'Créditos'">
+                <td data-title="'Créditos'" align="center">
                   {{miCurso.creditos}}
                 </td>
-                <td data-title="'N° Alumnos'">
+                <td data-title="'N° Alumnos'" align="center">
                   {{miCurso.cantidadAlumnos}}
                 </td>
-                <td data-title="'Horario'">
+                <td data-title="'Horario'" align="center">
                   {{miCurso.horario}}
                 </td>
               </tr>
