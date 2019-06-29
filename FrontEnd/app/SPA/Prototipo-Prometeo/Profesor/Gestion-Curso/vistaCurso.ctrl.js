@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams', '$cookies' ,'profesorCursoService', '$uibModal',
+angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams', '$cookies' ,'profesorCursoService', '$uibModal', 'NgTableParams',
 
-function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal){
+function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal ,NgTableParams){
   var ctrl = this;
   ctrl.curso = {};
   ctrl.proyectosLista = [];
