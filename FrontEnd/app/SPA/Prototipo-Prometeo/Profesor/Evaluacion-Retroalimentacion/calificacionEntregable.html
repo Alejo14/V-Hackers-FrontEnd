@@ -18,6 +18,9 @@
         <div class="table-responsive">
           <table ng-Table="ctrl.tablaHerramientas" class="table table-bordered">
             <tr ng-repeat="herramienta in ctrl.herramientaEvaluacionLista">
+              <td data-title="'Nro'">
+                {{$index + 1}}
+              </td>
               <td data-title="'Nombre Herramienta'">
                 {{herramienta.tipoHerramientaEvaluacion}}
               </td>
