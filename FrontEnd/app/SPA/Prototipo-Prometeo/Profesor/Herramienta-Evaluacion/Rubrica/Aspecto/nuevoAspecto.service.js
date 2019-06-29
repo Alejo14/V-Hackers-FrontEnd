@@ -48,4 +48,20 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   }
+
+  servicio.eliminarCriterio = function(data){
+    var urlEliminarCriterio = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/eliminarCriterio';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlEliminarCriterio,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

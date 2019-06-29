@@ -210,7 +210,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'editar-aspecto',
-                  url: '/editar-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado',
+                  url: '/editar-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado/:idAspecto',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
                 },
                 {
