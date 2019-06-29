@@ -7,11 +7,11 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
 
   ctrl.cargarMisCursos = function (ciclo) {
-    if($stateParams.rolUsuario=='P'){
+    if(ctrl.rolUsuario=='P'){
 
       ctrl.misCursosInfo = {
         "cicloId" : ciclo,
-        "rolUsuarioId" : "a23b0031-64f6-4ce0-8b03-5f577d16d06c"
+        "rolUsuarioId" : ctrl.rolUsuarioId
       };
 
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
@@ -23,8 +23,10 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
       ctrl.misCursosInfoAlumno = {
         "cicloId" : ciclo,
-        "rolUsuarioId" : "505b1b8c-aed2-49c8-9724-3879469afb02"
+        "rolUsuarioId" : ctrl.rolUsuarioId
       };
+
+      console.log(ctrl.misCursosInfoAlumno);
 
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfoAlumno).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
@@ -34,7 +36,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
   };
 
   ctrl.verCurso = function (miCurso){
-    if($stateParams.rolUsuario=='P'){
+    if(ctrl.rolUsuario=='P'){
       $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
     }else {
       $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario, rolusuarioId: ctrl.rolUsuarioId}); //Aca podemos enviar el RolUsuarioId tambien
@@ -65,13 +67,25 @@ $scope.$on('usuarioListo', function (event, args) {
   }
 
   ctrl.init = function () {
-    ctrl.rolUsuarioId="505b1b8c-aed2-49c8-9724-3879469afb02";
-    vistaMisCursosService.cicloActual().then(function(ciclo){
-      ctrl.cicloActual=ciclo;
-      ctrl.cargarMisCursos(ctrl.cicloActual);
-    });
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    ctrl.rolUsuario = $stateParams.rolUsuario;
 
     ctrl.listarPromediosEntregablesCursoCiclo();
+    var descripcionRol;
+    if(ctrl.rolUsuario=='P'){
+      descripcionRol = "Profesor";
+    }else {
+      descripcionRol = "Alumno";
+    }
+
+    vistaMisCursosService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
+      ctrl.rolUsuarioId=rolUsuario;
+      vistaMisCursosService.cicloActual().then(function(ciclo){
+        ctrl.cicloActual=ciclo;
+        ctrl.cargarMisCursos(ctrl.cicloActual);
+      });
+    });
+
     ctrl.opcionesReporteCursos = {
       title: {
         text: 'Historial de promedio de notas en el año'

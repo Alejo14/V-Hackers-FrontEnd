@@ -34,13 +34,28 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.listarPromediosEntregablesCursoCiclo = function (usuario) {
-    var urlListarPromediosEntregablesCursoCiclo = variablesAmbiente.apiUrl + variablesAmbiente.puertoReportes + '/reportes/listarpromediosentregablescursociclo';
+servicio.listarPromediosEntregablesCursoCiclo = function (usuario) {
+  var urlListarPromediosEntregablesCursoCiclo = variablesAmbiente.apiUrl + variablesAmbiente.puertoReportes + '/reportes/listarpromediosentregablescursociclo';
+  var $defer = $q.defer();
+  $http({
+      method: 'POST',
+      url: urlListarPromediosEntregablesCursoCiclo,
+      data: usuario
+    }).then(function (respuesta) {
+      $defer.resolve(respuesta.data);
+    }).catch(function (error) {
+      $defer.reject(error);
+    });
+   return $defer.promise;
+ }
+
+  servicio.obtenerRolUsuario = function(idUsuario, descripcionRol){
+
+    var urlObtenerRolUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/rolusuario/'+ idUsuario + '?descripcionrol=' + descripcionRol;
     var $defer = $q.defer();
     $http({
-        method: 'POST',
-        url: urlListarPromediosEntregablesCursoCiclo,
-        data: usuario
+        method: 'GET',
+        url: urlObtenerRolUsuario
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {
