@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('listarEntrgxProyAlumnoCtrl', ['$scope', '$state', '$stateParams' , 'entregableAlumnoService', '$uibModal', 'NgTableParams',
-function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('listarEntrgxProyAlumnoCtrl', ['$scope', '$state', '$stateParams' , 'entregableAlumnoService', '$uibModal', 'NgTableParams', '$cookies',
+function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTableParams, $cookies){
   var ctrl = this;
   ctrl.tituloNuevo = "Nuevo Entregable";
   ctrl.tituloModificado= "Entregable";
@@ -14,6 +14,9 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   $scope.fechaActual=new Date();
   ctrl.id=0;
   ctrl.proyectoId="";
+  ctrl.opcionesReporteEntregables = {};
+  ctrl.nombresEntregablesReporte = [];
+  ctrl.notasEntregablesReporte = [];
 
   function uuid() {
       function randomDigit() {
@@ -269,12 +272,64 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   };
 
+  ctrl.cargarReporteNotasAvancesProyecto = function () {
+    var idsUsuario = {
+      "idUsuario": $cookies.get('usuarioID'),
+      "idRol": $cookies.get('rolActivoId'),
+      "idProyecto": ctrl.proyectoId
+    };
+
+    entregableAlumnoService.cargarReporteNotasAvancesProyecto(idsUsuario).then(function (respuesta) {
+      ctrl.nombresEntregablesReporte = [];
+      ctrl.notasEntregablesReporte = [];
+      var numEntregables = respuesta.length;
+      for (var i = 0; i < numEntregables; i++) {
+        ctrl.nombresEntregablesReporte.push(respuesta[i].nombreEntregable);
+        ctrl.notasEntregablesReporte.push(respuesta[i].notaEntregable);
+      }
+
+      ctrl.opcionesReporteEntregables = {
+        title: {
+          text: 'Notas de entregables calificados del curso'
+        },
+
+        xAxis: {
+          categories: ctrl.nombresEntregablesReporte
+        },
+
+        lang: {
+          noData: 'No hay notas disponibles en los entregables',
+          viewFullscreen: 'Ver en pantalla completa',
+          printChart: 'Imprimir',
+          downloadPNG: 'Descargar PNG',
+          downloadCSV: 'Descargar CSV',
+          downloadJPEG: 'Descargar JPEG',
+          downloadPDF: 'Descargar PDF',
+          downloadSVG: 'Descargar SVG'
+        },
+
+        yAxis: {
+          allowDecimals: true,
+          title: {
+              text: 'Nota'
+          }
+        },
+
+        series: [{
+          name: 'Notas',
+          data: ctrl.notasEntregablesReporte
+        }]
+      };
+    });
+  }
+
   ctrl.init = function (){
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoNombre = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
     ctrl.rolusuarioId=$stateParams.rolusuarioId;
     ctrl.cargarEntregables(ctrl.proyectoId);
+    ctrl.cargarReporteNotasAvancesProyecto();
 
     }
 
