@@ -21,6 +21,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       };
       console.log(ctrl.proyectosLista);
     });
+    ctrl.proyectosTabla = new NgTableParams({}, { dataset: ctrl.proyectosLista });
   };
 
   ctrl.crearEntregable = function(entregable){
@@ -52,6 +53,8 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       };
       console.log(ctrl.entregablesLista);
     });
+
+    ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
   };
 
   ctrl.verProyecto = function (proyecto) {
@@ -181,8 +184,6 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
         });
         ctrl.cargarProyectos();
         ctrl.cargarEntregables();
-        ctrl.proyectosTabla = new NgTableParams({}, { dataset: ctrl.proyectosLista });
-        ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
       });
 
 
