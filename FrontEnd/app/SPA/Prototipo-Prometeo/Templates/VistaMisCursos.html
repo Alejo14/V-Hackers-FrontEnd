@@ -32,6 +32,9 @@
                   {{miCurso.horario}}
                 </td>
               </tr>
+              <tr ng-if="ctrl.listaMisCursos.length == 0">
+                <td colspan = "6" align="center">{{ctrl.mensajeError}}</td>
+              </tr>
             </table>
           </div>
         </div>

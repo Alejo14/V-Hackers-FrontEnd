@@ -4,7 +4,7 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
   ctrl.listaMisCursos = [];
   ctrl.opcionesReporteCursos = {};
-
+  ctrl.mensajeError = "No hay cursos disponibles";
 
   ctrl.cargarMisCursos = function (ciclo) {
     if(ctrl.rolUsuario=='P'){
