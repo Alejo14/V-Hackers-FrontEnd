@@ -4,6 +4,8 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
   ctrl.listaMisCursos = [];
   ctrl.opcionesReporteCursos = {};
+  ctrl.cursosReporte = [];
+  ctrl.opcionesReporteCursos2 = {};
   ctrl.mensajeError = "No hay cursos disponibles";
 
   ctrl.cargarMisCursos = function (ciclo) {
@@ -25,10 +27,10 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
         "cicloId" : ciclo,
         "rolUsuarioId" : ctrl.rolUsuarioId
       };
-
+      console.log("ALUMNO");
       console.log(ctrl.misCursosInfoAlumno);
 
-      vistaMisCursosService.listarMisCursos(ctrl.misCursosInfoAlumno).then(function (misCursosListaData) {
+      vistaMisCursosService.listarMisCursosAlumno(ctrl.misCursosInfoAlumno).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
         ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
       });
@@ -63,6 +65,115 @@ $scope.$on('usuarioListo', function (event, args) {
     };
     vistaMisCursosService.listarPromediosEntregablesCursoCiclo(usuario).then(function (respuesta) {
       console.log(respuesta);
+      var numCursos = respuesta.length;
+      for (var i = 0; i < numCursos; i++) {
+        var cursoReporteNuevo = {
+          "name": respuesta[i].nombreCurso,
+          "y": respuesta[i].promedio,
+          "drilldown": respuesta[i].nombreCurso
+        };
+        ctrl.cursosReporte.push(cursoReporteNuevo);
+      }
+      ctrl.opcionesReporteCursos2 = {
+        title: {
+          text: 'Promedio de notas de cursos del ciclo actual'
+        },
+
+        xAxis: {
+          type: 'category'
+        },
+
+        yAxis: {
+          allowDecimals: true,
+          title: {
+              text: 'Promedio ponderado'
+          }
+        },
+        options: {
+
+        },
+        lang: {
+          drillUpText: 'Regresar',
+          noData: 'No hay notas disponibles en el ciclo',
+          viewFullscreen: 'Ver en pantalla completa',
+          printChart: 'Imprimir',
+          downloadPNG: 'Descargar PNG',
+          downloadCSV: 'Descargar CSV',
+          downloadJPEG: 'Descargar JPEG',
+          downloadPDF: 'Descargar PDF',
+          downloadSVG: 'Descargar SVG'
+        },
+        tooltip: {
+          //headerFormat: '<span style="font-size:11px">{series.name}</span>',
+          pointFormat: '<b>Promedio ponderado: {point.y}</b> puntos<br/>'
+        },
+        plotOptions: {
+          series: {
+            events: {
+              click: function (evento) {
+
+              }
+            },
+            borderWidth: 0,
+            dataLabels: {
+              allowOverlap: true,
+              color: '#ffffff',
+              inside: true,
+              enabled: true
+            }
+          }
+        },
+        chart: {
+          type: 'column'
+        },
+        legend: {
+          enabled: false
+        },
+        drilldown: {
+          activeAxisLabelStyle: {
+            textDecoration: 'none',
+            color: '#333333'
+          },
+          activeDataLabelStyle: {
+            textDecoration: 'none',
+            color: '#333333'
+          },
+          drillUpButton: {
+            relativeTo: 'plotBox',
+            position: {
+              align: 'left',
+              verticalAlign: 'top',
+              y: -10,
+              x: 0
+            }
+          },
+          series: []//Arreglo que debe ser mandado por el back
+        },
+        series: [
+          {
+            name: 'Cursos',
+            colorByPoint: true,
+            data: ctrl.cursosReporte
+            // data: [
+            //   {
+            //     name: 'Ingeniería de Software',
+            //     y: 15.6,
+            //     drilldown: 'Ingeniería de Software'
+            //   },
+            //   {
+            //     name: 'Aplicaciones de ciencias de la computación',
+            //     y: 17.8,
+            //     drilldown: 'Aplicaciones de ciencias de la computación'
+            //   },
+            //   {
+            //     name: 'Programación de aplicativos móviles',
+            //     y: 18.9,
+            //     drilldown: 'Programación de aplicativos móviles'
+            //   }
+            // ]//Arreglo de BackEnd
+          }
+        ]
+      };
     });
   }
 
@@ -109,98 +220,7 @@ $scope.$on('usuarioListo', function (event, args) {
       }]
     };
 
-    ctrl.opcionesReporteCursos2 = {
-      title: {
-        text: 'Promedio de notas de cursos del ciclo actual'
-      },
 
-      xAxis: {
-        type: 'category'
-      },
-
-      yAxis: {
-        allowDecimals: true,
-        title: {
-            text: 'Promedio ponderado'
-        }
-      },
-      noData: 'Ningún dato disponible en este gráfico',
-      options: {
-
-      },
-      lang: {
-        drillUpText: 'Regresar'
-      },
-      tooltip: {
-        //headerFormat: '<span style="font-size:11px">{series.name}</span>',
-        pointFormat: '<b>Promedio ponderado: {point.y}</b> puntos<br/>'
-      },
-      plotOptions: {
-        series: {
-          events: {
-            click: function (evento) {
-
-            }
-          },
-          borderWidth: 0,
-          dataLabels: {
-            allowOverlap: true,
-            color: '#ffffff',
-            inside: true,
-            enabled: true
-          }
-        }
-      },
-      chart: {
-        type: 'column'
-      },
-      legend: {
-        enabled: false
-      },
-      drilldown: {
-        activeAxisLabelStyle: {
-          textDecoration: 'none',
-          color: '#333333'
-        },
-        activeDataLabelStyle: {
-          textDecoration: 'none',
-          color: '#333333'
-        },
-        drillUpButton: {
-          relativeTo: 'plotBox',
-          position: {
-            align: 'left',
-            verticalAlign: 'top',
-            y: -10,
-            x: 0
-          }
-        },
-        series: []//Arreglo que debe ser mandado por el back
-      },
-      series: [
-        {
-          name: 'Cursos',
-          colorByPoint: true,
-          data: [
-            {
-              name: 'Ingeniería de Software',
-              y: 15.6,
-              drilldown: 'Ingeniería de Software'
-            },
-            {
-              name: 'Aplicaciones de ciencias de la computación',
-              y: 17.8,
-              drilldown: 'Aplicaciones de ciencias de la computación'
-            },
-            {
-              name: 'Programación de aplicativos móviles',
-              y: 18.9,
-              drilldown: 'Programación de aplicativos móviles'
-            }
-          ]//Arreglo de BackEnd
-        }
-      ]
-    };
   }
 
   ctrl.init();

@@ -19,6 +19,22 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarMisCursosAlumno = function(misCursoInfo){
+
+    var urlListarMisCursos = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/listarcursosciclorolusuario/'
+                              + misCursoInfo.cicloId + '?RolUsuarioID=' + misCursoInfo.rolUsuarioId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarMisCursos
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   servicio.cicloActual = function(){
 
     var urlCicloActual = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cicloactual/';

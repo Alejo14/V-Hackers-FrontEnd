@@ -172,21 +172,21 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.regresarEntregables = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Está seguro de que quiere volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (regresarConfirmado) {
-      if (regresarConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         if (ctrl.entregable.proyectoId != 0) {
           $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId});
         } else {

@@ -141,6 +141,21 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.cargarReporteNotasAvancesProyecto = function (usuario) {
+    var urlCargarReporteNotasAvancesProyecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoReportes + '/reportes/listarnotasavancesproyecto';
+    var $defer = $q.defer();
+    $http({
+      method: 'POST',
+      url: urlCargarReporteNotasAvancesProyecto,
+      data: usuario
+    }).then(function (respuesta){
+      $defer.resolve(respuesta.data);
+    }).catch(function(error){
+      $defer.reject(error);
+    });
+    return $defer.promise;
+  }
+
   // servicio.entregableAlumno = function(){
   //
   //   var urlEntregableAlumno =  variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables'; //'http://localhost:7002/entregables';
