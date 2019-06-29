@@ -6,7 +6,9 @@
           {{$index + 1}}
         </td>
         <td data-title="'ENTREGABLE'">
-          <a href="">{{entregable.nombre}}</a>
+          <div class="col" ng-click="ctrl.avancesEntregable(entregable)">
+            <a href="">{{entregable.nombre}}</a>
+          </div>
         </td>
         <td data-title="'MÉTODO'">
           <div align="center" ng-if="entregable.metodoTrabajo==0">

@@ -50,7 +50,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               className: "btn btn-lg btn-danger"
             },
             confirm: {
-              text: "Sí",
+              text: "Sí, modificar",
               className: "btn btn-lg color-fondo-azul-pucp color-blanco"
             }
           },
