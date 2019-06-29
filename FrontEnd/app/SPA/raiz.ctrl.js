@@ -15,6 +15,12 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
           $state.go('login');
         });
       }
+      else {
+        $state.go('login');
+      }
+    }
+    else {
+      $state.go('login');
     }
 
   };

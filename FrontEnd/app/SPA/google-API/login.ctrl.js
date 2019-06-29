@@ -27,11 +27,12 @@ function ($scope, $state, variablesAmbiente, $cookies, loginService) {
               };
 
               loginService.login(correoLogin).then(function (respuestaCookie) {
-                if (respuestaCookie === 'Usuario no existe') {
+                if (respuestaCookie.correo === 'Usuario no existe') {
                   swal("¡Opss!", "El usuario no se encuentra en base de datos" , "error");
                 }
                 else {
-                  $cookies.put('usuarioID', respuestaCookie);
+                  $cookies.put('usuarioID', respuestaCookie.id);
+                  $cookies.put('rolActivoId', respuestaCookie.roles[0].id);
                   $cookies.put('inicioSesion', true);
                   $state.go('raiz');
                 }
