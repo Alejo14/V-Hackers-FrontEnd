@@ -71,7 +71,6 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
 
   ctrl.agregarAspecto = function(){
     $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
-
   }
 
   ctrl.regresarEntregable = function (){

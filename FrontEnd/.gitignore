@@ -36,5 +36,4 @@ Icon
 .Trashes
 
 #carpetas y archivos que se crea al desplegar
-node_modules/
 package-lock.json
