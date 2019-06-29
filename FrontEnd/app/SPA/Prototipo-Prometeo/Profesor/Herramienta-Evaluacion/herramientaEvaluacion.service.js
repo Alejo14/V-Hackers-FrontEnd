@@ -18,4 +18,19 @@ function($q, $http) {
     return $defer.promise;
   }
 
+  servicio.obtenerRolUsuario = function(idUsuario, descripcionRol){
+
+    var urlObtenerRolUsuario = 'http://localhost:7003' + '/roles/rolusuario/'+ idUsuario + '?descripcionrol=' + descripcionRol;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerRolUsuario
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

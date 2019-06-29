@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService',
-function($scope, $state, $stateParams, herramientaEvaluacionService){
+angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService','$cookies',
+function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
 
@@ -53,8 +53,20 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
     closeModal: false
     }).then(function (crearHerramientaConfirmada) {
       if (crearHerramientaConfirmada !== "cancelar") {
+        //Obtener RolUsuarioId
+        ctrl.idUsuario = $cookies.get('usuarioID');
+
+        var descripcionRol="Profesor";
+        //Obtener RolUsuarioId
+        ctrl.rolUsuarioId="";
+        herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
+          ctrl.rolUsuarioId=rolUsuario;
+        });
+
         //Llamada al servicio parar crear herramienta de evaluación
         ctrl.herramienta.id = uuid();
+
+        ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
         herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
           ctrl.herramienta.id = id.herramientaID;
         });
@@ -78,6 +90,10 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
             $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
           }
         });
+
+
+
+
       }
     });
   }
