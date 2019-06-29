@@ -151,20 +151,20 @@ function toBase64(file) {
 ctrl.regresarCursoAlumno = function () {
   swal({
     title: "¿Está seguro que quiere regresar?",
-    text: "Los cambios se guardarán",
+    text: "Los cambios no se guardarán",
     icon: "warning",
     buttons: {
-      cancelar: {
+      Cancel: {
         text: "Cancelar",
         className: "btn btn-lg btn-danger"
       },
-      confirm: {
-        text: "Sí, regresar",
+      Confirm: {
+        text: "Sí, volver",
         className: "btn btn-lg color-fondo-azul-pucp color-blanco"
       }
     }
-  }).then(function (regresarVistaCurso) {
-    if (regresarVistaCurso !== "cancelar") {
+  }).then(function (respuesta) {
+    if (respuesta == "Confirm") {
 
     }
   });

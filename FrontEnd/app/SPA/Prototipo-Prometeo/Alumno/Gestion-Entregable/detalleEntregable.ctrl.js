@@ -256,6 +256,10 @@ ctrl.elminarURL= function (archivo){
     });
 }
 
+ctrl.verHerramientas= function () {
+  $state.go('calificacion' , {avanceEntregableId: ctrl.idAvanceEntregable, herramientaCalificada: 0 });
+}
+
 
 ctrl.regresarCursoAlumno = function () {
   swal({

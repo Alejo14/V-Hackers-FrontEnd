@@ -74,21 +74,21 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   */
   ctrl.atras = function(){
     swal({
-    title: "¿Está seguro de que quieres volver?",
-    text: "Los cambios no se guardaran",
-    icon: "warning",
-    buttons: {
-      cancelar: {
-        text: "Cancelar",
-        className: "btn btn-lg btn-danger"
-      },
-      confirm: {
-        text: "Sí, volver",
-        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+      title: "¿Está seguro de que quiere volver?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
       }
-    }
-    }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         $state.go('inicioProfes');
       }
     });
