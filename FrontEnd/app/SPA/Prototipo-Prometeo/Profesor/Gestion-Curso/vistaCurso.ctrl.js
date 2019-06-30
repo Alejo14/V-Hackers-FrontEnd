@@ -53,7 +53,6 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       };
       console.log(ctrl.entregablesLista);
     });
-
     ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
   };
 

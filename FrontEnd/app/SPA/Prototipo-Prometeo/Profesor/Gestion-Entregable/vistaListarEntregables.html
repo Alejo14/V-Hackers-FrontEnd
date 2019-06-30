@@ -14,64 +14,61 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="row">
-            <div class="col-md-8">
-              <form class="form-horizontal ng-pristine ng-valid">
-                <div class="card-body card-padding">
-                  <div class="form-group">
-                    <h4 class="col-sm-3">Crear Entregable</h4>
-                    <div class="col-sm-9">
-                      <div class="fg-line">
-                        <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+          <div class="form-group">
+            <h4 class="col-sm-3">Crear Entregable</h4>
+            <div class="col-sm-9">
+              <div class="fg-line">
+                <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+          </div><br><br><br>
+          <div class="col-sm-9">
+            <div class="form-group">
+              <div class="table-responsive input-letra-prometeo">
+                <table ng-table="ctrl.entregablesTabla" class="table table-bordered">
+                  <tr ng-repeat="entregable in ctrl.entregablesLista">
+                    <td data-title="'NRO.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'ENTREGABLE'">
+                      <div class="col" ng-click="ctrl.avancesEntregable(entregable)">
+                        <a href="">{{entregable.nombre}}</a>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+                    </td>
+                    <td data-title="'MÉTODO'">
+                      <div align="center" ng-if="entregable.metodoTrabajo==0">
+                        <a> Indiv. </a>
+                      </div>
+                      <div align="center" ng-if="entregable.metodoTrabajo==1">
+                        <a> Grupal </a>
+                      </div>
+                    </td>
+                    <td data-title="'FECHA CREACIÓN'" align="center">
+                      {{entregable.fechaHabilitacionStr}}
+                    </td>
+                    <td data-title="'FECHA FIN'" align="center">
+                      {{entregable.fechaFinStr}}
+                    </td>
+                    <td data-title="'ACCIONES'" align="center" widht="25%">
+                      <a href="" ng-click="ctrl.verEntregable(entregable)" class="m-r-10">
+                        <i class="fa fa-pencil-alt"></i>
+                      </a>
+                      <a href="" ng-click="ctrl.elminarEntregable(entregable)" class="m-l-10">
+                        <i class="fa fa-trash-alt"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-8">
-              <form class="form-horizontal ng-pristine ng-valid">
-                <div class="card-body card-padding">
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <div class="row" align="center" style="padding:10px;">
-                        <div class="col-md-4">ENTREGABLE</div>
-                        <div class="col-md-3">FECHA CREACIÓN</div>
-                        <div class="col-md-2">ACCIONES</div>
-                      </div>
-                      <div ng-repeat="entregable in ctrl.entregablesLista">
-                        <div class="row" style="padding:5px;">
-                          <div class="col-md-4" ng-click="ctrl.ingresarEntregable()">
-                            <a href=""> {{entregable.nombre}} </a>
-                          </div>
-                          <div class="col-md-3" align="center">
-                            {{entregable.fechaHabilitacionStr}}
-                          </div>
-                          <div class="col-md-2" align="center">
-                            <a style="padding:10px;" ng-click="ctrl.irModificarEntregable(entregable)">
-                              <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a style="padding:10px;" ng-click="ctrl.elminarEntregable(entregable)">
-                              <i class="fas fa-trash-alt"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-            </div>
+
+          <div class="col-md-12" align="right">
+            <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </section>

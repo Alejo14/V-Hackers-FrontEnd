@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!-- <div class="col-md-12">
   <div class="row" align="center">
     <div class="col-md-1">NRO.</div>
     <div class="col-md-3">ENTREGABLE</div>
@@ -22,5 +22,30 @@
       </div>
       <div class="col-md-2" align="center">-</div>
     </div>
+  </div>
+</div> -->
+<div class="form-group">
+  <div class="table-responsive input-letra-prometeo">
+    <table ng-table="ctrl.entregablesTabla" class="table table-bordered">
+      <tr ng-repeat="entregable in ctrl.entregablesLista">
+        <td data-title="'NRO.'" align="center" width="5%">
+          {{$index + 1}}
+        </td>
+        <td data-title="'ENTREGABLE'">
+          <div class="col" ng-click="ctrl.verEntregable(entregable)">
+            <a href="">{{entregable.nombre}}</a>
+          </div>
+        </td>
+        <td data-title="'FECHA CREACIÓN'" align="center">
+          {{entregable.fechaCreacionStr}}
+        </td>
+        <td data-title="'FECHA DE ENTREGA'" align="center">
+          {{entregable.fechaFinStr}}
+        </td>
+        <td data-title="'NOTA'" align="center" widht="5%">
+          -
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
