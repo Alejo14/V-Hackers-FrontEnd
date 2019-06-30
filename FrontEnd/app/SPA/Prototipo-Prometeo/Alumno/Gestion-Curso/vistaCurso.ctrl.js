@@ -100,9 +100,9 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
     alumnoCursoService.mostrarAvanceProyecto(data).then(function (avanceProyectoId) {
       //console.log(avanceProyectoId);
     })
-    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre,rolusuarioId: ctrl.idRolusuario });
+    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre,rolusuarioId: ctrl.idRolusuario,
+      cursoCicloId:$stateParams.cursoCicloId,nombreCurso:$stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso, horario:$stateParams.horario  });
   };
-
 
   ctrl.verEntregable = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
@@ -133,26 +133,7 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
 }
 
   ctrl.volverCurso = function () {
-    swal({
-      title: "¿Está seguro que quiere regresar?",
-      text: "Los cambios no se guardarán",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, regresar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (vistaCursosAlumno) {
-      if (vistaCursosAlumno !== "cancelar") {
         $state.go('alumnoMisCursos',{rolUsuario: 'A'});
-      }
-
-    });
   };
 
   ctrl.init = function (){

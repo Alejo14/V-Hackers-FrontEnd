@@ -31,6 +31,8 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       ctrl.nivelesEscala = nivelesEscala;
       console.log(ctrl.nivelesEscala);
     });
+    console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);
+    console.log("Calificacion Herramienta Evaluacion ID",ctrl.calificacionHerramientaEvaluacionId);
     calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
       ctrl.evaluacionEscala = evaluacionEscala;
       console.log(evaluacionEscala);
