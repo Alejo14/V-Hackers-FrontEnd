@@ -7,7 +7,7 @@ function($q, $http, variablesAmbiente) {
 
   servicio.listarHorarios = function (idcc) {
     console.log(idcc)
-    var urlObtenerHorarios = 'http://localhost:7010/horarios/conroles/'+idcc;
+    var urlObtenerHorarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/conroles/'+idcc;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -21,7 +21,7 @@ function($q, $http, variablesAmbiente) {
   };
 
   servicio.listarUsuariosXRol = function (rol) {
-    var urlObtenerUsuarios = 'http://localhost:7003/usuarios/listarpor/'+rol;
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoUsuarios+'/usuarios/listarpor/'+rol;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -34,22 +34,8 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   };
 
-  servicio.obtenerEspecialidades = function (idFacultadEspecialidad) {
-    var urlObtenerEspecialidades = variablesAmbiente.apiUrl + variablesAmbiente.puertoFacultades + '/especialidad/' + idFacultadEspecialidad;
-    var $defer = $q.defer();
-    $http({
-        method: 'GET',
-        url: urlObtenerEspecialidades,
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
   servicio.eliminarHorario = function(data){
-    var urlElimHorario = 'http://localhost:7010/horarios/eliminar';
+    var urlElimHorario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/eliminar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -64,7 +50,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.crearHorario = function(data){
-    var urlCrearHorario = 'http://localhost:7010/horarios/crear';
+    var urlCrearHorario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -79,7 +65,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.asignarRolUsuarioXCursoCiclo = function(data){
-    var urlAsignarRolUsuarioXCC = 'http://localhost:7004/cursos/cursociclo/asignarrolusuario';
+    var urlAsignarRolUsuarioXCC = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/cursociclo/asignarrolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -94,7 +80,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.modificarRolUsuarioXCursoCiclo = function(data){
-    var urlModificarRolUsuarioXCC = 'http://localhost:7004/cursos/cursociclo/modificarrolusuario';
+    var urlModificarRolUsuarioXCC = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/cursociclo/modificarrolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -109,7 +95,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.eliminarRolUsuarioXCursoCiclo = function(data){
-    var urlEliminarRolUsuarioXCC = 'http://localhost:7004/cursos/cursociclo/eliminarolusuario';
+    var urlEliminarRolUsuarioXCC = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/cursociclo/eliminarolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -124,7 +110,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.asignarRolUsuario = function(data){
-    var urlAsignarRolUsuario = 'http://localhost:7010/horarios/asignarrolusuario';
+    var urlAsignarRolUsuario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/asignarrolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -139,7 +125,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.modificarRolUsuario = function(data){
-    var urlModificarRolUsuario = 'http://localhost:7010/horarios/modificarrolusuario';
+    var urlModificarRolUsuario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/modificarrolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -154,7 +140,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.eliminarRolUsuario = function(data){
-    var urlEliminarRolUsuario = 'http://localhost:7010/horarios/eliminarrolusuario';
+    var urlEliminarRolUsuario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/eliminarrolusuario';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -169,7 +155,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.modificarHorario = function(data){
-    var urlModifHorario = 'http://localhost:7010/horarios/modificar';
+    var urlModifHorario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/modificar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -183,9 +169,32 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.obtenerAsistentesHorario = function(data){
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoUsuarios+'/usuarios/listarpor/'+rol;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerUsuarios,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 
-
-
-
+  servicio.obtenerAsistentesNoHorario = function(data){
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoUsuarios+'/usuarios/listarpor/'+rol;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerUsuarios,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 
 }]);

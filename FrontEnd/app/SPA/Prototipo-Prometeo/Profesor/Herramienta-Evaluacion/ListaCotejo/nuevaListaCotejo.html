@@ -23,6 +23,9 @@
               <div class="table-responsive p-t-30">
                 <table ng-table="ctrl.criteriosTabla" class="table table-bordered">
                   <tr ng-repeat="criterio in ctrl.criteriosLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
                     <td data-title="'Descripción del Criterio'">
                       {{criterio.descripcion}}
                     </td>

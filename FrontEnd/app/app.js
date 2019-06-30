@@ -124,6 +124,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'creacion-facultad',
                   url: '/creacion-facultad',
                   templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Facultad/creacionFacultad.html'
+                },
+                {
+                  name: 'asignar-asistentes',
+                  url: '/asignar-asistentes/:idHorario/:nombre/:horario',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/asignarAsistentes.html'
                 }
               ]
             },
@@ -133,11 +138,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/profesor',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/profesor.html',
               children:[
-                {
-                  name: 'inicioProfes',
-                  url: '/inicioProfes',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaPrincipalProfesor.html'
-                },
+                // {
+                //   name: 'inicioProfes',
+                //   url: '/profesorMisCursos/:rolUsuario',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                // },
                 {
                   name: 'profesorMisCursos',
                   url: '/profesorMisCursos/:rolUsuario',
@@ -233,7 +238,6 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
-
                 {
                   name: 'editar-escala',
                   url: '/editar-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
@@ -264,6 +268,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/calificacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Escala/calificacionEscala.html'
                 },
+                {
+                  name: 'calificacionListaCotejo',
+                  url: '/calificacionListaCotejo/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Lista/calificacionListaCotejo.html'
+                }
               ]
             },
             //VISTAS DEL ALUMNO
@@ -272,11 +281,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/alumno',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/alumno.html',
               children:[
-                {
-                  name: 'inicioAlumnos',
-                  url: '/inicioAlumnos',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
-                },
+                // {
+                //   name: 'inicioAlumnos',
+                //   url: '/alumnoMisCursos/:rolUsuario',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                // },
                 {
                   name: 'alumnoCurso',
                   url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',

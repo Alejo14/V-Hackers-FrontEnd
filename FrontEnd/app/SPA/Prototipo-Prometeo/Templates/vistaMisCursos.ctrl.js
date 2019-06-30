@@ -19,8 +19,8 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
       vistaMisCursosService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
         console.log(misCursosListaData);
-        ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
       });
+      ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
     }else {
 
       ctrl.misCursosInfoAlumno = {
@@ -32,8 +32,8 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
       vistaMisCursosService.listarMisCursosAlumno(ctrl.misCursosInfoAlumno).then(function (misCursosListaData) {
         ctrl.listaMisCursos = misCursosListaData;
-        ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
       });
+      ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
     }
   };
 
