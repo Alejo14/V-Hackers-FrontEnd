@@ -265,7 +265,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         }
       }
     }).then(function (respuesta) {
-      if (respuesta !== "Confirm") {
+      if (respuesta === "Confirm") {
         var data={
           "herramientaID":herramienta.id
         };
