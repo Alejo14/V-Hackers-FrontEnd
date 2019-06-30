@@ -91,10 +91,11 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
     ctrl.herramienta = {};
     ctrl.herramienta.id = "";
     ctrl.herramienta.descripcion = "";
-    ctrl.herramienta.puntajeMax = 0;
+    ctrl.herramienta.puntaje_Max = 0;
     //ctrl.herramienta.usoOtrosEvaluadores = false;
     ctrl.herramienta.tipo = "";
     ctrl.herramienta.entregableId = $stateParams.id;
+    ctrl.herramienta.cursoCicloId = $stateParams.cursoCicloId;
     //Esta variable sirve para ejecutar el servicio de listar Niveles
     ctrl.nivelesCreados = 0;
     //Obtener RolUsuarioId
