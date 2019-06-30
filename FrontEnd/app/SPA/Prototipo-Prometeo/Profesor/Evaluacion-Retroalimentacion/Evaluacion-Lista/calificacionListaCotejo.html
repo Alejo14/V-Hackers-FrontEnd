@@ -1,0 +1,45 @@
+<section id="main">
+  <div ng-controller="calificacionListaCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+      <div class="card">
+        <div class="card-header">
+        <h2>Evaluación Lista de cotejo</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group fg-line">
+            <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n</label>
+            <label class="col-sm-2 p-t-10">Puntaje</label>
+            <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.evaluacion.calificacionEvaluacion.puntaje" placeholder="Ingrese el puntaje">
+            <textarea class="form-control p-t-10" rows="2" placeholder="Ingrese la observación general del entregable" ng-model="ctrl.evaluacion.calificacionEvaluacion.observacion">
+            </textarea>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table ng-Table="" class="table table-bordered">
+            <tr ng-repeat="criterio in ctrl.listaCriterios">
+              <td data-title="'Nro.'" align="center" width="5%">
+                {{$index + 1}}
+              </td>
+              <td data-title="'Nombre Herramienta'">
+                {{criterio.descripcion}}
+              </td>
+              <td data-title="'Descripción Herramienta'">
+                {{criterio.indicaciones}}
+              </td>
+              <td data-title="'Puntaje'" align="center">
+                {{criterio.calificacion}}
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="btn bgm-green btn-default waves-effect float-right m-15" ng-click="ctrl.atras()"><i class="fa fa-arrow-circle-left"></i> Atr&aacute;s</button>
+            <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()"><i class="fa fa-paper-plane"></i> Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
