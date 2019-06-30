@@ -46,6 +46,9 @@
               <div class="table-responsive p-t-30">
                 <table ng-table="ctrl.aspectoTabla" class="table table-bordered">
                   <tr ng-repeat="aspecto in ctrl.aspectoLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
                     <td data-title="'Nombre'">
                       {{aspecto.titulo}}
                     </td>

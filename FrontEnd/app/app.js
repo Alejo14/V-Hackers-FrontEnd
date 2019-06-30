@@ -233,7 +233,6 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
-
                 {
                   name: 'editar-escala',
                   url: '/editar-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
@@ -264,6 +263,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/calificacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Escala/calificacionEscala.html'
                 },
+                {
+                  name: 'calificacionListaCotejo',
+                  url: '/calificacionListaCotejo/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Lista/calificacionListaCotejo.html'
+                }
               ]
             },
             //VISTAS DEL ALUMNO
