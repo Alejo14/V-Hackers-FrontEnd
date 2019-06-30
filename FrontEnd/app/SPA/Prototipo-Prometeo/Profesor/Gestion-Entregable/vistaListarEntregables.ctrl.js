@@ -71,6 +71,14 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
     });
   }
 
+  ctrl.avancesEntregable = function(entregable){
+    $state.go('avances-entregable' , {id: 0, cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});
+    swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+    
+    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.curso.idHorario});
+  }
+  //avances-entregable/:id/:nombre/:metodo/:horarioId
+
   ctrl.init = function (){
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
