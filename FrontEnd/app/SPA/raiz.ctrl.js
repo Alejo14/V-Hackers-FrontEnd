@@ -35,20 +35,20 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
           var state = '';
           var rolUsuario = '';
           switch (descripcionRol) {
+            case 'Administrador':
+              state = 'inicioAdmin';
+              break;
             case 'Alumno':
               state = 'alumnoMisCursos';
               rolUsuario = 'A';
               break;
             case 'Profesor':
               state = 'profesorMisCursos';
-              rolUsuario = 'A';
+              rolUsuario = 'P';
               break;
             case 'Asistente de Docencia':
               state = 'profesorMisCursos';
-              rolUsuario = 'A';
-              break;
-            case 'Administrador':
-              state = 'inicioAdmin';
+              rolUsuario = 'P';
               break;
             default:
               state = 'principal';
