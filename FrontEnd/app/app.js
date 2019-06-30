@@ -308,7 +308,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'listar-entregables-alumno',
-                  url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre/:rolusuarioId',
+                  url: '/listar-entregables-alumno/:proyectoId/:proyectoNombre/:rolusuarioId/:cursoCicloId/:nombreCurso/:codigoCurso/:horario',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaListarEntregables.html'
                 },
                 {

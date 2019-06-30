@@ -105,10 +105,31 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   };
 
 
-  ctrl.regresarProyectos = function () {
-    //CORREGIR
-        $state.go('alumnoMisCursos', {rolUsuario:ctrl.rolusuarioId});
+  ctrl.regresarCurso = function () {
+    swal({
+      title: "¿Está seguro que quiere regresar?",
+      text: "Los cambios no se guardarán",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, regresar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (vistaCursosAlumno) {
+      if (vistaCursosAlumno !== "cancelar") {
+        $state.go('alumnoCursos', {cursoCicloId:$stateParams.cursoCicloId,nombreCurso:$stateParams.nombreCurso,
+          codigoCurso:$stateParams.codigoCurso,horario:$stateParams.horario , rolusuarioId:ctrl.rolusuarioId});
+      }
+
+    });
+
   };
+
 
   ctrl.regresarEntregables = function () {
     swal({

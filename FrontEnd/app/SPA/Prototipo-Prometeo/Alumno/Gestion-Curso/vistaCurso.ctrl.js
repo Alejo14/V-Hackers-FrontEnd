@@ -100,9 +100,9 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
     alumnoCursoService.mostrarAvanceProyecto(data).then(function (avanceProyectoId) {
       //console.log(avanceProyectoId);
     })
-    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre,rolusuarioId: ctrl.idRolusuario });
+    $state.go('listar-entregables-alumno', {proyectoId: proyecto.id, proyectoNombre:proyecto.nombre,rolusuarioId: ctrl.idRolusuario,
+      cursoCicloId:$stateParams.cursoCicloId,nombreCurso:$stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso, horario:$stateParams.horario  });
   };
-
 
   ctrl.verEntregable = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
