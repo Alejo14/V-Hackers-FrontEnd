@@ -293,9 +293,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.editarCriterio = function(indice){
-    switch (ctrl.herramientaEvaluacion[indice].tipo) {
+    switch (ctrl.herramientasEvaluacion[indice].tipo) {
       case 'Rubrica':
-        $state.go('editar-rubrica', {id: ctrl.herramienta[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, editar: 'editar'})
+        $state.go('editar-rubrica', {id: ctrl.herramientasEvaluacion[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'editar'})
         break;
       case 'Lista de Cotejo':
 
