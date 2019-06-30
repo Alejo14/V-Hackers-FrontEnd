@@ -1,15 +1,40 @@
-<ul class="header-inner clearfix ng-scope">
-  <div class="col-md-2" align="center">
-    <a ui-sref="principal"><img src="imagenes/logo.jpeg" alt="prometeo" height="55" width="270"></a>
+<!-- <ul class="header-inner clearfix ng-scope"> -->
+<style>
+  .header-1 {
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    border-radius: 0px 60px 60px 0px;
+    width: 420px;
+    height: 70px;
+    /* height: 56px; */
+  }
+  .header-2 {
+    margin: 0px;
+    padding: 0px;
+    /* border: solid; */
+    /* background-color: yellow; */
+    width: 510px;
+    height: 60px;
+  }
+  .imagen-logo {
+    height: 100%;
+    width: 80%;
+  }
+</style>
+<div class="col-md p-0">
+  <div class="col-md-4 header-1" align="center">
+    <a ui-sref="principal"><img src="imagenes/logo.jpeg" alt="prometeo" class="imagen-logo"></a>
   </div>
-  <li class="pull-right p-t-10">
-    <ul class="top-menu">
-      <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
-      <li><a href="#!/inicio/raiz/principal">Inicio</a></li>
-      <li><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
-      <li><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
-      <li><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
-      <!-- <a ui-sref="inicioAlumnos" href="#!/inicio/raiz/alumno/inicioAlumnos">Alumno</a> -->
-    </ul>
-  </li>
-</ul>
+  <nav class="col-md-8 float-right header-2">
+    <li class="pull-right p-t-10">
+      <ul class="top-menu">
+        <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
+        <li><a href="#!/inicio/raiz/principal">Inicio</a></li>
+        <li><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
+        <li><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
+        <li><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
+      </ul>
+    </li>
+  </nav>
+</div>
