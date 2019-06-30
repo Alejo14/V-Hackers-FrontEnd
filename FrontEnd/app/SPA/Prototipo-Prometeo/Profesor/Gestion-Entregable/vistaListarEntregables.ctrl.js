@@ -30,7 +30,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
         }
       }
     }).then(function (respuesta) {
-      if (respuesta != "Confirm") {
+      if (respuesta == "Confirm") {
         data={
           "id": entregable.id, //Defecto
           "nombre": entregable.nombre,
