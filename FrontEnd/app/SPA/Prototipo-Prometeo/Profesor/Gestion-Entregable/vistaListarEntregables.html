@@ -14,15 +14,10 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <h4 class="col-sm-3">Crear Entregable</h4>
-            <div class="col-sm-9">
-              <div class="fg-line">
-                <button ng-click = "ctrl.crearEntregable()" class="btn bgm-blue btn-float waves-effect waves-circle"><i class="fa fa-plus"></i></button>
-              </div>
+          <div class="col-sm-12"><br>
+            <div class="form-group">
+              <button ng-click="ctrl.crearEntregable()" class="btn btn-primary waves-effect color-fondo-azul-pucp m-l-5 float-right m-b-20"><i class="fa fa-plus"></i> Crear entregable</button>
             </div>
-          </div><br><br><br>
-          <div class="col-sm-9">
             <div class="form-group">
               <div class="table-responsive input-letra-prometeo">
                 <table ng-table="ctrl.entregablesTabla" class="table table-bordered">
@@ -64,7 +59,7 @@
           </div>
 
           <div class="col-md-12" align="right">
-            <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            <button type="button" ng-click = "ctrl.regresarProyectos()" class="btn btn-default waves-effect bgm-green" ><i class="fa fa-arrow-circle-left"></i> Atrás</button>
           </div>
         </div>
       </div>
