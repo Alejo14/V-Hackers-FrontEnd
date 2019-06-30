@@ -60,65 +60,19 @@
                       </div>
                     </div>
                   </div>
-                  <!--
-                  <div class="form-group">
-                    <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Profesor:</label>
-                    <div class="col-sm-4">
-                      <div class="fg-line">
-                          <button class="btn btn-default waves-effect" ng-click=""><i class="fa fa-upload"></i> Subir archivo</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Asistente de docencia:</label>
-                    <div class="col-sm-4">
-                      <div class="fg-line">
-                          <button class="btn btn-default waves-effect" ng-click=""><i class="fa fa-upload"></i> Subir archivo</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-8 control-label">Carga masiva Curso/Horarios/Alumnos:</label>
-                    <div class="col-sm-4">
-                      <div class="fg-line">
-                        <button class="btn btn-default waves-effect" ng-click=""><i class="fa fa-upload"></i> Subir archivo</button>
-                      </div>
-                    </div>
-                  </div>
-                  -->
                 </div>
               </form>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
+          <div class="row-md-12">
+            <div class="col-md-6">
                 <h5>Campos obligatorios *</h5>
             </div>
-            <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.crearSemestre(ctrl.semestre)" class="btn color-fondo-azul-pucp color-blanco" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
-              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+            <div class="col-md-6" align="right">
+              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect bgm-green m-r-5 m-l-5 float-right"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-click = "ctrl.crearSemestre(ctrl.semestre)" class="btn btn-primary color-fondo-azul-pucp waves-effect m-r-5 float-right" ng-disabled="!ctrl.registroValido"><i class="fa fa-save"></i> Guardar</button>
             </div>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <ul>
-                <li ng-repeat="alumno in ctrl.alumnosLista">
-                  Nombre: {{alumno.nombre}}, carrera: {{alumno.carrera}}
-                </li>
-              </ul>
-            </div> -->
           </div>
-          <!-- <div class="row">
-            <ul>
-              <li ng-repeat="alumno in ctrl.alumnosLista">{{alumno}}</li>
-            </ul>
-               </div> -->
-
-               <!-- <a ng-click="ctrl.verEntregable(entregable)">
-                 {{entregable.nombre}}
-               </a> -->
-
-
         </div>
       </div>
     </div>

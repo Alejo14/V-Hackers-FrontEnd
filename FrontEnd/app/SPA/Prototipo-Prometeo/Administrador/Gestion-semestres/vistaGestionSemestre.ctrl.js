@@ -57,21 +57,20 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
 
   ctrl.regresarAdministrador = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      title: "¿Estás seguro de que quieres volver?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (semestreNuevoConfirma) {
-      if (semestreNuevoConfirma !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         $state.go('inicioAdmin');
       }
     });
