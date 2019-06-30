@@ -1,20 +1,7 @@
 angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService','$cookies',
 function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  var ctrl = this;
- ctrl.titulo = 'Nueva Herramienta de Evaluación';
 
- if ($stateParams.id==0){
-  ctrl.titulo = 'Nueva co-evaluación';
- }
-
- ctrl.herramienta = {};
- ctrl.herramienta.descripcion = "";
- ctrl.herramienta.puntajeMax = 0;
- //ctrl.herramienta.usoOtrosEvaluadores = false;
- ctrl.herramienta.tipo = "";
- ctrl.herramienta.entregableId = $stateParams.id;
-//Esta variable sirve para ejecutar el servicio de listar Niveles
- ctrl.nivelesCreados = 0;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 
@@ -36,34 +23,23 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
    if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntajeMax){
      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
    }else{
-  swal({
-    title: "¿Estás seguro de que quieres crear esta herramienta?",
-    text: "Una vez creada, no podrá modificar el tipo de herramienta",
-    icon: "warning",
-    buttons: {
-      Cancel: {
-        text: "Cancelar",
-        className: "btn btn-lg btn-danger"
+    swal({
+      title: "¿Estás seguro de que quieres crear esta herramienta?",
+      text: "Una vez creada, no podrá modificar el tipo de herramienta",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, agregar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
       },
-      Confirm: {
-        text: "Sí, agregar",
-        className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-      }
-    },
-    closeModal: false
-    }).then(function (respuesta) {
-      if (respuesta == "Confirm") {
-        //Obtener RolUsuarioId
-        ctrl.idUsuario = $cookies.get('usuarioID');
-
-        var descripcionRol="Profesor";
-        //Obtener RolUsuarioId
-        ctrl.rolUsuarioId="";
-        herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
-          ctrl.rolUsuarioId=rolUsuario;
-          //Llamada al servicio parar crear herramienta de evaluación
-          ctrl.herramienta.id = uuid();
-          ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
+      closeModal: false
+      }).then(function (respuesta) {
+        if (respuesta == "Confirm") {
           herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
             ctrl.herramienta.id = id.herramientaID;
             swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
@@ -77,10 +53,9 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
               }
             });
           });
-        });
-      }
-    });
-  }
+        }
+      });
+    }
   }
 
   ctrl.regresarEntregable = function (){
@@ -105,5 +80,38 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
       }
     });
   }
+
+  ctrl.inicializarVariables = function(){
+    ctrl.titulo = 'Nueva Herramienta de Evaluación';
+
+    if ($stateParams.id==0){
+     ctrl.titulo = 'Nueva co-evaluación';
+    }
+
+    ctrl.herramienta = {};
+    ctrl.herramienta.descripcion = "";
+    ctrl.herramienta.puntajeMax = 0;
+    //ctrl.herramienta.usoOtrosEvaluadores = false;
+    ctrl.herramienta.tipo = "";
+    ctrl.herramienta.entregableId = $stateParams.id;
+    //Esta variable sirve para ejecutar el servicio de listar Niveles
+    ctrl.nivelesCreados = 0;
+    //Obtener RolUsuarioId
+    ctrl.rolUsuarioId="";
+  }
+
+  ctrl.init = function (){
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    var descripcionRol="Profesor";
+
+    herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
+      ctrl.rolUsuarioId=rolUsuario;
+      //Llamada al servicio parar crear herramienta de evaluación
+      ctrl.herramienta.id = uuid();
+      ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
+    });
+  }
+
+  ctrl.init();
 
 }]);

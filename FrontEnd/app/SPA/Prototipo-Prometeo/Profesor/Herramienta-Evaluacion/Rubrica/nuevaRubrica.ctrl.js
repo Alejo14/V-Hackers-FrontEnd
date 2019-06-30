@@ -111,11 +111,13 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
       },
       closeModal: false
     }).then(function (confirmarAspectoEliminado) {
-      if (confirmarAspectoEliminado === "confirm") {
+      if (confirmarAspectoEliminado) {
         var data = {
           "aspectoID" : ctrl.aspectoLista[indice].id
         };
-        nuevoAspectoRubricaServicio.eliminarAspecto(data).then(function(eliminado) {
+        nuevaRubricaService.eliminarAspecto(data).then(function(eliminado) {
+          ctrl.aspectoLista.splice(indice,1);
+          $scope.$apply();
           swal('Éxito', 'El aspecto ha sido eliminado', 'success');
         });
       }

@@ -72,17 +72,17 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
       },
       closeModal: false
     }).then(function (eliminarCriterioConfirmado) {
-      if (eliminarCriterioConfirmado !== "cancelar") {
+      if (eliminarCriterioConfirmado) {
         if($stateParams.estado === 'editar'){
           var data = {
             "criterioID": ctrl.criteriosLista[indiceCriterio].id
           };
           nuevoAspectoRubricaServicio.eliminarCriterio(data).then(function(eliminado){
+            ctrl.criteriosLista.splice(indiceCriterio,1);
+            $scope.$apply();
+            swal('Éxito', 'El aspecto ha sido eliminado', 'success');
           });
         }
-        ctrl.criteriosLista.splice(indiceCriterio,1);
-        $scope.$apply();
-        swal('Éxito', 'El aspecto ha sido eliminado', 'success');
       }
     });
   }
@@ -160,8 +160,14 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         ctrl.aspecto.descripcion = aspectoSeleccionado.descripcion;
       });
       nuevoAspectoRubricaServicio.listarCriteriosXAspecto(dataAspecto).then(function(criterios) {
-        ctrl.listarCriterios = criterios;
+        ctrl.criteriosLista = criterios;
         ctrl.aspecto.criterios = criterios;
+        angular.forEach(ctrl.criterioLista, function(criterio, indice){
+          criterio.niveles = criterios.nivelesCriterio;
+        });
+        angular.forEach(ctrl.aspecto.criterios, function(criterio, indice){
+          criterio.niveles = criterios.nivelesCriterio;
+        });
         ctrl.inicializarTabla();
       });
     }else{
