@@ -64,4 +64,34 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.modificarCriterio = function(data){
+    var urlModificarCriterio = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/modificarCriterio';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModificarCriterio,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.modificarAspecto = function(data){
+    var urlModificarAspecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/modificarAspecto';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlModificarAspecto,
+        data: data
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
 }]);

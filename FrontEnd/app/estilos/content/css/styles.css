@@ -82,3 +82,7 @@ body{
 .letra-tabs{
   font-weight: bold;
 }
+
+.largo-boton{
+  width: 200px;
+}
