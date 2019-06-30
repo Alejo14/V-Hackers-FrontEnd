@@ -89,6 +89,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
     }
 
     ctrl.herramienta = {};
+    ctrl.herramienta.id = "";
     ctrl.herramienta.descripcion = "";
     ctrl.herramienta.puntajeMax = 0;
     //ctrl.herramienta.usoOtrosEvaluadores = false;
@@ -103,7 +104,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
   ctrl.init = function (){
     ctrl.idUsuario = $cookies.get('usuarioID');
     var descripcionRol="Profesor";
-
+    ctrl.inicializarVariables();
     herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
       ctrl.rolUsuarioId=rolUsuario;
       //Llamada al servicio parar crear herramienta de evaluación
