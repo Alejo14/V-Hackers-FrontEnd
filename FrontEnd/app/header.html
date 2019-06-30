@@ -1,14 +1,15 @@
 <ul class="header-inner clearfix ng-scope">
-  <li class="logo hidden-xs color-blanco">
-    <a>Prometeo</a>
-  </li>
+  <div class="col-md-2" align="center">
+    <a ui-sref="principal"><img src="imagenes/prometeo.jpeg" alt="prometeo" height="55" width="270"></a>
+  </div>
   <li class="pull-right p-t-10">
     <ul class="top-menu">
       <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
-      <li><a ui-sref="principal">Inicio</a></li>
-      <li><a ui-sref="inicioProfes">Profesor</a></li>
-      <li><a ui-sref="inicioAlumnos">Alumno</a></li>
-      <li><a ui-sref="inicioAdmin">Administrador</a></li>
+      <li><a href="#!/inicio/raiz/principal">Inicio</a></li>
+      <li><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
+      <li><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
+      <li><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
+      <!-- <a ui-sref="inicioAlumnos" href="#!/inicio/raiz/alumno/inicioAlumnos">Alumno</a> -->
     </ul>
   </li>
 </ul>

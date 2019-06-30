@@ -66,7 +66,7 @@
                     <td data-title="'Nro.'" align="center" width="5%">
                       {{$index + 1}}
                     </td>
-                    <td data-title="'Código'">
+                    <td data-title="'Código'" align="center">
                       {{alumno.codigo}}
                     </td>
                     <td data-title="'Nombre'">
@@ -85,6 +85,17 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <!-- <div class="col">
+            <h5>Campos obligatorios *</h5>
+        </div> -->
+        <div class="col" align="right">
+          <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn btn-default waves-effect bgm-green m-r-5 m-l-5"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+        </div>
+      </div>
+      <!-- <div class="row" align="right">
+        <button type="button" ng-click = "ctrl.regresarEntregables()" class="btn btn-default waves-effect bgm-green m-r-5 m-l-5"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+      </div> -->
     </div>
   </div>
 </section>

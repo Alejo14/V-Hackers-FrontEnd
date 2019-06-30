@@ -12,11 +12,11 @@ function($scope, $state,$stateParams, $uibModal){
   }
 
   ctrl.profesor = function(){
-    $state.go('inicioProfes');
+    $state.go('profesorMisCursos',{rolUsuario: 'P'});
   }
 
   ctrl.alumno = function(){
-    $state.go('inicioAlumnos');
+    $state.go('alumnoMisCursos',{rolUsuario: 'A'});
   }
 
   ctrl.login = function () {

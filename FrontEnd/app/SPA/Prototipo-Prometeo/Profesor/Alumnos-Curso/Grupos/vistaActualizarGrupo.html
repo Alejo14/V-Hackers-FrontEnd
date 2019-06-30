@@ -2,14 +2,10 @@
   <div ng-controller="vistaActualizarGrupoCtrl as ctrl">
     <div class="container">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col m-b-10">
           <div class="block-container">
             <h2> {{ctrl.horario.cursoNombre}} - {{ctrl.horario.horarioNombre}} </h2>
           </div>
-        </div>
-        <div class="col-md-5 m-t-50" align="right">
-          <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.actualizarGrupo()"><i class="fa fa-save"></i> Guardar</button>
-          <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         </div>
       </div>
 
@@ -55,27 +51,27 @@
           <div class="<col-md-12 m-t-50>">
             <div class="row">
               <div class="col-md-12 m-t-30">
-                <label ng-click="ctrl.agregarAlGrupo()" class="btn bgm-blue"><i class="fa fa-arrow-right">  </i></label>
+                <button class="btn btn-primary color-fondo-azul-pucp" ng-click = "ctrl.agregarAlGrupo()"><i class="fa fa-arrow-right"></i> </button>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12 m-t-30">
-                <label ng-click="ctrl.sacarDelGrupo()" class="btn bgm-blue"><i class="fa fa-arrow-left">  </i></label>
+                <button class="btn btn-primary color-fondo-azul-pucp" ng-click = "ctrl.sacarDelGrupo()"><i class="fa fa-arrow-left"></i> </button>
               </div>
             </div>
           </div>
       </div>
 
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="card">
               <div class="card-header">
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                       <h3> Nombre grupo:</h3>
                     </div>
-                    <div class="col-md-6" align="left">
-                      <h3>  <input class="form-control input-sm" rows="1" placeholder="Ingrese nombre del grupo" ng-model = "ctrl.grupo.nombre"> </h3>
+                    <div class="col-md-6 m-t-15" align="left">
+                      <h2>  <input class="form-control input-letra-prometeo" rows="1" placeholder="Ingrese nombre del grupo" ng-model = "ctrl.grupo.nombre"> </h2>
                     </div>
                   </div>
                 </div>
@@ -107,6 +103,11 @@
             </div>
           </div>
 
+    </div>
+
+    <div class="col m-t-50" align="right">
+      <button type="button" class="btn btn-primary waves-effect color-fondo-azul-pucp" ng-click="ctrl.actualizarGrupo()"><i class="fa fa-save"></i> Guardar</button>
+      <button type="button" class="btn btn-default waves-effect bgm-green" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
     </div>
 
     </div>

@@ -36,7 +36,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.actualizarGrupo = function(){
     console.log("hola");
       if (ctrl.grupo.nombre==""){
-        swal("¡Opss!", "Ingrese un nombre para el grupo por favor" , "error");
+        swal("¡Opss! Ingresa un nombre para el grupo", "" , "error");
       }
       else{
         swal({
@@ -50,7 +50,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
               className: "btn btn-lg btn-danger"
             },
             confirm: {
-              text: "Sí",
+              text: "Sí, modificar",
               className: "btn btn-lg color-fondo-azul-pucp color-blanco"
             }
           },

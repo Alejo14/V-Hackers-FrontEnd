@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams', '$cookies' ,'profesorCursoService', '$uibModal',
+angular.module('vHackersModule').controller('profesorCursoCtrl', ['$scope', '$state' , '$stateParams', '$cookies' ,'profesorCursoService', '$uibModal', 'NgTableParams',
 
-function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal){
+function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal ,NgTableParams){
   var ctrl = this;
   ctrl.curso = {};
   ctrl.proyectosLista = [];
@@ -21,6 +21,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       };
       console.log(ctrl.proyectosLista);
     });
+    ctrl.proyectosTabla = new NgTableParams({}, { dataset: ctrl.proyectosLista });
   };
 
   ctrl.crearEntregable = function(entregable){
@@ -52,6 +53,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       };
       console.log(ctrl.entregablesLista);
     });
+    ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
   };
 
   ctrl.verProyecto = function (proyecto) {
@@ -181,7 +183,6 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
         });
         ctrl.cargarProyectos();
         ctrl.cargarEntregables();
-
       });
 
 

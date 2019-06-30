@@ -1,16 +1,6 @@
-angular.module('vHackersModule').controller('nuevoAspectoRubricaCtrl', ['$scope','$state', '$stateParams','nuevoAspectoRubricaServicio','$uibModal', 'NgTableParams',
-function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('nuevoAspectoRubricaCtrl', ['$scope','$state', '$stateParams','nuevoAspectoRubricaServicio','nuevaRubricaService','$uibModal', 'NgTableParams',
+function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubricaService, $uibModal, NgTableParams){
   var ctrl = this;
-  ctrl.titulo = 'Nueva aspecto';
-  ctrl.aspecto = {
-    titulo: "",
-    descripcion: "",
-    criterios: []
-  };
-  ctrl.rubricaId = $stateParams.id;
-  ctrl.criteriosLista = [];
-  ctrl.nivelesLista = [];
-  ctrl.nivelesCreados = 1;
 
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
@@ -83,8 +73,16 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, N
       closeModal: false
     }).then(function (eliminarCriterioConfirmado) {
       if (eliminarCriterioConfirmado !== "cancelar") {
+        if($stateParams.estado === 'editar'){
+          var data = {
+            "criterioID": ctrl.criteriosLista[indiceCriterio].id
+          };
+          nuevoAspectoRubricaServicio.eliminarCriterio(data).then(function(eliminado){
+          });
+        }
         ctrl.criteriosLista.splice(indiceCriterio,1);
         $scope.$apply();
+        swal('Éxito', 'El aspecto ha sido eliminado', 'success');
       }
     });
   }
@@ -117,15 +115,10 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, N
       if (aspectoGuardarConfirmado !== "cancelar") {
         nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
-           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
         });
-        // $scope.$apply();
       }
     });
-  }
-
-  ctrl.modificarAspecto = function(indice) {
-    
   }
 
   ctrl.inicializarTabla = function () {
@@ -139,9 +132,41 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, $uibModal, N
       $state.go('editar-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado});
   }
 
-  ctrl.init = function () {
+  ctrl.inicializarVariables = function () {
+    ctrl.titulo = 'Nueva aspecto';
+    ctrl.aspecto = {
+      titulo: "",
+      descripcion: "",
+      criterios: []
+    };
+    ctrl.rubricaId = $stateParams.id;
+    ctrl.criteriosLista = [];
+    ctrl.nivelesLista = [];
+    ctrl.nivelesCreados = 1;
+  }
 
-    ctrl.inicializarTabla();
+  ctrl.init = function () {
+    ctrl.inicializarVariables();
+    if($stateParams.estado === 'editar'){
+      var dataAspecto = {
+        "aspectoID" : $stateParams.idAspecto
+      }
+      var dataRubrica = {
+        "herramientaID": $stateParams.id
+      };
+      nuevaRubricaService.listarAspectos(dataRubrica).then(function(aspectos) {
+        aspectoSeleccionado = aspectos.find(aspecto => aspecto.id == $stateParams.idAspecto);
+        ctrl.aspecto.titulo = aspectoSeleccionado.titulo;
+        ctrl.aspecto.descripcion = aspectoSeleccionado.descripcion;
+      });
+      nuevoAspectoRubricaServicio.listarCriteriosXAspecto(dataAspecto).then(function(criterios) {
+        ctrl.listarCriterios = criterios;
+        ctrl.aspecto.criterios = criterios;
+        ctrl.inicializarTabla();
+      });
+    }else{
+      ctrl.inicializarTabla();
+    }
   }
 
   ctrl.init();

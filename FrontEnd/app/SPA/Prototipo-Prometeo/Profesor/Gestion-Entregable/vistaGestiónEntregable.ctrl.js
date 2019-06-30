@@ -172,8 +172,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
 
   ctrl.regresarEntregables = function () {
     swal({
-      title: "¿Está seguro de que quiere volver?",
-      text: "Los cambios no se guardarán",
+      title: "¿Estás seguro de que quieres volver?",
       icon: "warning",
       buttons: {
         Cancel: {
@@ -252,21 +251,21 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.eliminarHerramienta= function(herramienta,indice){
     console.log(angular.toJson(herramienta));//Envio el json para crear el entregable
     swal({
-      title: "¿Está seguro que quiere eliminar la herramienta?",
+      title: "¿Estás seguro que quieres eliminar la herramienta?",
       text: "",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (eliminarRubrica) {
-      if (eliminarRubrica !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta === "Confirm") {
         var data={
           "herramientaID":herramienta.id
         };
@@ -294,9 +293,9 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   }
 
   ctrl.editarCriterio = function(indice){
-    switch (ctrl.herramientaEvaluacion[indice].tipo) {
+    switch (ctrl.herramientasEvaluacion[indice].tipo) {
       case 'Rubrica':
-        $state.go('editar-rubrica', {id: ctrl.herramienta[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, editar: 'editar'})
+        $state.go('editar-rubrica', {id: ctrl.herramientasEvaluacion[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'editar'})
         break;
       case 'Lista de Cotejo':
 

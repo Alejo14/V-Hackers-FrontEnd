@@ -1,40 +1,38 @@
-<div class="col-md-12">
-  <div class="row" align="center" style="padding:10px;">
-    <div class="col-md-1">NRO.</div>
-    <div class="col-md-3">PROYECTO</div>
-    <div class="col-md-2">MÉTODO</div>
-    <div class="col-md-2">FECHA CREACIÓN</div>
-    <div class="col-md-2">FECHA FIN</div>
-    <div class="col-md-2">ACCIONES</div>
-  </div>
-  <div ng-repeat="proyecto in ctrl.proyectosLista" >
-    <div class="row" style="padding:5px;">
-      <div class="col-md-1" align="center" width="5%">
-        {{$index + 1}}
-      </div>
-      <div class="col-md-3" ng-click="ctrl.ingresarProyecto(proyecto)">
-        <a href=""> {{proyecto.nombre}} </a>
-      </div>
-      <div class="col-md-2" align="center" ng-if="proyecto.metodoTrabajo==0">
-        <a> Indiv. </a>
-      </div>
-      <div class="col-md-2" align="center" ng-if="proyecto.metodoTrabajo==1">
-        <a> Grupal </a>
-      </div>
-      <div class="col-md-2" align="center">
-        <a> {{proyecto.fechaCreacionStr}} </a>
-      </div>
-      <div class="col-md-2" align="center">
-        <a> {{proyecto.fechaFinStr}} </a>
-      </div>
-      <div class="col-md-2" align="center">
-        <a href="" style="padding:10px;" ng-click="ctrl.verProyecto(proyecto)">
-          <i class="fas fa-pencil-alt"></i>
-        </a>
-        <a href="" style="padding:10px;" ng-click="ctrl.eliminarProyecto(proyecto)">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </div>
-    </div>
+<div class="form-group">
+  <div class="table-responsive input-letra-prometeo">
+    <table ng-table="ctrl.proyectosTabla" class="table table-bordered">
+      <tr ng-repeat="proyecto in ctrl.proyectosLista">
+        <td data-title="'NRO.'" align="center" width="5%">
+          {{$index + 1}}
+        </td>
+        <td data-title="'PROYECTO'">
+          <div class="col" ng-click="ctrl.ingresarProyecto(proyecto)">
+            <a href="">{{proyecto.nombre}}</a>
+          </div>
+        </td>
+        <td data-title="'MÉTODO'">
+          <div align="center" ng-if="proyecto.metodoTrabajo==0">
+            <a> Indiv. </a>
+          </div>
+          <div align="center" ng-if="proyecto.metodoTrabajo==1">
+            <a> Grupal </a>
+          </div>
+        </td>
+        <td data-title="'FECHA CREACIÓN'" align="center">
+          {{proyecto.fechaCreacionStr}}
+        </td>
+        <td data-title="'FECHA FIN'" align="center">
+          {{proyecto.fechaFinStr}}
+        </td>
+        <td data-title="'ACCIONES'" align="center" widht="25%">
+          <a href="" ng-click="ctrl.verProyecto(proyecto)" class="m-r-10">
+            <i class="fa fa-pencil-alt"></i>
+          </a>
+          <a href="" ng-click="ctrl.eliminarProyecto(proyecto)" class="m-l-10">
+            <i class="fa fa-trash-alt"></i>
+          </a>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

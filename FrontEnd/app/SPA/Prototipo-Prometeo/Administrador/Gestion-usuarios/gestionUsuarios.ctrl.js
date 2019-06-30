@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('gestionUsuariosCtrl', ['$scope', 'gestionUsuariosService', '$uibModal', 'NgTableParams',
-function($scope, gestionUsuariosService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('gestionUsuariosCtrl', ['$scope', 'gestionUsuariosService', '$uibModal', 'NgTableParams', '$state',
+function($scope, gestionUsuariosService, $uibModal, NgTableParams, $state){
   var ctrl = this;
   ctrl.usuariosLista = [];
   ctrl.obtenerUsuarios = function () {
@@ -147,6 +147,28 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams){
             }
           });
         })
+      }
+    });
+  }
+
+  ctrl.regresarAdministrador = function () {
+    swal({
+      title: "¿Estás seguro de que quieres volver?",
+      text: "Los cambios no se guardaran",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, volver",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (semestreNuevoConfirma) {
+      if (semestreNuevoConfirma !== "cancelar") {
+        $state.go('inicioAdmin');
       }
     });
   }

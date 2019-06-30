@@ -69,3 +69,11 @@ body{
 .z-indice-prometeo {
   z-index: 2;
 }
+
+.placeholder-select{
+  display: contents !important;
+}
+
+.letra-tabs{
+  font-weight: bold;
+}

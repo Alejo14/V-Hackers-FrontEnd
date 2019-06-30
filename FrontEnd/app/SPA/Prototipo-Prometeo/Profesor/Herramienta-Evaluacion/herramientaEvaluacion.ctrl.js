@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService',
-function($scope, $state, $stateParams, herramientaEvaluacionService){
+angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService','$cookies',
+function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  var ctrl = this;
  ctrl.titulo = 'Nueva Herramienta de Evaluación';
 
@@ -37,46 +37,46 @@ function($scope, $state, $stateParams, herramientaEvaluacionService){
      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
    }else{
   swal({
-    title: "¿Está seguro de que desea crear esta herramienta?",
+    title: "¿Estás seguro de que quieres crear esta herramienta?",
     text: "Una vez creada, no podrá modificar el tipo de herramienta",
     icon: "warning",
     buttons: {
-      cancelar: {
+      Cancel: {
         text: "Cancelar",
         className: "btn btn-lg btn-danger"
       },
-      confirm: {
+      Confirm: {
         text: "Sí, agregar",
         className: "btn btn-lg color-fondo-azul-pucp color-blanco"
       }
     },
     closeModal: false
-    }).then(function (crearHerramientaConfirmada) {
-      if (crearHerramientaConfirmada !== "cancelar") {
-        //Llamada al servicio parar crear herramienta de evaluación
-        ctrl.herramienta.id = uuid();
-        herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
-          ctrl.herramienta.id = id.herramientaID;
-        });
-        swal({
-          title: "¡Listo!",
-          text: "Herramienta creada con éxito",
-          icon: "success",
-          buttons: {
-            confirm: {
-              text: "ok",
-              className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-            }
-          }
-        }).then(function(){
-          console.log("Id herramienta: "+ ctrl.herramienta.id);
-          if (ctrl.herramienta.tipo=="Rubrica"){
-            $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }else if(ctrl.herramienta.tipo=="Escala") {
-            $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-            $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
-          }
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
+        //Obtener RolUsuarioId
+        ctrl.idUsuario = $cookies.get('usuarioID');
+
+        var descripcionRol="Profesor";
+        //Obtener RolUsuarioId
+        ctrl.rolUsuarioId="";
+        herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
+          ctrl.rolUsuarioId=rolUsuario;
+          //Llamada al servicio parar crear herramienta de evaluación
+          ctrl.herramienta.id = uuid();
+          ctrl.herramienta.rolUsuarioId=ctrl.rolUsuarioId;
+          herramientaEvaluacionService.crearHerramienta(angular.toJson(ctrl.herramienta)).then(function(id){
+            ctrl.herramienta.id = id.herramientaID;
+            swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
+              console.log("Id herramienta: "+ ctrl.herramienta.id);
+              if (ctrl.herramienta.tipo=="Rubrica"){
+                $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }else if(ctrl.herramienta.tipo=="Escala") {
+                $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
+                $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+              }
+            });
+          });
         });
       }
     });
