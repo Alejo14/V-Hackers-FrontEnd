@@ -17,21 +17,20 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
 
   ctrl.elminarEntregable = function (entregable) {
     swal({
-      title: "¿Está seguro que quiere eliminar el entregable?",
-      text: "Los cambios no se guardarán",
+      title: "¿Estás seguro que quieres eliminar el entregable?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (eliminarConfirmado) {
-      if (eliminarConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta != "Confirm") {
         data={
           "id": entregable.id, //Defecto
           "nombre": entregable.nombre,
@@ -57,7 +56,13 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.entregablesLista[i].fechaHabilitacionStr = fechCrStr;
       };
+      for(let i = 0; i < ctrl.entregablesLista.length; i++){
+        fechCr = new Date(Number(ctrl.entregablesLista[i].fechaEntrega));
+        fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+        ctrl.entregablesLista[i].fechaFinStr = fechCrStr;
+      };
     });
+    ctrl.entregablesTabla = new NgTableParams({}, { dataset: ctrl.entregablesLista });
   };
 
   ctrl.obtenerNombreProyecto = function (id) {
