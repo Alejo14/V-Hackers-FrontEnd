@@ -133,11 +133,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/profesor',
               templateUrl: 'SPA/Prototipo-Prometeo/Profesor/profesor.html',
               children:[
-                {
-                  name: 'inicioProfes',
-                  url: '/inicioProfes',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/vistaPrincipalProfesor.html'
-                },
+                // {
+                //   name: 'inicioProfes',
+                //   url: '/profesorMisCursos/:rolUsuario',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                // },
                 {
                   name: 'profesorMisCursos',
                   url: '/profesorMisCursos/:rolUsuario',
@@ -267,11 +267,11 @@ function ($urlRouterProvider,stateHelperProvider) {
               url: '/alumno',
               templateUrl: 'SPA/Prototipo-Prometeo/Alumno/alumno.html',
               children:[
-                {
-                  name: 'inicioAlumnos',
-                  url: '/inicioAlumnos',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/vistaPrincipalAlumno.html'
-                },
+                // {
+                //   name: 'inicioAlumnos',
+                //   url: '/alumnoMisCursos/:rolUsuario',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                // },
                 {
                   name: 'alumnoCurso',
                   url: '/curso/:cursoCicloId/:nombreCurso/:codigoCurso/:creditos/:cantidadAlumnos/:horario',

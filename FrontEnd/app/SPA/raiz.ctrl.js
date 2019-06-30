@@ -33,15 +33,19 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
           $cookies.put('inicioSesion', false);
           var descripcionRol = ctrl.usuario.roles[0].descripcion;
           var state = '';
+          var rolUsuario = '';
           switch (descripcionRol) {
             case 'Alumno':
-              state = 'inicioAlumnos';
+              state = 'alumnoMisCursos';
+              rolUsuario = 'A';
               break;
             case 'Profesor':
-              state = 'inicioProfes';
+              state = 'profesorMisCursos';
+              rolUsuario = 'A';
               break;
             case 'Asistente de Docencia':
-              state = 'profesor';
+              state = 'profesorMisCursos';
+              rolUsuario = 'A';
               break;
             case 'Administrador':
               state = 'inicioAdmin';
@@ -49,7 +53,12 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
             default:
               state = 'principal';
           }
-          $state.go(state);
+          if (rolUsuario == '') {
+            $state.go(state);
+          } else {
+            $state.go(state,{rolUsuario: rolUsuario});
+          }
+
         }
       });
     }
