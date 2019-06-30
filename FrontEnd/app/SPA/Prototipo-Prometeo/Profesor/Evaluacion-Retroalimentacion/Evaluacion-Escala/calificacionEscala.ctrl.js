@@ -27,17 +27,18 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   }
 
   ctrl.obtenerEvaluacionCriterios = function (){//SE DEBE QUEDAR
-    calificacionEscalaService.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
-      ctrl.nivelesRubrica = nivelesRubrica;
-      console.log(ctrl.nivelesRubrica);
+    calificacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){
+      ctrl.nivelesEscala = nivelesEscala;
+      console.log(ctrl.nivelesEscala);
     });
-    calificacionEscalaService.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionAspecto){
-      ctrl.evaluacionAspecto = evaluacionAspecto;
-      angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-        aspecto.accordionOpen = false;
-        aspecto.activarPuntajeManual = false;
-      });
-      console.log(ctrl.evaluacionAspecto);
+    calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
+      ctrl.evaluacionEscala = evaluacionEscala;
+      console.log(evaluacionEscala);
+      // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+      //   aspecto.accordionOpen = false;
+      //   aspecto.activarPuntajeManual = false;
+      // });
+      // console.log(ctrl.evaluacionAspecto);
     });
   }
 
@@ -156,7 +157,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   }
 
   ctrl.init = function(){
-    ctrl.obtenerEvaluacionAspecto();
+    //ctrl.obtenerEvaluacionAspecto();
     ctrl.obtenerEvaluacionCriterios();
   }
 

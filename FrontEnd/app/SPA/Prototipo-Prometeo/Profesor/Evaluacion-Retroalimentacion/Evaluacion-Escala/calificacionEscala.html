@@ -13,9 +13,9 @@
         <div class="card-body">
           <div class="form-group fg-line">
             <uib-accordion close-others="true">
-              <div uib-accordion-group class="panel-default" ng-repeat="aspecto in ctrl.evaluacionAspecto" is-open="aspecto.accordionOpen">
+              <div uib-accordion-group class="panel-default" ng-repeat="criterio in ctrl.evaluacionEscala" is-open="criterio.accordionOpen">
                 <uib-accordion-heading class="label-letra-prometeo">
-                <label class="label-letra-prometeo">{{aspecto.titulo}} : {{aspecto.descripcion}}</label><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
+                <label class="label-letra-prometeo">{{criterio.titulo}} : {{criterio.descripcion}}</label><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': aspecto.accordionOpen, 'glyphicon-chevron-right': !aspecto.accordionOpen}"></i>
                 </uib-accordion-heading>
                 <div  class="form-group fg-line m-b-0">
                   <label class="control-label label-letra-prometeo p-t-10" align="right">Puntaje</label>
@@ -29,11 +29,12 @@
                   </div>
                 </div>
                 <div class="form-group fg-line">
-                  <label class="control-label label-letra-prometeo p-t-10 p-l-0">Observaci&oacute;n del aspecto</label>
-                  <textarea class="form-control p-t-10 input-letra-prometeo" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion">
+                  <label class="control-label label-letra-prometeo p-t-10 p-l-0">Observaci&oacute;n del criterio</label>
+                  <textarea class="form-control p-t-10 input-letra-prometeo" rows="2" placeholder="Ingrese la observación del criterio" ng-model="aspecto.observacion">
                   </textarea>
                 </div>
-                <div class="form-group fg-line">
+                <!-- Se debe borrar -->
+                <!-- <div class="form-group fg-line">
                   <label class="control-label label-letra-prometeo">Criterios</label>
                 </div>
                 <div class="row">
@@ -59,7 +60,9 @@
                 </div>
                 <div class="col-sm-12" align="right">
                   <button type="button" ng-click = "ctrl.calcularPuntajeCriterio(aspecto.id)" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
-                </div>
+                </div> -->
+
+                <!----->
               </div>
             </uib-accordion>
           </div>

@@ -258,7 +258,12 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'calificar-archivos',
                   url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Archivos/calificacionArchivos.html'
-                }
+                },
+                {
+                  name: 'calificacionEscala',
+                  url: '/calificacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Escala/calificacionEscala.html'
+                },
               ]
             },
             //VISTAS DEL ALUMNO
