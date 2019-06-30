@@ -133,26 +133,7 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
 }
 
   ctrl.volverCurso = function () {
-    swal({
-      title: "¿Está seguro que quiere regresar?",
-      text: "Los cambios no se guardarán",
-      icon: "warning",
-      buttons: {
-        cancelar: {
-          text: "Cancelar",
-          className: "btn btn-lg btn-danger"
-        },
-        confirm: {
-          text: "Sí, regresar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-        }
-      }
-    }).then(function (vistaCursosAlumno) {
-      if (vistaCursosAlumno !== "cancelar") {
         $state.go('alumnoMisCursos',{rolUsuario: 'A'});
-      }
-
-    });
   };
 
   ctrl.init = function (){
