@@ -106,7 +106,8 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
       case 'Lista de Cotejo':
       break;
       case 'Escala':
-      break;
+        $state.go('calificacionEscala', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        break;
       default:
         swall('Opss', 'Hubo un error en la creación de la herramienta', 'error');
       break;
