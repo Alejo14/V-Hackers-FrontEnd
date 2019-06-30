@@ -127,6 +127,10 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
     });
   }
 
+  ctrl.editarAsistentes= function(horario){
+    $state.go('asignar-asistentes',{idHorario:horario.id,nombre:ctrl.nombre,horario:horario.codigo});
+  }
+
 
 
   ctrl.init = function(){

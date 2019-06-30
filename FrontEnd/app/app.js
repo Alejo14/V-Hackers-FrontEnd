@@ -124,6 +124,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   name: 'creacion-facultad',
                   url: '/creacion-facultad',
                   templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Facultad/creacionFacultad.html'
+                },
+                {
+                  name: 'asignar-asistentes',
+                  url: '/asignar-asistentes/:idHorario/:nombre/:horario',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/asignarAsistentes.html'
                 }
               ]
             },

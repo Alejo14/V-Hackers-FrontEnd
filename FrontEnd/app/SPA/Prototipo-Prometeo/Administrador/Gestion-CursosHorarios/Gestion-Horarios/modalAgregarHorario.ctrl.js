@@ -9,6 +9,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
   ctrl.idCursoCiclo = idCursoCiclo;
   ctrl.idCurso = idCurso;
   ctrl.idCiclo = idCiclo;
+  ctrl.listaHorarios = [];
   ctrl.horarioNuevo = {
     "id": "",
     "cursoCicloId": "",
@@ -124,7 +125,10 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
             });
             //guardar relación de horario y rolusuario
 
-            swal("¡Bien hecho!", "El curso se creó exitosamente" , "success");
+
+
+
+            swal("¡Bien hecho!", "El horario se creó exitosamente" , "success");
           } else {
             console.log("Modo modificar");
             var horario = {
@@ -179,12 +183,14 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
             //guardar relación de horario y rolusuario
 
 
-            swal("¡Bien hecho!", "El curso se creó exitosamente" , "success");
+            swal("¡Bien hecho!", "El horario se modificó exitosamente" , "success");
+
           }
         }
         else {
           swal("Error", "Por favor llenar todos los campos" , "error");
         }
+
         $uibModalInstance.close(ctrl.horarioNuevo);
       }
     });
@@ -208,6 +214,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
       //console.log("modo creacion:"+ctrl.idCursoCiclo);
     }
   };
+
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);
   };
