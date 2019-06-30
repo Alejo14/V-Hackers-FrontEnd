@@ -1,40 +1,87 @@
-<!-- <ul class="header-inner clearfix ng-scope"> -->
-<style>
-  .header-1 {
-    margin: 0px;
-    padding: 0px;
-    background-color: white;
-    border-radius: 0px 60px 60px 0px;
-    width: 420px;
-    height: 70px;
-    /* height: 56px; */
-  }
-  .header-2 {
-    margin: 0px;
-    padding: 0px;
-    /* border: solid; */
-    /* background-color: yellow; */
-    width: 510px;
-    height: 60px;
-  }
-  .imagen-logo {
-    height: 100%;
-    width: 80%;
-  }
-</style>
-<div class="col-md p-0">
-  <div class="col-md-4 header-1" align="center">
-    <a ui-sref="principal"><img src="imagenes/logo.jpeg" alt="prometeo" class="imagen-logo"></a>
+  <!-- <ul class="header-inner clearfix ng-scope"> -->
+  <style>
+    .header-1 {
+      margin: 0px;
+      padding: 0px;
+      background-color: white;
+      border-radius: 30px 30px 30px 0px;
+      /* width: 430px; */
+      height: 70px;
+    }
+    .header-2 {
+      margin: 0px;
+      padding: 0px;
+      padding-right: 60px;
+      /* border: solid; */
+      /* background-color: yellow; */
+      /* width: 510px; */
+      height: 70px;
+      /* line-height: 70px; */
+    }
+    .header-3 {
+      margin: 0;
+      padding: 0;
+      /* padding-right: 60px; */
+      /* border: solid; */
+      /* background-color: yellow; */
+      /* width: 510px; */
+      height: 30px;
+      line-height: 30px;
+    }
+    .imagen-logo {
+      height: 100%;
+      width: 80%;
+    }
+    .header-4 {
+      /* margin: 5px 20px 0px 20px; */
+      margin-top: 5px;
+      margin-bottom: 25px;
+      padding: 0px;
+      /* background-color: white; */
+      border-radius: 0px 0px 30px 30px;
+      /* width: 430px; */
+      border-bottom: solid;
+      border-color: #2b78e4;
+      /* weight: 90px; */
+      height: 40px;
+      line-height: 30px;
+      color: #2b78e4;
+      font-weight: 800;
+      background: white;
+    }
+    .header-5 {
+      weight: 20px;
+      margin: 5px 0px 0px 0px;
+      padding: 0px;
+      /* border: solid; */
+    }
+  </style>
+  <div class="row" style="margin: 0px; padding: 0px;">
+    <div class="col-md-4 header-1" align="center">
+      <a ui-sref="principal"><img src="imagenes/logo.jpeg" alt="prometeo" class="imagen-logo"></a>
+    </div>
+    <div class="col-md-8 header-2">
+      <nav class="float-right" style="height: 70px; padding: 20px 60px;">
+        <!-- <li class="pull-right p-t-10"> -->
+          <ul class="top-menu header-3">
+            <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
+            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/principal">Inicio</a></li>
+            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
+            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
+            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
+          </ul>
+        <!-- </li> -->
+      </nav>
+    </div>
   </div>
-  <nav class="col-md-8 float-right header-2">
-    <li class="pull-right p-t-10">
-      <ul class="top-menu">
-        <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
-        <li><a href="#!/inicio/raiz/principal">Inicio</a></li>
-        <li><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
-        <li><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
-        <li><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
-      </ul>
-    </li>
-  </nav>
-</div>
+  <div class="row-md header-4">
+    <div class="col-md-2 header-5" style="border-right: solid;" align="center">
+      Nombre COMPLETO
+    </div>
+    <div class="col-md-2 header-5" align="center">
+      CÓDIGO
+    </div>
+    <div class="col-md-2 header-5" style="border-left: solid;" align="center">
+      PERFIL
+    </div>
+  </div>

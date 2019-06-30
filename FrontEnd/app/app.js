@@ -259,6 +259,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
                 {
+                  name: 'avances-proyecto',
+                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
+                },
+                {
                   name: 'calificar-archivos',
                   url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Archivos/calificacionArchivos.html'
