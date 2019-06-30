@@ -20,7 +20,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  }
 
  ctrl.crearHerramienta = function () {
-   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntajeMax){
+   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntaje_Max){
      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
    }else{
     swal({

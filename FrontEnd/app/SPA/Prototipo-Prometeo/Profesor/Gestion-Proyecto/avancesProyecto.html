@@ -1,0 +1,66 @@
+<section id="main">
+  <div ng-controller="avancesEntregableCtrl as ctrl">
+    <div class="container">
+      <div class="block-container">
+        <h2> {{ctrl.titulo}} </h2>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h3> {{ctrl.subtitulo}} </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12" ng-if="ctrl.esIndividual">
+              <div class="table-responsive">
+                <table ng-table="" class="table table-bordered">
+                  <tr ng-repeat="avance in ctrl.avancesLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'Nombre Alumno'" align="center">
+                        {{avance.nombreCompleto}}
+                    </td>
+                    <td data-title="'Correo'" align="center">
+                        {{avance.correo}}
+                    </td>
+                    <td data-title="'Acciones'" align="center" widht="25%">
+                      <a ng-click="ctrl.irArchivos(avance)" class="m-r-10"><i class="fa fa-eye"></i></a>
+                      <a ng-click="ctrl.irCalificacion(avance)" class="m-l-10"><i class="fa fa-check"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-12" ng-if="ctrl.esGrupal">
+              <div class="table-responsive">
+                <table ng-table="" class="table table-bordered">
+                  <tr ng-repeat="avance in ctrl.avancesLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'Grupo'" align="center">
+                        {{avance.nombre}}
+                    </td>
+                    <td data-title="'Acciones'" align="center" widht="25%">
+                      <a ng-click="ctrl.irArchivos(avance)" class="m-r-10"><i class="fa fa-eye"></i></a>
+                      <a ng-click="ctrl.irCalificacion(avance)" class="m-l-10"><i class="fa fa-check"></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
