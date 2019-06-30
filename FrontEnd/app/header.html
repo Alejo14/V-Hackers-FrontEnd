@@ -35,7 +35,6 @@
     .header-4 {
       /* margin: 5px 20px 0px 20px; */
       margin-top: 5px;
-      margin-bottom: 25px;
       padding: 0px;
       /* background-color: white; */
       border-radius: 0px 0px 30px 30px;
@@ -48,11 +47,14 @@
       color: #2b78e4;
       font-weight: 800;
       background: white;
+      font-size: 15px;
     }
     .header-5 {
-      weight: 20px;
-      margin: 5px 0px 0px 0px;
+      /* weight: 20px; */
+      margin: 0px;
+      margin-top: 5px;
       padding: 0px;
+      /* float: left; */
       /* border: solid; */
     }
   </style>
@@ -75,13 +77,16 @@
     </div>
   </div>
   <div class="row-md header-4">
-    <div class="col-md-2 header-5" style="border-right: solid;" align="center">
-      Nombre COMPLETO
+    <div class="col-md-2 header-5 float-left" style="border-right: solid;" align="center">
+      <h2 class="border" style="background-color: red; color: black;">{{ctrl.usuario.codigo}}</h2>
     </div>
-    <div class="col-md-2 header-5" align="center">
-      CÓDIGO
+    <div class="col-md-1 header-5 float-left" align="center">
+      {{ctrl.usuario.codigo}}20000000
     </div>
-    <div class="col-md-2 header-5" style="border-left: solid;" align="center">
+    <div class="col-md-1 header-5 float-left" style="border-left: solid;" align="center">
       PERFIL
+    </div>
+    <div class="col-md-1 header-5 float-right" align="center">
+      <a href="" ng-click="rCtrl.logOut()"><i class="fa fa-sign-out-alt"></i></a>
     </div>
   </div>
