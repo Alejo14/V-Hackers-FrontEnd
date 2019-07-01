@@ -107,7 +107,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   ctrl.regresarCurso = function () {
         $state.go('alumnoCursos', {cursoCicloId:$stateParams.cursoCicloId,nombreCurso:$stateParams.nombreCurso,
-          codigoCurso:$stateParams.codigoCurso,horario:$stateParams.horario , rolusuarioId:ctrl.rolusuarioId});
+          codigoCurso:$stateParams.codigoCurso,horario:$stateParams.horario , rolusuarioId:$stateParams.rolusuarioId});
   };
 
 
@@ -262,8 +262,8 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   ctrl.verArchivos = function (entregable) {
     $state.go('detalle-entregable' , {nombre: entregable.nombre, id: entregable.id ,fechaEntrega: entregable.fechaEntrega,
-    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: "", proyectoId: 0,
-    nombreCurso: "",codigoCurso:"" ,horario: "",idRolUsuario: ctrl.rolusuarioId, estadoEntregable: "D"}); //Temporal, deberia usar un servicio para traerme esa info
+    fechaHabilitacion: entregable.fechaHabilitacion, descripcion: entregable.descripcion, ponderacion: entregable.ponderacion, cursoCicloId: $stateParams.cursoCicloId, proyectoId: 0,
+    nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: $stateParams.rolusuarioId, estadoEntregable: "D"}); //Temporal, deberia usar un servicio para traerme esa info
 
   };
 
@@ -279,7 +279,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
         ctrl.idAvanceEntregable=respuesta;
         //console.log(ctrl.idAvanceEntregable);
-        $state.go('calificacion' , {avanceEntregableId: ctrl.idAvanceEntregable, herramientaCalificada: 0 });
+        $state.go('visualizacion' , {avanceEntregableId: ctrl.idAvanceEntregable.id, herramientaCalificada: 0 });
     });
 
   };

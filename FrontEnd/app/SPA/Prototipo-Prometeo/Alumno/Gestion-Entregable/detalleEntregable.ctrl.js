@@ -278,9 +278,10 @@ ctrl.regresarCursoAlumno = function () {
     }
   }).then(function (regresarVistaCurso) {
     if (regresarVistaCurso !== "cancelar") {
-      $state.go('alumnoCursos', {cursoCicloId: $stateParams.cursoCicloId, nombreCurso: $stateParams.nombreCurso, codigoCurso: $stateParams.codigoCurso, horario: $stateParams.horario}); //Aca podemos enviar el RolUsuarioId tambien
+      $state.go('alumnoCursos', {cursoCicloId: $stateParams.cursoCicloId, nombreCurso: $stateParams.nombreCurso, codigoCurso: $stateParams.codigoCurso, horario: $stateParams.horario, rolusuarioId:$stateParams.idRolUsuario}); //Aca podemos enviar el RolUsuarioId tambien
     }
   });
+
 
 
 
@@ -323,16 +324,16 @@ ctrl.regresarCursoAlumno = function () {
 
      //este debe ser el id que se debe usar para registrar el archivo
 
-    if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto
-      ctrl.detalleE.cursoCicloId=0;
-      ctrl.detalleE.proyectoId=$stateParams.proyectoId;
-    }else{                            //Entregable pertence a un cursoCiclo
-      ctrl.detalleE.proyectoId=0;
-      ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
-      ctrl.detalleE.nombreCurso=$stateParams.nombreCurso;
-      ctrl.detalleE.codigoCurso=$stateParams.codigoCurso;
-      ctrl.detalleE.horario=$stateParams.horario;
-    }
+    // if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto
+    //   ctrl.detalleE.cursoCicloId=0;
+    //   ctrl.detalleE.proyectoId=$stateParams.proyectoId;
+    // }else{                            //Entregable pertence a un cursoCiclo
+    //   ctrl.detalleE.proyectoId=0;
+    //   ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
+    //   ctrl.detalleE.nombreCurso=$stateParams.nombreCurso;
+    //   ctrl.detalleE.codigoCurso=$stateParams.codigoCurso;
+    //   ctrl.detalleE.horario=$stateParams.horario;
+    // }
 
 
   }
