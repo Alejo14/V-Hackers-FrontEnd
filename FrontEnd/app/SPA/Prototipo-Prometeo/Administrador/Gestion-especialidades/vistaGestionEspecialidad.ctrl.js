@@ -102,7 +102,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     ctrl.especialidad.nombre = $stateParams.nombre;
     ctrl.especialidad.responsableId = $stateParams.responsableId;
     administradorEspecialidadService.obtenerFacultades().then(function (facultadesListaData) {
-      ctrl.especialidad.facultad = facultadesListaData.find(fac => fac.id === $stateParams.facultadId);
+      ctrl.especialidad.facultad = facultadesListaData.find(fac => fac.id === $stateParams.facultadId).id;
     });
     administradorEspecialidadService.listarResponsables().then(function (responsablesListaData) {
       var responsable = responsablesListaData.find(i => i.id === $stateParams.responsableId);
