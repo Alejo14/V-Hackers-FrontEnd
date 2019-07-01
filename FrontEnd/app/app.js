@@ -154,6 +154,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
+                  name: 'calificacion-proyecto',
+                  url: '/calificacion/:avanceProyectoId/:herramientaCalificada/:nombreProyecto/:nombreCalificado',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/Calificacion-proyecto/calificacion-proyecto.html'
+                },
+                {
                   name: 'calificacionAspectos',
                   url: '/calificacionAspectos/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Aspecto/calificacionAspectos.html'

@@ -1,9 +1,9 @@
-angular.module('vHackersModule').controller('avancesEntregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
-function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('avancesProyectoCtrl', ['$scope', '$state', '$stateParams' , 'gestionProyectoService', '$uibModal', 'NgTableParams',
+function($scope, $state,$stateParams, gestionProyectoService, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.titulo = "";
   ctrl.subtitulo = "Avances "
-  ctrl.entregable = {};
+  ctrl.proyecto = {};
   ctrl.avanceSeleccionado = {};
   ctrl.avancesLista = [];
   ctrl.horarioId = "";
@@ -11,7 +11,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.esGrupal = false;
 
   ctrl.obtenerAlumnos = function (horarioId) {
-    entregableService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
+    gestionProyectoService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
       ctrl.avancesLista = alumnosListaData;
       console.log(alumnosListaData);
       ctrl.avancesTabla = new NgTableParams({}, { dataset: ctrl.avancesLista });
@@ -19,7 +19,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.obtenerGrupos = function (horarioId) {
-    entregableService.obtenerGrupos(horarioId).then(function (gruposListaData) {
+    gestionProyectoService.obtenerGrupos(horarioId).then(function (gruposListaData) {
       ctrl.avancesLista = gruposListaData;
       console.log(gruposListaData);
       ctrl.avancesTabla = new NgTableParams({}, { dataset: ctrl.avancesLista });
@@ -27,48 +27,38 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.obtenerAvance = function (avance) {
+    var nombreCalificadoProyecto = '';
     if(ctrl.esIndividual){
       idRolUsuario=avance.idRolUsuario;
+      nombreCalificadoProyecto = avance.nombreCompleto;
       idGrupo="0";
     }else{
       idRolUsuario="0";
       idGrupo=avance.id;
+      nombreCalificadoProyecto = avance.nombre;
     }
-    idEntregable=ctrl.entregable.id;
+    idProyecto=ctrl.proyecto.id;
     console.log("idRolUsuario: " + idRolUsuario);
     console.log("idGrupo: " + idGrupo);
-    console.log("idEntregable: " + idEntregable);
-    entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
+    console.log("idProyecto: " + idProyecto);
+    gestionProyectoService.mostrarAvanceProyecto(idProyecto, idRolUsuario, idGrupo).then(function (avanceData) {
       ctrl.avanceSeleccionado = avanceData;
-      $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0});
+      $state.go('calificacion-proyecto', {avanceProyectoId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0, nombreProyecto: ctrl.proyecto.nombre, nombreCalificado: nombreCalificadoProyecto});
     });
-    console.log(ctrl.avanceSeleccionado);
   };
 
   ctrl.irCalificacion = function (avance) {
     ctrl.obtenerAvance(avance);
   };
 
-  ctrl.irArchivos = function(avance){
-    if(ctrl.esIndividual){
-      idRolUsuario=avance.idRolUsuario;
-      idGrupo="0";
-    }else{
-      idRolUsuario="0";
-      idGrupo=avance.id;
-    }
-    idEntregable=ctrl.entregable.id;
-    $state.go('calificar-archivos', {idEntregable: idEntregable, idRolUsuario: idRolUsuario, idGrupo: idGrupo});
-  };
-
   ctrl.init = function (){
-    ctrl.entregable.id = $stateParams.id;
-    ctrl.entregable.nombre = $stateParams.nombre;
-    ctrl.entregable.metodo = $stateParams.metodo;
+    ctrl.proyecto.id = $stateParams.id;
+    ctrl.proyecto.nombre = $stateParams.nombre;
+    ctrl.proyecto.metodo = $stateParams.metodo;
     ctrl.horarioId = $stateParams.horarioId;
 
-    ctrl.titulo = ctrl.entregable.nombre;
-    if (ctrl.entregable.metodo == 0){ //Entregable individual
+    ctrl.titulo = ctrl.proyecto.nombre;
+    if (ctrl.proyecto.metodo == 0){ //Entregable individual
       ctrl.subtitulo = ctrl.subtitulo + "individuales";
       ctrl.obtenerAlumnos(ctrl.horarioId);
       ctrl.esIndividual = true;

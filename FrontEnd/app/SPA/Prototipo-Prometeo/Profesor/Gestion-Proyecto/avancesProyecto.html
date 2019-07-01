@@ -1,5 +1,5 @@
 <section id="main">
-  <div ng-controller="avancesEntregableCtrl as ctrl">
+  <div ng-controller="avancesProyectoCtrl as ctrl">
     <div class="container">
       <div class="block-container">
         <h2> {{ctrl.titulo}} </h2>
@@ -49,7 +49,6 @@
                         {{avance.nombre}}
                     </td>
                     <td data-title="'Acciones'" align="center" widht="25%">
-                      <a ng-click="ctrl.irArchivos(avance)" class="m-r-10"><i class="fa fa-eye"></i></a>
                       <a ng-click="ctrl.irCalificacion(avance)" class="m-l-10"><i class="fa fa-check"></i></a>
                     </td>
                   </tr>
