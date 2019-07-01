@@ -43,7 +43,7 @@
             <button class="btn bgm-green btn-default waves-effect float-right m-15" ng-click="ctrl.atras()"><i class="fa fa-arrow-circle-left"></i> Atr&aacute;s</button>
             <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15 m-l-15" ng-click="ctrl.guardarCalificacion()"><i class="fa fa-save"></i> Guardar</button>
             <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()" ng-if="ctrl.usuarioRol == 'Asistente'" ng-disabled="!ctrl.habilitarBotones"><i class="fa fa-paper-plane"></i> Enviar</button>
-            <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.enviarCalificacion()" ng-if="ctrl.usuarioRol == 'Profesor'" ng-disabled="!ctrl.habilitarBotones"><i class="fa fa-upload"></i> Publicar</button>
+            <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15" ng-click="ctrl.publicarCalificacion()" ng-if="ctrl.usuarioRol == 'Profesor'" ng-disabled="!ctrl.habilitarBotones"><i class="fa fa-upload"></i> Publicar</button>
           </div>
         </div>
       </div>

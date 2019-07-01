@@ -92,7 +92,22 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.enviarCalificacion = function(id){
-    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/cambiarEstadoaEnviado' + id;
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion +'/cambiarEstadoaEnviado/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.publicarCalificacion = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion +'/cambiarEstadoaCompleto/' + id;
     var $defer = $q.defer();
     $http({
         method: 'GET',
