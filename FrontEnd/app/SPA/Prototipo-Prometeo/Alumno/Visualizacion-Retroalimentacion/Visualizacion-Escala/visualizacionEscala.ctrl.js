@@ -69,7 +69,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
 
   ctrl.regresar = function (){
     swal({
-      title: "¿Estás seguro de que deseas regresar?",
+      title: "¿Esta seguro de que desea regresar?",
       text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
@@ -84,7 +84,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
       }
     });
   }
@@ -171,7 +171,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     }
     console.log(data);
     calificacionEscalaService.guardarAspecto(data).then(function(){
-      swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
+      swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
       $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
     });
   }
@@ -181,7 +181,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     //ctrl.calcularPuntajeCriterio();
 
     if (ctrl.puntajeAsignado>ctrl.evaluacionAspecto[0].puntajeMaximo) {
-      swal("¡Opss!", "El puntaje asignado supera el puntaje máximo" , "error");
+      swal("¡Opss!", "El Puntaje Asignado supera el Puntaje Máximo" , "error");
     }else {
 
       //ctrl.puntajeHerramienta = 0;
@@ -209,7 +209,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       }
       console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
       calificacionEscalaService.guardarEscala(data).then(function(){
-        swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
+        swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
         $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
 

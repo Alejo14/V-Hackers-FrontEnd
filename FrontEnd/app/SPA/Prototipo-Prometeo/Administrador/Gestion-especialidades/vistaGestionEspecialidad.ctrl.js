@@ -84,7 +84,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       if (parametroRetorno) {
         ctrl.especialidadesArchivoLista = parametroRetorno.info;
         ctrl.especialidadesArchivoNombre = parametroRetorno.nombre;
-        swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
+        swal("¡Bien hecho!", "El archivo se creó exitosamente" , "success");
       }
     });
   }
@@ -127,7 +127,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
 
   ctrl.eliminarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     swal({
-      title: "¿Está seguro que quiere eliminar la especialidad?",
+      title: "¿Estás seguro que quieres eliminar la especialidad?",
       text: "La especialidad se eliminará permanentemente",
       icon: "warning",
       buttons: {
@@ -136,7 +136,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
           className: "btn btn-lg btn-danger"
         },
         confirm: {
-          text: "Sí. Eliminar",
+          text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
@@ -156,7 +156,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
 
   ctrl.regresarAdministradorSwal = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Estás seguro de que quieres volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
@@ -182,7 +182,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
 
   ctrl.regresarListaEspecialidades = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Estás seguro de que quieres volver?",
       text: "No se guardarán los cambios",
       icon: "warning",
       buttons: {

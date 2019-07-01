@@ -31,9 +31,12 @@
 
       </div>
       <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
-        <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
+        <div class="col-md-5" align="left">
+            <h5><strong class="text-danger">*</strong> Campos obligatorios</h5>
+        </div>
         <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarUsuario()" ng-disabled="!ctrl.registroValido" ng-if="!ctrl.modoSoloLectura"><i class="fa fa-save"></i> Guardar</button>
         <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.actualizarRoles()" ng-disabled="!ctrl.registroValido" ng-if="ctrl.modoSoloLectura"><i class="fa fa-save"></i> Actualizar</button>
+        <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
       </div>
     </div>
   </div>

@@ -331,6 +331,16 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/detalle-herramientas/:id',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Gestion-Entregable/vistaGestiónHerramientas.html'
                 },
+                {
+                  name: 'visualizacion',
+                  url: '/visualizacion/:avanceEntregableId/:herramientaCalificada',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/visualizacionEntregable.html'
+                },
+                {
+                  name: 'visualizacionEscala',
+                  url: '/visualizacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Escala/visualizacionEscala.html'
+                },
               ]
             }
           ]

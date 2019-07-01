@@ -82,7 +82,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
 
   ctrl.guardarUsuario = function () {
     swal({
-      title: "¿Esta seguro de que desea agregar a este usuario?",
+      title: "¿Estás seguro de que deseas agregar a este usuario?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
@@ -159,7 +159,7 @@ function modalAgregarUsuarioCtrl ($scope, $uibModalInstance, gestionUsuariosServ
 
   ctrl.actualizarRoles = function () {
     swal({
-      title: "¿Esta seguro de que desea actualizar los roles de este usuario?",
+      title: "¿Estás seguro de que deseas actualizar los roles de este usuario?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],

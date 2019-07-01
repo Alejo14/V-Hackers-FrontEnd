@@ -150,7 +150,7 @@ function toBase64(file) {
 
 ctrl.regresarCursoAlumno = function () {
   swal({
-    title: "¿Está seguro que quiere regresar?",
+    title: "¿Estás seguro que quieres regresar?",
     text: "Los cambios no se guardarán",
     icon: "warning",
     buttons: {

@@ -23,7 +23,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal){
 
   ctrl.regresarEntregablesAlumno = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Estás seguro de que quieres volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {

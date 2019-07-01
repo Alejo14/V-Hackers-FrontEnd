@@ -35,8 +35,8 @@ function($scope, $state, $stateParams, gestionProyectoServiceAlumno, $uibModal){
 
   ctrl.volverCurso = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      title: "¿Estás seguro de que quieres volver?",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {
@@ -86,7 +86,7 @@ function($scope, $state, $stateParams, gestionProyectoServiceAlumno, $uibModal){
 
   ctrl.guardarProyecto = function (proyectoNuevo) {
     swal({
-      title: "¿Esta seguro de que desea agregar este Proyecto?",
+      title: "¿Estás seguro de que deseas agregar este proyecto?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
@@ -160,14 +160,14 @@ function($scope, $state, $stateParams, gestionProyectoServiceAlumno, $uibModal){
           $("#ts2").attr("checked", false);
           $("input[name=metodo][value=0]").prop('checked', true);
 
-          swal("¡Bien hecho!", "El Proyecto se genero exitosamente" , "success");
+          swal("¡Bien hecho!", "El proyecto se generó exitosamente" , "success");
       }
     });
   }
 
   ctrl.modificarProyecto = function (proyectoModif) {
     swal({
-      title: "¿Esta seguro de que desea guardar los cambios al Proyecto?",
+      title: "¿Estás seguro de que deseas guardar los cambios al proyecto?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
@@ -238,7 +238,7 @@ function($scope, $state, $stateParams, gestionProyectoServiceAlumno, $uibModal){
           proyectoModif.ponderacion="";
           $("textarea#desTA").val("");
 
-          swal("¡Bien hecho!", "El Proyecto se modifico exitosamente" , "success");
+          swal("¡Bien hecho!", "El proyecto se modificó exitosamente" , "success");
       }
     });
   }
