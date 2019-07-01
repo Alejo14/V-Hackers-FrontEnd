@@ -121,20 +121,4 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.obtenerUsuario = function (usuarioId) {
-    var urlObtenerUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/obtenerusuario/' + usuarioId;
-    var $defer = $q.defer();
-    $http({
-        method: 'GET',
-        url: urlObtenerUsuario
-     }).then(function (respuesta) {
-       $defer.resolve(respuesta.data);
-     }).catch(function (error) {
-       $defer.reject(error);
-     });
-    return $defer.promise;
-  };
-
-  // cambiarEstadoaEnviado/:calificacionHerramientaEvaluacionId
-
 }]);
