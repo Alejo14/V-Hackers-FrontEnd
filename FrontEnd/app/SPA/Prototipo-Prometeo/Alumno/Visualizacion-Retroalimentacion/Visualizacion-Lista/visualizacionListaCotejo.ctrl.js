@@ -1,8 +1,8 @@
-angular.module('vHackersModule').controller('calificacionListaCtrl', calificacionListaCtrl);
+angular.module('vHackersModule').controller('visualizacionListaCtrl', visualizacionListaCtrl);
 
-calificacionListaCtrl.$inject = ['$scope','$state', '$stateParams','calificacionListaService'];
+visualizacionListaCtrl.$inject = ['$scope','$state', '$stateParams','visualizacionListaService'];
 
-function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaService){
+function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaService){
   var ctrl = this;
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
@@ -10,7 +10,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
   ctrl.listaCriterios = {};
 
   ctrl.obtenerCalificacionListaCotejo = function (){
-    calificacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
+    visualizacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
       ctrl.listaCriterios = listaCriteriosData;
       console.log(ctrl.listaCriterios);
     });
@@ -49,42 +49,6 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
     }else{
       swal("Error","No se ha encontrado el aspecto","error");
     }
-  }
-
-  ctrl.crearMensaje = function (longitud) {
-    var mensaje = "Los puntajes de los aspectos ";
-    if(longitud === 1) mensaje = mensaje + indices[0] + " ha sido modificado, pero no hay explicación alguna.";
-    else{
-      for(let i = 0; i < longitud; i++){
-        var j = i + 1;
-        if(i === longitud - 2) mensaje = mensaje + j + " y ";
-        else if (i === longitud - 1) mensaje = mensaje + j + ", ";
-        else mensaje = mensaje + j + " han sido modificados pero no hay explicación alguna."
-      }
-    }
-    return mensaje;
-  }
-
-  ctrl.hayPuntajesManuales = function () {
-    var puntajesManuales = true;
-    var indices = [];
-    var contador = 0;
-    angular.forEach(ctrl.evaluacionAspecto, function (aspecto,indice) {
-      if(aspecto.activarPuntajeManual){
-        if (aspecto.descripcionPuntajeManual === null || aspecto.descripcionPuntajeManual === ''){
-          indices.push(indice);
-        }else{
-          contador++;
-        }
-      }
-    });
-    var n = indices.length;
-    if(n > 0){
-      var mensaje = ctrl.crearMensaje(n);
-      swal("¡Opss!", mensaje , "error");
-    }
-    if(contador > 0) return puntajesManuales;
-    return !puntajesManuales;
   }
 
   ctrl.init = function(){

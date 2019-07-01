@@ -1,8 +1,8 @@
-angular.module('vHackersModule').controller('calificacionAspectosCtrl', calificacionAspectosCtrl);
+angular.module('vHackersModule').controller('visualizacionAspectoCtrl', visualizacionAspectoCtrl);
 
-calificacionAspectosCtrl.$inject = ['$scope','$state', '$stateParams','calificacionAspectoService'];
+visualizacionAspectoCtrl.$inject = ['$scope','$state', '$stateParams','visualizacionAspectoServicio'];
 
-function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspectoService){
+function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspectoServicio){
   var ctrl = this;
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
@@ -12,11 +12,11 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
   ctrl.nivelesRubrica = {};
 
   ctrl.obtenerEvaluacionAspecto = function (){
-    calificacionAspectoService.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
+    visualizacionAspectoServicio.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
       ctrl.nivelesRubrica = nivelesRubrica;
       console.log(ctrl.nivelesRubrica);
     });
-    calificacionAspectoService.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionAspecto){
+    visualizacionAspectoServicio.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionAspecto){
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
@@ -134,7 +134,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
         "aspectos":ctrl.evaluacionAspecto
       }
       console.log(data);
-      calificacionAspectoService.guardarAspecto(data).then(function(){
+      visualizacionAspectoServicio.guardarAspecto(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
         $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
       });

@@ -1,4 +1,4 @@
-angular.module("vHackersModule").service('calificacionListaService', ['$q', '$http', 'variablesAmbiente',
+angular.module("vHackersModule").service('visualizacionListaService', ['$q', '$http', 'variablesAmbiente',
 function($q, $http, variablesAmbiente) {
 
   var servicio = this;
