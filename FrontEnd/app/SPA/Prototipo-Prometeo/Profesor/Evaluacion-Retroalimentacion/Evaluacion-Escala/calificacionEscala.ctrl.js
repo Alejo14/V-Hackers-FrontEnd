@@ -35,6 +35,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log("Calificacion Herramienta Evaluacion ID",ctrl.calificacionHerramientaEvaluacionId);
     calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
       ctrl.evaluacionAspecto=evaluacionEscala;//Para guardar la informacion obtenida
+      console.log("EVALUACION",evaluacionEscala);
       ctrl.evaluacionEscala = evaluacionEscala[0].criterios;
       ctrl.calcularPuntajeCriterio();
       console.log("ASPECTO INICIAL",ctrl.evaluacionAspecto);
@@ -174,38 +175,47 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   ctrl.guardarcriterios = function(){//Se debe QUEDAR
     //ctrl.calcularPuntajeCriterio();
 
+    if (ctrl.puntajeAsignado>ctrl.evaluacionAspecto[0].puntajeMaximo) {
+      swal("¡Opss!", "El Puntaje Asignado supera el Puntaje Máximo" , "error");
+    }else {
+
+      //ctrl.puntajeHerramienta = 0;
+      // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+      //   var puntajesManuales = ctrl.hayPuntajesManuales;
+      //   var puntaje = 0;
+      //   angular.forEach(aspecto.criterios, function(criterio,indice){
+      //     puntaje += criterio.puntajeAsignado;
+      //   });
+      //   aspecto.puntajeAsignado = puntaje;
+      //   if(!puntajesManuales){
+      //     ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
+      //     aspecto.puntajeManual = 0;
+      //     angular.forEach(aspecto.criterios, function(criterio,indice){
+      //       criterio.puntajeManual = 0;
+      //     });
+      //   }else{
+      //     ctrl.puntajeHerramienta += aspecto.puntajeManual;
+      //   }
+      // });
+      ctrl.evaluacionAspecto[0].puntajeAsignado=ctrl.puntajeAsignado;
+      ctrl.evaluacionAspecto[0].criterios=ctrl.evaluacionEscala;
+      var data = { //Se manda un ASpecto Vacio para mantener la estructura pero con los criterios
+        "aspectos":ctrl.evaluacionAspecto
+      }
+      console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
+      calificacionEscalaService.guardarEscala(data).then(function(){
+        swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+      });
 
 
-
-
-    //ctrl.puntajeHerramienta = 0;
-    // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-    //   var puntajesManuales = ctrl.hayPuntajesManuales;
-    //   var puntaje = 0;
-    //   angular.forEach(aspecto.criterios, function(criterio,indice){
-    //     puntaje += criterio.puntajeAsignado;
-    //   });
-    //   aspecto.puntajeAsignado = puntaje;
-    //   if(!puntajesManuales){
-    //     ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
-    //     aspecto.puntajeManual = 0;
-    //     angular.forEach(aspecto.criterios, function(criterio,indice){
-    //       criterio.puntajeManual = 0;
-    //     });
-    //   }else{
-    //     ctrl.puntajeHerramienta += aspecto.puntajeManual;
-    //   }
-    // });
-    ctrl.evaluacionAspecto[0].puntajeAsignado=ctrl.puntajeAsignado;
-    ctrl.evaluacionAspecto[0].criterios=ctrl.evaluacionEscala;
-    var data = { //Se manda un ASpecto Vacio para mantener la estructura pero con los criterios
-      "aspectos":ctrl.evaluacionAspecto
     }
-    console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
-    calificacionEscalaService.guardarEscala(data).then(function(){
-      swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
-      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
-    });
+
+
+
+
+
+
   }
 
 
