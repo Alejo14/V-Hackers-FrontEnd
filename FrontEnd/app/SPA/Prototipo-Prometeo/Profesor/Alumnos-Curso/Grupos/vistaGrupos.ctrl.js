@@ -88,47 +88,6 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   }
 
 
-/*  ctrl.crearConjuntosGrupo = function (grupoNuevo) {
-    if (grupoNuevo==""){
-      swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
-    }
-    else{
-      swal({
-        title: "¿Esta seguro de que desea crear esta agrupación?",
-        text: "",
-        icon: "warning",
-        //buttons: ["Cancelar", "Sí, agregar"],
-        buttons: {
-          cancelar: {
-            text: "Cancelar",
-            className: "btn btn-lg btn-danger"
-          },
-          confirm: {
-            text: "Sí, agregar",
-            className: "btn btn-lg color-fondo-azul-pucp color-blanco"
-          }
-        },
-        closeModal: false
-      }).then(function (agrupacionNuevoConfirmado) {
-        if (agrupacionNuevoConfirmado !== "cancelar") {
-
-          console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
-          data={
-            "id": uuid(),
-            "nombre": grupoNuevo,
-            "fechaCreacion": (new Date())*1,
-            "conjuntoGrupos_id": uuid(),
-            "horario_id": ctrl.horario.horarioId
-            }
-            console.log(angular.toJson(data));
-            vistaGruposService.crearConjuntosGrupo(angular.toJson(data)).then(function () {
-              swal("¡Bien hecho!", "La agrupación se genero exitosamente" , "success");
-            });
-        }
-      });
-    }
-  }*/
-
   ctrl.crearGrupo = function (grupoNuevo) {
       if (grupoNuevo==""){
         swal("¡Opss!", "Ingrese un nombre para la nueva agrupación por favor" , "error");
@@ -136,7 +95,6 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
       else{
         swal({
           title: "¿Estás seguro de que deseas crear el grupo " + grupoNuevo + "?",
-          text: "",
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
           buttons: {
@@ -151,7 +109,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
           },
           closeModal: false
         }).then(function (agrupacionNuevoConfirmado) {
-          if (agrupacionNuevoConfirmado !== "cancelar") {
+          if (agrupacionNuevoConfirmado == "confirm") {
 
             console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
             data={
@@ -166,12 +124,11 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
 
                 swal({
                   title: "El nuevo grupo se generó exitosamente ¿Deseas agregar los integrantes ahora?",
-                  text: "",
                   icon: "success",
                   //buttons: ["Cancelar", "Sí, agregar"],
                   buttons: {
                     cancelar: {
-                      text: "Después, gracias",
+                      text: "No, luego",
                       className: "btn btn-lg btn-danger"
                     },
                     confirm: {
@@ -181,7 +138,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
                   },
                   closeModal: false
                 }).then(function (agrupacionNuevoConfirmado) {
-                  if (agrupacionNuevoConfirmado != "cancelar") {
+                  if (agrupacionNuevoConfirmado == "confirm") {
                     $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupoNuevo.id, grupoNombre: grupoNuevo.nombre});
                   }
                 });
