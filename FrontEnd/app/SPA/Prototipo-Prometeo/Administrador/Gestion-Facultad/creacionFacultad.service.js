@@ -1,5 +1,5 @@
-angular.module("vHackersModule").service('creacionFacultadService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('creacionFacultadService', ['$q', '$http','variablesAmbiente',
+function($q, $http,variablesAmbiente) {
 
   var servicio = this;
 
