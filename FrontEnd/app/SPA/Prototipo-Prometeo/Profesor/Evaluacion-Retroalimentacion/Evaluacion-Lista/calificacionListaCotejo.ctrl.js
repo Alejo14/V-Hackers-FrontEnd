@@ -18,7 +18,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
 
   ctrl.regresar = function (){
     swal({
-      title: "¿Esta seguro de que desea regresar?",
+      title: "¿Estás seguro que deseas regresar?",
       text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
