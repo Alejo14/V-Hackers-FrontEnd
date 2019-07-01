@@ -7,7 +7,7 @@ function($q, $http) {
   servicio.obtenerCursos = function(){
 
     //var urlObtenerUsuarios = 'data/usuariosLista.json';
-    var urlObtenerCursos = 'http://localhost:7004/cursos/cursociclo';
+    var urlObtenerCursos = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/cursociclo';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -21,7 +21,7 @@ function($q, $http) {
   };
 
   servicio.obtenerFacultades = function () {
-    var urlObtenerFacultades = 'http://localhost:7005/facultad';
+    var urlObtenerFacultades = variablesAmbiente.apiUrl+variablesAmbiente.puertoFacultades+'/facultad';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -35,7 +35,7 @@ function($q, $http) {
   };
 
   servicio.obtenerEspecialidades = function () {
-    var urlObtenerEspecialidades = 'http://localhost:7005/especialidad';
+    var urlObtenerEspecialidades = variablesAmbiente.apiUrl+variablesAmbiente.puertoFacultades+'/especialidad';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -49,7 +49,7 @@ function($q, $http) {
   };
 
   servicio.obtenerCiclos = function () {
-    var urlObtenerEspecialidades = 'http://localhost:7006/semestres';
+    var urlObtenerEspecialidades = variablesAmbiente.apiUrl+variablesAmbiente.puertoSemestre+'/semestres';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -63,7 +63,7 @@ function($q, $http) {
   };
 
   servicio.eliminarCursoCiclo = function(data){
-    var urlElimCurso = 'http://localhost:7004/cursos/cursociclo/eliminar';
+    var urlElimCurso = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/cursociclo/eliminar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
