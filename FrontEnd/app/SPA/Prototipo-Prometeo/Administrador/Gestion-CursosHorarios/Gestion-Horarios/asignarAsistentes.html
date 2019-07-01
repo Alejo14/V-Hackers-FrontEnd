@@ -8,8 +8,8 @@
           </div>
         </div>
         <div class="col-md-5 m-t-50" align="right">
-          <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.actualizarGrupo()"><i class="fa fa-save"></i> Guardar</button>
-          <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCurso()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+          <button type="button" class="btn btn-primary waves-effect" ng-click="ctrl.actualizarAsistentes()"><i class="fa fa-save"></i> Guardar</button>
+          <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.volverCursoCiclo()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
                         {{asistente.nombreEspecialidad}}
                       </td>
                       <td data-title="'Agregar'">
-                        <input type="checkbox" ng-model="alumno.marcado">
+                        <input type="checkbox" ng-model="asistente.marcado">
                       </td>
                     </tr>
                   </table>
@@ -82,7 +82,7 @@
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <table ng-table="" class="table table-hover">
-                        <tr ng-repeat="asistente in ctrl.asistenteHorario" (click)="RowSelected(asistente);">
+                        <tr ng-repeat="asistente in ctrl.asistentesHorario" (click)="RowSelected(asistente);">
                           <td data-title="'Código'">
                             {{asistente.codigo}}
                           </td>
@@ -93,7 +93,7 @@
                             {{asistente.nombreEspecialidad}}
                           </td>
                           <td data-title="'Sacar'">
-                            <input type="checkbox" ng-model="alumno.marcado">
+                            <input type="checkbox" ng-model="asistente.marcado">
                           </td>
                         </tr>
                       </table>

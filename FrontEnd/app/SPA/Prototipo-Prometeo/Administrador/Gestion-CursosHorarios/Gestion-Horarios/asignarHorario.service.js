@@ -170,7 +170,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.obtenerAsistentesHorario = function(data){
-    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoUsuarios+'/usuarios/listarpor/'+rol;
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/listarasistenteshorario/'+data;
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -184,11 +184,27 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.obtenerAsistentesNoHorario = function(data){
-    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoUsuarios+'/usuarios/listarpor/'+rol;
+    var urlObtenerUsuarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/listarasistentesnohorario/'+data;
     var $defer = $q.defer();
     $http({
         method: 'GET',
         url: urlObtenerUsuarios,
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.actualizarAsistentesHorario = function(data){
+    //ACTUALIZAR
+    var urlActualizarHorario = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/actualizarasistenteshorario';
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlActualizarHorario,
+        data: data
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

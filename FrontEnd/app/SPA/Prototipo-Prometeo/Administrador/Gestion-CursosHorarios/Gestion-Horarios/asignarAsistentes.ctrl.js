@@ -5,6 +5,10 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
   ctrl.idHorario = "";
   ctrl.horario = "";
   ctrl.nombreCurso = "";
+  ctrl.codigoCurso = "";
+  ctrl.idCurso = "";
+  ctrl.idCursoCiclo = "";
+  ctrl.idSemestre = "";
   ctrl.asistentesHorario = [];
   ctrl.asistentesNoHorario = [];
   ctrl.asistentesHorarioTabla;
@@ -12,13 +16,8 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
 
 
   ctrl.actualizarAsistentes = function(){
-    console.log("hola");
-      if (ctrl.grupo.nombre==""){
-        swal("¡Opss!", "Ingrese un nombre para el grupo por favor" , "error");
-      }
-      else{
         swal({
-          title: "¿Estás seguro de que deseas modificar el grupo " + ctrl.grupo.nombre + "?",
+          title: "¿Estás seguro de que deseas modificar a los asistentes de docencia?",
           text: "",
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
@@ -37,43 +36,26 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
           if (agrupacionNuevoConfirmado !== "cancelar") {
 
 
-            listaAlumnos = [];
-            for(let i = 0; i < ctrl.alumnosGrupo.length; i++){
-              idRolUsuarioAlumno = {
-                "idRolUsuario": ctrl.alumnosGrupo[i].idRolUsuario
+            listaAsistentes = [];
+            for(let i = 0; i < ctrl.asistentesHorario.length; i++){
+              idRolUsuarioAsistente = {
+                "idRolUsuario": ctrl.asistentesHorario[i].idRolUsuario
               }
-              listaAlumnos.push(idRolUsuarioAlumno);
+              listaAsistentes.push(idRolUsuarioAsistente);
+
             }
-            console.log(listaAlumnos);
 
             data={
-              "id": ctrl.grupo.id,
-              "rolUsuarioIds": listaAlumnos
+              "horarioId": ctrl.idHorario,
+              "listaAsistentes": listaAsistentes
               }
-              console.log(angular.toJson(data));
 
-              vistaGruposService.actualizarGrupo(data).then(function () {
-                if(ctrl.grupo.nombre != ctrl.grupo.nombreOriginal){
-                  ctrl.grupo.nombreOriginal = ctrl.grupo.nombre;
-                  data={
-                    "id": ctrl.grupo.id,
-                    "nombre": ctrl.grupo.nombre,
-                    "fechaCreacion": (new Date())*1,
-                    "conjuntoGrupos_id": uuid(),
-                    "horario_id": ctrl.horario.horarioId
-                    }
-                    console.log(angular.toJson(data));
-                    vistaGruposService.modificarNombreGrupo(angular.toJson(data)).then(function () {
-                        swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizó correctamente" , "success");
-                    });
-                }else{
-                  swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizó correctamente" , "success");
-                }
+              asignarHorarioService.actualizarAsistentesHorario(data).then(function () {
+                swal("¡Bien hecho!", "Los asistentes se han actualizado correctamente" , "success");
               });
-              //$state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
         });
-      }
+
   }
 
 
@@ -103,7 +85,7 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
 
   ctrl.obtenerAsistentesHorario = function(){
 
-    asignarHorarioService.obtenerAsistentesHorario(ctrl.horarioId).then(function (asistentesHorarioData) {
+    asignarHorarioService.obtenerAsistentesHorario(ctrl.idHorario).then(function (asistentesHorarioData) {
       ctrl.asistentesHorario = asistentesHorarioData;
       for(let i = 0; i < ctrl.asistentesHorario.length; i++){
         ctrl.asistentesHorario[i].marcado = false;
@@ -113,7 +95,7 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
   };
 
   ctrl.obtenerAsistentesNoHorario = function(){
-    asignarHorarioService.obtenerAsistenteNoHorario(ctrl.horarioId).then(function (asistentesNoHorarioData) {
+    asignarHorarioService.obtenerAsistentesNoHorario(ctrl.idHorario).then(function (asistentesNoHorarioData) {
       ctrl.asistentesNoHorario = asistentesNoHorarioData;
       for(let i = 0; i < ctrl.asistentesNoHorario.length; i++){
         ctrl.asistentesNoHorario[i].marcado = false;
@@ -122,13 +104,22 @@ function($scope, $state, $stateParams, $uibModal, asignarHorarioService, NgTable
     });
   };
 
+  ctrl.volverCursoCiclo = function(){
+    $state.go('asignar-horarios',{idCursoCiclo:ctrl.idCursoCiclo,idCurso:ctrl.idCurso,idSemestre:ctrl.idSemestre,nombreCurso:ctrl.nombreCurso,codigoCurso:ctrl.codigoCurso});
+  }
+
   ctrl.init = function () {
+
     ctrl.nombreCurso = $stateParams.nombre;
     ctrl.horario = $stateParams.horario;
     ctrl.idHorario = $stateParams.idHorario;
-
-    //ctrl.obtenerAsistentesHorario(ctrl.idHorario);
-    //ctrl.obtenerAsistentesNoHorario(ctrl.idHorario);
+    ctrl.codigoCurso = $stateParams.codigoCurso;
+    ctrl.idCurso = $stateParams.idCurso;
+    ctrl.idCursoCiclo = $stateParams.idCursoCiclo;
+    ctrl.idSemestre = $stateParams.idSemestre;
+    ctrl.obtenerAsistentesHorario(ctrl.idHorario);
+    ctrl.obtenerAsistentesNoHorario(ctrl.idHorario);
+    console.log(ctrl.idHorario);
 
   }
 

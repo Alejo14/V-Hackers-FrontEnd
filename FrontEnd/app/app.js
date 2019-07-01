@@ -127,7 +127,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'asignar-asistentes',
-                  url: '/asignar-asistentes/:idHorario/:nombre/:horario',
+                  url: '/asignar-asistentes/:idHorario/:nombre/:horario/:codigoCurso/:idCurso/:idCursoCiclo/:idSemestre',
                   templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-CursosHorarios/Gestion-Horarios/asignarAsistentes.html'
                 }
               ]

@@ -20,7 +20,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
     "asistenteId": ""
   };//asegurarse de guardar los datos del profesor y de los asistentes de docencia para agregar data en tabla de rolusuarioXcurso y rolusuarioXhorario
   ctrl.profesoresLista = [];
-  ctrl.asistentesLista = [];
+
 
   function uuid() {
       function randomDigit() {
@@ -84,18 +84,9 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
                 "rolUsuarioIDAnt": ctrl.horarioNuevo.profesorId,
                 "horarioId": horario.id
               }
-              var asistenteXHorario = {
-                "rolUsuarioId": ctrl.horarioNuevo.asistenteId,
-                "rolUsuarioIDAnt": ctrl.horarioNuevo.asistenteId,
-                "horarioId": horario.id
-              }
               asignarHorarioService.asignarRolUsuario(profesorXHorario).then(function () {
                 console.log("Se asignó profesor al horario");
                 console.log(profesorXHorario);
-              });
-              asignarHorarioService.asignarRolUsuario(asistenteXHorario).then(function () {
-                console.log("Se asignó asistente al horario");
-                console.log(asistenteXHorario);
               });
 
               //guardar relacion de cursociclo y rolusuario
@@ -104,23 +95,12 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
                 "rolUsuarioIDAnt": ctrl.horarioNuevo.profesorId,
                 "cursoCicloId": ctrl.horarioNuevo.cursoCicloId
               }
-              var asistenteXCurso = {
-                "rolUsuarioId": ctrl.horarioNuevo.asistenteId,
-                "rolUsuarioIDAnt": ctrl.horarioNuevo.asistenteId,
-                "cursoCicloId": ctrl.horarioNuevo.cursoCicloId
-              }
-
-
 
 
               //se debe usar el service de curso
               asignarHorarioService.asignarRolUsuarioXCursoCiclo(angular.toJson(profesorXCurso)).then(function () {
                   console.log("Se asignó profesor");
                   console.log(profesorXCurso);
-              });
-              asignarHorarioService.asignarRolUsuarioXCursoCiclo(angular.toJson(asistenteXCurso)).then(function () {
-                  console.log("Se asignó asistente");
-                  console.log(asistenteXCurso);
               });
             });
             //guardar relación de horario y rolusuario
@@ -145,18 +125,9 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
                 "rolUsuarioIDAnt": modo.profesorId,
                 "horarioId": horario.id
               }
-              var asistenteXHorario = {
-                "rolUsuarioId": ctrl.horarioNuevo.asistenteId,
-                "rolUsuarioIDAnt": modo.asistenteId,
-                "horarioId": horario.id
-              }
               asignarHorarioService.modificarRolUsuario(angular.toJson(profesorXHorario)).then(function () {
                   console.log("Se modificó el profesor por horario");
                   console.log(profesorXHorario);
-              });
-              asignarHorarioService.modificarRolUsuario(angular.toJson(asistenteXHorario)).then(function () {
-                  console.log("Se modificó el asistente por horario");
-                  console.log(asistenteXHorario);
               });
 
               //guardar relacion de cursociclo y rolusuario
@@ -165,19 +136,10 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
                 "rolUsuarioIDAnt": modo.profesorId,
                 "cursoCicloId": ctrl.horarioNuevo.cursoCicloId
               }
-              var asistenteXCurso = {
-                "rolUsuarioId": ctrl.horarioNuevo.asistenteId,
-                "rolUsuarioIDAnt": modo.asistenteId,
-                "cursoCicloId": ctrl.horarioNuevo.cursoCicloId
-              }
               //se debe usar el service de curso
               asignarHorarioService.modificarRolUsuarioXCursoCiclo(angular.toJson(profesorXCurso)).then(function () {
                 console.log("Se modificó el profesor por cursociclo");
                 console.log(profesorXCurso);
-              });
-              asignarHorarioService.modificarRolUsuarioXCursoCiclo(angular.toJson(asistenteXCurso)).then(function () {
-                console.log("Se modificó el asistente por cursociclo");
-                console.log(asistenteXCurso);
               });
             });
             //guardar relación de horario y rolusuario
@@ -197,7 +159,6 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
   };
   ctrl.init = function(){
     ctrl.listarUsuariosXRol("Profesor");
-    ctrl.listarUsuariosXRol("Asistente de Docencia");
     console.log(ctrl.modo);
     if(ctrl.modo !== "c"){
       ctrl.horarioNuevo.id = modo.id;
