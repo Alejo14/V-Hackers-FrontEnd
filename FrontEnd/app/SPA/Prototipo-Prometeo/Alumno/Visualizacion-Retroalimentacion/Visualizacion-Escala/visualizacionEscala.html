@@ -1,0 +1,73 @@
+<section id="main">
+  <div ng-controller="calificacionEscalaCtrl as ctrl">
+    <div class="container">
+      <h3>Evaluaci&oacute;n de la herramienta</h3>
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-12">
+                <h4 class="titulo-letra-prometeo">Criterios</h4>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="form-group fg-line">
+            <label class="col-sm-8 p-t-10 p-l-0"></label>
+            <label class="col-sm-2 p-t-10">Puntaje</label>
+            <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.puntajeAsignado" ng-disabled="true" placeholder="Ingrese el puntaje">
+            <label class="form-control p-t-10" ></label>
+
+              <div class="" ng-repeat="criterio in ctrl.evaluacionEscala">
+                <div class="" style="width: 100%; heigth: 250px; color:black; font-width:1200; font-size:20px; background:silver">
+                  <label >{{$index + 1}}. {{criterio.descripcion}}</label>
+                </div>
+
+                <div  class="form-group fg-line m-b-0">
+                  <label class="control-label label-letra-prometeo p-t-10" align="right">Indicaciones del criterio</label>
+                </div>
+                <div class="form-group fg-line m-b-10">
+                  <textarea class="form-control p-t-10 input-letra-prometeo" rows="1" placeholder="Ingrese la observación del criterio" ng-model="criterio.indicaciones">
+                  </textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- <div class="form-group fg-line p-l-10 p-b-10 label-letra-prometeo" ng-repeat="nivel in criterio.niveles">
+                      {{($index+1) + '. ' + nivel.descripcion}}
+                      </div> -->
+                      <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala" ng-disabled="true">
+                        <label class="control-label input-letra-prometeo">
+                            <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-disabled="true" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
+                            <i class="input-helper"></i>
+                            {{criterio.nivelesCriterios[$index].descripcion}} ({{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
+                        </label>
+                      </div>
+
+                  </div>
+                  <!-- Se debe borrar -->
+                  <!--
+                  <div class="col-sm-6">
+                    <div class="form-group fg-line p-l-10 label-letra-prometeo" ng-repeat="criterio in criterio.criterios">
+                      <label class="col-sm-6 p-t-10 p-l-0 control-label label-letra-prometeo">Observaci&oacute;n del criterio {{$index+1}}</label>
+                      <textarea class="form-control p-t-10 input-letra-prometeo" rows="4" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+               -->
+
+                <!----->
+              </div>
+          </div>
+          <div class="col-sm-12" align="right">
+            <!-- <button type="button" ng-click = "ctrl.calcularPuntajeCriterio()" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
+            <button type="button" ng-click = "ctrl.guardarcriterios()" class="btn btn-primary waves-effect" ng-disabled="!ctrl.habilitarBotones"><i class="fa fa-save"></i> Guardar</button> -->
+            <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
