@@ -1,9 +1,10 @@
-angular.module('vHackersModule').controller('gestionProyectoCtrl', ['$scope', '$state', '$stateParams', 'NgTableParams', 'calificacionProyectoService', '$uibModal',
+angular.module('vHackersModule').controller('calificacionProyecto', ['$scope', '$state', '$stateParams', 'NgTableParams', 'calificacionProyectoService', '$uibModal',
 function($scope, $state, $stateParams, NgTableParams, calificacionProyectoService, $uibModal){
   var ctrl = this;
-  ctrl.idAvanceProyecto = $stateParams.idAvanceProyecto;
+  ctrl.idAvanceProyecto = $stateParams.avanceProyectoId;
   ctrl.nombreProyecto = $stateParams.nombreProyecto;
   ctrl.nombreCalificado = $stateParams.nombreCalificado;
+  ctrl.mensajeError = 'No se encuentran entregables calificados disponibles';
   ctrl.avanceProyecto = {};
   ctrl.proyectoCalificado = false;
   ctrl.observacion = '';
@@ -21,6 +22,10 @@ function($scope, $state, $stateParams, NgTableParams, calificacionProyectoServic
     calificacionProyectoService.obtenerAvanceProyecto(ctrl.idAvanceProyecto).then(function (respuesta) {
       ctrl.avanceProyecto = respuesta;
       ctrl.proyectoCalificado = ctrl.avanceProyecto.estadoAvanceProyectoId === '88479f6c-55d2-48e8-bc7e-20858ca48c57';
+      if (ctrl.proyectoCalificado) {
+        ctrl.observacion = ctrl.avanceProyecto.observaciones;
+        ctrl.nota = ctrl.avanceProyecto.nota;
+      }
     })
   }
   ctrl.calificarAvanceProyecto = function () {
