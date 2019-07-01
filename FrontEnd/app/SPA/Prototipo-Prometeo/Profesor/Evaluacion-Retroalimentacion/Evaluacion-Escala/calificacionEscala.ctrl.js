@@ -37,11 +37,16 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       ctrl.evaluacionAspecto=evaluacionEscala;//Para guardar la informacion obtenida
       console.log("EVALUACION",evaluacionEscala);
       ctrl.evaluacionEscala = evaluacionEscala[0].criterios;
-      ctrl.calcularPuntajeCriterio();
-      console.log("ASPECTO INICIAL",ctrl.evaluacionAspecto);
+      //ctrl.calcularPuntajeCriterio();
+      ctrl.puntajeAsignado = 0;
       angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
-        criterio.activarPuntajeManual = false;
+        ctrl.puntajeAsignado += criterio.puntajeAsignado;
       });
+
+      console.log("ASPECTO INICIAL",ctrl.evaluacionAspecto);
+      // angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+      //   criterio.activarPuntajeManual = false;
+      // });
       //console.log(ctrl.evaluacionAspecto);
 
       for (var i = 0; i < ctrl.nivelesEscala.length; i++) {
