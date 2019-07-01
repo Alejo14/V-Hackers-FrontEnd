@@ -46,22 +46,27 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
   ctrl.cargarPestana = function(perfil) {
     switch (perfil.descripcion) {
       case 'Administrador':
+        $cookies.put('rolActivoId', perfil.id);
         ctrl.state = 'inicioAdmin';
         ctrl.rolUsuario = null;
         break;
       case 'Alumno':
+        $cookies.put('rolActivoId', perfil.id);
         ctrl.state = 'alumnoMisCursos';
         ctrl.rolUsuario = 'A';
         break;
       case 'Profesor':
+        $cookies.put('rolActivoId', perfil.id);
         ctrl.state = 'profesorMisCursos';
         ctrl.rolUsuario = 'P';
         break;
       case 'Asistente de Docencia':
+        $cookies.put('rolActivoId', perfil.id);
         ctrl.state = 'profesorMisCursos';
         ctrl.rolUsuario = 'P';
         break;
       default:
+        $cookies.put('rolActivoId', perfil.id);
         ctrl.state = 'principal';
         ctrl.rolUsuario = null;
     }

@@ -20,7 +20,11 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
-        aspecto.activarPuntajeManual = false;
+        if(aspecto.descripcionPuntajeManual !== '' || aspecto.descripcionPuntajeManual !== null){
+          aspecto.activarPuntajeManual = true;
+        }else{
+          aspecto.activarPuntajeManual = false;
+        }
       });
       console.log(ctrl.evaluacionAspecto);
     });
@@ -68,74 +72,76 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
         ctrl.evaluacionAspecto[posicion].puntajeAsignado += criterio.puntajeAsignado;
       });
       ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
+      ctrl.evaluacionAspecto[posicion].activarPuntajeManual = false;
+      ctrl.evaluacionAspecto[posicion].descripcionPuntajeManual = '';
     }else{
       swal("Error","No se ha encontrado el aspecto","error");
     }
   }
 
   ctrl.crearMensaje = function (longitud) {
-    var mensaje = "Los puntajes de los aspectos ";
-    if(longitud === 1) mensaje = mensaje + indices[0] + " ha sido modificado, pero no hay explicación alguna.";
+    var mensaje = "";
+    if(longitud === 1) mensaje = "El puntaje del aspecto " + ctrl.indices[0] + " ha sido modificado, pero no hay explicación alguna.";
     else{
+      mensaje = "Los puntajes de los aspectos ";
       for(let i = 0; i < longitud; i++){
-        var j = i + 1;
-        if(i === longitud - 2) mensaje = mensaje + j + " y ";
-        else if (i === longitud - 1) mensaje = mensaje + j + ", ";
-        else mensaje = mensaje + j + " han sido modificados pero no hay explicación alguna."
+        if(i === longitud - 2) mensaje = mensaje + ctrl.indices[i] + " y ";
+        else if (i === longitud - 1) mensaje = mensaje + ctrl.indices[i] + ", ";
+        else mensaje = mensaje + ctrl.indices[i] + " han sido modificados pero no hay explicación alguna."
       }
     }
     return mensaje;
   }
 
   ctrl.hayPuntajesManuales = function () {
-    var puntajesManuales = true;
-    var indices = [];
+    ctrl.indices = [];
     var contador = 0;
     angular.forEach(ctrl.evaluacionAspecto, function (aspecto,indice) {
       if(aspecto.activarPuntajeManual){
         if (aspecto.descripcionPuntajeManual === null || aspecto.descripcionPuntajeManual === ''){
-          indices.push(indice);
+          ctrl.indices.push(indice+1);
         }else{
           contador++;
         }
       }
     });
-    var n = indices.length;
-    if(n > 0){
-      var mensaje = ctrl.crearMensaje(n);
-      swal("¡Opss!", mensaje , "error");
-    }
-    if(contador > 0) return puntajesManuales;
-    return !puntajesManuales;
+    if(ctrl.indices.length) return 2;
+    if(contador > 0) return 1;
+    return 0;
   }
 
   ctrl.guardarAspecto = function(){
     ctrl.puntajeHerramienta = 0;
-    angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-      var puntajesManuales = ctrl.hayPuntajesManuales;
-      var puntaje = 0;
-      angular.forEach(aspecto.criterios, function(criterio,indice){
-        puntaje += criterio.puntajeAsignado;
-      });
-      aspecto.puntajeAsignado = puntaje;
-      if(!puntajesManuales){
-        ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
-        aspecto.puntajeManual = 0;
+    var puntajesManuales = ctrl.hayPuntajesManuales();
+    if(puntajesManuales !== 2){
+      angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+        var puntaje = 0;
         angular.forEach(aspecto.criterios, function(criterio,indice){
-          criterio.puntajeManual = 0;
+          puntaje += criterio.puntajeAsignado;
         });
-      }else{
-        ctrl.puntajeHerramienta += aspecto.puntajeManual;
+        aspecto.puntajeAsignado = puntaje;
+        if(puntajesManuales === 0){
+          ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
+          aspecto.puntajeManual = 0;
+          angular.forEach(aspecto.criterios, function(criterio,indice){
+            criterio.puntajeManual = 0;
+          });
+        }else if(puntajesManuales === 1){
+          ctrl.puntajeHerramienta += aspecto.puntajeManual;
+        }
+      });
+      var data = {
+        "aspectos":ctrl.evaluacionAspecto
       }
-    });
-    var data = {
-      "aspectos":ctrl.evaluacionAspecto
+      console.log(data);
+      calificacionAspectoService.guardarAspecto(data).then(function(){
+        swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+      });
+    }else{
+      var mensaje = ctrl.crearMensaje(ctrl.indices.length);
+      swal("¡Opss!", mensaje , "error");
     }
-    console.log(data);
-    calificacionAspectoService.guardarAspecto(data).then(function(){
-      swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
-      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
-    });
   }
 
   ctrl.init = function(){
