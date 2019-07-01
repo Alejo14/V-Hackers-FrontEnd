@@ -257,7 +257,7 @@ ctrl.elminarURL= function (archivo){
 }
 
 ctrl.verHerramientas= function () {
-  $state.go('calificacion' , {avanceEntregableId: ctrl.idAvanceEntregable, herramientaCalificada: 0 });
+  $state.go('visualizacion' , {avanceEntregableId: ctrl.idAvanceEntregable.id, herramientaCalificada: 0 });
 }
 
 
