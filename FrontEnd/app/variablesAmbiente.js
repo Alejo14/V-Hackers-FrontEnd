@@ -29,6 +29,9 @@
   window.__env.llaveApiLogin = 'AIzaSyD-6itk6u4kFYAJj7tHl2xvHZevytS-yoY';
   //cliente login
   window.__env.clienteLogin = '844327842205-hr7p49le062oob0ki3t59u89jhd9t2p0.apps.googleusercontent.com';
+  //Puerto para el correo
+  window.__env.puertoCorreo = ':7009';
+  //Puerto para horarios
   window.__env.puertoHorarios = ':7010';
   //Puerto de grupos
   window.__env.puertoGrupos = ':7011';

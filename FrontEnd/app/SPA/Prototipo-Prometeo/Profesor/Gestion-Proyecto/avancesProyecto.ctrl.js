@@ -43,7 +43,7 @@ function($scope, $state,$stateParams, gestionProyectoService, $uibModal, NgTable
     console.log("idProyecto: " + idProyecto);
     gestionProyectoService.mostrarAvanceProyecto(idProyecto, idRolUsuario, idGrupo).then(function (avanceData) {
       ctrl.avanceSeleccionado = avanceData;
-      $state.go('calificacion-proyecto', {avanceProyectoId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0, nombreProyecto: ctrl.proyecto.nombre, nombreCalificado: nombreCalificadoProyecto});
+      $state.go('calificacion-proyecto', {idProyecto: ctrl.proyecto.id, metodo: ctrl.proyecto.metodo, horarioId: ctrl.horarioId, avanceProyectoId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0, nombreProyecto: ctrl.proyecto.nombre, nombreCalificado: nombreCalificadoProyecto});
     });
   };
 

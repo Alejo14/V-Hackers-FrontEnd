@@ -155,7 +155,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacion-proyecto',
-                  url: '/calificacion/:avanceProyectoId/:herramientaCalificada/:nombreProyecto/:nombreCalificado',
+                  url: '/calificacion/:idProyecto/:metodo/:horarioId/:avanceProyectoId/:herramientaCalificada/:nombreProyecto/:nombreCalificado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/Calificacion-proyecto/calificacion-proyecto.html'
                 },
                 {
@@ -341,6 +341,16 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/visualizacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Escala/visualizacionEscala.html'
                 },
+                {
+                  name: 'visualizacionAspecto',
+                  url: '/visualizacionAspecto/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Aspecto/visualizacionAspectos.html'
+                },
+                {
+                  name: 'visualizacionListaCotejo',
+                  url: '/visualizacionListaCotejo/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Lista/visualizacionListaCotejo.html'
+                }
               ]
             }
           ]

@@ -1,15 +1,62 @@
 <section id="main">
-  <div ng-controller="gestionProyectoCtrl as ctrl">
+  <div ng-controller="calificacionProyecto as ctrl">
     <div class="container">
       <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <h2> {{ctrl.titulo}} </h2>
+              <h2> {{ctrl.nombreProyecto}} </h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2> {{ctrl.nombreCalificado}} </h2>
             </div>
           </div>
         </div>
         <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="table-responsive">
+                <table ng-table="ctrl.tablaAvancesEntregables" class="table table-bordered">
+                  <tr ng-repeat="avanceEntregable in ctrl.avancesEntregablesLista">
+                    <td data-title="'Nro.'" align="center" width="5%">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'Nombre de entregable'">
+                      {{avanceEntregable.nombreEntregable}}
+                    </td>
+                    <td data-title="'Nota'">
+                      {{avanceEntregable.nota}}
+                    </td>
+                  </tr>
+                  <tr ng-if="ctrl.avancesEntregablesLista.length == 0">
+                    <td colspan = "3" align="center">{{ctrl.mensajeError}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <button class="btn bgm-green btn-default waves-effect float-right m-15" ng-click="ctrl.atras()"><i class="fa fa-arrow-circle-left"></i> Atr&aacute;s</button>
+              <button class="btn btn-primary color-fondo-azul-pucp waves-effect float-right m-t-15 m-b-15 m-l-15" ng-click="ctrl.calificarAvanceProyecto()" ng-if="!ctrl.proyectoCalificado" ng-disabled="ctrl.observacion === ''"><i class="fa fa-save"></i> Calificar</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <div class="fg-line">
+                  <label class="col-sm-8 p-t-10 p-l-0">Observaci&oacute;n</label>
+                  <label class="col-sm-2 p-t-10">Puntaje</label>
+                  <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.nota" placeholder="Ingrese el puntaje" ng-readonly="ctrl.proyectoCalificado">
+                </div>
+                <div class="fg-line">
+                  <textarea class="form-control" placeholder="Ingrese la observación general del proyecto" ng-model="ctrl.observacion" ng-readonly="ctrl.proyectoCalificado">
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>
