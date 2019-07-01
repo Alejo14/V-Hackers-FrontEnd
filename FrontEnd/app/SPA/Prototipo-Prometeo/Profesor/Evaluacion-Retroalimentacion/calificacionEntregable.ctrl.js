@@ -84,10 +84,33 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
       }
     }).then(function (respuesta) {
       if (respuesta) {
-        calificacionHerramientaEvaluacionServicio.enviarCalificacion(ctrl.evaluacion).then(function(data){
-          swal("¡Felicidades!","Se envió la calificación exitosamente","success").then(function(){
-            $state.go('avances-entregable');
-          });
+        console.log(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId);
+        calificacionHerramientaEvaluacionServicio.enviarCalificacion(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId).then(function(data){
+          swal("¡Felicidades!","Se envió la calificación exitosamente","success");
+        });
+      }
+    });
+  }
+
+  ctrl.publicarCalificacion = function () {
+    swal({
+      title: "¿Estás seguro de que quieres publicar la calificación realizada al profesor del curso?",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, enviar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (respuesta) {
+      if (respuesta) {
+        console.log(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId);
+        calificacionHerramientaEvaluacionServicio.publicarCalificacion(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId).then(function(data){
+          swal("¡Felicidades!","Se publicó la calificación exitosamente","success");
         });
       }
     });
