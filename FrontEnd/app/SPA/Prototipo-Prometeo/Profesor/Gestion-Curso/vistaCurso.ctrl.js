@@ -109,6 +109,10 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
     $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.curso.idHorario});
   };
 
+  ctrl.calificarProyecto = function (proyecto) {
+    $state.go('avances-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, metodo: proyecto.metodoTrabajo, horarioId: ctrl.curso.idHorario});
+  };
+
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
     swal({
@@ -194,7 +198,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
   };
 
   ctrl.ingresarProyecto = function(proyecto){
-    $state.go('evaluacion-herramienta-listar', {cursoId:ctrl.curso.cursoCicloId, proyectoId: proyecto.id, proyectoNombre:proyecto.nombre});
+    $state.go('evaluacion-herramienta-listar', {cursoId:ctrl.curso.cursoCicloId, proyectoId: proyecto.id, proyectoNombre:proyecto.nombre, horarioId: ctrl.curso.idHorario});
   }
 
   ctrl.init();

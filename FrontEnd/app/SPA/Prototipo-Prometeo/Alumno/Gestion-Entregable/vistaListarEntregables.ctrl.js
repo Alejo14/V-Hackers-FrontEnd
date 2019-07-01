@@ -105,10 +105,11 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   };
 
 
-  ctrl.regresarProyectos = function () {
-    //CORREGIR
-        $state.go('alumnoMisCursos', {rolUsuario:ctrl.rolusuarioId});
+  ctrl.regresarCurso = function () {
+        $state.go('alumnoCursos', {cursoCicloId:$stateParams.cursoCicloId,nombreCurso:$stateParams.nombreCurso,
+          codigoCurso:$stateParams.codigoCurso,horario:$stateParams.horario , rolusuarioId:ctrl.rolusuarioId});
   };
+
 
   ctrl.regresarEntregables = function () {
     swal({

@@ -20,7 +20,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  }
 
  ctrl.crearHerramienta = function () {
-   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntajeMax){
+   if (!ctrl.herramienta.descripcion || !ctrl.herramienta.puntaje_Max){
      swal("¡Opss!", "Hay campos obligatorios sin llenar" , "error");
    }else{
     swal({
@@ -89,11 +89,13 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
     }
 
     ctrl.herramienta = {};
+    ctrl.herramienta.id = "";
     ctrl.herramienta.descripcion = "";
-    ctrl.herramienta.puntajeMax = 0;
+    ctrl.herramienta.puntaje_Max = 0;
     //ctrl.herramienta.usoOtrosEvaluadores = false;
     ctrl.herramienta.tipo = "";
     ctrl.herramienta.entregableId = $stateParams.id;
+    ctrl.herramienta.cursoCicloId = $stateParams.cursoCicloId;
     //Esta variable sirve para ejecutar el servicio de listar Niveles
     ctrl.nivelesCreados = 0;
     //Obtener RolUsuarioId
@@ -103,7 +105,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
   ctrl.init = function (){
     ctrl.idUsuario = $cookies.get('usuarioID');
     var descripcionRol="Profesor";
-
+    ctrl.inicializarVariables();
     herramientaEvaluacionService.obtenerRolUsuario(ctrl.idUsuario, descripcionRol).then(function(rolUsuario){
       ctrl.rolUsuarioId=rolUsuario;
       //Llamada al servicio parar crear herramienta de evaluación

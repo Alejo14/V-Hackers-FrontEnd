@@ -8,7 +8,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col-md-12">
-              <h2>{{ctrl.mensaje}}</h2>
+              <h2>Usuarios</h2>
             </div>
           </div>
         </div>
@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="pull-right">
-                <button class="btn btn-primary m-b-10" ng-click = "ctrl.agregarUsuario()"><i class="fa fa-plus-circle"></i> Agregar Usuario</button>
+                <button class="btn btn-primary color-fondo-azul-pucp waves-effect m-b-20 float-right" ng-click = "ctrl.agregarUsuario()"><i class="fa fa-plus-circle"></i> Agregar Usuario</button>
               </div>
             </div>
           </div>
@@ -37,15 +37,15 @@
                     <td data-title="'Correo'">
                       {{usuario.correo}}
                     </td>
-                    <td data-title="'Acciones'">
-                      <div align="center">
-                        <a style="padding:10px;" class="col-md-6" ng-click="ctrl.modificarRoles(usuario)">
+                    <td data-title="'Acciones'" align="center">
+                      <!-- <div align="center"> -->
+                        <a href="" style="padding:5px;" class="col-md-6" ng-click="ctrl.modificarRoles(usuario)">
                           <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a style="padding:10px;" class="col-md-6" ng-click="ctrl.eliminarUsuario(usuario, $index)">
+                        <a href="" style="padding:5px;" class="col-md-6" ng-click="ctrl.eliminarUsuario(usuario, $index)">
                           <i class="fas fa-trash-alt"></i>
                         </a>
-                      </div>
+                      <!-- </div> -->
                     </td>
                   </tr>
                 </table>
@@ -54,7 +54,7 @@
           </div>
           <div class="row m-t-10">
             <div class="col-md-12" align="right">
-              <button type="button" class="btn btn-default waves-effect" ng-click="ctrl.regresarAdministrador()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" class="btn btn-default waves-effect bgm-green m-r-5 m-l-5 float-right" ng-click="ctrl.regresarAdministrador()"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
           </div>
         </div>

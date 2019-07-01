@@ -51,7 +51,20 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
 
     modalInstance.result.then( function (parametroRetorno) {
       if (parametroRetorno) {
-          ctrl.criteriosLista[indiceCriterio] = parametroRetorno;
+        ctrl.criteriosLista[indiceCriterio] = parametroRetorno;
+        if($stateParams.estado === 'editar'){
+          var criterio = {
+            "id": parametroRetorno.id,
+            "descripcion": parametroRetorno.descripcion,
+            "indicaciones": parametroRetorno.indicaciones,
+            "nivelesCriterio": parametroRetorno.niveles
+          };
+          nuevoAspectoRubricaServicio.modificarAspecto(criterio).then(function(modificado){
+            swal('Éxito', 'El criterio ha sido modificado','success');
+          });
+        }else{
+          swal('Éxito', 'El criterio ha sido modificado','success');
+        }
       }
     });
   }
@@ -88,8 +101,50 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
   }
 
   ctrl.guardarAspecto = function(){
+    var maximoPuntaje = 0;
+    angular.forEach(ctrl.criteriosLista, function (criterio, indice) {
+      maximoPuntaje += criterio.puntaje_maximo;
+    });
+    if($stateParams.estado !== 'editar') ctrl.guardarAspectoNuevo(maximoPuntaje);
+    else ctrl.editarAspecto(maximoPuntaje);
+  }
+
+  ctrl.guardarAspectoNuevo = function(maximoPuntaje){
     swal({
-      title: "¿Esta seguro de que desea guardar el Aspecto actual?",
+      title: "¿Esta seguro de que desea guardar el aspecto actual?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        cancelar: {
+          className: "btn btn-lg btn-danger"
+        },
+        confirm: {
+          text: "Sí, guardar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      },
+      closeModal: false
+    }).then(function (aspectoGuardarConfirmado) {
+      if (aspectoGuardarConfirmado) {
+        var data = {
+          "rubricaId": ctrl.rubricaId,
+          "descripcion": ctrl.aspecto.descripcion,
+          "puntaje_maximo": maximoPuntaje,
+  	      "cant_criterios": ctrl.criteriosLista.length,
+  	      "titulo": ctrl.aspecto.titulo,
+  	      "criterios": ctrl.criteriosLista
+        };
+        nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
+           swal("Felicidades","Se guardó su configuración con éxito" ,"success");
+           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
+        });
+      }
+    });
+  }
+
+  ctrl.editarAspecto = function (maximoPuntaje) {
+    swal({
+      title: "¿Esta seguro de que desea editar el aspecto actual?",
       text: "",
       icon: "warning",
       buttons: {
@@ -104,18 +159,16 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
       closeModal: false
     }).then(function (aspectoGuardarConfirmado) {
       data = {
-        "rubricaID": ctrl.rubricaId,
+        "id":$stateParams.id,
+        "rubricaId": ctrl.rubricaId,
         "descripcion": ctrl.aspecto.descripcion,
-        "puntaje_maximo": 20,
-	      "cant_criterios": ctrl.criteriosLista.length,
+        "puntaje_maximo": maximoPuntaje,
 	      "titulo": ctrl.aspecto.titulo,
-	      "criterios": ctrl.criteriosLista
-      }
-      console.log(data);
-      if (aspectoGuardarConfirmado !== "cancelar") {
-        nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
-           swal("Felicidades","Se guardó su configuración con éxito" ,"success");
-           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
+      };
+      if (aspectoGuardarConfirmado) {
+        nuevoAspectoRubricaServicio.modificarAspecto(data).then(function(){
+          swal("Felicidades","Se guardó su configuración con éxito" ,"success");
+          $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
         });
       }
     });
@@ -160,14 +213,19 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         ctrl.aspecto.descripcion = aspectoSeleccionado.descripcion;
       });
       nuevoAspectoRubricaServicio.listarCriteriosXAspecto(dataAspecto).then(function(criterios) {
-        ctrl.criteriosLista = criterios;
-        ctrl.aspecto.criterios = criterios;
-        angular.forEach(ctrl.criterioLista, function(criterio, indice){
-          criterio.niveles = criterios.nivelesCriterio;
+        var criteriosRecibidos = [];
+        angular.forEach(criterios, function (criterio,indice) {
+          var criterioRegreso = {
+            "id" : criterio.id,
+            "descripcion": criterio.descripcion,
+            "indicaciones": criterio.indicaciones,
+            "niveles": criterio.nivelesCriterio
+          };
+          criteriosRecibidos.push(criterioRegreso);
         });
-        angular.forEach(ctrl.aspecto.criterios, function(criterio, indice){
-          criterio.niveles = criterios.nivelesCriterio;
-        });
+
+        ctrl.criteriosLista = criteriosRecibidos;
+        ctrl.aspecto.criterios = criteriosRecibidos;
         ctrl.inicializarTabla();
       });
     }else{

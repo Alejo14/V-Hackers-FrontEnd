@@ -72,10 +72,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
   }
 
   ctrl.avancesEntregable = function(entregable){
-    $state.go('avances-entregable' , {id: 0, cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});
-    swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
-    
-    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.curso.idHorario});
+    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.horarioId});
   }
   //avances-entregable/:id/:nombre/:metodo/:horarioId
 
@@ -83,6 +80,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
     ctrl.tituloVer = $stateParams.proyectoNombre;
     ctrl.proyectoId = $stateParams.proyectoId;
     ctrl.cursoCicloId = $stateParams.cursoId;
+    ctrl.horarioId = $stateParams.horarioId;
     ctrl.entregablesLista = [];
     ctrl.cargarEntregables(ctrl.proyectoId);
     ctrl.obtenerNombreProyecto(ctrl.proyectoId);
