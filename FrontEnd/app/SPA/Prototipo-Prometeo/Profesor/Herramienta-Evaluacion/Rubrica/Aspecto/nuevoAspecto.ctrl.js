@@ -127,13 +127,14 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
     }).then(function (aspectoGuardarConfirmado) {
       if (aspectoGuardarConfirmado) {
         var data = {
-          "rubricaId": ctrl.rubricaId,
+          "rubricaID": ctrl.rubricaId,
           "descripcion": ctrl.aspecto.descripcion,
           "puntaje_maximo": maximoPuntaje,
   	      "cant_criterios": ctrl.criteriosLista.length,
   	      "titulo": ctrl.aspecto.titulo,
   	      "criterios": ctrl.criteriosLista
         };
+        console.log(data);
         nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
            $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});

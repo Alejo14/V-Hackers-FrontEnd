@@ -31,7 +31,7 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.guardarAspecto = function(aspectos){
+  servicio.guardarEscala = function(aspectos){
      var urlGuardarAspectoCalificado = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacionAspectosCriterioRubrica'
      var $defer = $q.defer();
      $http({

@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-sm-10">
             <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Código horario*: </label>
+              <label class="label-letra-prometeo col-sm-4 control-label m-t-10 m-b-0">Código horario<strong class="text-danger">*</strong>: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
                   <input class="form-control input-sm" placeholder="Ingrese código de horario" ng-model = "ctrl.horarioNuevo.codigo">
@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-sm-10">
             <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Cantidad alumnos*: </label>
+              <label class="label-letra-prometeo col-sm-4 control-label m-t-10 m-b-0">Cantidad alumnos<strong class="text-danger">*</strong>: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
                   <input class="form-control input-sm" placeholder="Ingrese cantidad alumnos" ng-model = "ctrl.horarioNuevo.cantidadAlumnos">
@@ -39,30 +39,13 @@
         <div class="row">
           <div class="col-sm-10">
             <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Profesor*: </label>
+              <label class="label-letra-prometeo col-sm-4 control-label m-t-10 m-b-0">Profesor<strong class="text-danger">*</strong>: </label>
               <div class="col-sm-8">
                 <div class="fg-line">
                   <select class="form-control"
                     data-placeholder="Seleccione un profesor"
                     ng-model="ctrl.horarioNuevo.profesorId"
                     ng-options="profesor.rolUsuarioId as profesor.nombres for profesor in ctrl.profesoresLista">
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-10">
-            <div class="form-group">
-              <label class="col-sm-4 control-label m-t-10 m-b-0">Asistente de Docencia*: </label>
-              <div class="col-sm-8">
-                <div class="fg-line">
-                  <select class="form-control"
-                    data-placeholder="Seleccione un asistente de docencia"
-                    ng-model="ctrl.horarioNuevo.asistenteId"
-                    ng-options="asistente.rolUsuarioId as asistente.nombres for asistente in ctrl.asistentesLista">
                     <option value=""></option>
                   </select>
                 </div>

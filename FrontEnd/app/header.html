@@ -2,7 +2,7 @@
   <style>
     .header-1 {
       margin: 0px;
-      padding: 0px;
+      padding: 5px;
       background-color: white;
       border-radius: 30px 30px 30px 0px;
       /* width: 430px; */
@@ -10,27 +10,18 @@
     }
     .header-2 {
       margin: 0px;
-      padding: 0px;
-      padding-right: 60px;
+      padding: 5px 40px 5px 0px;
+      padding-right: 40px;
       /* border: solid; */
       /* background-color: yellow; */
-      /* width: 510px; */
+      width: 100%;
       height: 70px;
       /* line-height: 70px; */
-    }
-    .header-3 {
-      margin: 0;
-      padding: 0;
-      /* padding-right: 60px; */
-      /* border: solid; */
-      /* background-color: yellow; */
-      /* width: 510px; */
-      height: 30px;
-      line-height: 30px;
+      float: right;
     }
     .imagen-logo {
       height: 100%;
-      width: 80%;
+      border-radius: 10px;
     }
     .header-4 {
       /* margin: 5px 20px 0px 20px; */
@@ -45,7 +36,7 @@
       height: 40px;
       line-height: 30px;
       color: #2b78e4;
-      font-weight: 800;
+      font-weight: 750;
       background: white;
       font-size: 15px;
     }
@@ -53,40 +44,33 @@
       /* weight: 20px; */
       margin: 0px;
       margin-top: 5px;
-      padding: 0px;
+      padding: 0px 20px;
       /* float: left; */
       /* border: solid; */
     }
   </style>
   <div class="row" style="margin: 0px; padding: 0px;">
     <div class="col-md-4 header-1" align="center">
-      <a ui-sref="principal"><img src="imagenes/logo.jpeg" alt="prometeo" class="imagen-logo"></a>
+      <a><img src="imagenes/PROMETEO-gif.gif" alt="prometeo" class="imagen-logo" width="95%"></a>
     </div>
-    <div class="col-md-8 header-2">
-      <nav class="float-right" style="height: 70px; padding: 20px 60px;">
-        <!-- <li class="pull-right p-t-10"> -->
-          <ul class="top-menu header-3">
-            <li ng-click="rCtrl.logOut()"><a><i class="fa fa-sign-out-alt color-blanco"></i></a></li>
-            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/principal">Inicio</a></li>
-            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/profesor/profesorMisCursos/P">Profesor</a></li>
-            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/alumno/alumnoMisCursos/A">Alumno</a></li>
-            <li class="p-l-10 p-r-10"><a href="#!/inicio/raiz/administrador/inicioAdmin">Administrador</a></li>
-          </ul>
-        <!-- </li> -->
-      </nav>
+    <div class="col-md-6 header-2">
+      <!-- <a><img src="imagenes/logo-pucp-blanco.png" alt="prometeo" class="imagen-logo" style="float: right;"></a> -->
+    </div>
+    <div class="col-md-2 header-2">
+      <a><img src="imagenes/logo-pucp-blanco.png" alt="prometeo" class="imagen-logo" style="float: right;"></a>
     </div>
   </div>
-  <div class="row-md header-4">
-    <div class="col-md-2 header-5 float-left" style="border-right: solid;" align="center">
-      <h2 class="border" style="background-color: red; color: black;">{{ctrl.usuario.codigo}}</h2>
+  <div class="row-md-12 header-4">
+    <div class="header-5 float-left" style="border-right: solid;" align="center">
+      {{rCtrl.usuario.nombreCompleto}}
     </div>
-    <div class="col-md-1 header-5 float-left" align="center">
-      {{ctrl.usuario.codigo}}20000000
+    <div class="header-5 float-left" align="center">
+      {{rCtrl.usuario.codigo}}
     </div>
-    <div class="col-md-1 header-5 float-left" style="border-left: solid;" align="center">
-      PERFIL
+    <div class="header-5 float-left" style="border-left: solid;" align="center" ng-repeat="rol in rCtrl.usuario.roles">
+      <a href="" ng-click="rCtrl.cargarPestana(rol)">{{rol.descripcion}}</a>
     </div>
-    <div class="col-md-1 header-5 float-right" align="center">
+    <div class="header-5 float-right" align="center">
       <a href="" ng-click="rCtrl.logOut()"><i class="fa fa-sign-out-alt"></i></a>
     </div>
   </div>

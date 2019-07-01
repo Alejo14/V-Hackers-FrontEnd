@@ -34,13 +34,30 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);
     console.log("Calificacion Herramienta Evaluacion ID",ctrl.calificacionHerramientaEvaluacionId);
     calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
-      ctrl.evaluacionEscala = evaluacionEscala;
-      console.log(evaluacionEscala);
-      // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-      //   aspecto.accordionOpen = false;
-      //   aspecto.activarPuntajeManual = false;
+      ctrl.evaluacionAspecto=evaluacionEscala;//Para guardar la informacion obtenida
+      console.log("EVALUACION",evaluacionEscala);
+      ctrl.evaluacionEscala = evaluacionEscala[0].criterios;
+      //ctrl.calcularPuntajeCriterio();
+      ctrl.puntajeAsignado = 0;
+      angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+        ctrl.puntajeAsignado += criterio.puntajeAsignado;
+      });
+
+      console.log("ASPECTO INICIAL",ctrl.evaluacionAspecto);
+      // angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+      //   criterio.activarPuntajeManual = false;
       // });
-      // console.log(ctrl.evaluacionAspecto);
+      //console.log(ctrl.evaluacionAspecto);
+
+      for (var i = 0; i < ctrl.nivelesEscala.length; i++) {
+        for (var j = 0; j < ctrl.evaluacionEscala.length; j++) {
+          for (var k = 0; k < ctrl.evaluacionEscala[j].nivelesCriterios.length; k++) {
+            if (ctrl.evaluacionEscala[j].nivelesCriterios[k].nivelRubricaId==ctrl.nivelesEscala[i].id) {
+              ctrl.evaluacionEscala[j].nivelesCriterios[k].descripcion=ctrl.nivelesEscala[i].descripcion;
+            }
+          }
+        }
+      }
     });
   }
 
@@ -80,14 +97,15 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     return -1;
   }
 
-  ctrl.calcularPuntajeCriterio = function(aspectoId){
-    var posicion = ctrl.buscarAspecto(aspectoId);
+  ctrl.calcularPuntajeCriterio = function(){
+    var posicion = 1;
     if(posicion !== -1){
-      ctrl.evaluacionAspecto[posicion].puntajeAsignado = 0;
-      angular.forEach(ctrl.evaluacionAspecto[posicion].criterios, function(criterio,indice){
-        ctrl.evaluacionAspecto[posicion].puntajeAsignado += criterio.puntajeAsignado;
+      ctrl.puntajeAsignado = 0;
+      angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+        ctrl.puntajeAsignado += criterio.puntajeAsignado;
       });
-      ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
+      ctrl.habilitarBotones = true;
+      //ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
     }else{
       swal("Error","No se ha encontrado el aspecto","error");
     }
@@ -129,7 +147,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     return !puntajesManuales;
   }
 
-  ctrl.guardarAspecto = function(){
+  ctrl.guardarAspecto = function(){//Se debe BORRAR
     ctrl.puntajeHerramienta = 0;
     angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
       var puntajesManuales = ctrl.hayPuntajesManuales;
@@ -158,8 +176,59 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     });
   }
 
+
+  ctrl.guardarcriterios = function(){//Se debe QUEDAR
+    //ctrl.calcularPuntajeCriterio();
+
+    if (ctrl.puntajeAsignado>ctrl.evaluacionAspecto[0].puntajeMaximo) {
+      swal("¡Opss!", "El Puntaje Asignado supera el Puntaje Máximo" , "error");
+    }else {
+
+      //ctrl.puntajeHerramienta = 0;
+      // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
+      //   var puntajesManuales = ctrl.hayPuntajesManuales;
+      //   var puntaje = 0;
+      //   angular.forEach(aspecto.criterios, function(criterio,indice){
+      //     puntaje += criterio.puntajeAsignado;
+      //   });
+      //   aspecto.puntajeAsignado = puntaje;
+      //   if(!puntajesManuales){
+      //     ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
+      //     aspecto.puntajeManual = 0;
+      //     angular.forEach(aspecto.criterios, function(criterio,indice){
+      //       criterio.puntajeManual = 0;
+      //     });
+      //   }else{
+      //     ctrl.puntajeHerramienta += aspecto.puntajeManual;
+      //   }
+      // });
+      ctrl.evaluacionAspecto[0].puntajeAsignado=ctrl.puntajeAsignado;
+      ctrl.evaluacionAspecto[0].criterios=ctrl.evaluacionEscala;
+      var data = { //Se manda un ASpecto Vacio para mantener la estructura pero con los criterios
+        "aspectos":ctrl.evaluacionAspecto
+      }
+      console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
+      calificacionEscalaService.guardarEscala(data).then(function(){
+        swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+      });
+
+
+    }
+
+
+
+
+
+
+  }
+
+
+
+
   ctrl.init = function(){
     //ctrl.obtenerEvaluacionAspecto();
+    ctrl.habilitarBotones = false;
     ctrl.obtenerEvaluacionCriterios();
   }
 

@@ -17,12 +17,12 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
-  servicio.enviarCalificacion = function(evaluacion){
-    var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacion';
+  servicio.guardarCalificacion = function(evaluacion){
+    var urlGuardarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion + '/guardarCalificacion';
     var $defer = $q.defer();
     $http({
         method: 'POST',
-        url: urlEnviarCalificacion,
+        url: urlGuardarCalificacion,
         data: evaluacion
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
@@ -45,7 +45,7 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   }
-  
+
   servicio.mostrarArchivosAvanceEntregable = function(id){
     var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarArchivoAvanceEntregable/' + id;
     var $defer = $q.defer();
@@ -90,5 +90,51 @@ function($q, $http, variablesAmbiente) {
      });
     return $defer.promise;
   }
+
+  servicio.enviarCalificacion = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion +'/cambiarEstadoaEnviado/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.publicarCalificacion = function(id){
+    var urlmostrarAvanceEntregable = variablesAmbiente.apiUrl + variablesAmbiente.puertoCalificacion +'/cambiarEstadoaCompleto/' + id;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlmostrarAvanceEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+       console.log(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.obtenerUsuario = function (usuarioId) {
+    var urlObtenerUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/obtenerusuario/' + usuarioId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerUsuario
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  };
+
+  // cambiarEstadoaEnviado/:calificacionHerramientaEvaluacionId
 
 }]);

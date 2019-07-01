@@ -1,11 +1,11 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('creacionCursosService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('creacionCursosService', ['$q', '$http','variablesAmbiente',
+function($q, $http,variablesAmbiente) {
 
   var servicio = this;
 
   servicio.registroCurso = function(data){
-    var urlEnviarCurso = 'http://localhost:7004/cursos/crear';
+    var urlEnviarCurso = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -20,7 +20,7 @@ function($q, $http) {
   }
 
   servicio.modificarCurso = function(data){
-    var urlModificarCurso = 'http://localhost:7004/cursos/modificar';
+    var urlModificarCurso = variablesAmbiente.apiUrl+variablesAmbiente.puertoCursos+'/cursos/modificar';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -35,7 +35,7 @@ function($q, $http) {
   }
 
   servicio.obtenerFacultades = function () {
-    var urlObtenerFacultades = 'http://localhost:7005/facultad';
+    var urlObtenerFacultades = variablesAmbiente.apiUrl+variablesAmbiente.puertoFacultades+'/facultad';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -49,7 +49,7 @@ function($q, $http) {
   };
 
   servicio.obtenerEspecialidades = function () {
-    var urlObtenerEspecialidades = 'http://localhost:7005/especialidad';
+    var urlObtenerEspecialidades = variablesAmbiente.apiUrl+variablesAmbiente.puertoFacultades+'/especialidad';
     var $defer = $q.defer();
     $http({
         method: 'GET',

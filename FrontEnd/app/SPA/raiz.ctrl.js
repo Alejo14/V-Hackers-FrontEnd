@@ -2,7 +2,9 @@ angular.module('vHackersModule').controller('raizCtrl', ['$scope', '$state' , '$
 
 function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
   var ctrl = this;
-
+  ctrl.nombreUsuario = '';
+  ctrl.state = '';
+  ctrl.rolUsuario = '';
   ctrl.idUsuario = $cookies.get('usuarioID');
   ctrl.logOut = function () {
     var token = gapi.auth.getToken();
@@ -24,45 +26,56 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
     }
 
   };
+
   ctrl.init = function () {
     if (!ctrl.usuario) {
       raizService.obtenerUsuarioLogin(ctrl.idUsuario).then(function (usuario){
         ctrl.usuario = usuario;
         var inicioSesion = $cookies.get('inicioSesion');
+        ctrl.usuario.nombreCompleto = ctrl.usuario.nombres + ' ' + ctrl.usuario.apellidos.toUpperCase();
+        console.log(ctrl.usuario);
         if (inicioSesion && inicioSesion !== 'false') {
           $cookies.put('inicioSesion', false);
-          var descripcionRol = ctrl.usuario.roles[0].descripcion;
-          var state = '';
-          var rolUsuario = '';
-          switch (descripcionRol) {
-            case 'Administrador':
-              state = 'inicioAdmin';
-              break;
-            case 'Alumno':
-              state = 'alumnoMisCursos';
-              rolUsuario = 'A';
-              break;
-            case 'Profesor':
-              state = 'profesorMisCursos';
-              rolUsuario = 'P';
-              break;
-            case 'Asistente de Docencia':
-              state = 'profesorMisCursos';
-              rolUsuario = 'P';
-              break;
-            default:
-              state = 'principal';
-          }
-          if (rolUsuario == '') {
-            $state.go(state);
-          } else {
-            $state.go(state,{rolUsuario: rolUsuario});
-          }
-
+          // var descripcionRol = ctrl.usuario.roles[0];
+          ctrl.cargarPestana(ctrl.usuario.roles[0]);
         }
       });
     }
   };
+
+  ctrl.cargarPestana = function(perfil) {
+    switch (perfil.descripcion) {
+      case 'Administrador':
+        $cookies.put('rolActivoId', perfil.id);
+        ctrl.state = 'inicioAdmin';
+        ctrl.rolUsuario = null;
+        break;
+      case 'Alumno':
+        $cookies.put('rolActivoId', perfil.id);
+        ctrl.state = 'alumnoMisCursos';
+        ctrl.rolUsuario = 'A';
+        break;
+      case 'Profesor':
+        $cookies.put('rolActivoId', perfil.id);
+        ctrl.state = 'profesorMisCursos';
+        ctrl.rolUsuario = 'P';
+        break;
+      case 'Asistente de Docencia':
+        $cookies.put('rolActivoId', perfil.id);
+        ctrl.state = 'profesorMisCursos';
+        ctrl.rolUsuario = 'P';
+        break;
+      default:
+        $cookies.put('rolActivoId', perfil.id);
+        ctrl.state = 'principal';
+        ctrl.rolUsuario = null;
+    }
+    if (ctrl.rolUsuario == null) {
+      $state.go(ctrl.state);
+    } else {
+      $state.go(ctrl.state,{rolUsuario: ctrl.rolUsuario});
+    }
+  }
 
   ctrl.init();
 }]);

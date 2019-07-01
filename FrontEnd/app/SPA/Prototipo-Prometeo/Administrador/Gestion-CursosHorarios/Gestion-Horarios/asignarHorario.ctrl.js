@@ -128,7 +128,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   }
 
   ctrl.editarAsistentes= function(horario){
-    $state.go('asignar-asistentes',{idHorario:horario.id,nombre:ctrl.nombre,horario:horario.codigo});
+    $state.go('asignar-asistentes',{idHorario:horario.id,nombre:ctrl.nombre,horario:horario.codigo,codigoCurso:ctrl.codigo,idCurso:ctrl.idCurso,idCursoCiclo:ctrl.idCursoCiclo,idSemestre:ctrl.idCiclo});
   }
 
 

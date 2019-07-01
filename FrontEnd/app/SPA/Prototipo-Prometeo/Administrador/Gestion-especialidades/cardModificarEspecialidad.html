@@ -4,7 +4,7 @@
       <form class="form-horizontal ng-pristine ng-valid">
         <div class="card-body card-padding">
           <div class="form-group">
-            <label class="col-sm-4 control-label">C&oacute;digo*:</label>
+            <label class="label-letra-prometeo col-sm-4 control-label">C&oacute;digo<strong class="text-danger">*</strong>:</label>
             <div class="col-sm-8">
               <div class="fg-line">
                   <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.codigo" placeholder="e.g: COD" disabled>
@@ -12,7 +12,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-4 control-label">Nombre*:</label>
+            <label class="label-letra-prometeo col-sm-4 control-label">Nombre<strong class="text-danger">*</strong>:</label>
             <div class="col-sm-8">
               <div class="fg-line">
                   <input type="text" class="form-control input-sm" ng-model="ctrl.especialidad.nombre" placeholder="e.g: Especialidad" ng-change="ctrl.validarRegistroValido()">
@@ -20,11 +20,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-4 control-label">Facultad*:</label>
+            <label class="label-letra-prometeo col-sm-4 control-label">Facultad<strong class="text-danger">*</strong>:</label>
             <div class="col-sm-8">
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="ctrl.especialidad.facultad" ng-options="facultad.nombre for facultad in ctrl.facultadesLista" ng-change="ctrl.validarRegistroValido()">
+                  <select class="form-control" ng-model="ctrl.especialidad.facultad" ng-options="facultad.id as facultad.nombre for facultad in ctrl.facultadesLista" ng-change="ctrl.validarRegistroValido()">
                     <!--<option value="">Seleccione una facultad:</option>-->
                   </select>
                 </div>
@@ -39,7 +39,7 @@
         <div class="card-body card-padding">
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-4 control-label">Responsable*:</label>
+              <label class="label-letra-prometeo col-sm-4 control-label">Responsable<strong class="text-danger">*</strong>:</label>
               <div class="col-sm-8">
                 <div class="fg-line">
                     <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsableNombre" placeholder="Responsable" ng-change="ctrl.validarRegistroValido()">

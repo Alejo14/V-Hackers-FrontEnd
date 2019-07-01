@@ -1,8 +1,8 @@
 angular.module('vHackersModule').controller('calificacionCtrl', calificacionCtrl);
 
-calificacionCtrl.$inject = ['$scope','$state', '$stateParams','NgTableParams','calificacionHerramientaEvaluacionServicio'];
+calificacionCtrl.$inject = ['$scope','$state', '$stateParams','NgTableParams','calificacionHerramientaEvaluacionServicio','$cookies'];
 
-function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacionHerramientaEvaluacionServicio){
+function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacionHerramientaEvaluacionServicio,$cookies){
   var ctrl = this;
 
   ctrl.evaluacion = {};
@@ -43,9 +43,9 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   * Servicio para enviar Calificación al Back-End
   *================================================
   */
-  ctrl.enviarCalificacion = function() {
+  ctrl.guardarCalificacion = function() {
     swal({
-      title: "¿Estás seguro de que quieres enviar la calificación realizada?",
+      title: "¿Estás seguro de que quieres guardar la calificación realizada?",
       icon: "warning",
       buttons: {
         Cancel: {
@@ -58,15 +58,63 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
         }
       }
     }).then(function (respuesta) {
-      if (respuesta == "Confirm") {
-        calificacionHerramientaEvaluacionServicio.enviarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
-          swal("¡Felicidades!","Se guardó la calificación exitosamente","success").then(function(){
-            $state.go('inicioProfes');
-          });
+      if (respuesta) {
+        console.log(ctrl.evaluacion);
+        calificacionHerramientaEvaluacionServicio.guardarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
+          swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
+          ctrl.habilitarBotones = true;
         });
       }
     });
   };
+
+  ctrl.enviarCalificacion = function(){
+    swal({
+      title: "¿Estás seguro de que quieres enviar la calificación realizada al profesor del curso?",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, enviar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (respuesta) {
+      if (respuesta) {
+        console.log(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId);
+        calificacionHerramientaEvaluacionServicio.enviarCalificacion(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId).then(function(data){
+          swal("¡Felicidades!","Se envió la calificación exitosamente","success");
+        });
+      }
+    });
+  }
+
+  ctrl.publicarCalificacion = function () {
+    swal({
+      title: "¿Estás seguro de que quieres publicar la calificación realizada al profesor del curso?",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, enviar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (respuesta) {
+      if (respuesta) {
+        console.log(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId);
+        calificacionHerramientaEvaluacionServicio.publicarCalificacion(ctrl.evaluacion.calificacionEvaluacion.calificacionEvaluacionId).then(function(data){
+          swal("¡Felicidades!","Se publicó la calificación exitosamente","success");
+        });
+      }
+    });
+  }
 
   /*===============================================
   * Botón Atrás
@@ -99,6 +147,8 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   *==================================================
   */
   ctrl.calificarHerramienta = function(indice){
+    console.log("calificaciónHerramientaId");
+    console.log(ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId);
     switch (ctrl.herramientaEvaluacionLista[indice].tipoHerramientaEvaluacion) {
       case 'Rubrica':
         $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
@@ -117,6 +167,14 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   }
 
   ctrl.init = function (){
+    ctrl.habilitarBotones = false;
+    ctrl.rolId = $cookies.get('rolActivoId');
+    console.log(ctrl.rolId);
+    if(ctrl.rolId === 'f4d1f6d3-9313-4d63-8da4-256aec99d5cd'){
+      ctrl.usuarioRol = 'Profesor';
+    }else{
+      ctrl.usuarioRol = 'Asistente'
+    }
     ctrl.obtenerEvaluacion();
   };
   ctrl.init();
