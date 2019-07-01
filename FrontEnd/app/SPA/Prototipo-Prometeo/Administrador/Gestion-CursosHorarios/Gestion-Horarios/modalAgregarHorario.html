@@ -46,20 +46,22 @@
                     data-placeholder="Seleccione un profesor"
                     ng-model="ctrl.horarioNuevo.profesorId"
                     ng-options="profesor.rolUsuarioId as profesor.nombres for profesor in ctrl.profesoresLista">
-                    <option value=""></option>
+                    <!-- <option value=""></option> -->
                   </select>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class = "row">
-          <h1></h1>
+        <div class = "row-md-12">
+          <div class="m-t-30 m-b-10 text-right">
+            <div class="col-md-5" align="left">
+                <h5><strong class="text-danger">*</strong> Campos obligatorios</h5>
+            </div>
+            <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarHorario()"><i class="fa fa-save"></i> Guardar</button>
+            <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
         </div>
-      <div class="p-b-25 p-r-25 p-l-25 p-t-2 text-right">
-        <button class="btn btn-danger waves-effect" ng-click = "ctrl.cerrar()"><i class="fa fa-ban"></i> Cancelar</button>
-        <button class="btn color-fondo-azul-pucp color-blanco" ng-click = "ctrl.guardarHorario()"><i class="fa fa-save"></i> Guardar</button>
-      </div>
     </div>
   </div>
 </section>
