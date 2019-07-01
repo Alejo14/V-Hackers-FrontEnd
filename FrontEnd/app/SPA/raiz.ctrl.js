@@ -37,31 +37,7 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
         if (inicioSesion && inicioSesion !== 'false') {
           $cookies.put('inicioSesion', false);
           var descripcionRol = ctrl.usuario.roles[0];
-          ctrl.cargarPestaña();
-          // switch (descripcionRol) {
-          //   case 'Administrador':
-          //     state = 'inicioAdmin';
-          //     break;
-          //   case 'Alumno':
-          //     state = 'alumnoMisCursos';
-          //     rolUsuario = 'A';
-          //     break;
-          //   case 'Profesor':
-          //     state = 'profesorMisCursos';
-          //     rolUsuario = 'P';
-          //     break;
-          //   case 'Asistente de Docencia':
-          //     state = 'profesorMisCursos';
-          //     rolUsuario = 'P';
-          //     break;
-          //   default:
-          //     state = 'principal';
-          // }
-          // if (rolUsuario == '') {
-          //   $state.go(ctrl.state);
-          // } else {
-          //   $state.go(ctrl.state,{rolUsuario: ctrl.rolUsuario});
-          // }
+          ctrl.cargarPestana();
         }
       });
     }
