@@ -35,25 +35,23 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
 
 
   ctrl.eliminarGrupo = function (grupoElim) {
-    console.log(grupoElim);
+    // console.log(grupoElim);
     swal({
       title: "¿Estás seguro de que deseas eliminar al grupo "+ grupoElim.nombre+"?",
-      text: "",
       icon: "warning",
-      //buttons: ["Cancelar", "Sí, agregar"],
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
-    }).then(function (grupoElimConfirmado) {
-      if (grupoElimConfirmado !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
 
         console.log(angular.toJson(grupoElim));//Envio el json para crear el entregable
         data={
