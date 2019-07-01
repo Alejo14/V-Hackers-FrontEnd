@@ -8,15 +8,21 @@
             <div class="col-md-12">
                 <h4 class="titulo-letra-prometeo">Criterios</h4>
             </div>
+
           </div>
         </div>
         <div class="card-body">
+
           <div class="form-group fg-line">
+            <label class="col-sm-8 p-t-10 p-l-0"></label>
+            <label class="col-sm-2 p-t-10">Puntaje</label>
+            <input type="number" min="0" step="any" class="col-sm-2 form-control input-sm" ng-model="ctrl.puntajeAsignado" placeholder="Ingrese el puntaje">
+            <label class="form-control p-t-10" ></label>
+
               <div class="" ng-repeat="criterio in ctrl.evaluacionEscala">
                 <div class="" style="width: 100%; heigth: 250px; color:black; font-width:1200; font-size:20px; background:silver">
-                  <label >{{criterio.descripcion}}</label>
+                  <label >{{$index + 1}}. {{criterio.descripcion}}</label>
                 </div>
-
 
                 <div  class="form-group fg-line m-b-0">
                   <label class="control-label label-letra-prometeo p-t-10" align="right">Indicaciones del criterio</label>
@@ -56,7 +62,7 @@
               </div>
           </div>
           <div class="col-sm-12" align="right">
-            <button type="button" ng-click = "ctrl.calcularPuntajeCriterio(criterio.id)" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
+            <button type="button" ng-click = "ctrl.calcularPuntajeCriterio()" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
             <button type="button" ng-click = "ctrl.guardarcriterio()" class="btn btn-primary waves-effect"><i class="fa fa-save"></i> Guardar</button>
             <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
           </div>

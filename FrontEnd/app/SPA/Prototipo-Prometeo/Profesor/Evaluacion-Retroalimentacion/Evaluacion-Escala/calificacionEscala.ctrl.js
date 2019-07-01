@@ -80,14 +80,14 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     return -1;
   }
 
-  ctrl.calcularPuntajeCriterio = function(aspectoId){
-    var posicion = ctrl.buscarAspecto(aspectoId);
+  ctrl.calcularPuntajeCriterio = function(){
+    var posicion = 1;
     if(posicion !== -1){
-      ctrl.evaluacionAspecto[posicion].puntajeAsignado = 0;
-      angular.forEach(ctrl.evaluacionAspecto[posicion].criterios, function(criterio,indice){
-        ctrl.evaluacionAspecto[posicion].puntajeAsignado += criterio.puntajeAsignado;
+      ctrl.puntajeAsignado = 0;
+      angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+        ctrl.puntajeAsignado += criterio.puntajeAsignado;
       });
-      ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
+      //ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
     }else{
       swal("Error","No se ha encontrado el aspecto","error");
     }
