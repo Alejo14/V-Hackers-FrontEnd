@@ -15,39 +15,32 @@
         </div>
         <div class="card-body">
           <div class="row">
-
-            <div class="col-md-8">
-              <form class="form-horizontal ng-pristine ng-valid">
-                <div class="card-body card-padding">
-
-                  <table ng-table="ctrl.especialidadesTabla" class="table table-hover">
-                    <tr ng-repeat="especialidad in ctrl.especialidadesLista">
-                      <td data-title="'NRO.'" align="center" width="5%">
-                        {{$index + 1}}
-                      </td>
-                      <td data-title="'ESPECIALIDAD'">
-                        {{especialidad.nombre}}
-                      </td>
-                      <td data-title="'ACCIONES'">
-                        <a style="padding:10px;" ng-click="ctrl.verEspecialidad(especialidad)">
-                          <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a style="padding:10px;" ng-click="ctrl.eliminarEspecialidad(especialidad)">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
-                      </td>
-
-                    </tr>
-                  </table>
-
-                </div>
-              </form>
-
-                </div>
+            <div class="col-md-10">
+              <div class="table-responsive m-20">
+                <table ng-Table="ctrl.especialidadesTabla" class="table table-bordered">
+                  <tr ng-repeat="especialidad in ctrl.especialidadesLista">
+                    <td data-title="'NRO.'" align="center">
+                      {{$index + 1}}
+                    </td>
+                    <td data-title="'ESPECIALIDAD'">
+                      {{especialidad.nombre}}
+                    </td>
+                    <td data-title="'ACCIONES'" align="center">
+                      <a href="" style="padding:10px;" ng-click="ctrl.verEspecialidad(especialidad)">
+                        <i class="fas fa-pencil-alt"></i>
+                      </a>
+                      <a href="" style="padding:10px;" ng-click="ctrl.eliminarEspecialidad(especialidad)">
+                        <i class="fas fa-trash-alt"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-12" align="right">
-              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect bgm-green"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
             </div>
           </div>
         </div>

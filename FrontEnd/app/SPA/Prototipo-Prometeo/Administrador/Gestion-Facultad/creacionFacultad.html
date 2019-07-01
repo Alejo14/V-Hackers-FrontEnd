@@ -58,29 +58,22 @@
         <div class="table-responsive">
           <table ng-table="ctrl.tablaFacultades" class="table table-bordered">
             <tr ng-repeat="facultad in ctrl.facultadesLista">
-              <!-- <td data-title="'Rol'">
-                {{usuario.rolesUsuario[0].rol.descripcion}}
-              </td> -->
               <td data-title="'Nro.'" align="center" width="5%">
                 {{$index + 1}}
               </td>
-              <td data-title="'Código'">
+              <td data-title="'Código'" align="center">
                 {{facultad.codigo}}
               </td>
               <td data-title="'Facultad'">
                 {{facultad.nombre}}
               </td>
-              <td data-title="'Acciones'">
-                <div class = "col-md-5">
-                  <a style="float:right"  ng-click="ctrl.eliminarFacultad(facultad,$index)">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </div>
-                <div class="col-md-4" >
-                  <a style="float:right" ng-click="ctrl.editarFacultad(facultad)">
-                    <i class="fas fa-pencil-alt"></i>
-                  </a>
-                </div>
+              <td data-title="'Acciones'" align="center">
+                <a href="" class="p-r-10" ng-click="ctrl.editarFacultad(facultad)">
+                  <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a href="" class="p-r-10" ng-click="ctrl.eliminarFacultad(facultad,$index)">
+                  <i class="fas fa-trash-alt"></i>
+                </a>
               </td>
             </tr>
           </table>
