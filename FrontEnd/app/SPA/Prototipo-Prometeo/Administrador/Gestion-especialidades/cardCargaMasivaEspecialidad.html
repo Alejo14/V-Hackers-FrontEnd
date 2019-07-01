@@ -3,7 +3,7 @@
     <form class="form-horizontal ng-pristine ng-valid">
       <div class="card-body card-padding">
         <div class="form-group">
-          <label class="col-sm-2 control-label">Carga masiva:</label>
+          <label class="label-letra-prometeo col-sm-2 control-label">Carga masiva:</label>
           <div class="col-sm-3">
             <div class="fg-line">
                 <button class="btn btn-primary waves-effect color-fondo-azul-pucp" ng-click="ctrl.agregarCargaMasiva()"><i class="fa fa-upload"></i> Subir archivo</button>
@@ -16,7 +16,10 @@
   </div>
 </div>
 <div class="row">
-    <div class="col-sm-12" align="right">
+  <div class="col-md-3">
+      <h5><strong class="text-danger">*</strong> Campos obligatorios</h5>
+  </div>
+  <div class="col-sm-9" align="right">
     <button type="button" ng-click = "" class="btn btn-primary waves-effect color-fondo-azul-pucp"><i class="fa fa-save"></i> Guardar</button>
     <button type="button" ng-click = "ctrl.regresarAdministrador()" class="btn btn-default waves-effect bgm-green"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
   </div>
