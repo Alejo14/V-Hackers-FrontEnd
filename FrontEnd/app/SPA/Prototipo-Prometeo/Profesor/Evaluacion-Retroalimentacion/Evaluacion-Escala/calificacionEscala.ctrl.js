@@ -34,13 +34,13 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);
     console.log("Calificacion Herramienta Evaluacion ID",ctrl.calificacionHerramientaEvaluacionId);
     calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
-      ctrl.evaluacionEscala = evaluacionEscala;
-      console.log(evaluacionEscala);
-      // angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-      //   aspecto.accordionOpen = false;
-      //   aspecto.activarPuntajeManual = false;
-      // });
-      // console.log(ctrl.evaluacionAspecto);
+      ctrl.evaluacionEscala = evaluacionEscala[0].criterios;
+      console.log(evaluacionEscala[0].criterios);
+      angular.forEach(ctrl.evaluacionEscala, function(criterio,indice){
+        criterio.accordionOpen = false;
+        criterio.activarPuntajeManual = false;
+      });
+      //console.log(ctrl.evaluacionAspecto);
     });
   }
 
