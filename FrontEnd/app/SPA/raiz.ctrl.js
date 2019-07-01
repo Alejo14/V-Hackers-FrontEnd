@@ -36,8 +36,8 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
         console.log(ctrl.usuario);
         if (inicioSesion && inicioSesion !== 'false') {
           $cookies.put('inicioSesion', false);
-          var descripcionRol = ctrl.usuario.roles[0];
-          ctrl.cargarPestana();
+          // var descripcionRol = ctrl.usuario.roles[0];
+          ctrl.cargarPestana(ctrl.usuario.roles[0]);
         }
       });
     }
