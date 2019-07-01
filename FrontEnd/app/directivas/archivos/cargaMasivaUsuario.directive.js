@@ -21,20 +21,33 @@ angular.module('vHackersModule').directive('cargaMasivaUsuario', ['httpPostFacto
 
                //agregar referencua a httpPostFactorypara la siguiente sección
                 //console.log(scope.parametros);
-                httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/cargamasiva', formData, function (callback) {
-                  // recieve image name to use in a ng-src
-                  //console.log(callback);
-                  scope.parametros=callback;
-                  // if (scope.eventoPostSubida) {
-                  //     scope.eventoPostSubida(scope.parametros);
-                  //
-                  // }
-
-                  if (scope.eventoPostSeleccion) {
-                      scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
-                       swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
+                swal({
+                  title: "¿Estás seguro de que quieres cargar este archivo?",
+                  icon: "warning",
+                  buttons: {
+                    Cancel: {
+                      text: "Cancelar",
+                      className: "btn btn-lg btn-danger"
+                    },
+                    Confirm: {
+                      text: "Sí, cargar",
+                      className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+                    }
                   }
-               });
+                }).then(function (respuesta) {
+                  if (respuesta == "Confirm") {
+
+                    httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/usuarios/cargamasiva', formData, function (callback) {
+                      scope.parametros=callback;
+                      if (scope.eventoPostSeleccion) {
+                          scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
+                           swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
+                      }
+                   });
+
+                  }
+                });
+
 
             });
 

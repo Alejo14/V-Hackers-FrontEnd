@@ -40,15 +40,8 @@ angular.module('vHackersModule').directive('cargaMasivaAlumnosHorario', ['httpPo
                   if (respuesta == "Confirm") {
 
                     httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/cargamasiva/alumnos', formData, function (callback) {
-                      // recieve image name to use in a ng-src
-                      //console.log(callback);
                       scope.parametros=callback;
-                      // if (scope.eventoPostSubida) {
-                      //     scope.eventoPostSubida(scope.parametros);
-                      //
-                      // }
-
-                      if (scope.eventoPostSeleccion) {
+                      if (scope.eventoPostSeleccion){
                           scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
                            swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
                       }

@@ -38,15 +38,7 @@ angular.module('vHackersModule').directive('cargaMasivaCursoCiclo', ['httpPostFa
                   if (respuesta == "Confirm") {
 
                     httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cursociclo/cargamasiva', formData, function (callback) {
-                      // recieve image name to use in a ng-src
-                      //console.log(callback);
                       scope.parametros=callback;
-                      // if (scope.eventoPostSubida) {
-                      //     scope.eventoPostSubida(scope.parametros);
-                      //
-                      // }
-                    
-
                       if (scope.eventoPostSeleccion) {
                           scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
                           swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
@@ -55,7 +47,6 @@ angular.module('vHackersModule').directive('cargaMasivaCursoCiclo', ['httpPostFa
 
                   }
                 });
-
 
             });
 
