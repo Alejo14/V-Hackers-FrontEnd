@@ -210,4 +210,20 @@ function($q, $http,variablesAmbiente) {
        });
       return $defer.promise;
     };
+
+    servicio.enviarCorreo = function (data) {
+      var urlEnviarCorreo = variablesAmbiente.apiUrl + variablesAmbiente.puertoCorreo + '/correo/enviar';
+      var $defer = $q.defer();
+      $http({
+          method: 'POST',
+          url: urlEnviarCorreo,
+          data: data
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    };
+
 }]);

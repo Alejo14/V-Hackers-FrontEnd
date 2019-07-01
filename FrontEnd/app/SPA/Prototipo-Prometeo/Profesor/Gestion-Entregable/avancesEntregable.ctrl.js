@@ -10,11 +10,40 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   ctrl.esIndividual = false;
   ctrl.esGrupal = false;
 
+  ctrl.confirmarCalificacion = function () {
+    swal({
+      title: "¿Estás seguro de que quieres confirmar las calificaciones?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, confirmar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (respuesta) {
+      if (respuesta === "Confirm") {
+        var data = {
+          "avance" : ctrl.avanceEntregableIdCorreo
+        };
+        console.log(data);
+        entregableService.enviarCorreo(data).then(function(respuesta) {
+          swal('Éxito', 'Calificaciones confirmadas y publicadas', 'success');
+        });
+      }
+    });
+  }
+
   ctrl.obtenerAlumnos = function (horarioId) {
     entregableService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
       ctrl.avancesLista = alumnosListaData;
       console.log(alumnosListaData);
       ctrl.avancesTabla = new NgTableParams({}, { dataset: ctrl.avancesLista });
+      ctrl.obtenerAvanceParaCorreo(ctrl.avancesLista[0]);
     });
   };
 
@@ -23,6 +52,22 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.avancesLista = gruposListaData;
       console.log(gruposListaData);
       ctrl.avancesTabla = new NgTableParams({}, { dataset: ctrl.avancesLista });
+      ctrl.obtenerAvanceParaCorreo(ctrl.avancesLista[0]);
+    });
+  };
+
+  ctrl.obtenerAvanceParaCorreo = function (avance) {
+    if(ctrl.esIndividual){
+      idRolUsuario=avance.idRolUsuario;
+      idGrupo="0";
+    }else{
+      idRolUsuario="0";
+      idGrupo=avance.id;
+    }
+    idEntregable=ctrl.entregable.id;
+    entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
+      ctrl.avanceSeleccionado = avanceData;
+      ctrl.avanceEntregableIdCorreo =  ctrl.avanceSeleccionado.id;
     });
   };
 
@@ -35,14 +80,10 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       idGrupo=avance.id;
     }
     idEntregable=ctrl.entregable.id;
-    console.log("idRolUsuario: " + idRolUsuario);
-    console.log("idGrupo: " + idGrupo);
-    console.log("idEntregable: " + idEntregable);
     entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
       ctrl.avanceSeleccionado = avanceData;
       $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0});
     });
-    console.log(ctrl.avanceSeleccionado);
   };
 
   ctrl.irCalificacion = function (avance) {
@@ -66,7 +107,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     ctrl.entregable.nombre = $stateParams.nombre;
     ctrl.entregable.metodo = $stateParams.metodo;
     ctrl.horarioId = $stateParams.horarioId;
-
     ctrl.titulo = ctrl.entregable.nombre;
     if (ctrl.entregable.metodo == 0){ //Entregable individual
       ctrl.subtitulo = ctrl.subtitulo + "individuales";
@@ -77,7 +117,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.obtenerGrupos(ctrl.horarioId);
       ctrl.esGrupal = true;
     }
-
     console.log(ctrl.avancesLista);
   }
   ctrl.init();
