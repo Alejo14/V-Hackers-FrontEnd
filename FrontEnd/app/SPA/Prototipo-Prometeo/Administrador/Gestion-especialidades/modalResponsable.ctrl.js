@@ -24,7 +24,7 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.seleccionarResponsable = function () {
     swal({
-      title: "¿Esta seguro de que desea seleccionar a este responsable?",
+      title: "¿Estás seguro de que deseas seleccionar a este responsable?",
       text: "",
       icon: "warning",
       buttons: {

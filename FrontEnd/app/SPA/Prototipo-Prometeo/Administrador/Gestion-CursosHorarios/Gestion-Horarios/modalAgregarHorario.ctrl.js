@@ -49,7 +49,7 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
 
   ctrl.guardarHorario = function () {
     swal({
-      title: "¿Está seguro de que desea crear este horario?",
+      title: "¿Estás seguro de que deseas crear este horario?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],

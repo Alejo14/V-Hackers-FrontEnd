@@ -113,7 +113,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
 
   ctrl.regresarEntregables = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
+      title: "¿Estás seguro de que quieres volver?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
@@ -197,7 +197,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     console.log(angular.toJson(entregableM));//Envio el json para crear el entregable
     swal({
-      title: "¿Está seguro que quiere eliminar el entregable?",
+      title: "¿Estás seguro que quieres eliminar el entregable?",
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
@@ -221,7 +221,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
           }
           console.log(angular.toJson(data));
         entregableAlumnoService.eliminarentregableAlumno(angular.toJson(data)).then(function () {
-            swal("¡Bien hecho!", "El entregable se elimino exitosamente" , "success");
+            swal("¡Bien hecho!", "El entregable se eliminó exitosamente" , "success");
         });
         ctrl.entregablesLista.splice(ctrl.entregablesLista.indexOf(entregableM.id));
       }

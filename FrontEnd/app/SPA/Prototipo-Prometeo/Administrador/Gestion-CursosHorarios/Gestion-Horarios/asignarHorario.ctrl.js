@@ -29,8 +29,8 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
 
   ctrl.regresarListarCursos = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      title: "¿Estás seguro de que quieres volver?",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {
@@ -96,7 +96,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
 
   ctrl.eliminarHorario = function (horario,indice) {
     swal({
-      title: "¿Esta seguro de que desea eliminar el horario?",
+      title: "¿Estás seguro de que deseas eliminar el horario?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],

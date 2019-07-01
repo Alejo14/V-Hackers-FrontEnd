@@ -37,7 +37,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.eliminarGrupo = function (grupoElim) {
     console.log(grupoElim);
     swal({
-      title: "¿Esta seguro de que desea eliminar al grupo "+ grupoElim.nombre+"?",
+      title: "¿Estás seguro de que deseas eliminar al grupo "+ grupoElim.nombre+"?",
       text: "",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
@@ -65,7 +65,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
           }
           console.log(angular.toJson(data));
           vistaGruposService.eliminarGrupo(angular.toJson(data)).then(function () {
-            swal("El grupo se elimino exitosamente", "¡Los miembros ahora no tienen grupo!" , "success");
+            swal("El grupo se eliminó exitosamente", "¡Los miembros ahora no tienen grupo!" , "success");
           });
           ctrl.gruposLista.splice(ctrl.gruposLista.indexOf(grupoElim),1);
       }
@@ -133,7 +133,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
 
   ctrl.crearGrupo = function (grupoNuevo) {
       if (grupoNuevo==""){
-        swal("¡Opss!", "Ingrese un nombre para la nueva agrupacion por favor" , "error");
+        swal("¡Opss!", "Ingrese un nombre para la nueva agrupación por favor" , "error");
       }
       else{
         swal({

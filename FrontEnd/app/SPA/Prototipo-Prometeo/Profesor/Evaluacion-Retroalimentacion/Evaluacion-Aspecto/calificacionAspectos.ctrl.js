@@ -36,7 +36,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
 
   ctrl.regresar = function (){
     swal({
-      title: "¿Esta seguro de que desea regresar?",
+      title: "¿Estás seguro de que deseas regresar?",
       text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
@@ -135,7 +135,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       }
       console.log(data);
       calificacionAspectoService.guardarAspecto(data).then(function(){
-        swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
+        swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
         $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
       });
     }else{

@@ -115,7 +115,7 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams, $state){
 
   ctrl.eliminarUsuario = function (usuario, indiceUsuarioTabla) {
     swal({
-      title: "¿Esta seguro de que desea eliminar a este usuario?",
+      title: "¿Estás seguro de que deseas eliminar a este usuario?",
       text: "Una vez eliminado, no podrá deshacer esta acción",
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
@@ -154,7 +154,7 @@ function($scope, gestionUsuariosService, $uibModal, NgTableParams, $state){
   ctrl.regresarAdministrador = function () {
     swal({
       title: "¿Estás seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {

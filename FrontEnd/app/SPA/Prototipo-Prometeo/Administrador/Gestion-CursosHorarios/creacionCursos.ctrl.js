@@ -44,8 +44,8 @@ function($scope,$state,$stateParams , creacionCursosService, $uibModal){
 
   ctrl.regresarAdministrador = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      title: "¿Estás seguro de que quieres volver?",
+      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
         cancelar: {

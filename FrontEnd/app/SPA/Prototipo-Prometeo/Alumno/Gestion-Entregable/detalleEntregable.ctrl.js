@@ -172,7 +172,7 @@ function toBase64(file) {
     var id=archivo.id;
 
     swal({
-      title: "¿Está seguro que quiere eliminar el archivo?",
+      title: "¿Estás seguro que quieres eliminar el archivo?",
       text: "Los cambios se guardarán",
       icon: "warning",
       buttons: {
@@ -188,7 +188,7 @@ function toBase64(file) {
     }).then(function (eliminarArchivoConfirmacion) {
       if (eliminarArchivoConfirmacion !== "cancelar") {
         entregableAlumnoService.eliminarArchivo(id).then(function () {
-            swal("¡Bien hecho!", "El archivo se elimino exitosamente" , "success");
+            swal("¡Bien hecho!", "El archivo se eliminó exitosamente" , "success");
         });
 
         ctrl.listaArchivos.splice(ctrl.listaArchivos.indexOf(archivo),1);
@@ -200,7 +200,7 @@ ctrl.elminarURL= function (archivo){
   var id=archivo.id;
 
   swal({
-    title: "¿Está seguro que quiere eliminar el URL?",
+    title: "¿Estás seguro que quieres eliminar el URL?",
     text: "Los cambios se guardarán",
     icon: "warning",
     buttons: {
@@ -216,7 +216,7 @@ ctrl.elminarURL= function (archivo){
   }).then(function (eliminarURLConfirmacion) {
     if (eliminarURLConfirmacion !== "cancelar") {
       entregableAlumnoService.eliminarArchivo(id).then(function () {
-          swal("¡Bien hecho!", "El URL se elimino exitosamente" , "success");
+          swal("¡Bien hecho!", "El URL se eliminó exitosamente" , "success");
       });
 
       ctrl.listaURLs.splice(ctrl.listaURLs.indexOf(archivo),1);
@@ -245,10 +245,10 @@ ctrl.elminarURL= function (archivo){
       //console.log(parametroRetorno);
       if (parametroRetorno) {
         if (parametroRetorno[0]==1){
-          swal("¡Bien hecho!", "El URL se creo exitosamente" , "success");
+          swal("¡Bien hecho!", "El URL se creó exitosamente" , "success");
           ctrl.listaURLs.push(parametroRetorno[1]);
         }else {
-          swal("¡Bien hecho!", "El archivo se creo exitosamente" , "success");
+          swal("¡Bien hecho!", "El archivo se creó exitosamente" , "success");
           ctrl.listaArchivos.push(parametroRetorno[1]);
         }
 
@@ -263,7 +263,7 @@ ctrl.verHerramientas= function () {
 
 ctrl.regresarCursoAlumno = function () {
   swal({
-    title: "¿Está seguro que quiere regresar?",
+    title: "¿Estás seguro que quieres regresar?",
     text: "Los cambios se guardarán",
     icon: "warning",
     buttons: {
