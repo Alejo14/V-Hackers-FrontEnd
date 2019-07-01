@@ -28,7 +28,7 @@ angular.module('vHackersModule').directive('subirArchivoEspecialidad', ['httpPos
 
           if (scope.eventoPostSeleccion) {
             scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
-            // swal("¡Bien hecho!", "El archivo se guardo exitosamente" , "success");
+             swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
           }
         });
       });

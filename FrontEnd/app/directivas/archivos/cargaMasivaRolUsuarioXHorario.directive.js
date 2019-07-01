@@ -33,7 +33,7 @@ angular.module('vHackersModule').directive('cargaMasivaRolUsuarioHorario', ['htt
 
                   if (scope.eventoPostSeleccion) {
                       scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
-                       swal("¡Bien hecho!", "Se envió el archivo exitosamente" , "success");
+                       swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
                   }
                });
 
