@@ -41,6 +41,16 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
         criterio.activarPuntajeManual = false;
       });
       //console.log(ctrl.evaluacionAspecto);
+
+      for (var i = 0; i < ctrl.nivelesEscala.length; i++) {
+        for (var j = 0; j < ctrl.evaluacionEscala.length; j++) {
+          for (var k = 0; k < ctrl.evaluacionEscala[j].nivelesCriterios.length; k++) {
+            if (ctrl.evaluacionEscala[j].nivelesCriterios[k].nivelRubricaId==ctrl.nivelesEscala[i].id) {
+              ctrl.evaluacionEscala[j].nivelesCriterios[k].descripcion=ctrl.nivelesEscala[i].descripcion;
+            }
+          }
+        }
+      }
     });
   }
 

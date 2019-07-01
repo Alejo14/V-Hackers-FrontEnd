@@ -30,23 +30,20 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
 
   ctrl.regresarAdministrador = function () {
     swal({
-      title: "¿Está seguro de que quieres volver?",
-      text: "Los cambios no se guardaran",
+      title: "¿Estás seguro de que quieres volver?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
-          className: "btn btn-lg btn-danger",
-          value: "cancelar"
+          className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-          value: "confirm"
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function(regresar){
-      if (regresar == "confirm") {
+    }).then(function(respuesta){
+      if (respuesta == "Confirm") {
         $state.go('inicioAdmin');
       }
     });
@@ -54,23 +51,21 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
 
   ctrl.guardarFacultad = function(){
       swal({
-        title: "¿Está seguro de que quiere registrar la facultad?",
-        text: "Los cambios se guardarán",
+        title: "¿Estás seguro de que quieres registrar la facultad?",
         icon: "warning",
         buttons: {
-          cancelar: {
+          Cancel: {
             text: "Cancelar",
-            className: "btn btn-lg btn-danger",
-            value: "cancelar"
+            className: "btn btn-lg btn-danger"
           },
-          confirm: {
+          Confirm: {
             text: "Sí, guardar",
-            className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-            value: "confirm"
+            className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+
           }
         }
-      }).then(function(regresar){
-        if (regresar == "confirm") {
+      }).then(function(respuesta){
+        if (respuesta == "Confirm") {
           if(ctrl.modo == 'c'){
             ctrl.facultadActual.id = uuid();
             creacionFacultadService.registroFacultad(ctrl.facultadActual, ctrl.modo).then(function () {
@@ -102,23 +97,20 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
 
   ctrl.eliminarFacultad = function(facultad,$index){
     swal({
-      title: "¿Está seguro de que quiere eliminar la facultad?",
-      text: "",
+      title: "¿Estás seguro de que quieres eliminar la facultad?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
-          className: "btn btn-lg btn-danger",
-          value: "cancelar"
+          className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-          value: "confirm"
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function(regresar){
-      if (regresar == "confirm") {
+    }).then(function(respuesta){
+      if (respuesta == "Confirm") {
         creacionFacultadService.eliminarFacultad(facultad);
         ctrl.facultadesLista.splice($index,1);
       }
@@ -133,13 +125,10 @@ function($scope,$state,$stateParams , creacionFacultadService, $uibModal){
     ctrl.modo = 'm';
   }
 
-
-
   ctrl.init = function (){
     ctrl.obtenerFacultades();
     ctrl.modo ='c';
   };
-
 
   ctrl.init();
 
