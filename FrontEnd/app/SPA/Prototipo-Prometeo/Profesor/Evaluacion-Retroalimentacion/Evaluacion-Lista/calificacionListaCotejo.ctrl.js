@@ -7,8 +7,8 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
-  ctrl.listaCriterios = {};
-
+  ctrl.listaCriterios = [];
+  ctrl.puntajeAsignado = 0;
   ctrl.obtenerCalificacionListaCotejo = function (){
     calificacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
       ctrl.listaCriterios = listaCriteriosData;
@@ -38,17 +38,18 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
     });
   }
 
-  ctrl.calcularPuntajeCriterio = function(aspectoId){
-    var posicion = ctrl.buscarAspecto(aspectoId);
-    if(posicion !== -1){
-      ctrl.evaluacionAspecto[posicion].puntajeAsignado = 0;
-      angular.forEach(ctrl.evaluacionAspecto[posicion].criterios, function(criterio,indice){
-        ctrl.evaluacionAspecto[posicion].puntajeAsignado += criterio.puntajeAsignado;
-      });
-      ctrl.evaluacionAspecto[posicion].puntajeManual = ctrl.evaluacionAspecto[posicion].puntajeAsignado;
-    }else{
-      swal("Error","No se ha encontrado el aspecto","error");
+  ctrl.calcularPuntajeCriterio = function(){
+    ctrl.habilitarBotones = true;
+    longitud=ctrl.listaCriterios.length;
+    ctrl.puntajeAsignado = 0;
+    console.log(ctrl.listaCriterios);
+    for(let i = 0; i< longitud; i++){
+      console.log(ctrl.listaCriterios[i].calificacion);
+      if(ctrl.listaCriterios[i].calificacion==1){
+        ctrl.puntajeAsignado = ctrl.puntajeAsignado + 1;
+      }
     }
+    console.log(ctrl.puntajeAsignado);
   }
 
   ctrl.crearMensaje = function (longitud) {
@@ -87,11 +88,22 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
     return !puntajesManuales;
   }
 
-  ctrl.init = function(){
-    console.log(ctrl.herramientaEvaluacionId);
-    console.log(ctrl.calificacionHerramientaEvaluacionId);
-    ctrl.obtenerCalificacionListaCotejo();
-  }
+  ctrl.guardarcriterios = function(){
+    data ={
+      "criterios": ctrl.listaCriterios
+    }
+      calificacionListaService.guardarCalificacionCriterioListaCotejo(data).then(function(){
+        swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+      });
+    }
 
-  ctrl.init();
-}
+    ctrl.init = function(){
+      console.log(ctrl.herramientaEvaluacionId);
+      console.log(ctrl.calificacionHerramientaEvaluacionId);
+      ctrl.habilitarBotones = false;
+      ctrl.obtenerCalificacionListaCotejo();
+    }
+
+    ctrl.init();
+  }
