@@ -24,7 +24,7 @@
             <div class="col-sm-8">
               <div class="fg-line">
                 <div class="select">
-                  <select class="form-control" ng-model="ctrl.especialidad.facultad" ng-options="facultad.nombre for facultad in ctrl.facultadesLista" ng-change="ctrl.validarRegistroValido()">
+                  <select class="form-control" ng-model="ctrl.especialidad.facultad" ng-options="facultad.id as facultad.nombre for facultad in ctrl.facultadesLista" ng-change="ctrl.validarRegistroValido()">
                     <!--<option value="">Seleccione una facultad:</option>-->
                   </select>
                 </div>
