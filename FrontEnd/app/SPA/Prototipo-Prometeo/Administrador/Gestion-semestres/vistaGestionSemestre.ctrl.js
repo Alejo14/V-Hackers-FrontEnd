@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('administradorSemestreCtrl', ['$scope', '$state' , '$stateParams' ,'administradorSemestreService', '$uibModal',
+angular.module('vHackersModule').controller('administradorSemestreCtrl', ['$scope', '$state' , '$stateParams' ,'administradorSemestreService', '$uibModal','NgTableParams',
 
-function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
+function($scope, $state,$stateParams, administradorSemestreService, $uibModal, NgTableParams){
   var ctrl = this;
   ctrl.semestre={
     anioCiclo : "",
@@ -96,8 +96,8 @@ function($scope, $state,$stateParams, administradorSemestreService, $uibModal){
         fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
         ctrl.semestresLista[i].fechaFinStr = fechCrStr;
       };
-      ctrl.semestresTabla = new NgTableParams({}, { dataset: ctrl.semestresLista });
     });
+    ctrl.semestresTabla = new NgTableParams({}, { dataset: ctrl.semestresLista });
   };
 
   ctrl.init = function (){
