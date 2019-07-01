@@ -155,7 +155,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacion-proyecto',
-                  url: '/calificacion/:avanceProyectoId/:herramientaCalificada/:nombreProyecto/:nombreCalificado',
+                  url: '/calificacion/:idProyecto/:metodo/:horarioId/:avanceProyectoId/:herramientaCalificada/:nombreProyecto/:nombreCalificado',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/Calificacion-proyecto/calificacion-proyecto.html'
                 },
                 {
