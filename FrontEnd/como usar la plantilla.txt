@@ -1,0 +1,16 @@
+1. hacer "npm install" para instalar las dependencias. Es necesario tener instalado nodejs.
+2. hacer "gulp serve" para levantar el servidor de frontend.
+Lo que es el núcleo del proyecto y sobre donde se va a trabajar la mayoría es en la carpeta /src/ y aún más en /src/app/. 
+
+En /src/app/app.js se definen los módulos que se utilizarán en el proyecto. Es necesario mencionar que un módulo puede componerse de más módulos internamente, razón por la cual en app.js están los módulos predefinidos y solamente dos módulos del tipo BlurAdmin.*; ya que cada uno de estos dos módulos (definidos en los archivos pages.module.js y theme.module.js) definen adicionalmente otros módulos internos. 
+
+Todos aquellos archivos que terminen en module.js obviamente son módulos. Los módulos son agrupaciones de controladores, directives, configs, y todo eso. De esa manera, se mantiene un mayor orden en el proyecto.
+
+Si revisas el archivo /src/index.html, verás que no todas las etiquetas (<etiqueta>) son predefinidas por HTML5. Algunas etiquetas son creadas especialmente para el proyecto (AngularJS permite esto). Estas etiquetas nuevas conocidas como "directive" permiten insertar plantillas de html para no tener que repetir elementos o para que se vea más ordenado. Estos directives personalizados están definidos en su totalidad en la carpeta /src/theme/components/ en los archivos cuyo nombre termina en .directive.js, aquí, el atributo templateURL te indica dónde está la plantilla HTML y que puedes modificar a tu gusto.
+
+Entre otros archivos que vas a encontrar, verás la definición de Controllers. Los controllers son la herramienta más cercana a los archivos HTML. Estos archivos contienen las funciones, eventos y variables que emplearán las vistas.
+
+Otro tipo de archivo son los services que te permite tener funcionalidades que pueden ser reutilizables. Así, puedes tener aquí llamadas al backend, definir variables muy utilizadas y otras cosas bien generales para el módulo.
+
+
+Si quieres cambiar el color de la plantilla, los archivos se encuentran en el directorio /src/sass/theme/conf/colorScheme/ y si quieres crear un archivo de colores nuevos debes crearlo en ese directorio y modificar el archivo /src/sass/common.scss
