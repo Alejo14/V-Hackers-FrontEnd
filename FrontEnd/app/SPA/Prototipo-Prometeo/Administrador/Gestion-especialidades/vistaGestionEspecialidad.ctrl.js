@@ -110,14 +110,17 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     });
   }
 
-  ctrl.modificarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+  ctrl.modificarEspecialidad = function (especialidad) {
+    //Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log("facultad id");
     data = {
       "id": especialidad.id,
-      "facultadId": especialidad.facultad.id,
+      "facultadId": especialidad.facultad,
       "nombre": especialidad.nombre,
       "codigo": especialidad.codigo,
       "responsableId": especialidad.responsableId
     }
+    console.log(data);
     administradorEspecialidadService.modificoEspecialidad(angular.toJson(data)).then(function () {
       swal("¡Bien hecho!", "La especialidad fue modificada exitosamente" , "success").then(function () {
         $state.go('listar-especialidades');
@@ -151,7 +154,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   };
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad.id !== "" && ctrl.especialidad.responsableId !== "";
+    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad !== "" && ctrl.especialidad.responsableId !== "";
   };
 
   ctrl.regresarAdministradorSwal = function () {
