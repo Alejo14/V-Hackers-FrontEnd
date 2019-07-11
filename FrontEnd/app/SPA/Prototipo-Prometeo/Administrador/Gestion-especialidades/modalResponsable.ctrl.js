@@ -46,7 +46,7 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.init = function(){
     ctrl.listarResponsables();
-
+  }
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);
   };
