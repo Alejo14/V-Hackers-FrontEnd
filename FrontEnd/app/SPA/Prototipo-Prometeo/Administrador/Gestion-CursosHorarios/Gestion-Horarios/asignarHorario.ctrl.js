@@ -10,6 +10,17 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.idCiclo = "";
   ctrl.idHorario = "";
   ctrl.horariosLista = [];
+  
+  ctrl.obtenerInfoArchivo = function (archivo,parametros) {
+    //console.log(parametros);
+    var id=parametros.data;
+
+    ctrl.archivoURL=arch.nombre;
+    //console.log(arch);
+    //ctrl.listaArchivos.push(arch);
+
+    // //$state.go('cargar-archivos');
+  }
 
 
   function uuid() {
