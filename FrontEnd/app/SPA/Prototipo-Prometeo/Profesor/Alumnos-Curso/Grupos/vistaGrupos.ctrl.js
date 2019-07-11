@@ -98,18 +98,18 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
           icon: "warning",
           //buttons: ["Cancelar", "Sí, agregar"],
           buttons: {
-            cancelar: {
+            Cancel: {
               text: "Cancelar",
               className: "btn btn-lg btn-danger"
             },
-            confirm: {
+            Confirm: {
               text: "Sí, agregar",
               className: "btn btn-lg color-fondo-azul-pucp color-blanco"
             }
           },
           closeModal: false
         }).then(function (agrupacionNuevoConfirmado) {
-          if (agrupacionNuevoConfirmado == "confirm") {
+          if (agrupacionNuevoConfirmado == "Confirm") {
 
             console.log(angular.toJson(grupoNuevo));//Envio el json para crear el entregable
             data={
