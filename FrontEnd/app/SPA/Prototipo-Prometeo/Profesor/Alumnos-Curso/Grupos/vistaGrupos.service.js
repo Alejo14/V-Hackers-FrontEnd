@@ -48,6 +48,7 @@ function($q, $http, variablesAmbiente) {
   servicio.crearGrupo = function(data){
     var urlCrearGrupo = variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos + '/grupos/creargrupo';
     var $defer = $q.defer();
+    console.log(urlCrearGrupo);
     $http({
         method: 'POST',
         url: urlCrearGrupo,
