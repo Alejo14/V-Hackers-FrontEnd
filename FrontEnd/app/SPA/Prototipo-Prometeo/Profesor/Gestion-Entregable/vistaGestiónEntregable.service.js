@@ -198,7 +198,6 @@ function($q, $http,variablesAmbiente) {
     servicio.obtenerAvance = function(idEntregable, idRolUsuario, idGrupo){
       var urlobtenerAvance = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregables/mostrarAvanceEntregable/'
       + idEntregable+"?idRolUsuario=" + idRolUsuario + "&idGrupo=" + idGrupo;
-      console.log(urlobtenerAvance);
       var $defer = $q.defer();
       $http({
           method: 'GET',
