@@ -1,5 +1,5 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('alumnoCursoService', ['$q', '$http', 'variablesAmbiente'
+angular.module("vHackersModule").service('alumnoCursoService', ['$q', '$http', 'variablesAmbiente',
 function($q, $http, variablesAmbiente) {
 
   var servicio = this;
