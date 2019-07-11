@@ -24,22 +24,21 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.seleccionarResponsable = function () {
     swal({
-      title: "¿Estás seguro de que deseas seleccionar a este responsable?",
-      text: "",
+      title: "¿Estás seguro de que deseas seleccionar el responsable?",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancelar: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, agregar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function (responsableConfirmado) {
-      if (responsableConfirmado !== "cancelar") {
+      if (responsableConfirmado == "Confirm") {
         $uibModalInstance.close(ctrl.responsableSeleccionado);
       }
     });
@@ -47,10 +46,6 @@ function especialidadResponsableCtrl ($scope, $uibModalInstance, NgTableParams, 
 
   ctrl.init = function(){
     ctrl.listarResponsables();
-    // if (responsableNombre.length > 1) {
-    //
-    // }
-  };
 
   ctrl.cerrar = function () {
     $uibModalInstance.close(0);

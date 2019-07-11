@@ -63,16 +63,19 @@
     </div>
   </div>
   <div class="row-md-12 header-4">
-    <div class="header-5 float-left" style="border-right: solid;" align="center">
-      {{rCtrl.usuario.nombreCompleto}}
-    </div>
     <div class="header-5 float-left" align="center">
-      {{rCtrl.usuario.codigo}}
+      ROLES:
     </div>
-    <div class="header-5 float-left" style="border-left: solid;" align="center" ng-repeat="rol in rCtrl.usuario.roles">
+    <div class="header-5 float-left" style="border-right: solid;" align="center" ng-repeat="rol in rCtrl.usuario.roles">
       <a href="" ng-click="rCtrl.cargarPestana(rol)">{{rol.descripcion}}</a>
     </div>
     <div class="header-5 float-right" align="center">
       <a href="" ng-click="rCtrl.logOut()"><i class="fa fa-sign-out-alt"></i></a>
+    </div>
+    <div class="header-5 float-right" style="border-right: solid;" align="center">
+      {{rCtrl.usuario.codigo}}
+    </div>
+    <div class="header-5 float-right" style="border-right: solid; border-left: solid;" align="center">
+      {{rCtrl.usuario.nombreCompleto}}
     </div>
   </div>
