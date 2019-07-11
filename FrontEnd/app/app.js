@@ -103,7 +103,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 {
                   name: 'gestion-usuarios',
                   url: '/gestion-usuarios',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
+                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/gestionUsuarios.html'
                 },
                 {
                   name: 'creacion-cursos',
