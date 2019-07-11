@@ -41,8 +41,15 @@
             <div class="row">
               <label class="label-letra-prometeo col-sm-4 control-label">Responsable<strong class="text-danger">*</strong>:</label>
               <div class="col-sm-8">
-                <div class="fg-line">
-                    <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsableNombre" placeholder="Responsable">
+                <div class="col-sm-10">
+                  <div class="fg-line">
+                      <input type="text" class="form-control input-sm" disabled ng-model="ctrl.especialidad.responsableNombre" placeholder="Responsable">
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="fg-line">
+                    <a href="" ng-click="ctrl.eliminarResponsable()"><strong class="text-danger">X</strong></a>
+                  </div>
                 </div>
               </div>
             </div>

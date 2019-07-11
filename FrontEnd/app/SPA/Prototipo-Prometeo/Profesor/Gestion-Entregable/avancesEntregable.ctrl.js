@@ -102,6 +102,28 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     $state.go('calificar-archivos', {idEntregable: idEntregable, idRolUsuario: idRolUsuario, idGrupo: idGrupo});
   };
 
+  ctrl.regresar = function(){
+    swal({
+      title: "¿Estás seguro de que quieres volver?",
+      text: "",
+      icon: "warning",
+      buttons: {
+        Cancel: {
+          text: "Cancelar",
+          className: "btn btn-lg btn-danger"
+        },
+        Confirm: {
+          text: "Sí, confirmar",
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
+        }
+      }
+    }).then(function (respuesta) {
+      if (respuesta) {
+        $state.go('curso', {cursoCicloId: $stateParams.cursoCicloId});
+      }
+    });
+  }
+
   ctrl.init = function (){
     ctrl.entregable.id = $stateParams.id;
     ctrl.entregable.nombre = $stateParams.nombre;

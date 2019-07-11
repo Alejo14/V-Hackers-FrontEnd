@@ -4,7 +4,7 @@ function($q, $http, variablesAmbiente) {
   var servicio = this;
 
   servicio.enviarAspecto = function(data){
-    var urlEnviarAspecto = 'http://localhost:7008/herramienta/asignarAspecto'; //url a donde se envían los niveles seleccionados
+    var urlEnviarAspecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/asignarAspecto'; //url a donde se envían los niveles seleccionados
     var $defer = $q.defer();
     $http({
         method: 'POST',

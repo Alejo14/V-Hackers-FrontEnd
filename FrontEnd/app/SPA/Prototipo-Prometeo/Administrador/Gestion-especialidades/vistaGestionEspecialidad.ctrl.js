@@ -14,7 +14,7 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
       codigo : "",
       nombre : ""
     },
-    responsableId : "",
+    responsableId : "0a00a0aa-00a0-0000-a0a0-0a0000a000a0",
     responsableNombre : ""
   };
 
@@ -104,44 +104,55 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
     administradorEspecialidadService.obtenerFacultades().then(function (facultadesListaData) {
       ctrl.especialidad.facultad = facultadesListaData.find(fac => fac.id === $stateParams.facultadId).id;
     });
-    administradorEspecialidadService.listarResponsables().then(function (responsablesListaData) {
-      var responsable = responsablesListaData.find(i => i.id === $stateParams.responsableId);
-      ctrl.especialidad.responsableNombre = responsable.nombreCompleto;
-    });
+    if ($stateParams.responsableId !== "0a00a0aa-00a0-0000-a0a0-0a0000a000a0") {
+      administradorEspecialidadService.listarResponsables().then(function (responsablesListaData) {
+        var responsable = responsablesListaData.find(i => i.id === $stateParams.responsableId);
+        ctrl.especialidad.responsableNombre = responsable.nombreCompleto;
+      });
+    };
+    ctrl.registroValido = true;
+    console.log(ctrl.especialidad);
+    console.log(ctrl.registroValido);
   }
 
-  ctrl.modificarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+  ctrl.modificarEspecialidad = function (especialidad) {
+    //Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
+    console.log("facultad id");
     data = {
       "id": especialidad.id,
-      "facultadId": especialidad.facultad.id,
+      "facultadId": especialidad.facultad,
       "nombre": especialidad.nombre,
       "codigo": especialidad.codigo,
       "responsableId": especialidad.responsableId
     }
+    console.log(data);
     administradorEspecialidadService.modificoEspecialidad(angular.toJson(data)).then(function () {
       swal("¡Bien hecho!", "La especialidad fue modificada exitosamente" , "success").then(function () {
         $state.go('listar-especialidades');
       });
     });
   };
-
+  ctrl.eliminarResponsable = function () {
+    ctrl.especialidad.responsableId = "0a00a0aa-00a0-0000-a0a0-0a0000a000a0";
+    ctrl.especialidad.responsableNombre = "";
+  }
   ctrl.eliminarEspecialidad = function (especialidad) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
     swal({
       title: "¿Estás seguro que quieres eliminar la especialidad?",
       text: "La especialidad se eliminará permanentemente",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancelar: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (especialidadEliminaConfirma) {
-      if (especialidadEliminaConfirma !== "cancelar") {
+      if (especialidadEliminaConfirma == "Confirm") {
         administradorEspecialidadService.eliminarEspecialidad(angular.toJson(especialidad)).then(function () {
           swal("¡Bien hecho!", "La especialidad se eliminó exitosamente" , "success");
         });
@@ -151,26 +162,25 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   };
 
   ctrl.validarRegistroValido = function () {
-    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad.id !== "" && ctrl.especialidad.responsableId !== "";
+    ctrl.registroValido = ctrl.especialidad.codigo !== "" && ctrl.especialidad.nombre !== "" && ctrl.especialidad.facultad !== "";
   };
 
   ctrl.regresarAdministradorSwal = function () {
     swal({
       title: "¿Estás seguro de que quieres volver?",
-      text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (especialidadNuevaConfirma) {
-      if (especialidadNuevaConfirma !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         $state.go('inicioAdmin');
       }
     });
@@ -183,20 +193,19 @@ function($scope, $state,$stateParams, administradorEspecialidadService, $uibModa
   ctrl.regresarListaEspecialidades = function () {
     swal({
       title: "¿Estás seguro de que quieres volver?",
-      text: "No se guardarán los cambios",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancelar: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
-    }).then(function (especialidadNuevaConfirma) {
-      if (especialidadNuevaConfirma !== "cancelar") {
+    }).then(function (respuesta) {
+      if (respuesta == "Confirm") {
         $state.go('listar-especialidades');
       }
     });

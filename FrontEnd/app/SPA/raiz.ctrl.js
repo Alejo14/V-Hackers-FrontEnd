@@ -62,8 +62,8 @@ function($scope, $state, $stateParams, $uibModa, $cookies, raizService){
         break;
       case 'Asistente de Docencia':
         $cookies.put('rolActivoId', perfil.id);
-        ctrl.state = 'profesorMisCursos';
-        ctrl.rolUsuario = 'P';
+        ctrl.state = 'jpMisCursos';
+        ctrl.rolUsuario = 'J';
         break;
       default:
         $cookies.put('rolActivoId', perfil.id);

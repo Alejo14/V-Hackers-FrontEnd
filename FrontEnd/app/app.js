@@ -103,7 +103,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 {
                   name: 'gestion-usuarios',
                   url: '/gestion-usuarios',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-Usuarios/gestionUsuarios.html'
+                  templateUrl: 'SPA/Prototipo-Prometeo/Administrador/Gestion-usuarios/gestionUsuarios.html'
                 },
                 {
                   name: 'creacion-cursos',
@@ -146,6 +146,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                 {
                   name: 'profesorMisCursos',
                   url: '/profesorMisCursos/:rolUsuario',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                },
+                {
+                  name: 'jpMisCursos',
+                  url: '/jpMisCursos/:rolUsuario',
                   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
                 },
                 {
@@ -260,12 +265,12 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'avances-entregable',
-                  url: '/avances-entregable/:id/:nombre/:metodo/:horarioId',
+                  url: '/avances-entregable/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
                 {
                   name: 'avances-proyecto',
-                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId',
+                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
                 },
                 {

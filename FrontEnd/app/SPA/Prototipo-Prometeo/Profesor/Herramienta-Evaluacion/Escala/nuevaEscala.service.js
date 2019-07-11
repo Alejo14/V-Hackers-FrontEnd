@@ -4,7 +4,7 @@ function($q, $http, variablesAmbiente) {
   var servicio = this;
 
   servicio.enviarNiveles = function(data){
-    var urlEnviarNiveles = 'http://localhost:7008/herramienta/agregarNiveles'; //url a donde se envían los niveles seleccionados
+    var urlEnviarNiveles = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/agregarNiveles'; //url a donde se envían los niveles seleccionados
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -83,7 +83,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.agregarCriterios = function(data){
-    var urlEnviarCriterios = 'http://localhost:7008/herramienta/agregarCriterios'; //url a donde se envían los niveles seleccionados
+    var urlEnviarCriterios = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/agregarCriterios'; //url a donde se envían los niveles seleccionados
     var $defer = $q.defer();
     $http({
         method: 'POST',

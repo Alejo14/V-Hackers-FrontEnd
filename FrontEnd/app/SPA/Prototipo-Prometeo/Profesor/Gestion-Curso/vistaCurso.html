@@ -4,7 +4,7 @@
       <div class="block-container">
         <h2> {{ctrl.curso.codigoCurso}} - {{ctrl.curso.nombreCurso}} - {{ctrl.curso.horario}}</h2>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3" ng-if="ctrl.usuarioRol === 'Profesor'">
         <div class="card ">
           <div class="card-header" align="center">
                 <h2> Acciones </h2>
@@ -20,11 +20,6 @@
                 <div class="row">
                   <div class="col-md-12 m-t-30">
                     <button ng-click = "ctrl.crearEntregable()" class = "btn btn-default waves-effect bgm-blue largo-boton"><i class="fa fa-plus"></i> Nuevo entregable</button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 m-t-30">
-                    <button ng-click = "ctrl.crearCoEvaluacion()" class = "btn btn-default waves-effect bgm-blue largo-boton"><i class="fa fa-plus" color= "white"></i> Nueva co-evaluaci&oacute;n</button>
                   </div>
                 </div>
                 <div class="row">
