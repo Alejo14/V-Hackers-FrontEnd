@@ -41,6 +41,7 @@ angular.module('vHackersModule').directive('cargaMasivaAlumnosHorario', ['httpPo
 
                     httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/cargamasiva/alumnos', formData, function (callback) {                      
                            swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
+                    }
 
                    });
 
