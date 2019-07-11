@@ -39,12 +39,9 @@ angular.module('vHackersModule').directive('cargaMasivaAlumnosHorario', ['httpPo
                 }).then(function (respuesta) {
                   if (respuesta == "Confirm") {
 
-                    httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/cargamasiva/alumnos', formData, function (callback) {
-                      scope.parametros=callback;
-                      if (scope.eventoPostSeleccion){
-                          scope.eventoPostSeleccion({ nombre: element[0].files[0].name, tamano: element[0].files[0].size ,fechaCreacion: Date.now()}, scope.parametros);
+                    httpPostFactory(variablesAmbiente.apiUrl + variablesAmbiente.puertoHorarios + '/horarios/cargamasiva/alumnos', formData, function (callback) {                      
                            swal("¡Bien hecho!", "El archivo se envió exitosamente" , "success");
-                      }
+
                    });
 
                   }
