@@ -1,11 +1,11 @@
 //El $q aún se está evaluando si se va a emplear
-angular.module("vHackersModule").service('gestionProyectoServiceAlumno', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('gestionProyectoServiceAlumno', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
   servicio.registroProyecto = function(data){
-    var urlCrearProyecto = 'http://localhost:7001/proyectos/crear';
+    var urlCrearProyecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectos/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -20,7 +20,7 @@ function($q, $http) {
   }
 
   servicio.modificarProyecto = function(data){
-    var urlModifProyecto = 'http://localhost:7001/proyectos/modificar';
+    var urlModifProyecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectos/modificar';
     var $defer = $q.defer();
     $http({
         method: 'POST',

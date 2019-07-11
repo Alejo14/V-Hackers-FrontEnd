@@ -4,7 +4,7 @@ function($q, $http, variablesAmbiente) {
   var servicio = this;
 
   servicio.crearHerramienta = function(data){
-    var urlCrearHerrmienta =  variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/crear';
+    var urlCrearHerrmienta = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
