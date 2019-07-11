@@ -127,18 +127,18 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
                   icon: "success",
                   //buttons: ["Cancelar", "Sí, agregar"],
                   buttons: {
-                    cancelar: {
+                    Cancel: {
                       text: "No, luego",
                       className: "btn btn-lg btn-danger"
                     },
-                    confirm: {
+                    Confirm: {
                       text: "Sí, agregar",
                       className: "btn btn-lg color-fondo-azul-pucp color-blanco"
                     }
                   },
                   closeModal: false
                 }).then(function (agrupacionNuevoConfirmado) {
-                  if (agrupacionNuevoConfirmado == "confirm") {
+                  if (agrupacionNuevoConfirmado == "Confirm") {
                     $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupoNuevo.id, grupoNombre: grupoNuevo.nombre});
                   }
                 });
