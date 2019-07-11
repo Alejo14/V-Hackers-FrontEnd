@@ -21,6 +21,19 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
         console.log(misCursosListaData);
       });
       ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
+    } else if(ctrl.rolUsuario=='J'){
+
+        ctrl.misCursosInfo = {
+          "cicloId" : ciclo,
+          "rolUsuarioId" : ctrl.rolUsuarioId
+        };
+        console.log(ctrl.misCursosInfo);
+        vistaMisCursosService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
+          ctrl.listaMisCursos = misCursosListaData;
+          console.log(misCursosListaData);
+        });
+        ctrl.tablaMisCursos = new NgTableParams({}, { dataset: ctrl.listaMisCursos});
+
     }else {
 
       ctrl.misCursosInfoAlumno = {
@@ -39,6 +52,8 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
   ctrl.verCurso = function (miCurso){
     if(ctrl.rolUsuario=='P'){
+      $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
+    }else if(ctrl.rolUsuario=='J'){
       $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
     }else {
       $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario, rolusuarioId: ctrl.rolUsuarioId}); //Aca podemos enviar el RolUsuarioId tambien
@@ -177,6 +192,8 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
     var descripcionRol;
     if(ctrl.rolUsuario=='P'){
       descripcionRol = "Profesor";
+    }else if(ctrl.rolUsuario=='J'){
+      descripcionRol = "Asistente de Docencia";
     }else {
       descripcionRol = "Alumno";
     }
