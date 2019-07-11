@@ -149,6 +149,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
                 },
                 {
+                  name: 'jpMisCursos',
+                  url: '/jpMisCursos/:rolUsuario',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Templates/VistaMisCursos.html'
+                },
+                {
                   name: 'calificacion',
                   url: '/calificacion/:avanceEntregableId/:herramientaCalificada',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
@@ -260,12 +265,12 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'avances-entregable',
-                  url: '/avances-entregable/:id/:nombre/:metodo/:horarioId',
+                  url: '/avances-entregable/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
                 {
                   name: 'avances-proyecto',
-                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId',
+                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
                 },
                 {

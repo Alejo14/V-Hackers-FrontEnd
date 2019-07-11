@@ -106,11 +106,11 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
   };
 
   ctrl.avancesEntregable = function (entregable) {
-    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.curso.idHorario});
+    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.curso.idHorario, cursoCicloId:ctrl.curso.cursoCicloId });
   };
 
   ctrl.calificarProyecto = function (proyecto) {
-    $state.go('avances-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, metodo: proyecto.metodoTrabajo, horarioId: ctrl.curso.idHorario});
+    $state.go('avances-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, metodo: proyecto.metodoTrabajo, horarioId: ctrl.curso.idHorario, cursoCicloId:ctrl.curso.cursoCicloId });
   };
 
   ctrl.elminarEntregable = function (entregableM) {//Se debe colocar un boton y no hacer clik en el nombre y agregar los demas valores
@@ -164,6 +164,12 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
 
   ctrl.init = function (){
     ctrl.idUsuario = $cookies.get('usuarioID');
+    ctrl.rolUsuarioId = $cookies.get('rolActivoId');
+    if(ctrl.rolUsuarioId === 'f4d1f6d3-9313-4d63-8da4-256aec99d5cd'){
+      ctrl.usuarioRol = 'Profesor';
+    }else{
+      ctrl.usuarioRol = 'Asistente';
+    }
 
     profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, 'Profesor').then(function(rolUsuario){
       ctrl.rolUsuarioId=rolUsuario;
