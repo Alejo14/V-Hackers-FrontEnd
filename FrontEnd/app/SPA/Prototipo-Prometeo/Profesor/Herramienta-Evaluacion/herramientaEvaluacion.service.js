@@ -1,10 +1,10 @@
-angular.module("vHackersModule").service('herramientaEvaluacionService', ['$q', '$http',
-function($q, $http) {
+angular.module("vHackersModule").service('herramientaEvaluacionService', ['$q', '$http', 'variablesAmbiente',
+function($q, $http, variablesAmbiente) {
 
   var servicio = this;
 
   servicio.crearHerramienta = function(data){
-    var urlCrearHerrmienta =  'http://localhost:7008/herramienta/crear';
+    var urlCrearHerrmienta = variablesAmbiente.apiUrl + variablesAmbiente.puertoHerramientaEvaluacion + '/herramienta/crear';
     var $defer = $q.defer();
     $http({
         method: 'POST',
@@ -20,7 +20,7 @@ function($q, $http) {
 
   servicio.obtenerRolUsuario = function(idUsuario, descripcionRol){
 
-    var urlObtenerRolUsuario = 'http://localhost:7003' + '/roles/rolusuario/'+ idUsuario + '?descripcionrol=' + descripcionRol;
+    var urlObtenerRolUsuario = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/rolusuario/'+ idUsuario + '?descripcionrol=' + descripcionRol;
     var $defer = $q.defer();
     $http({
         method: 'GET',
