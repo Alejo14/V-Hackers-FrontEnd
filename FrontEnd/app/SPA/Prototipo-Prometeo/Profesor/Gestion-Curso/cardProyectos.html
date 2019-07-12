@@ -24,7 +24,7 @@
         <td data-title="'FECHA FIN'" align="center">
           {{proyecto.fechaFinStr}}
         </td>
-        <td data-title="'ACCIONES'" align="center" widht="25%">
+        <td data-title="'ACCIONES'" align="center" widht="25%" ng-if="ctrl.usuarioRol === 'Profesor'">
           <a href="" ng-click="ctrl.calificarProyecto(proyecto)" class="m-r-5">
             <i class="fa fa-check"></i>
           </a>
