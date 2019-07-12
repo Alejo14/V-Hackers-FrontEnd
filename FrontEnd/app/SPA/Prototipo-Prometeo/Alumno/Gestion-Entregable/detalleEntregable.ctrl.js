@@ -173,20 +173,19 @@ function toBase64(file) {
 
     swal({
       title: "¿Estás seguro que quieres eliminar el archivo?",
-      text: "Los cambios se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (eliminarArchivoConfirmacion) {
-      if (eliminarArchivoConfirmacion !== "cancelar") {
+      if (eliminarArchivoConfirmacion == "Confirm") {
         entregableAlumnoService.eliminarArchivo(id).then(function () {
             swal("¡Bien hecho!", "El archivo se eliminó exitosamente" , "success");
         });

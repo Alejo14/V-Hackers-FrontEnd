@@ -1,42 +1,74 @@
 <section id="main">
   <div ng-controller="loginCtrl as ctrl">
     <div class="container">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-md-12">
-              <h2>Login</h2>
+      <div class="row-md-12">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <div class="row-md-12">
+                  <h2>Te damos la bienvenida</h2>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="m-0 p-10" align="center">
+                 <img src="imagenes/PROMETEO-gif.gif" width="200px" alt="prometeo" style="">
+              </div>
+              <div class="row-md-12" align="center">
+                <h3>Iniciar sesión</h3>
+              </div><br>
+              <div class="row-md-12">
+                <div class="col-md-12" align="center">
+                  <!-- <div align> -->
+                    <button class="btn btn-primary p-t-10 p-b-10 p-l-20 p-r-20" ng-click = "ctrl.googleLogin()" ng-if="ctrl.loginConGoogle">
+                      <i class="fab fa-google p-r-20" style="font-size: 15px;"></i> Inicia sesión con GOOGLE</button>
+                    <!-- <button class="btn btn-primary" ng-click = "ctrl.probarCookie()"><i class="fa fa-plus-circle"></i> Probar Cookie</button> -->
+                  <!-- </div> -->
+                    <form role="form" class="ng-pristine ng-valid" ng-if="!ctrl.loginConGoogle">
+                      <!-- <div class="Xb9hP">
+                        <input type="email" class="whsOnd zHQkBf" jsname="YPqjbf"  spellcheck="false" tabindex="0" aria-label="Correo electrónico o teléfono" name="identifier" autocapitalize="none" id="identifierId" dir="ltr" data-initial-dir="ltr" data-initial-value="">
+                        <div jsname="YRMmle" class="AxOyFc snByac" aria-hidden="true">
+                          Correo electrónico o teléfono
+                        </div>
+                      </div> -->
+                      <div class="row-md-12">
+                        <div class="col-md-12">
+                          <div class="form-group-lg fg-line">
+                              <!-- <label for="exampleInputEmail1">Correo google</label> -->
+                              <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="Correo electrónico" ng-model="ctrl.usuario.email"><br>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-md-12">
+                        <div class="col-md-12">
+                          <div class="form-group-lg fg-line">
+                              <!-- <label for="exampleInputPassword1">Contraseña</label> -->
+                              <input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Introduce tu contraseña"><br>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-md-12">
+                        <div class="col-md-12" align="right">
+                          <div class="form-group fg-line">
+                              <!-- <label for="exampleInputPassword1">Contraseña</label> -->
+                              <button type="submit" class="btn btn-primary btn-sm m-t-10 waves-effect" ng-click="ctrl.login()">Ingresar</button>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-md-12">
+                  <label for="inputCorreo">Correo de usuario</label>
+                  <input type="text" id="inputCorreo" name="inputCorreo" ng-model="ctrl.usuario.email" ng-readonly>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12" align="center">
-              <!-- <div align> -->
-                <button class="btn btn-primary p-t-10 p-b-10 p-l-20 p-r-20" ng-click = "ctrl.googleLogin()" ng-if="ctrl.loginConGoogle">
-                  <i class="fab fa-google p-r-20" style="font-size: 15px;"></i> Inicia sesión con GOOGLE</button>
-                <!-- <button class="btn btn-primary" ng-click = "ctrl.probarCookie()"><i class="fa fa-plus-circle"></i> Probar Cookie</button> -->
-              <!-- </div> -->
-                <form role="form" class="ng-pristine ng-valid" ng-if="!ctrl.loginConGoogle">
-                  <div class="form-group fg-line">
-                      <label for="exampleInputEmail1">Correo google</label>
-                      <input type="email" class="form-control input-sm" id="exampleInputEmail1" placeholder="Ingrese su correo google" ng-model="ctrl.usuario.email">
-                  </div>
-                  <div class="form-group fg-line">
-                      <label for="exampleInputPassword1">Contraseña</label>
-                      <input type="password" class="form-control input-sm" id="exampleInputPassword1" placeholder="Ingrese su contraseña">
-                  </div>
-
-                  <button type="submit" class="btn btn-primary btn-sm m-t-10 waves-effect" ng-click="ctrl.login()">Ingresar</button>
-              </form>
-            </div>
-          </div>
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <label for="inputCorreo">Correo de usuario</label>
-              <input type="text" id="inputCorreo" name="inputCorreo" ng-model="ctrl.usuario.email" ng-readonly>
-            </div>
-          </div> -->
+        <div class="col-md-3">
         </div>
       </div>
     </div>
