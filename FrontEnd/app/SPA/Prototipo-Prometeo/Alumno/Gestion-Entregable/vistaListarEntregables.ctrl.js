@@ -117,17 +117,17 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancelar: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+      if (usuarioNuevoConfirmado == "Confirm") {
         $state.go('evaluacion-herramienta-listar');
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
@@ -201,17 +201,17 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancelar: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+      if (usuarioNuevoConfirmado !== "Confirm") {
         data={
           "id": entregableM.id, //Defecto
           "nombre": entregableM.nombre,

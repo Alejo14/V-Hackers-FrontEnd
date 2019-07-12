@@ -27,17 +27,17 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal){
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function (usuarioNuevoConfirmado) {
-      if (usuarioNuevoConfirmado !== "cancelar") {
+      if (usuarioNuevoConfirmado == "Confirm") {
         $state.go('inicioAlumnos');
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
