@@ -168,10 +168,10 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
     if(ctrl.rolUsuarioId === 'f4d1f6d3-9313-4d63-8da4-256aec99d5cd'){
       ctrl.usuarioRol = 'Profesor';
     }else{
-      ctrl.usuarioRol = 'Asistente';
+      ctrl.usuarioRol = 'Asistente de Docencia';
     }
 
-    profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, 'Profesor').then(function(rolUsuario){
+    profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, ctrl.usuarioRol).then(function(rolUsuario){
       ctrl.rolUsuarioId=rolUsuario;
       ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
 

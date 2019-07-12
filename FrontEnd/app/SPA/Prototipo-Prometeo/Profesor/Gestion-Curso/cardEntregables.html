@@ -24,7 +24,7 @@
         <td data-title="'FECHA FIN'" align="center">
           {{entregable.fechaFinStr}}
         </td>
-        <td data-title="'ACCIONES'" align="center" widht="25%">
+        <td data-title="'ACCIONES'" align="center" widht="25%" ng-if="ctrl.usuarioRol === 'Profesor'">
           <a href="" ng-click="ctrl.verEntregable(entregable)" class="m-r-10">
             <i class="fa fa-pencil-alt"></i>
           </a>
