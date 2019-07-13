@@ -53,3 +53,4 @@ package-lock.json
 
 /src/release
 /release
+/app/variablesAmbiente.js
