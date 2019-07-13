@@ -297,13 +297,20 @@ ctrl.regresarCursoAlumno = function () {
     ctrl.detalleE.descripcion=$stateParams.descripcion;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idAvanceEntregable="";
-
+    console.log("ENTREGABLE",ctrl.detalleE);
     if ($stateParams.estadoEntregable=="I"){
       ctrl.mostrarBoton=true;
     }else {
       ctrl.mostrarBoton=false;
     }
 
+    ctrl.Tipoentregable=0;
+    ctrl.idCursoCiclo = $stateParams.cursoCicloId;
+    entregableAlumnoService.listarEntregables(ctrl.idCursoCiclo).then(function (entregablesListaData) {
+      ctrl.entregablesLista = entregablesListaData;
+      ctrl.Tipoentregable=ctrl.entregablesLista.find(i => i.id === ctrl.detalleE.id);
+      console.log("TIPO DE ENTREGABLE",ctrl.Tipoentregable);
+    });
     data={
       "idEntregable":ctrl.detalleE.id,
       "idRolUsuario":ctrl.detalleE.idRolUsuario,
@@ -331,18 +338,32 @@ ctrl.regresarCursoAlumno = function () {
               "idRolUsuario":ctrl.detalleE.idRolUsuario,
               "idHorario":cursoEncontrado.idHorario
             }
-            entregableAlumnoService.mostrarGrupoId(dataGrupo).then(function(miGrupoId){
-              //console.log("3-GRUPO ID",miGrupoId);
-              data.idGrupo=miGrupoId;
 
-              console.log("4-DATA",data);
+            if (ctrl.Tipoentregable.metodoTrabajo==0) {
+              data.idGrupo=0;
+              console.log("4-DATA INDIVIDUAL",data);
               entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
                   ctrl.idAvanceEntregable=respuesta;
                   console.log("5-AVANCE ENTREGABLE",ctrl.idAvanceEntregable);
                   ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
                   ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
               });
-            });
+            }else {
+              entregableAlumnoService.mostrarGrupoId(dataGrupo).then(function(miGrupoId){
+                //console.log("3-GRUPO ID",miGrupoId);
+                data.idGrupo=miGrupoId;
+
+                console.log("4-DATA GRUPAL",data);
+                entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+                    ctrl.idAvanceEntregable=respuesta;
+                    console.log("5-AVANCE ENTREGABLE",ctrl.idAvanceEntregable);
+                    ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
+                    ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
+                });
+              });
+
+            }
+
 
 
 
@@ -350,27 +371,6 @@ ctrl.regresarCursoAlumno = function () {
         });
     //////------------------------------------------------///////////
 
-
-
-    //ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
-
-
-
-
-    //Tengo que probarlo
-
-     //este debe ser el id que se debe usar para registrar el archivo
-
-    // if($stateParams.cursoCicloId==0){ //Entregable pertence a un proyecto
-    //   ctrl.detalleE.cursoCicloId=0;
-    //   ctrl.detalleE.proyectoId=$stateParams.proyectoId;
-    // }else{                            //Entregable pertence a un cursoCiclo
-    //   ctrl.detalleE.proyectoId=0;
-    //   ctrl.detalleE.cursoCicloId=$stateParams.cursoCicloId;
-    //   ctrl.detalleE.nombreCurso=$stateParams.nombreCurso;
-    //   ctrl.detalleE.codigoCurso=$stateParams.codigoCurso;
-    //   ctrl.detalleE.horario=$stateParams.horario;
-    // }
 
 
   }
