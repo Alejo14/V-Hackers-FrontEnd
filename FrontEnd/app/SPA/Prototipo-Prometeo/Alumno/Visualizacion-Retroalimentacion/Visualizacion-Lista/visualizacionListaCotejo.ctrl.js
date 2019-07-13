@@ -32,7 +32,7 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso == "Confirm"){
-        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }

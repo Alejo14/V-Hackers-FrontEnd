@@ -51,7 +51,7 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -136,7 +136,7 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
       console.log(data);
       visualizacionAspectoServicio.guardarAspecto(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
       });
     }else{
       var mensaje = ctrl.crearMensaje(ctrl.indices.length);
