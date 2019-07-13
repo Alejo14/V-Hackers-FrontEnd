@@ -303,7 +303,6 @@ ctrl.regresarCursoAlumno = function () {
     }else {
       ctrl.mostrarBoton=false;
     }
-<<<<<<< HEAD
 
     data={
       "idEntregable":ctrl.detalleE.id,
@@ -374,14 +373,6 @@ ctrl.regresarCursoAlumno = function () {
     // }
 
 
-=======
-    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
-        ctrl.idAvanceEntregable=respuesta;
-        console.log(ctrl.idAvanceEntregable);
-        ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
-        ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
-    });
->>>>>>> eda459c41b5707b1536cb91db30de92e07f52f6d
   }
 
   ctrl.init();
