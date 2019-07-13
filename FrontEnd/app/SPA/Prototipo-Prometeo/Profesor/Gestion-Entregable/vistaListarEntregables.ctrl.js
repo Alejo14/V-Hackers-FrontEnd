@@ -72,7 +72,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
   }
 
   ctrl.avancesEntregable = function(entregable){
-    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.horarioId});
+    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.horarioId, cursoCicloId: ctrl.cursoCicloId});
   }
   //avances-entregable/:id/:nombre/:metodo/:horarioId
 

@@ -203,17 +203,17 @@ ctrl.elminarURL= function (archivo){
     text: "Los cambios se guardarán",
     icon: "warning",
     buttons: {
-      cancelar: {
+      Cancel: {
         text: "Cancelar",
         className: "btn btn-lg btn-danger"
       },
-      confirm: {
+      Confirm: {
         text: "Sí, eliminar",
         className: "btn btn-lg color-fondo-azul-pucp color-blanco"
       }
     }
   }).then(function (eliminarURLConfirmacion) {
-    if (eliminarURLConfirmacion !== "cancelar") {
+    if (eliminarURLConfirmacion == "Confirm") {
       entregableAlumnoService.eliminarArchivo(id).then(function () {
           swal("¡Bien hecho!", "El URL se eliminó exitosamente" , "success");
       });
@@ -266,17 +266,17 @@ ctrl.regresarCursoAlumno = function () {
     text: "Los cambios se guardarán",
     icon: "warning",
     buttons: {
-      cancelar: {
+      Cancel: {
         text: "Cancelar",
         className: "btn btn-lg btn-danger"
       },
-      confirm: {
+      Confirm: {
         text: "Sí, regresar",
         className: "btn btn-lg color-fondo-azul-pucp color-blanco"
       }
     }
   }).then(function (regresarVistaCurso) {
-    if (regresarVistaCurso !== "cancelar") {
+    if (regresarVistaCurso == "Confirm") {
       $state.go('alumnoCursos', {cursoCicloId: $stateParams.cursoCicloId, nombreCurso: $stateParams.nombreCurso, codigoCurso: $stateParams.codigoCurso, horario: $stateParams.horario, rolusuarioId:$stateParams.idRolUsuario}); //Aca podemos enviar el RolUsuarioId tambien
     }
   });
@@ -303,6 +303,7 @@ ctrl.regresarCursoAlumno = function () {
     }else {
       ctrl.mostrarBoton=false;
     }
+<<<<<<< HEAD
 
     data={
       "idEntregable":ctrl.detalleE.id,
@@ -373,6 +374,14 @@ ctrl.regresarCursoAlumno = function () {
     // }
 
 
+=======
+    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+        ctrl.idAvanceEntregable=respuesta;
+        console.log(ctrl.idAvanceEntregable);
+        ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
+        ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
+    });
+>>>>>>> eda459c41b5707b1536cb91db30de92e07f52f6d
   }
 
   ctrl.init();

@@ -4,7 +4,8 @@ function ($scope, $state, variablesAmbiente, $cookies, loginService) {
 
   ctrl.usuario = {
     username: "",
-    email: ""
+    email: "",
+    password: ""
   };
   ctrl.loginConGoogle = false;
   ctrl.googleLogin = function () {
@@ -50,21 +51,23 @@ function ($scope, $state, variablesAmbiente, $cookies, loginService) {
   }
 
   ctrl.login = function () {
-    var correoLogin = {
-      "correo": ctrl.usuario.email
-    };
+    if (ctrl.usuario.email != "" && ctrl.usuario.password != "") {
+      var correoLogin = {
+        "correo": ctrl.usuario.email
+      };
 
-    loginService.login(correoLogin).then(function (respuestaCookie) {
-      if (respuestaCookie.correo === 'Usuario no existe') {
-        swal("¡Opss!", "El usuario no se encuentra en base de datos" , "error");
-      }
-      else {
-        $cookies.put('usuarioID', respuestaCookie.id);
-        $cookies.put('rolActivoId', respuestaCookie.roles[0].id);
-        $cookies.put('inicioSesion', true);
-        $state.go('raiz');
-      }
-    });
+      loginService.login(correoLogin).then(function (respuestaCookie) {
+        if (respuestaCookie.correo === 'Usuario no existe') {
+          swal("¡Opss!", "El usuario no se encuentra en base de datos" , "error");
+        }
+        else {
+          $cookies.put('usuarioID', respuestaCookie.id);
+          $cookies.put('rolActivoId', respuestaCookie.roles[0].id);
+          $cookies.put('inicioSesion', true);
+          $state.go('raiz');
+        }
+      });
+    }
   }
 
   ctrl.probarCookie = function () {
