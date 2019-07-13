@@ -18,6 +18,19 @@ function($q, $http,variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarProyectos = function(codigoCurso){
+    var urlListarProyectos = variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectosxcurso/' + codigoCurso;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarProyectos
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
 
     servicio.registroentregableAlumno = function(data){
       var urlEnviarCalificacion = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/crear';

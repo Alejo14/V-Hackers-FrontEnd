@@ -125,12 +125,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     date=entregable.fechaEntrega.getDate();
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
-    if(ctrl.mostrarMetodoTrabajo == 1){
-      var metodo = 0;
-      if(ctrl.metodoTrabajo !== "individual") metodo = 1;
+
+    if(ctrl.metodoTrabajo != "individual") {
+      metodo = 1;
     }else{
-      var metodo = 0;
+      metodo = 0;
     }
+
     if(entregable.proyectoId != 0){
       var data={
         "id": null, //Defecto
@@ -145,6 +146,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         "notificaciones": $scope.events,
         "metodoTrabajo": metodo
       };
+      console.log(data);
       entregableService.registroentregableAlumnoXProyecto(data).then(function () {
           swal("¡Bien hecho!", "El entregable del proyecto se creó exitosamente" , "success");
           $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId});
@@ -208,11 +210,12 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     if (!entregable.horaEntrega) {hours=0} else {hours=entregable.horaEntrega.getHours();}
     if (!entregable.horaEntrega) {minutes=0} else {minutes=entregable.horaEntrega.getMinutes();}
 
-    if(ctrl.mostrarMetodoTrabajo==1){
-      var metodo = parseInt(ctrl.mostrarMetodoTrabajo);
+    if(ctrl.metodoTrabajo != "individual") {
+      metodo = 1;
     }else{
-      var metodo = 0;
+      metodo = 0;
     }
+
     if (ctrl.entregable.proyectoId == 0) {
         var proyecto = null;
     } else {
@@ -356,6 +359,24 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       if($stateParams.proyectoId != 0){
         ctrl.titulo = ctrl.titulo + " de un proyecto"
         ctrl.entregable.proyectoId=$stateParams.proyectoId;
+
+        //// Aqui validar si el proyecto es grupal o individual
+
+        entregableService.listarProyectos($stateParams.cursoCicloId).then(function (proyectosListaData) {
+          ctrl.proyectosLista = proyectosListaData;
+          console.log("listar proyectos");
+          console.log(proyectosListaData);
+          var proyectoEncontrado = ctrl.proyectosLista.find(i => i.id === $stateParams.proyectoId);
+          ctrl.proyecto = proyectoEncontrado;
+          console.log(ctrl.proyecto);
+
+          if(ctrl.proyecto.metodoTrabajo == 0) {
+            ctrl.metodoTrabajo = "individual";
+          }else{
+            ctrl.metodoTrabajo = "grupal";
+          }
+        });
+
       }else{
         ctrl.entregable.proyectoId=0;
         ctrl.mostrarMetodoTrabajo=1;
@@ -371,6 +392,22 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
         entregableService.listarEntregablesXProyecto($stateParams.proyectoId).then(function (entregableLista) {
           ctrl.entregableLista = entregableLista;
           ctrl.inicializarEntregable();
+        });
+
+        entregableService.listarProyectos($stateParams.cursoCicloId).then(function (proyectosListaData) {
+          ctrl.proyectosLista = proyectosListaData;
+
+          var proyectoEncontrado = ctrl.proyectosLista.find(i => i.id === $stateParams.proyectoId);
+          ctrl.proyecto = proyectoEncontrado;
+
+          console.log("Proyecto:");
+          console.log(ctrl.proyecto);
+
+          if(ctrl.proyecto.metodoTrabajo == 0) {
+            ctrl.metodoTrabajo = "individual";
+          }else{
+            ctrl.metodoTrabajo = "grupal";
+          }
         });
       }else{
         ctrl.entregable.proyectoId=0;

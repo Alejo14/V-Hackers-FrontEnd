@@ -31,11 +31,8 @@
                       </div>
                     </td>
                     <td data-title="'MÉTODO'">
-                      <div align="center" ng-if="entregable.metodoTrabajo==0">
-                        <a> Indiv. </a>
-                      </div>
-                      <div align="center" ng-if="entregable.metodoTrabajo==1">
-                        <a> Grupal </a>
+                      <div align="center">
+                        {{ctrl.metodoTrabajo}}
                       </div>
                     </td>
                     <td data-title="'FECHA CREACIÓN'" align="center">

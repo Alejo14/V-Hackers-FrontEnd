@@ -72,7 +72,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
   }
 
   ctrl.avancesEntregable = function(entregable){
-    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: entregable.metodoTrabajo, horarioId: ctrl.horarioId, cursoCicloId: ctrl.cursoCicloId});
+    $state.go('avances-entregable' , {id: entregable.id, nombre: entregable.nombre, metodo: ctrl.proyecto.metodoTrabajo, horarioId: ctrl.horarioId, cursoCicloId: ctrl.cursoCicloId});
   }
   //avances-entregable/:id/:nombre/:metodo/:horarioId
 
@@ -82,8 +82,25 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
     ctrl.cursoCicloId = $stateParams.cursoId;
     ctrl.horarioId = $stateParams.horarioId;
     ctrl.entregablesLista = [];
+
+    entregableService.listarProyectos(ctrl.cursoCicloId).then(function (proyectosListaData) {
+      ctrl.proyectosLista = proyectosListaData;
+
+      var proyectoEncontrado = ctrl.proyectosLista.find(i => i.id === $stateParams.proyectoId);
+      ctrl.proyecto = proyectoEncontrado;
+
+      console.log("Proyecto:");
+      console.log(ctrl.proyecto);
+
+      if(ctrl.proyecto.metodoTrabajo == 0) {
+        ctrl.metodoTrabajo = "Indiv.";
+      }else{
+        ctrl.metodoTrabajo = "Grupal";
+      }
+    });
     ctrl.cargarEntregables(ctrl.proyectoId);
     ctrl.obtenerNombreProyecto(ctrl.proyectoId);
+
   }
 
   ctrl.init();
