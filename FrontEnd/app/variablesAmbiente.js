@@ -2,7 +2,7 @@
   window.__env = window.__env || {};
   //API url
   //window.__env.apiUrl = 'http://200.16.7.187';
-  window.__env.apiUrl = 'http://localhost';
+  window.__env.apiUrl = 'http://200.16.7.187';
   //Url base
   window.__env.baseUrl = '/';
   //Puertos de microservicios
