@@ -21,17 +21,17 @@
                 <li class="nav-item">
                   <a class="nav-link letra-tabs" ng-class="{active:ctrl.cargaUnitaria1}" href="" ng-click="ctrl.cambiarVista(1)">Entregables</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link letra-tabs" ng-class="{active:ctrl.cargaUnitaria2}" href="" ng-click="ctrl.cambiarVista(2)">Encuestas</a>
-                </li>
+                </li> -->
               </ul>
             </div>
             <div ng-if="ctrl.cargaUnitaria0" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/cardProyectos.html'">
             </div>
             <div ng-if="ctrl.cargaUnitaria1" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/cardEntregables.html'">
             </div>
-            <div ng-if="ctrl.cargaUnitaria2" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/cardEncuestas.html'">
-            </div>
+            <!-- <div ng-if="ctrl.cargaUnitaria2" class="card-body" ng-include="'SPA/Prototipo-Prometeo/Alumno/Gestion-Curso/cardEncuestas.html'">
+            </div> -->
           </div>
       </div>
       <div class="col-md-3">
