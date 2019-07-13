@@ -37,20 +37,19 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
   ctrl.regresar = function (){
     swal({
       title: "¿Estás seguro de que deseas regresar?",
-      text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function(confirmarRegreso){
-      if(confirmarRegreso !== "cancelar"){
+      if(confirmarRegreso == "Confirm"){
         $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
       }
     });

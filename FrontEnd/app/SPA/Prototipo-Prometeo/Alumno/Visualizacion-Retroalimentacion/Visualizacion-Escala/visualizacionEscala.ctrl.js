@@ -70,20 +70,19 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   ctrl.regresar = function (){
     swal({
       title: "¿Esta seguro de que desea regresar?",
-      text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function(confirmarRegreso){
-      if(confirmarRegreso !== "cancelar"){
+      if(confirmarRegreso == "Confirm"){
         $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
       }
     });
