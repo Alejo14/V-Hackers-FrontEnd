@@ -2,50 +2,61 @@
   <div ng-controller="visualizacionListaCtrl as ctrl">
     <div class="container">
       <div class="block-container">
-      <div class="card">
-        <div class="card-header">
-        <h2>Evaluación Lista de cotejo</h2>
-        </div>
-        <div class="col-sm-12">
-          <div  class="form-group fg-line m-b-0">
-            <label class="control-label label-letra-prometeo p-t-10" align="right">Puntaje</label>
+        <div class="card">
+          <div class="card-header">
+            <h2>Evaluación Lista de cotejo</h2>
           </div>
-          <div class="form-group fg-line m-b-10">
-            <input type="number" step="any" class="z-indice-prometeo texto-centrado col-sm-1 form-control input-sm input-letra-prometeo m-r-10" ng-model="ctrl.puntajeAsignado" placeholder="Ingrese el puntaje" disabled>
-          </div>
-          <div class="form-group fg-line">
-            <label class="control-label label-letra-prometeo p-t-10 p-l-0">Observaci&oacute;n</label>
-            <textarea class="form-control p-t-10 input-letra-prometeo" rows="2" placeholder="Ingrese la observación del aspecto" ng-model="aspecto.observacion" disabled>
-            </textarea>
-          </div>
-          <div class="form-group fg-line">
-            <label class="control-label label-letra-prometeo">Criterios</label>
-          </div>
-          <div class="table-responsive">
-            <table ng-Table="" class="table table-bordered">
-              <tr ng-repeat="criterio in ctrl.listaCriterios">
-                <td data-title="'Nro.'" align="center" width="5%">
-                  {{$index + 1}}
-                </td>
-                <td data-title="'Descripcion'">
-                  {{criterio.descripcion}}
-                </td>
-                <td data-title="'Indicaciones'">
-                  {{criterio.indicaciones}}
-                </td>
-                <td data-title="'Conforme'" align="center" >
-                  <div class="checkbox col-md-12" >
-                    <input type="checkbox" ng-model="criterio.calificacion" ng-true-value=1 ng-false-value=0 class="z-indice-prometeo" disabled>
-                    <i class="input-helper"></i>
+          <div class="card-body">
+            <div class="row-md-12">
+              <div  class="col-md-12">
+                <label class="control-label label-letra-prometeo p-t-10" align="right">Puntaje</label>
+                <div class="form-group fg-line m-b-10">
+                  <input type="number" step="any" class="z-indice-prometeo col-sm-2 form-control input-sm input-letra-prometeo m-r-10" ng-model="ctrl.puntajeAsignado" placeholder="No hay puntaje" disabled><br><br>
+                </div>
+              </div>
+            </div>
+            <div class="row-md-12">
+              <div class="col-md-12">
+                <label class="control-label label-letra-prometeo p-t-10 p-l-0">Observaci&oacute;n</label>
+                <div class="form-group fg-line">
+                  <textarea class="form-control p-t-10 input-letra-prometeo" rows="2" placeholder="No hay observación del aspecto" ng-model="aspecto.observacion" disabled></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row-md-12">
+              <div class="col-md-12">
+                <label class="control-label label-letra-prometeo">Criterios</label>
+                <div class="row-md-12">
+                  <div class="table-responsive">
+                    <table ng-Table="" class="table table-bordered">
+                      <tr ng-repeat="criterio in ctrl.listaCriterios">
+                        <td data-title="'Nro.'" align="center" width="5%">
+                          {{$index + 1}}
+                        </td>
+                        <td data-title="'Descripcion'">
+                          {{criterio.descripcion}}
+                        </td>
+                        <td data-title="'Indicaciones'">
+                          {{criterio.indicaciones}}
+                        </td>
+                        <td data-title="'Conforme'" align="center">
+                          <div class="col-md-12 checkbox" align="center">
+                            <input type="checkbox" ng-model="criterio.calificacion" ng-true-value=1 ng-false-value=0 class="z-indice-prometeo" disabled>
+                            <i class="input-helper"></i>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
-                </td>
-              </tr>
-            </table>
+                </div>
+              </div>
+            </div>
+            <div class="row-md-12">
+              <div class="col-sm-12" align="right">
+                <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect bgm-green"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-12 m-t-15" align="right">
-            <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-          </div>
-        </div>
         </div>
       </div>
     </div>

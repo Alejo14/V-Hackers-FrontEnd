@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('avancesEntregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
-function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('avancesEntregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams', '$cookies',
+function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams, $cookies){
   var ctrl = this;
   ctrl.titulo = "";
   ctrl.subtitulo = "Avances "
@@ -137,6 +137,12 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     ctrl.entregable.metodo = $stateParams.metodo;
     ctrl.horarioId = $stateParams.horarioId;
     ctrl.titulo = ctrl.entregable.nombre;
+
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    ctrl.rolId = $cookies.get('rolActivoId');
+    entregableService.obtenerRol(ctrl.rolId).then(function (rol) {
+      ctrl.usuarioRol = rol.descripcion;
+    });
     if (ctrl.entregable.metodo == 0){ //Entregable individual
       ctrl.subtitulo = ctrl.subtitulo + "individuales";
       ctrl.obtenerAlumnos(ctrl.horarioId);
