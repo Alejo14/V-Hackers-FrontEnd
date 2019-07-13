@@ -79,9 +79,16 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       idRolUsuario="0";
       idGrupo=avance.id;
     }
+    console.log("idRolUsuario");
+    console.log(idRolUsuario);
+    console.log("idGrupo");
+    console.log(idGrupo);
+
     idEntregable=ctrl.entregable.id;
     entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
       ctrl.avanceSeleccionado = avanceData;
+      console.log("avanceSeleccionado");
+      console.log(ctrl.avanceSeleccionado);
       $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id, herramientaCalificada: 0});
     });
   };
