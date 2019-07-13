@@ -1,7 +1,7 @@
 angular.module('vHackersModule').controller('nuevaRubricaCtrl', ['$scope','$state', '$stateParams','NgTableParams', 'nuevaRubricaService', 'nuevoAspectoRubricaServicio',
 function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoAspectoRubricaServicio){
   var ctrl = this;
-
+  ctrl.horarioId = $stateParams.horarioId;
   ctrl.agregarNivel = function () {
     ctrl.rubrica.numeroNiveles += 1;
     var nivel = {
@@ -70,7 +70,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, horarioId: ctrl.horarioId});
   }
 
   ctrl.regresarEntregable = function (){
@@ -90,7 +90,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
       closeModal: false
     }).then(function (confirmarRegreso) {
       if (confirmarRegreso !== "cancelar") {
-        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+        $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
       }
     });
   }
@@ -125,7 +125,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
   }
 
   ctrl.editarAspecto  = function (indice) {
-    $state.go('editar-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, idAspecto: ctrl.aspectoLista[indice].id});
+    $state.go('editar-aspecto', {id: ctrl.rubrica.id, entregableId: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, idAspecto: ctrl.aspectoLista[indice].id, horarioId: ctrl.horarioId});
   }
 
   ctrl.guardarRubrica = function(){
@@ -150,7 +150,7 @@ function($scope, $state, $stateParams, NgTableParams, nuevaRubricaService,nuevoA
           "estado": "publico"
         };
         nuevaRubricaService.guardarRubrica(confirmarRubrica).then(function(){
-          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
         });
       }
     });

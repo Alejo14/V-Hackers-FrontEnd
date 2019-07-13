@@ -1,6 +1,7 @@
 angular.module('vHackersModule').controller('nuevaEscalaCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaEscalaService',
 function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaService){
   var ctrl = this;
+  ctrl.horarioId = $stateParams.horarioId;
 
   ctrl.agregarNivel = function () {
     ctrl.rubrica.numeroNiveles += 1;
@@ -70,11 +71,11 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
   }
 
   ctrl.agregarAspecto = function(){
-    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id});
+    $state.go('nuevo-aspecto', {id: ctrl.rubrica.id, horarioId: ctrl.horarioId});
   }
 
   ctrl.regresarEntregable = function (){
-    $state.go('evaluacion-herramienta');
+    $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
   }
 
   ctrl.eliminarAspecto = function (indice) {
@@ -115,7 +116,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaEscalaServi
           console.log(dataCriterios);
           nuevaEscalaService.agregarCriterios(dataCriterios);
           //------------------//
-          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+          $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
         });
       }
     });

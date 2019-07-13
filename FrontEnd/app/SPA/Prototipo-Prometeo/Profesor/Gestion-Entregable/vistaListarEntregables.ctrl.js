@@ -1,6 +1,7 @@
 angular.module('vHackersModule').controller('listarEntregablesXProyectoCtrl', ['$scope','$state','$stateParams' ,'entregableService','gestionProyectoService','$uibModal','NgTableParams',
 function($scope, $state,$stateParams, entregableService, gestionProyectoService, $uibModal, NgTableParams){
   var ctrl = this;
+  ctrl.horarioId = $stateParams.horarioId;
 
   ctrl.regresarProyectos = function () {
     $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
@@ -8,11 +9,11 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
 
   ctrl.crearEntregable = function () {
     //entregable de un proyecto
-    $state.go('evaluacion-herramienta-gestionar' , {id: 0, cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});//ctrl.curso.cursoCicloId
+    $state.go('evaluacion-herramienta-gestionar' , {id: 0, cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, horarioId: ctrl.horarioId});//ctrl.curso.cursoCicloId
   };
 
   ctrl.irModificarEntregable = function (entregable) {
-    $state.go('evaluacion-herramienta-gestionar' , {id: entregable.id,cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId});
+    $state.go('evaluacion-herramienta-gestionar' , {id: entregable.id,cursoCicloId: ctrl.cursoCicloId, proyectoId: ctrl.proyectoId, horarioId: ctrl.horarioId});
   };
 
   ctrl.elminarEntregable = function (entregable) {

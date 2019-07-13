@@ -1,7 +1,7 @@
 angular.module('vHackersModule').controller('herramientaEvaluacionCtrl', ['$scope','$state', '$stateParams','herramientaEvaluacionService','$cookies',
 function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
  var ctrl = this;
-
+ ctrl.horarioId = $stateParams.horarioId;
  //Después de crear, se llama al servicio para guardarlo en el BackEnd y este envía un id
  //ctrl.herramienta.id = 'b52a8c24-318b-45cf-b339-e81253d013c2';
 
@@ -45,11 +45,11 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
             swal("¡Listo!", "Herramienta creada con éxito", "success").then(function(){
               console.log("Id herramienta: "+ ctrl.herramienta.id);
               if (ctrl.herramienta.tipo=="Rubrica"){
-                $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+                $state.go('nueva-rubrica', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo', horarioId: ctrl.horarioId});
               }else if(ctrl.herramienta.tipo=="Escala") {
-                $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+                $state.go('nueva-escala', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo', horarioId: ctrl.horarioId});
               }else if(ctrl.herramienta.tipo=="Lista de Cotejo") {
-                $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo'});
+                $state.go('nueva-lista-cotejo', {id: ctrl.herramienta.id, entregableId: $stateParams.id, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'nuevo', horarioId: ctrl.horarioId});
               }
             });
           });
@@ -76,7 +76,7 @@ function($scope, $state, $stateParams, herramientaEvaluacionService, $cookies) {
       closeModal: false
     }).then(function (regresarConfirmado){
       if(regresarConfirmado !== "cancelar"){
-        $state.go('evaluacion-herramienta-gestionar',{id: $stateParams.id ,cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+        $state.go('evaluacion-herramienta-gestionar',{id: $stateParams.id ,cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
       }
     });
   }

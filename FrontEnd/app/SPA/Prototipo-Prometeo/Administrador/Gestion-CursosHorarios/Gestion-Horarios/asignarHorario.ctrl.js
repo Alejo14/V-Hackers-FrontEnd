@@ -10,7 +10,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
   ctrl.idCiclo = "";
   ctrl.idHorario = "";
   ctrl.horariosLista = [];
-  
+
   ctrl.obtenerInfoArchivo = function (archivo,parametros) {
     //console.log(parametros);
     var id=parametros.data;
@@ -42,19 +42,19 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
       text: "Los cambios no se guardarán",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger",
           value: "cancelar"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, volver",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco",
           value: "confirm"
         }
       }
     }).then(function(regresar){
-      if (regresar == "confirm") {
+      if (regresar == "Confirm") {
         $state.go('gestion-horarios');
       }
     });
@@ -94,8 +94,11 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
       }
     });
     modalInstance.result.then( function (parametroRetorno) {
-        ctrl.listarHorarios(ctrl.idCursoCiclo);
-        console.log("Se debe actualizar la pantalla");
+      setTimeout(function () {
+        asignarHorarioService.listarHorarios(ctrl.idCursoCiclo).then(function (horariosListaData) {
+          ctrl.horariosLista = horariosListaData;
+        });
+      }, 3000)
     });
   };
 

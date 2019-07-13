@@ -1,6 +1,7 @@
 angular.module('vHackersModule').controller('nuevoAspectoRubricaCtrl', ['$scope','$state', '$stateParams','nuevoAspectoRubricaServicio','nuevaRubricaService','$uibModal', 'NgTableParams',
 function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubricaService, $uibModal, NgTableParams){
   var ctrl = this;
+  ctrl.horarioId = $stateParams.horarioId;
 
   ctrl.agregarCriterio = function () {
     var modalInstance = $uibModal.open({
@@ -137,7 +138,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         console.log(data);
         nuevoAspectoRubricaServicio.enviarAspecto(data).then(function(){
            swal("Felicidades","Se guardó su configuración con éxito" ,"success");
-           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
+           $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, horarioId: ctrl.horarioId});
         });
       }
     });
@@ -169,7 +170,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
       if (aspectoGuardarConfirmado) {
         nuevoAspectoRubricaServicio.modificarAspecto(data).then(function(){
           swal("Felicidades","Se guardó su configuración con éxito" ,"success");
-          $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado});
+          $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: $stateParams.estado, horarioId: ctrl.horarioId});
         });
       }
     });
@@ -181,9 +182,9 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
 
   ctrl.regresar = function () {
     if($stateParams.estado === 'nuevo')
-      $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado});
+      $state.go('nueva-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado, horarioId: ctrl.horarioId});
     else
-      $state.go('editar-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado});
+      $state.go('editar-rubrica', {id: ctrl.rubricaId, entregableId:$stateParams.entregableId, nivelesCreados: ctrl.nivelesCreados, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado:$stateParams.estado, horarioId: ctrl.horarioId});
   }
 
   ctrl.inicializarVariables = function () {

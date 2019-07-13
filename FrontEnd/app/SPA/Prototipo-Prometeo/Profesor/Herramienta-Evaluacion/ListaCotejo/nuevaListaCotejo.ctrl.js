@@ -1,9 +1,10 @@
 angular.module('vHackersModule').controller('nuevaListaCotejoCtrl', ['$scope','$state', '$stateParams','NgTableParams','$uibModal', 'nuevaListaCotejoService',
 function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejoService){
   var ctrl = this;
+  ctrl.horarioId = $stateParams.horarioId;
 
   ctrl.regresarEntregable = function (){
-    $state.go('evaluacion-herramienta');
+    $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
   }
 
   ctrl.guardarRubrica = function(){
@@ -35,7 +36,7 @@ function($scope, $state, $stateParams, NgTableParams,$uibModal, nuevaListaCotejo
         nuevaListaCotejoService.guardarRubrica(confirmarRubrica).then(function(){
           nuevaListaCotejoService.guardarCotejos(cotejos).then(function(cotejoData){
             console.log(cotejoData);
-            $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+            $state.go('evaluacion-herramienta-gestionar', {id: $stateParams.entregableId, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
           });
         });
       }
