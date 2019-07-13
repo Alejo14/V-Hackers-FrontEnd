@@ -99,8 +99,23 @@ function($q, $http, variablesAmbiente) {
     var urlCicloActual = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cicloactual/';
     var $defer = $q.defer();
     $http({
-        method: 'POst',
+        method: 'POST',
         url: urlCicloActual
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.obtenerRol = function(idRol){
+
+    var urlObtenerRol = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/obtenerrol/'+ idRol;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlObtenerRol
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
      }).catch(function (error) {

@@ -238,4 +238,20 @@ function($q, $http,variablesAmbiente) {
       return $defer.promise;
     };
 
+    servicio.obtenerRol = function(idRol){
+
+      var urlObtenerRol = variablesAmbiente.apiUrl + variablesAmbiente.puertoUsuarios + '/roles/obtenerrol/'+ idRol;
+      var $defer = $q.defer();
+      $http({
+          method: 'GET',
+          url: urlObtenerRol
+       }).then(function (respuesta) {
+         $defer.resolve(respuesta.data);
+       }).catch(function (error) {
+         $defer.reject(error);
+       });
+      return $defer.promise;
+    }
+
+
 }]);
