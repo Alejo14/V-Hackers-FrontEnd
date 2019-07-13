@@ -190,7 +190,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'evaluacion-herramienta-gestionar',
-                  url: '/evaluacion-herramienta-gestionar/:id/:cursoCicloId/:proyectoId',
+                  url: '/evaluacion-herramienta-gestionar/:id/:cursoCicloId/:proyectoId/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/vistaGestiónEntregable.html'
                 },
                 {
@@ -205,27 +205,27 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'nueva-herramienta',
-                  url: '/:id/nueva-herramienta/:cursoCicloId/:proyectoId',
+                  url: '/:id/nueva-herramienta/:cursoCicloId/:proyectoId/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/herramientaEvaluacion.html'
                 },
                 {
                   name: 'nueva-rubrica',
-                  url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/nueva-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
                 },
                 {
                   name: 'editar-rubrica',
-                  url: '/editar-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/editar-rubrica/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/nuevaRubrica.html'
                 },
                 {
                   name: 'nuevo-aspecto',
-                  url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado',
+                  url: '/nuevo-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
                 },
                 {
                   name: 'editar-aspecto',
-                  url: '/editar-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado/:idAspecto',
+                  url: '/editar-aspecto/:id/:entregableId/:cursoCicloId/:proyectoId/:estado/:idAspecto/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Rubrica/Aspecto/nuevoAspecto.html'
                 },
                 {
@@ -245,22 +245,22 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'nueva-escala',
-                  url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/nueva-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
                 {
                   name: 'editar-escala',
-                  url: '/editar-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/editar-escala/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/Escala/nuevaEscala.html'
                 },
                 {
                   name: 'nueva-lista-cotejo',
-                  url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/nueva-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
                 },
                 {
                   name: 'editar-lista-cotejo',
-                  url: '/editar-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado',
+                  url: '/editar-lista-cotejo/:id/:entregableId/:nivelesCreados/:cursoCicloId/:proyectoId/:estado/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Herramienta-Evaluacion/ListaCotejo/nuevaListaCotejo.html'
                 },
                 {

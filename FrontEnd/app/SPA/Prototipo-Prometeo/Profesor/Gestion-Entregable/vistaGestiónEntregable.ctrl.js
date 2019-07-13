@@ -2,6 +2,7 @@
 angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
 function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
   var ctrl = this;
+  ctrl.horarioId = $stateParams.horarioId;
 
   function getDayClass(data) {
     var date = data.date, mode = data.mode;
@@ -189,7 +190,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     }).then(function (respuesta) {
       if (respuesta == "Confirm") {
         if (ctrl.entregable.proyectoId != 0) {
-          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId});
+          $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId, horarioId: ctrl.horarioId});
         } else {
           $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId});
         }
@@ -292,13 +293,13 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
   };
 
   ctrl.crearHerramienta = function(){
-    $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId});
+    $state.go('nueva-herramienta', {id: $stateParams.id, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, horarioId: ctrl.horarioId});
   }
 
   ctrl.editarCriterio = function(indice){
     switch (ctrl.herramientasEvaluacion[indice].tipo) {
       case 'Rubrica':
-        $state.go('editar-rubrica', {id: ctrl.herramientasEvaluacion[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'editar'})
+        $state.go('editar-rubrica', {id: ctrl.herramientasEvaluacion[indice].id, entregableId: $stateParams.id, nivelesCreados: 1, cursoCicloId: $stateParams.cursoCicloId, proyectoId: $stateParams.proyectoId, estado: 'editar', horarioId: ctrl.horarioId})
         break;
       case 'Lista de Cotejo':
 
