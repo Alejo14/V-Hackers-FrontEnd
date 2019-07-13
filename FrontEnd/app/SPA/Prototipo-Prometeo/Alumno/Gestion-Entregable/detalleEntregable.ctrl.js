@@ -297,23 +297,61 @@ ctrl.regresarCursoAlumno = function () {
     ctrl.detalleE.descripcion=$stateParams.descripcion;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idAvanceEntregable="";
-    data={
-      "idEntregable":ctrl.detalleE.id,
-      "idRolUsuario":ctrl.detalleE.idRolUsuario
-    }
-    console.log("EntregableId y RolUsuarioIdUsuario");
-    console.log(data);
+
     if ($stateParams.estadoEntregable=="I"){
       ctrl.mostrarBoton=true;
     }else {
       ctrl.mostrarBoton=false;
     }
-    entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
-        ctrl.idAvanceEntregable=respuesta;
-        console.log(ctrl.idAvanceEntregable);
-        ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
-        ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
-    });
+
+    data={
+      "idEntregable":ctrl.detalleE.id,
+      "idRolUsuario":ctrl.detalleE.idRolUsuario,
+      "idGrupo": ""
+    }
+    console.log("EntregableId y RolUsuarioIdUsuario");
+    console.log(data);
+    ctrl.idGrupo="";
+    //////---------------Para la parte grupal---------------///////////
+        entregableAlumnoService.cicloActual().then(function(ciclo){
+          ctrl.cicloActual=ciclo;
+          ctrl.misCursosInfo = {
+            "cicloId" : ctrl.cicloActual,
+            "rolUsuarioId" : ctrl.detalleE.idRolUsuario
+          };
+          //console.log("1-MIS CURSOS",ctrl.misCursosInfo);
+          entregableAlumnoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
+            ctrl.listaMisCursos = misCursosListaData;
+            // console.log("listar cursos");
+            // console.log(misCursosListaData);
+            var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId & i.horario === $stateParams.horario);
+            ctrl.cursoPrueba = cursoEncontrado;
+            //console.log("2-PRUEBA DE CURSO",ctrl.cursoPrueba);
+            dataGrupo={
+              "idRolUsuario":ctrl.detalleE.idRolUsuario,
+              "idHorario":cursoEncontrado.idHorario
+            }
+            entregableAlumnoService.mostrarGrupoId(dataGrupo).then(function(miGrupoId){
+              //console.log("3-GRUPO ID",miGrupoId);
+              data.idGrupo=miGrupoId;
+
+              console.log("4-DATA",data);
+              entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
+                  ctrl.idAvanceEntregable=respuesta;
+                  console.log("5-AVANCE ENTREGABLE",ctrl.idAvanceEntregable);
+                  ctrl.cargarArchivos(ctrl.idAvanceEntregable.id);
+                  ctrl.cargarURLs(ctrl.idAvanceEntregable.id); //Falta traer la fecha
+              });
+            });
+
+
+
+          });
+        });
+    //////------------------------------------------------///////////
+
+
+
     //ctrl.idAvanceEntregable="75e825bc-81d0-11e9-bc42-526af7764f64";
 
 

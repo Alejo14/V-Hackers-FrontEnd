@@ -111,7 +111,7 @@ function($q, $http,variablesAmbiente) {
   }
 
   servicio.mostrarAvanceEntregables = function(data){
-    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuario + "&idGrupo=0"; //'http://localhost:7002/entregables';
+    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuario + "&idGrupo=" + data.idGrupo; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',
@@ -153,6 +153,53 @@ function($q, $http,variablesAmbiente) {
     }).catch(function(error){
       $defer.reject(error);
     });
+    return $defer.promise;
+  }
+
+  servicio.listarMisCursos = function(misCursoInfo){
+    var urlListarMisCursos = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/listarhorariocursociclorolusuario/'
+                              + misCursoInfo.cicloId + '?RolUsuarioID=' + misCursoInfo.rolUsuarioId;
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarMisCursos
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+  servicio.cicloActual = function(){
+
+    var urlCicloActual = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cicloactual/';
+    var $defer = $q.defer();
+    $http({
+        method: 'POst',
+        url: urlCicloActual
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
+
+  servicio.mostrarGrupoId = function(data){
+    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoGrupos +'/grupos/obtenergrupoid/' + data.idRolUsuario + "?idHorario=" + data.idHorario; //'http://localhost:7002/entregables';
+
+    //localhost:7011/grupos/obtenergrupoid/fcd07160-f291-4ed6-91b2-5b4973563f3b?idHorario=eecc5f10-b218-4d50-9a31-13ea1cc52de2
+    var $defer = $q.defer();
+    $http({
+        method: 'GET',
+        url: urlListarEntregables
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
     return $defer.promise;
   }
 
