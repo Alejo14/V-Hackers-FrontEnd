@@ -164,39 +164,37 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
 
   ctrl.init = function (){
     ctrl.idUsuario = $cookies.get('usuarioID');
-    ctrl.rolUsuarioId = $cookies.get('rolActivoId');
-    if(ctrl.rolUsuarioId === 'f4d1f6d3-9313-4d63-8da4-256aec99d5cd'){
-      ctrl.usuarioRol = 'Profesor';
-    }else{
-      ctrl.usuarioRol = 'Asistente de Docencia';
-    }
+    ctrl.rolId = $cookies.get('rolActivoId');
 
-    profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, ctrl.usuarioRol).then(function(rolUsuario){
-      ctrl.rolUsuarioId=rolUsuario;
-      ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
+    profesorCursoService.obtenerRol(ctrl.rolId).then(function (rol) {
+      ctrl.usuarioRol = rol.descripcion;
+      profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, ctrl.usuarioRol).then(function(rolUsuario){
+        ctrl.rolUsuarioId=rolUsuario;
+        ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
 
-      profesorCursoService.cicloActual().then(function(ciclo){
-        ctrl.cicloActual=ciclo;
-        ctrl.misCursosInfo = {
-          "cicloId" : ctrl.cicloActual,
-          "rolUsuarioId" : ctrl.rolUsuarioId
-        };
-        console.log(ctrl.misCursosInfo);
-        profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
-          ctrl.listaMisCursos = misCursosListaData;
-          console.log("listar cursos");
-          console.log(misCursosListaData);
-          var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
-          ctrl.curso = cursoEncontrado;
-          console.log("curso");
-          console.log(ctrl.curso);
+        profesorCursoService.cicloActual().then(function(ciclo){
+          ctrl.cicloActual=ciclo;
+          ctrl.misCursosInfo = {
+            "cicloId" : ctrl.cicloActual,
+            "rolUsuarioId" : ctrl.rolUsuarioId
+          };
+          console.log(ctrl.misCursosInfo);
+          profesorCursoService.listarMisCursos(ctrl.misCursosInfo).then(function (misCursosListaData) {
+            ctrl.listaMisCursos = misCursosListaData;
+            console.log("listar cursos");
+            console.log(misCursosListaData);
+            var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
+            ctrl.curso = cursoEncontrado;
+            console.log("curso");
+            console.log(ctrl.curso);
+          });
+          ctrl.cargarProyectos();
+          ctrl.cargarEntregables();
         });
-        ctrl.cargarProyectos();
-        ctrl.cargarEntregables();
       });
-
-
     });
+
+
   }
 
   ctrl.listaAlumnos = function () {

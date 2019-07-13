@@ -169,12 +169,10 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   ctrl.init = function (){
     ctrl.habilitarBotones = false;
     ctrl.rolId = $cookies.get('rolActivoId');
-    console.log(ctrl.rolId);
-    if(ctrl.rolId === 'f4d1f6d3-9313-4d63-8da4-256aec99d5cd'){
-      ctrl.usuarioRol = 'Profesor';
-    }else{
-      ctrl.usuarioRol = 'Asistente'
-    }
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    calificacionHerramientaEvaluacionServicio.obtenerRol(ctrl.rolId).then(function (rol) {
+      ctrl.usuarioRol = rol.descripcion;
+    });
     ctrl.obtenerEvaluacion();
   };
   ctrl.init();

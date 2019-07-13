@@ -1,5 +1,5 @@
-angular.module('vHackersModule').controller('listarEntregablesXProyectoCtrl', ['$scope','$state','$stateParams' ,'entregableService','gestionProyectoService','$uibModal','NgTableParams',
-function($scope, $state,$stateParams, entregableService, gestionProyectoService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('listarEntregablesXProyectoCtrl', ['$scope','$state','$stateParams' ,'entregableService','gestionProyectoService','$uibModal','NgTableParams', '$cookies',
+function($scope, $state,$stateParams, entregableService, gestionProyectoService, $uibModal, NgTableParams, $cookies){
   var ctrl = this;
   ctrl.horarioId = $stateParams.horarioId;
 
@@ -83,6 +83,11 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
     ctrl.cursoCicloId = $stateParams.cursoId;
     ctrl.horarioId = $stateParams.horarioId;
     ctrl.entregablesLista = [];
+    ctrl.rolId = $cookies.get('rolActivoId');
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    entregableService.obtenerRol(ctrl.rolId).then(function (rol) {
+      ctrl.usuarioRol = rol.descripcion;
+    });
 
     entregableService.listarProyectos(ctrl.cursoCicloId).then(function (proyectosListaData) {
       ctrl.proyectosLista = proyectosListaData;
