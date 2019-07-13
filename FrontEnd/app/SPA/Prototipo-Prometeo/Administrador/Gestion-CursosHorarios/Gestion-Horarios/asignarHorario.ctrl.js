@@ -44,13 +44,11 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
       buttons: {
         Cancel: {
           text: "Cancelar",
-          className: "btn btn-lg btn-danger",
-          value: "cancelar"
+          className: "btn btn-lg btn-danger"
         },
         Confirm: {
           text: "Sí, volver",
-          className: "btn btn-lg color-fondo-azul-pucp color-blanco",
-          value: "confirm"
+          className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       }
     }).then(function(regresar){

@@ -1,6 +1,6 @@
 //-- Anderson
-angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams',
-function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams){
+angular.module('vHackersModule').controller('entregableCtrl', ['$scope', '$state', '$stateParams' , 'entregableService', '$uibModal', 'NgTableParams', '$cookies',
+function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParams, $cookies){
   var ctrl = this;
   ctrl.horarioId = $stateParams.horarioId;
 
@@ -342,6 +342,11 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     ctrl.marcarFechaFin(ctrl.entregable.fechaEntrega);
     ctrl.fechasIniciadas = true;
     ctrl.fechasCargadas = true;
+    ctrl.rolId = $cookies.get('rolActivoId');
+    ctrl.idUsuario = $cookies.get('usuarioID');
+    entregableService.obtenerRol(ctrl.rolId).then(function (rol) {
+      ctrl.usuarioRol = rol.descripcion;
+    });
   }
 
   ctrl.init = function (){
