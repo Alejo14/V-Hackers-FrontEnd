@@ -6,6 +6,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.grupo = {};
   ctrl.alumnosSinGrupo = [];
   ctrl.nombreAgrupacionNueva = "";
+  ctrl.cursoCicloId = '';
 
   ctrl.obtenerAlumnosGrupo = function (grupoId) {
     console.log(grupoId);
@@ -133,7 +134,12 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
     }
   };
 
+  ctrl.volverCurso = function(){
+    $state.go('grupos', {cursoCicloId: ctrl.cursoCicloId, cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
+  }
+
   ctrl.init = function () {
+    ctrl.cursoCicloId = $stateParams.cursoCicloId;
     ctrl.horario.cursoNombre = $stateParams.cursoNombre;
     ctrl.horario.horarioNombre = $stateParams.horarioNombre;
     ctrl.horario.horarioId = $stateParams.horarioId;

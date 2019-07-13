@@ -200,7 +200,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
   }
 
   ctrl.listaAlumnos = function () {
-    $state.go('listar-alumnos',  {cursoNombre: ctrl.curso.nombreCurso, horarioNombre: ctrl.curso.horario, horarioId: ctrl.curso.idHorario});
+    $state.go('listar-alumnos',  {cursoCicloId: ctrl.curso.cursoCicloId, cursoNombre: ctrl.curso.nombreCurso, horarioNombre: ctrl.curso.horario, horarioId: ctrl.curso.idHorario});
   };
 
   ctrl.ingresarProyecto = function(proyecto){

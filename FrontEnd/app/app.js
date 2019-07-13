@@ -230,17 +230,17 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'listar-alumnos',
-                  url: '/listar-alumnos/:cursoNombre/:horarioNombre/:horarioId',
+                  url: '/listar-alumnos/:cursoCicloId/:cursoNombre/:horarioNombre/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/listarAlumnosCurso.html'
                 },
                 {
                   name: 'grupos',
-                  url: '/grupos/:cursoNombre/:horarioNombre/:horarioId',
+                  url: '/grupos/:cursoCicloId/:cursoNombre/:horarioNombre/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/Grupos/vistaGrupos.html'
                 },
                 {
                   name: 'actualizarGrupo',
-                  url: '/actualizarGrupo/:cursoNombre/:horarioId/:horarioNombre/:grupoId/:grupoNombre',
+                  url: '/actualizarGrupo/:cursoCicloId/:cursoNombre/:horarioId/:horarioNombre/:grupoId/:grupoNombre',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Alumnos-Curso/Grupos/vistaActualizarGrupo.html'
                 },
                 {

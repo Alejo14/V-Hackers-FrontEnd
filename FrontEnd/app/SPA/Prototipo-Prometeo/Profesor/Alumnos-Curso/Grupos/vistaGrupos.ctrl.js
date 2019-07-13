@@ -5,7 +5,8 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   ctrl.alumnosLista = [];
   ctrl.conjuntosLista = [];
   ctrl.gruposLista = [];
-  ctrl.nombreAgrupacionNueva = ""
+  ctrl.nombreAgrupacionNueva = "";
+  ctrl.cursoCicloId = '';
 
   ctrl.obtenerAlumnos = function (horarioId) {
     vistaGruposService.obtenerAlumnos(horarioId).then(function (alumnosListaData) {
@@ -149,10 +150,15 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
   }
 
   ctrl.actualizarGrupo = function(grupo){
-    $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupo.id, grupoNombre: grupo.nombre});
+    $state.go('actualizarGrupo',  {cursoCicloId: ctrl.cursoCicloId, cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupo.id, grupoNombre: grupo.nombre});
+  }
+
+  ctrl.volverListarAlumnos = function () {
+    $state.go('listar-alumnos', {cursoCicloId: ctrl.cursoCicloId, cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
   }
 
   ctrl.init = function () {
+    ctrl.cursoCicloId = $stateParams.cursoCicloId;
     ctrl.horario.cursoNombre = $stateParams.cursoNombre;
     ctrl.horario.horarioNombre = $stateParams.horarioNombre;
     ctrl.horario.horarioId = $stateParams.horarioId;
