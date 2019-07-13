@@ -1,6 +1,6 @@
-angular.module('vHackersModule').controller('alumnoCursoCtrl', ['$scope', '$state' , '$stateParams' ,'alumnoCursoService', '$uibModal', 'NgTableParams',
+angular.module('vHackersModule').controller('alumnoCursoCtrl', ['$scope', '$state' , '$stateParams' ,'alumnoCursoService', '$uibModal', 'NgTableParams', '$cookies',
 
-function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTableParams){
+function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTableParams, $cookies){
   var ctrl = this;
   ctrl.curso = {};
   ctrl.proyectosLista = [];
@@ -42,6 +42,10 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
   ctrl.entregablesLista = [];
   ctrl.cargarEntregables = function () {
     var idCursoCiclo = ctrl.curso.cursoCicloId;
+    var alumnoEntregable = {
+      "usuarioId": $cookies.get('usuarioID'),
+      "rolId": $cookies.get('rolActivoId')
+    };
     alumnoCursoService.listarEntregables(idCursoCiclo).then(function (entregablesListaData) {
       ctrl.entregablesLista = entregablesListaData;
       for(let i = 0; i < ctrl.entregablesLista.length; i++){
@@ -66,6 +70,30 @@ function($scope, $state, $stateParams, alumnoCursoService, $uibModal, NgTablePar
       });
       ctrl.fechasCargadas = true;
     });
+    // alumnoCursoService.listarEntregablesAlumno(idCursoCiclo, alumnoEntregable).then(function (entregablesListaData) {
+    //   ctrl.entregablesLista = entregablesListaData;
+    //   for(let i = 0; i < ctrl.entregablesLista.length; i++){
+    //     fechCr = new Date(Number(ctrl.entregablesLista[i].fechaHabilitacion));
+    //     fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+    //     ctrl.entregablesLista[i].fechaCreacionStr = fechCrStr;
+    //   };
+    //   for(let i = 0; i < ctrl.entregablesLista.length; i++){
+    //     fechCr = new Date(Number(ctrl.entregablesLista[i].fechaEntrega));
+    //     fechCrStr = fechCr.getDate().toString() + "-" + (fechCr.getMonth()+1).toString() + "-" + fechCr.getFullYear().toString();
+    //     ctrl.entregablesLista[i].fechaFinStr = fechCrStr;
+    //   };
+    //   ctrl.entregablesLista.forEach(function(entregable) {
+    //     var ind = $scope.events.findIndex(i => i.date === entregable.fechaEntrega);
+    //     if (ind === -1 && (($scope.dt * 1) <= entregable.fechaEntrega)) {
+    //       var dato = {
+    //         date: entregable.fechaEntrega,
+    //         status: "full"
+    //       };
+    //       $scope.events.push(dato);
+    //     }
+    //   });
+    //   ctrl.fechasCargadas = true;
+    // });
   };
 
   function getDayClass(data) {
