@@ -268,11 +268,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/avances-entregable/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
-                {
-                  name: 'avances-proyecto',
-                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
-                },
+                // {
+                //   name: 'avances-proyecto',
+                //   url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
+                // },
                 {
                   name: 'calificar-archivos',
                   url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
