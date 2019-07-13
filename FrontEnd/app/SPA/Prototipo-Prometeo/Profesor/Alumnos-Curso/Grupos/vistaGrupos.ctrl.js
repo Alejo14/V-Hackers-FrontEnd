@@ -140,7 +140,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
                   closeModal: false
                 }).then(function (agrupacionNuevoConfirmado) {
                   if (agrupacionNuevoConfirmado == "Confirm") {
-                    $state.go('actualizarGrupo',  {cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupoNuevo.id, grupoNombre: grupoNuevo.nombre});
+                    $state.go('actualizarGrupo',  {cursoCicloId: ctrl.cursoCicloId, cursoNombre: ctrl.horario.cursoNombre, horarioId: ctrl.horario.horarioId, horarioNombre: ctrl.horario.horarioNombre, grupoId: grupoNuevo.id, grupoNombre: grupoNuevo.nombre});
                   }
                 });
               });
