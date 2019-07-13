@@ -54,18 +54,18 @@ function modalAgregarHorarioCtrl ($scope, $uibModalInstance, asignarHorarioServi
       icon: "warning",
       //buttons: ["Cancelar", "Sí, agregar"],
       buttons: {
-        cancelar: {
+        Cancel: {
           text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, agregar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function (horarioNuevoConfirmado) {
-      if (horarioNuevoConfirmado !== "cancelar") {
+      if (horarioNuevoConfirmado == "Confirm") {
         //armar horarioNuevo para devolver a pantalla anterior
         if( ctrl.horarioNuevo.profesorId!=='' && ctrl.horarioNuevo.codigo !== '' && ctrl.horarioNuevo.cantidadAlumnos !== ''){
           if(ctrl.modo == "c"){

@@ -6,7 +6,7 @@ function($q, $http, variablesAmbiente) {
 
 
   servicio.listarHorarios = function (idcc) {
-    console.log(idcc)
+    // console.log(idcc)
     var urlObtenerHorarios = variablesAmbiente.apiUrl+variablesAmbiente.puertoHorarios+'/horarios/conroles/'+idcc;
     var $defer = $q.defer();
     $http({
