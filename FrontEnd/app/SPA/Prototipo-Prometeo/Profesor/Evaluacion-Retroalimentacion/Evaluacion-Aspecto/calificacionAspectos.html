@@ -37,27 +37,25 @@
                 <div class="form-group fg-line">
                   <label class="control-label label-letra-prometeo">Criterios</label>
                 </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group fg-line p-l-10 p-b-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
-                      {{($index+1) + '. ' + criterio.descripcion}}
-                      <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
-                        <label class="control-label input-letra-prometeo">
-                            <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
-                            <i class="input-helper"></i>
-                            {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos: {{criterio.nivelesCriterios[$index].descripcion}}
-                        </label>
-                      </div>
+                <div class="col-sm-12">
+                  <div class="form-group fg-line p-l-10 p-b-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
+                    {{($index+1) + '. ' + criterio.descripcion}}
+                    <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesRubrica">
+                      <label class="control-label input-letra-prometeo">
+                          <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
+                          <i class="input-helper"></i>
+                          {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos: {{criterio.nivelesCriterios[$index].descripcion}}
+                      </label>
                     </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group fg-line p-l-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
-                      <label class="col-sm-6 p-t-10 p-l-0 control-label label-letra-prometeo">Observaci&oacute;n del criterio {{$index+1}}</label>
-                      <textarea class="form-control p-t-10 input-letra-prometeo" rows="4" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
-                      </textarea>
-                    </div>
+                    <label class="col-sm-6 p-t-10 p-l-0 control-label label-letra-prometeo">Observaci&oacute;n del criterio {{$index+1}}</label>
+                    <textarea class="form-control p-t-10 input-letra-prometeo" rows="4" placeholder="Ingrese la observación del criterio" ng-model="criterio.observacion">
+                    </textarea>
                   </div>
                 </div>
+                <!-- <div class="col-sm-6">
+                  <div class="form-group fg-line p-l-10 label-letra-prometeo" ng-repeat="criterio in aspecto.criterios">
+                  </div>
+                </div> -->
                 <div class="col-sm-12" align="right">
                   <button type="button" ng-click = "ctrl.calcularPuntajeCriterio(aspecto.id)" class="btn btn-primary waves-effect"><i class="fa fa-calculator"></i> Calcular</button>
                 </div>
