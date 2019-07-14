@@ -33,7 +33,7 @@ function($q, $http, variablesAmbiente) {
   }
 
   servicio.mostrarAvanceEntregables = function(data){
-    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuario + "&idGrupo=0"; //'http://localhost:7002/entregables';
+    var urlListarEntregables =variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable +'/entregables/mostrarAvanceEntregable/' + data.idEntregable + "?idRolUsuario=" + data.idRolUsuario + "&idGrupo=" + data.idGrupo; //'http://localhost:7002/entregables';
     var $defer = $q.defer();
     $http({
         method: 'GET',

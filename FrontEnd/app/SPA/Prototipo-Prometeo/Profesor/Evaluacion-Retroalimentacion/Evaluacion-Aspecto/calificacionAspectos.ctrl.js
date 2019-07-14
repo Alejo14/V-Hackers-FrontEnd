@@ -21,7 +21,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
-        if(aspecto.descripcionPuntajeManual !== '' || aspecto.descripcionPuntajeManual !== null){
+        if(aspecto.descripcionPuntajeManual !== "" && aspecto.descripcionPuntajeManual !== null){
           aspecto.activarPuntajeManual = true;
         }else{
           aspecto.activarPuntajeManual = false;
@@ -128,7 +128,8 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
             criterio.puntajeManual = 0;
           });
         }else if(puntajesManuales === 1){
-          ctrl.puntajeHerramienta += aspecto.puntajeManual;
+          if(aspecto.activarPuntajeManual) ctrl.puntajeHerramienta += aspecto.puntajeManual;
+          else ctrl.puntajeHerramienta += aspecto.puntajeAsignado;
         }
       });
       var data = {

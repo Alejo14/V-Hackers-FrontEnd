@@ -168,7 +168,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       };
       entregableService.registroentregableAlumnoXCurso(data).then(function () {
           swal("¡Bien hecho!", "El entregable se creó exitosamente" , "success");
-          $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId});
+          $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId, horarioId: ctrl.horarioId});
       });
     }
   };
@@ -240,7 +240,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       if (ctrl.entregable.proyectoId != 0) {
         $state.go('evaluacion-herramienta-listar', {proyectoId: ctrl.entregable.proyectoId, cursoId: ctrl.entregable.cursoCicloId});
       }else{
-        $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId});
+        $state.go('curso', {cursoCicloId: ctrl.entregable.cursoCicloId, horarioId: ctrl.horarioId});
       }
     });
   }

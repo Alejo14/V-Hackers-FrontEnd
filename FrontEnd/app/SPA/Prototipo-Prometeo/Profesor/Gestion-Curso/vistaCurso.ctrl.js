@@ -156,7 +156,11 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
   }
 
   ctrl.volverCurso = function () {
-        $state.go('profesorMisCursos', {rolUsuario: "P"});
+    if(ctrl.usuarioRol === 'Profesor'){
+      $state.go('profesorMisCursos', {rolUsuario: "P"});
+    }else{
+      $state.go('profesorMisCursos', {rolUsuario: "J"});
+    }
   };
 
   ctrl.misCursosInfo = {};
