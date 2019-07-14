@@ -20,7 +20,7 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
       ctrl.evaluacionAspecto = evaluacionAspecto;
       angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
         aspecto.accordionOpen = false;
-        if(aspecto.descripcionPuntajeManual !== '' || aspecto.descripcionPuntajeManual !== null){
+        if(aspecto.descripcionPuntajeManual !== "" && aspecto.descripcionPuntajeManual !== null){
           aspecto.activarPuntajeManual = true;
         }else{
           aspecto.activarPuntajeManual = false;
