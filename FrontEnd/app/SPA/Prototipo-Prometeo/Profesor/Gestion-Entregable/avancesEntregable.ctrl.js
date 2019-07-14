@@ -71,7 +71,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     });
   };
 
-  ctrl.obtenerAvance = function (avance) {
+  ctrl.irCalificacion = function (avance) {
     if(ctrl.esIndividual){
       idRolUsuario=avance.idRolUsuario;
       idGrupo="0";
@@ -89,10 +89,6 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       ctrl.avanceSeleccionado = avanceData;
       $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id});
     });
-  };
-
-  ctrl.irCalificacion = function (avance) {
-    ctrl.obtenerAvance(avance);
   };
 
   ctrl.irArchivos = function(avance){

@@ -177,10 +177,12 @@ ctrl.regresarCursoAlumno = function () {
           //ctrl.botonGrabar="Modificar";
     ctrl.detalleE.id=$stateParams.idEntregable;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
+    ctrl.detalleE.idGrupo=$stateParams.idGrupo;
     ctrl.idAvanceEntregable="";
     data={
       "idEntregable":ctrl.detalleE.id,
-      "idRolUsuario":ctrl.detalleE.idRolUsuario
+      "idRolUsuario":ctrl.detalleE.idRolUsuario,
+      "idGrupo": ctrl.detalleE.idGrupo
     }
     console.log("EntregableId y RolUsuarioIdUsuario");
     console.log(data);
