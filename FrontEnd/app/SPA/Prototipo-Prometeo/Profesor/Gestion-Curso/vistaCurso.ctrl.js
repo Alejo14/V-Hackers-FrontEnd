@@ -171,6 +171,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
       profesorCursoService.obtenerRolUsuario(ctrl.idUsuario, ctrl.usuarioRol).then(function(rolUsuario){
         ctrl.rolUsuarioId=rolUsuario;
         ctrl.curso.cursoCicloId=$stateParams.cursoCicloId;
+        ctrl.curso.horarioId=$stateParams.horarioId;
 
         profesorCursoService.cicloActual().then(function(ciclo){
           ctrl.cicloActual=ciclo;
@@ -183,7 +184,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
             ctrl.listaMisCursos = misCursosListaData;
             console.log("listar cursos");
             console.log(misCursosListaData);
-            var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId);
+            var cursoEncontrado = ctrl.listaMisCursos.find(i => i.cursoCicloId === $stateParams.cursoCicloId & i.idHorario === $stateParams.horarioId);
             ctrl.curso = cursoEncontrado;
             console.log("curso");
             console.log(ctrl.curso);

@@ -52,9 +52,9 @@ function($scope, $state, $stateParams, $uibModal, vistaMisCursosService, NgTable
 
   ctrl.verCurso = function (miCurso){
     if(ctrl.rolUsuario=='P'){
-      $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
+      $state.go('curso', {cursoCicloId: miCurso.cursoCicloId, horarioId: miCurso.idHorario});
     }else if(ctrl.rolUsuario=='J'){
-      $state.go('curso', {cursoCicloId: miCurso.cursoCicloId});
+      $state.go('curso', {cursoCicloId: miCurso.cursoCicloId, horarioId: miCurso.idHorario});
     }else {
       $state.go('alumnoCursos', {cursoCicloId: miCurso.cursoCicloId, nombreCurso: miCurso.nombreCurso, codigoCurso: miCurso.codigoCurso, horario: miCurso.horario, rolusuarioId: ctrl.rolUsuarioId}); //Aca podemos enviar el RolUsuarioId tambien
     }
