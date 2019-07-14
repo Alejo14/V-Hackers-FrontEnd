@@ -5,6 +5,7 @@ calificacionListaCtrl.$inject = ['$scope','$state', '$stateParams','calificacion
 function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaService){
   var ctrl = this;
 
+  ctrl.entregable = {};
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
   ctrl.listaCriterios = [];
@@ -33,7 +34,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
+        $state.go('calificacion',{entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -94,11 +95,15 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
     }
       calificacionListaService.guardarCalificacionCriterioListaCotejo(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+        $state.go('calificacionHerramienta', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
     }
 
     ctrl.init = function(){
+      ctrl.entregable.id = $stateParams.entregableId;
+      ctrl.entregable.nombre = $stateParams.nombre;
+      ctrl.entregable.metodo = $stateParams.metodo;
+      ctrl.horarioId = $stateParams.horarioId;
       console.log(ctrl.herramientaEvaluacionId);
       console.log(ctrl.calificacionHerramientaEvaluacionId);
       ctrl.habilitarBotones = false;

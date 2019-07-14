@@ -155,7 +155,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacion',
-                  url: '/calificacion/:avanceEntregableId',
+                  url: '/calificacion/:entregableId/:nombre/:metodo/:horarioId/:cursoCicloId/:avanceEntregableId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
@@ -165,12 +165,12 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacionAspectos',
-                  url: '/calificacionAspectos/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/calificacionAspectos/:entregableId/:nombre/:metodo/:horarioId/:cursoCicloId/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Aspecto/calificacionAspectos.html'
                 },
                 {
                   name: 'calificacionHerramienta',
-                  url: '/calificacion/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:puntajeHerramienta',
+                  url: '/calificacion/:entregableId/:nombre/:metodo/:horarioId/:cursoCicloId/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:puntajeHerramienta',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
@@ -180,7 +180,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name:'gestion-proyecto',
-                  url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion/:descripcion/:visible/:registroHoras/:metodoTrabajo/:cursoCiclo_id',
+                  url: '/gestion-proyecto/:id/:nombre/:fechaCreacion/:fechaInicio/:fechaFin/:ponderacion/:descripcion/:visible/:registroHoras/:metodoTrabajo/:cursoCiclo_id/:horarioId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/vistaGestiónProyecto.html'
                 },
                 {
@@ -268,24 +268,24 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/avances-entregable/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
-                // {
-                //   name: 'avances-proyecto',
-                //   url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
-                //   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
-                // },
+                {
+                  name: 'avances-proyecto',
+                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
+                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
+                },
                 {
                   name: 'calificar-archivos',
-                  url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
+                  url: '/calificar-archivos/:idEntregable/:nombre/:metodo/:horarioId/:cursoCicloId/:idRolUsuario/:idGrupo',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Archivos/calificacionArchivos.html'
                 },
                 {
                   name: 'calificacionEscala',
-                  url: '/calificacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/calificacionEscala/:entregableId/:nombre/:metodo/:horarioId/:cursoCicloId/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Escala/calificacionEscala.html'
                 },
                 {
                   name: 'calificacionListaCotejo',
-                  url: '/calificacionListaCotejo/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/calificacionListaCotejo/:entregableId/:nombre/:metodo/:horarioId/:cursoCicloId/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/Evaluacion-Lista/calificacionListaCotejo.html'
                 }
               ]

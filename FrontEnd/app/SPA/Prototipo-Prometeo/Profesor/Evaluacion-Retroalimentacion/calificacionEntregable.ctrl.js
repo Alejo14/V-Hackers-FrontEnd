@@ -12,6 +12,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   */
   ctrl.avanceEntregableId = $stateParams.avanceEntregableId;
   ctrl.herramientaEvaluacionLista = [];
+  ctrl.entregable = {};
   ctrl.obtenerEvaluacion = function () {
     ctrl.tablaHerramientas = new NgTableParams({}, { dataset: ctrl.herramientaEvaluacionLista });
     console.log(ctrl.avanceEntregableId);
@@ -56,7 +57,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
         }
       }
     }).then(function (respuesta) {
-      if (respuesta) {
+      if (respuesta == "Confirm") {
         console.log(ctrl.evaluacion);
         calificacionHerramientaEvaluacionServicio.guardarCalificacion(angular.toJson(ctrl.evaluacion)).then(function(data){
           swal("¡Felicidades!","Se guardó la calificación exitosamente","success");
@@ -135,7 +136,7 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
       }
     }).then(function (respuesta) {
       if (respuesta == "Confirm") {
-        $state.go('inicioProfes');
+        $state.go('avances-entregable' , {id: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo: ctrl.entregable.metodo, horarioId: ctrl.horarioId, cursoCicloId:$stateParams.cursoCicloId });
       }
     });
   };
@@ -149,13 +150,13 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
     console.log(ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId);
     switch (ctrl.herramientaEvaluacionLista[indice].tipoHerramientaEvaluacion) {
       case 'Rubrica':
-        $state.go('calificacionAspectos', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('calificacionAspectos', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       case 'Lista de Cotejo':
-        $state.go('calificacionListaCotejo', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('calificacionListaCotejo', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       case 'Escala':
-        $state.go('calificacionEscala', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('calificacionEscala', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       default:
         swall('Opss', 'Hubo un error en la creación de la herramienta', 'error');
@@ -165,6 +166,10 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   }
 
   ctrl.init = function (){
+    ctrl.entregable.id = $stateParams.entregableId;
+    ctrl.entregable.nombre = $stateParams.nombre;
+    ctrl.entregable.metodo = $stateParams.metodo;
+    ctrl.horarioId = $stateParams.horarioId;
     ctrl.habilitarBotones = false;
     ctrl.rolId = $cookies.get('rolActivoId');
     ctrl.idUsuario = $cookies.get('usuarioID');

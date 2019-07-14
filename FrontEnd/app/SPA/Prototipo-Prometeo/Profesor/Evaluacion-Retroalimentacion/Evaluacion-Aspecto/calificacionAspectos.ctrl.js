@@ -4,6 +4,7 @@ calificacionAspectosCtrl.$inject = ['$scope','$state', '$stateParams','calificac
 
 function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspectoService){
   var ctrl = this;
+  ctrl.entregable = {};
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
@@ -51,7 +52,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
+        $state.go('calificacion', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -136,7 +137,7 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
       console.log(data);
       calificacionAspectoService.guardarAspecto(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+        $state.go('calificacionHerramienta', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
       });
     }else{
       var mensaje = ctrl.crearMensaje(ctrl.indices.length);
@@ -145,6 +146,10 @@ function calificacionAspectosCtrl ($scope,$state,$stateParams,calificacionAspect
   }
 
   ctrl.init = function(){
+    ctrl.entregable.id = $stateParams.entregableId;
+    ctrl.entregable.nombre = $stateParams.nombre;
+    ctrl.entregable.metodo = $stateParams.metodo;
+    ctrl.horarioId = $stateParams.horarioId;
     ctrl.obtenerEvaluacionAspecto();
   }
 

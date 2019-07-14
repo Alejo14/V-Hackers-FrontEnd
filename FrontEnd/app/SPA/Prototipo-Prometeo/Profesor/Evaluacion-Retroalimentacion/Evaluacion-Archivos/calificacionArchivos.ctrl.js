@@ -5,6 +5,7 @@ function($scope, $state,$stateParams, calificacionHerramientaEvaluacionServicio,
   ctrl.alumnosLista = [];
   ctrl.alumnosListaModal = [];
   ctrl.mensajeNuevo = "Go V-Hackers";
+  ctrl.entregable = {};
   ctrl.obtenerCalificacionEntregable = function () {
     calificacionHerramientaEvaluacionServicio.obtenerCalificacionEntregable().then(function (calificacionEntregableData) {
       ctrl.calificacionEntregable = alumnosListaData;
@@ -165,7 +166,7 @@ ctrl.regresarCursoAlumno = function () {
     }
   }).then(function (respuesta) {
     if (respuesta == "Confirm") {
-
+      $state.go('avances-entregable' , {id: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo: ctrl.entregable.metodo, horarioId: ctrl.horarioId, cursoCicloId:$stateParams.cursoCicloId });
     }
   });
 
@@ -175,6 +176,10 @@ ctrl.regresarCursoAlumno = function () {
 
   ctrl.init = function () {
           //ctrl.botonGrabar="Modificar";
+    ctrl.entregable.id = $stateParams.idEntregable;
+    ctrl.entregable.nombre = $stateParams.nombre;
+    ctrl.entregable.metodo = $stateParams.metodo;
+    ctrl.horarioId = $stateParams.horarioId;
     ctrl.detalleE.id=$stateParams.idEntregable;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idAvanceEntregable="";

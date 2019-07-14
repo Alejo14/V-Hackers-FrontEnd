@@ -5,6 +5,7 @@ calificacionEscalaCtrl.$inject = ['$scope','$state', '$stateParams','calificacio
 function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaService){
   var ctrl = this;
 
+  ctrl.entregable = {};
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
   ctrl.evaluacionAspecto = {};
@@ -84,7 +85,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
+        $state.go('calificacion',{entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -172,7 +173,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log(data);
     calificacionEscalaService.guardarAspecto(data).then(function(){
       swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+      $state.go('calificacionHerramienta', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
     });
   }
 
@@ -210,7 +211,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
       calificacionEscalaService.guardarEscala(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+        $state.go('calificacionHerramienta', {entregableId: ctrl.entregable.id, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
 
 
@@ -228,6 +229,10 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
 
   ctrl.init = function(){
     //ctrl.obtenerEvaluacionAspecto();
+    ctrl.entregable.id = $stateParams.entregableId;
+    ctrl.entregable.nombre = $stateParams.nombre;
+    ctrl.entregable.metodo = $stateParams.metodo;
+    ctrl.horarioId = $stateParams.horarioId;
     ctrl.habilitarBotones = false;
     ctrl.obtenerEvaluacionCriterios();
   }

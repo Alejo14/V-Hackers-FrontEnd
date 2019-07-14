@@ -29,7 +29,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
   }
   ctrl.crearProyecto = function () {
     $state.go('gestion-proyecto' , {id: 0, nombre: 0, fechaCreacion: 0, fechaInicio: 0, fechaFin: 0, ponderacion: 0,
-    descripcion: 0, visible: 0, registroHoras: 0, metodoTrabajo: 0, cursoCiclo_id: ctrl.curso.cursoCicloId});
+    descripcion: 0, visible: 0, registroHoras: 0, metodoTrabajo: 0, cursoCiclo_id: ctrl.curso.cursoCicloId, horarioId: ctrl.curso.idHorario});
   };
 
   ctrl.crearCoEvaluacion = function () {
@@ -60,7 +60,7 @@ function($scope, $state, $stateParams, $cookies, profesorCursoService, $uibModal
     $state.go('gestion-proyecto' , {id: proyecto.id, nombre: proyecto.nombre, fechaCreacion: proyecto.fechaCreacion,
       fechaInicio: proyecto.fechaInicio, fechaFin: proyecto.fechaFin, ponderacion: proyecto.ponderacion,
       descripcion: proyecto.descripcion, visible: proyecto.visible, registroHoras: proyecto.registroHoras,
-      metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id});
+      metodoTrabajo: proyecto.metodoTrabajo, cursoCiclo_id: proyecto.cursoCiclo_id, horarioId: ctrl.curso.idHorario});
   };
 
   ctrl.eliminarProyecto = function (proyectoElim) {

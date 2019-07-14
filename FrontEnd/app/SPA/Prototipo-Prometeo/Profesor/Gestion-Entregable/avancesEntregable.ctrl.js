@@ -87,7 +87,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
     idEntregable=ctrl.entregable.id;
     entregableService.obtenerAvance(idEntregable, idRolUsuario, idGrupo).then(function (avanceData) {
       ctrl.avanceSeleccionado = avanceData;
-      $state.go('calificacion', {avanceEntregableId: ctrl.avanceSeleccionado.id});
+      $state.go('calificacion', {entregableId: idEntregable, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, avanceEntregableId: ctrl.avanceSeleccionado.id});
     });
   };
 
@@ -104,7 +104,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       idGrupo=avance.id;
     }
     idEntregable=ctrl.entregable.id;
-    $state.go('calificar-archivos', {idEntregable: idEntregable, idRolUsuario: idRolUsuario, idGrupo: idGrupo});
+    $state.go('calificar-archivos', {idEntregable: idEntregable, nombre: ctrl.entregable.nombre, metodo:ctrl.entregable.metodo, horarioId:ctrl.horarioId, cursoCicloId: $stateParams.cursoCicloId, idRolUsuario: idRolUsuario, idGrupo: idGrupo});
   };
 
   ctrl.regresar = function(){
@@ -124,7 +124,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (respuesta) {
       if (respuesta) {
-        $state.go('curso', {cursoCicloId: $stateParams.cursoCicloId});
+        $state.go('curso', {cursoCicloId: $stateParams.cursoCicloId, horarioId: ctrl.horarioId});
       }
     });
   }
