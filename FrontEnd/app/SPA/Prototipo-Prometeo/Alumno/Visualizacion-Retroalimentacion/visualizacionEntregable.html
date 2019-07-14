@@ -14,14 +14,16 @@
               <div class="col-md-4">
                 <label class="col-sm-4 control-label label-letra-prometeo p-t-10">Puntaje</label>
                 <div class="form-group fg-line col-sm-8">
-                  <input type="number" min="0" step="any" class="form-control input-sm" ng-disabled="true" ng-model="ctrl.evaluacion.calificacionEvaluacion.puntaje" placeholder="Ingrese el puntaje">
+                  <input ng-if="!ctrl.noMostrarCalificacion" type="number" min="0" step="any" class="form-control input-sm" ng-disabled="true" ng-model="ctrl.evaluacion.calificacionEvaluacion.puntaje" placeholder="Ingrese el puntaje">
+                  <input ng-if="ctrl.noMostrarCalificacion" type="number" min="0" step="any" class="form-control input-sm" ng-disabled="true" placeholder="0">
                 </div>
               </div>
             </div>
             <div class="row-md-12">
               <div class="col-md-12">
                 <div class="form-group fg-line">
-                  <textarea class="form-control p-t-10" rows="2" placeholder="No hay observación general del entregable" ng-model="ctrl.evaluacion.calificacionEvaluacion.observacion" disabled></textarea><br>
+                  <textarea ng-if="!ctrl.noMostrarCalificacion" class="form-control p-t-10" rows="2" placeholder="No hay observación general del entregable" ng-model="ctrl.evaluacion.calificacionEvaluacion.observacion" disabled></textarea><br>
+                  <textarea ng-if="ctrl.noMostrarCalificacion" class="form-control p-t-10" rows="2" placeholder="No hay observación general del entregable" disabled></textarea><br>
                 </div>
               </div>
             </div>
@@ -39,11 +41,14 @@
                       <td data-title="'Descripción Herramienta'">
                         {{herramienta.descripcion}}
                       </td>
-                      <td data-title="'Puntaje'" align="center">
+                      <td ng-if="!ctrl.noMostrarCalificacion" data-title="'Puntaje'" align="center">
                         {{herramienta.puntaje}}
                       </td>
+                      <td ng-if="ctrl.noMostrarCalificacion" data-title="'Puntaje'" align="center">
+                        0
+                      </td>
                       <td data-title="'Ver'" align="center">
-                        <a ng-click="ctrl.calificarHerramienta($index)" class="m-l-10"><i class="fa fa-eye"></i></a>
+                        <a ng-click="ctrl.visualizarHerramienta($index)" class="m-l-10"><i class="fa fa-eye"></i></a>
                       </td>
                     </tr>
                   </table>
