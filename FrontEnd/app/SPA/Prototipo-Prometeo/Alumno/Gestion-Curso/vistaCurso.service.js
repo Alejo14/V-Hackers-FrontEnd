@@ -33,6 +33,22 @@ function($q, $http, variablesAmbiente) {
     return $defer.promise;
   }
 
+  servicio.listarEntregablesAlumno = function(codigoCurso, alumnoEntregable){
+
+    var urlListarEntregables = variablesAmbiente.apiUrl + variablesAmbiente.puertoEntregable + '/entregablesxcursocicloAlumno/' + codigoCurso;
+    var $defer = $q.defer();
+    $http({
+        method: 'POST',
+        url: urlListarEntregables,
+        data: alumnoEntregable
+     }).then(function (respuesta) {
+       $defer.resolve(respuesta.data);
+     }).catch(function (error) {
+       $defer.reject(error);
+     });
+    return $defer.promise;
+  }
+
   servicio.eliminarProyecto = function(data){
     var urlElimProyecto = variablesAmbiente.apiUrl + variablesAmbiente.puertoProyectos + '/proyectos/eliminar';
     var $defer = $q.defer();

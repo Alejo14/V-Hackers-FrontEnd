@@ -155,7 +155,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacion',
-                  url: '/calificacion/:avanceEntregableId/:herramientaCalificada',
+                  url: '/calificacion/:avanceEntregableId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
@@ -170,7 +170,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'calificacionHerramienta',
-                  url: '/calificacion/:avanceEntregableId/:herramientaCalificada/:calificacionHerramientaEvaluacionId/:puntajeHerramienta',
+                  url: '/calificacion/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:puntajeHerramienta',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Evaluacion-Retroalimentacion/calificacionEntregable.html'
                 },
                 {
@@ -268,11 +268,11 @@ function ($urlRouterProvider,stateHelperProvider) {
                   url: '/avances-entregable/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Entregable/avancesEntregable.html'
                 },
-                {
-                  name: 'avances-proyecto',
-                  url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
-                  templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
-                },
+                // {
+                //   name: 'avances-proyecto',
+                //   url: '/avances-proyecto/:id/:nombre/:metodo/:horarioId/:cursoCicloId',
+                //   templateUrl: 'SPA/Prototipo-Prometeo/Profesor/Gestion-Proyecto/avancesProyecto.html'
+                // },
                 {
                   name: 'calificar-archivos',
                   url: '/calificar-archivos/:idEntregable/:idRolUsuario/:idGrupo',
@@ -338,7 +338,7 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'visualizacion',
-                  url: '/visualizacion/:avanceEntregableId/:herramientaCalificada',
+                  url: '/visualizacion/:avanceEntregableId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/visualizacionEntregable.html'
                 },
                 {

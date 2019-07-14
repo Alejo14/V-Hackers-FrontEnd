@@ -59,7 +59,7 @@
             <div class="col-md-12">
               <div class="card-body">
                 <button type="button" ng-click = "ctrl.regresar()" class="btn btn-default waves-effect bgm-green m-l-5 float-right"><i class="fa fa-arrow-circle-left"></i> Atrás</button>
-                <button type="button" ng-click = "ctrl.confirmarCalificacion()" class="btn btn-default waves-effect bgm-blue m-r-5 m-l-5 float-right"><i class="fa fa-save"></i> Confirmar</button>
+                <button ng-if="ctrl.usuarioRol === 'Profesor'" type="button" ng-click = "ctrl.confirmarCalificacion()" class="btn btn-default waves-effect bgm-blue m-r-5 m-l-5 float-right"><i class="fa fa-save"></i> Confirmar</button>
               </div>
             </div>
           </div>

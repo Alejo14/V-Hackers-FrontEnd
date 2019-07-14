@@ -19,21 +19,20 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
   ctrl.regresar = function (){
     swal({
       title: "¿Estás seguro que deseas regresar?",
-      text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function(confirmarRegreso){
-      if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+      if(confirmarRegreso == "Confirm"){
+        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }

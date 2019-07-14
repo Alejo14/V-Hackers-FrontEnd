@@ -279,7 +279,7 @@ function($scope, $state,$stateParams, entregableAlumnoService, $uibModal, NgTabl
     entregableAlumnoService.mostrarAvanceEntregables(data).then(function (respuesta) {
         ctrl.idAvanceEntregable=respuesta;
         //console.log(ctrl.idAvanceEntregable);
-        $state.go('visualizacion' , {avanceEntregableId: ctrl.idAvanceEntregable.id, herramientaCalificada: 0 });
+        $state.go('visualizacion' , {avanceEntregableId: ctrl.idAvanceEntregable.id });
     });
 
   };

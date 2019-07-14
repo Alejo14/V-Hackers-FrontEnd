@@ -37,21 +37,20 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
   ctrl.regresar = function (){
     swal({
       title: "¿Estás seguro de que deseas regresar?",
-      text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function(confirmarRegreso){
-      if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+      if(confirmarRegreso == "Confirm"){
+        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -136,7 +135,7 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
       console.log(data);
       visualizacionAspectoServicio.guardarAspecto(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
       });
     }else{
       var mensaje = ctrl.crearMensaje(ctrl.indices.length);

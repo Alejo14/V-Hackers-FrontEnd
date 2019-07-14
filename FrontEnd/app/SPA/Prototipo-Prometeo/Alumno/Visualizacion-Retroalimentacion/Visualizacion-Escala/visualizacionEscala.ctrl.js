@@ -70,21 +70,20 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   ctrl.regresar = function (){
     swal({
       title: "¿Esta seguro de que desea regresar?",
-      text: "No se guardarán los cambios efectuados",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, regresar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function(confirmarRegreso){
-      if(confirmarRegreso !== "cancelar"){
-        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+      if(confirmarRegreso == "Confirm"){
+        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -172,7 +171,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log(data);
     calificacionEscalaService.guardarAspecto(data).then(function(){
       swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
-      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
     });
   }
 
@@ -210,7 +209,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
       calificacionEscalaService.guardarEscala(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de Evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
 
 

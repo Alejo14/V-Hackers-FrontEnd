@@ -84,7 +84,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -172,7 +172,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
     console.log(data);
     calificacionEscalaService.guardarAspecto(data).then(function(){
       swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
+      $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeHerramienta});
     });
   }
 
@@ -210,7 +210,7 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
       console.log("ASPECTO FINAL",ctrl.evaluacionAspecto);
       calificacionEscalaService.guardarEscala(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
 
 

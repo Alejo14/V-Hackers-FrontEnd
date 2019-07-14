@@ -33,7 +33,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso !== "cancelar"){
-        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada: 0});
+        $state.go('calificacion',{avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
@@ -94,7 +94,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
     }
       calificacionListaService.guardarCalificacionCriterioListaCotejo(data).then(function(){
         swal('Éxito', 'Se guardó la calificación de la herramienta de evaluación','success');
-        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, herramientaCalificada:1, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
+        $state.go('calificacionHerramienta', {avanceEntregableId: $stateParams.avanceEntregableId, calificacionHerramientaEvaluacionId: $stateParams.calificacionHerramientaEvaluacionId, puntajeHerramienta: ctrl.puntajeAsignado});
       });
     }
 
