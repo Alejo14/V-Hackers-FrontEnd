@@ -27,6 +27,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
           "puntaje_maximo": parametroRetorno.puntaje_maximo
         };
         ctrl.criteriosLista.push(nuevoCriterio);
+        ctrl.aspecto.puntaje_maximo += parametroRetorno.puntaje_maximo;
       }
     });
   };
@@ -76,17 +77,17 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
       text: "No podrá recuperar el criterio en el futuro",
       icon: "warning",
       buttons: {
-        cancelar: {
+        Cancel: {
           className: "btn btn-lg btn-danger"
         },
-        confirm: {
+        Confirm: {
           text: "Sí, eliminar",
           className: "btn btn-lg color-fondo-azul-pucp color-blanco"
         }
       },
       closeModal: false
     }).then(function (eliminarCriterioConfirmado) {
-      if (eliminarCriterioConfirmado) {
+      if (eliminarCriterioConfirmado == 'Confirm') {
         if($stateParams.estado === 'editar'){
           var data = {
             "criterioID": ctrl.criteriosLista[indiceCriterio].id
@@ -103,10 +104,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
 
   ctrl.guardarAspecto = function(){
     var maximoPuntaje = 0;
-    angular.forEach(ctrl.criteriosLista, function (criterio, indice) {
-      maximoPuntaje += criterio.puntaje_maximo;
-    });
-    if($stateParams.estado !== 'editar') ctrl.guardarAspectoNuevo(maximoPuntaje);
+    if ($stateParams.estado !== 'editar') ctrl.guardarAspectoNuevo(maximoPuntaje);
     else ctrl.editarAspecto(maximoPuntaje);
   }
 
@@ -130,7 +128,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         var data = {
           "rubricaID": ctrl.rubricaId,
           "descripcion": ctrl.aspecto.descripcion,
-          "puntaje_maximo": maximoPuntaje,
+          "puntaje_maximo": ctrl.aspecto.puntaje_maximo,
   	      "cant_criterios": ctrl.criteriosLista.length,
   	      "titulo": ctrl.aspecto.titulo,
   	      "criterios": ctrl.criteriosLista
@@ -164,7 +162,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         "id":$stateParams.id,
         "rubricaId": ctrl.rubricaId,
         "descripcion": ctrl.aspecto.descripcion,
-        "puntaje_maximo": maximoPuntaje,
+        "puntaje_maximo": ctrl.aspecto.puntaje_maximo,
 	      "titulo": ctrl.aspecto.titulo,
       };
       if (aspectoGuardarConfirmado) {
@@ -213,6 +211,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         aspectoSeleccionado = aspectos.find(aspecto => aspecto.id == $stateParams.idAspecto);
         ctrl.aspecto.titulo = aspectoSeleccionado.titulo;
         ctrl.aspecto.descripcion = aspectoSeleccionado.descripcion;
+        ctrl.aspecto.puntaje_maximo = aspectoSeleccionado.puntaje_maximo;
       });
       nuevoAspectoRubricaServicio.listarCriteriosXAspecto(dataAspecto).then(function(criterios) {
         var criteriosRecibidos = [];
