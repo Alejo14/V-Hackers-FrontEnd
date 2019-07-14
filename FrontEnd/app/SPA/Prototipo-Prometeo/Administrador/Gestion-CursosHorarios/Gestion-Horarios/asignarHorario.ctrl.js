@@ -52,7 +52,7 @@ function($scope,$state,$stateParams,asignarHorarioService, $uibModal,NgTablePara
         }
       }
     }).then(function(regresar){
-      if (regresar == "confirm") {
+      if (regresar == "Confirm") {
         $state.go('gestion-horarios');
       }
     });
