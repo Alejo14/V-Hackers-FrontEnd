@@ -93,6 +93,7 @@ function($scope, $state, $stateParams, $uibModal, vistaGruposService, NgTablePar
                   swal("¡Bien hecho!", "El grupo "+ ctrl.grupo.nombre + " se actualizó correctamente" , "success");
                 }
               });
+              $state.go('grupos', {cursoCicloId: ctrl.cursoCicloId, cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
               //$state.go('grupos',  {cursoNombre: ctrl.horario.cursoNombre, horarioNombre: ctrl.horario.horarioNombre, horarioId: ctrl.horario.horarioId});
           }
         });
