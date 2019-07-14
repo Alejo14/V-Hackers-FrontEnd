@@ -72,7 +72,7 @@ function($scope, $state, $stateParams, $uibModal, listarAlumnosService, NgTableP
   };
 
   ctrl.volverCurso = function () {
-    $state.go('curso', {cursoCicloId: ctrl.cursoCicloId});
+    $state.go('curso', {cursoCicloId: ctrl.cursoCicloId, horarioId: ctrl.horario.horarioId});
   };
 
   ctrl.init = function () {

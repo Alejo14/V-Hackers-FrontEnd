@@ -4,7 +4,7 @@ function($scope, $state,$stateParams, entregableService, gestionProyectoService,
   ctrl.horarioId = $stateParams.horarioId;
 
   ctrl.regresarProyectos = function () {
-    $state.go('curso', {cursoCicloId:ctrl.cursoCicloId});
+    $state.go('curso', {cursoCicloId:ctrl.cursoCicloId, horarioId: ctrl.horarioId});
   };
 
   ctrl.crearEntregable = function () {

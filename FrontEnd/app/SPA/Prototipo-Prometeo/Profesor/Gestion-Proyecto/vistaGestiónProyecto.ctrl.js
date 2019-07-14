@@ -51,7 +51,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
       }
     }).then(function (respuesta) {
       if (respuesta == "Confirm") {
-        $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
+        $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id, horarioId: $stateParams.horarioId});
         //herramientaEvaluacionServicio.enviarCalificacion(ctrl.enviarCalificacion);
       }
     });
@@ -135,7 +135,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           console.log(angular.toJson(data));
           gestionProyectoService.registroProyecto(angular.toJson(data)).then(function () {
             swal("¡Bien hecho!", "El proyecto fue creado exitosamente" , "success").then(function () {
-              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
+              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id, horarioId: $stateParams.horarioId});
             });
           });
 
@@ -212,7 +212,7 @@ function($scope, $state, $stateParams, gestionProyectoService, $uibModal){
           console.log(angular.toJson(data));
           gestionProyectoService.modificarProyecto(angular.toJson(data)).then(function () {
             swal("¡Bien hecho!", "El proyecto fue modificado exitosamente" , "success").then(function () {
-              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id});
+              $state.go('curso', {cursoCicloId: ctrl.proyectoG.cursoCiclo_id, horarioId: $stateParams.horarioId});
             });
           });
 

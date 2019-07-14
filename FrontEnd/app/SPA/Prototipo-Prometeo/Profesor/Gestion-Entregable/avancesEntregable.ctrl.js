@@ -124,7 +124,7 @@ function($scope, $state,$stateParams, entregableService, $uibModal, NgTableParam
       }
     }).then(function (respuesta) {
       if (respuesta) {
-        $state.go('curso', {cursoCicloId: $stateParams.cursoCicloId});
+        $state.go('curso', {cursoCicloId: $stateParams.cursoCicloId, horarioId: ctrl.horarioId});
       }
     });
   }
