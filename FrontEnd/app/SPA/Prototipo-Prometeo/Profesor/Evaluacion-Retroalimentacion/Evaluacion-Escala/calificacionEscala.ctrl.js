@@ -28,8 +28,10 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   }
 
   ctrl.obtenerEvaluacionCriterios = function (){//SE DEBE QUEDAR
+    ctrl.mostrarBox = false;
     calificacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){
       ctrl.nivelesEscala = nivelesEscala;
+      if(ctrl.nivelesEscala.length === 1) ctrl.mostrarBox = true;
       console.log(ctrl.nivelesEscala);
     });
     console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);

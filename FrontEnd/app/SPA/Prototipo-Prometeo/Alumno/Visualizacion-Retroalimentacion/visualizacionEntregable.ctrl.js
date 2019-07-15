@@ -19,10 +19,8 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
         ctrl.evaluacion = evaluacion;
         if(ctrl.evaluacion.estadoCalificacionEvaluacionId === '670aa21d-9cd8-4202-8e1f-0869cdabcd42' || ctrl.evaluacion.estadoCalificacionEvaluacionId === '8126b0d6-f10e-4f0a-abcc-3432fdef3aa2'){
           ctrl.noMostrarCalificacion = true;
-          $rootScope.$broadcast('NO-MOSTRAR-CALIFICACION');
         }else{
           ctrl.noMostrarCalificacion = false;
-          $rootScope.$broadcast('MOSTRAR-CALIFICACION');
         }
         ctrl.herramientaEvaluacionLista = evaluacion.herramientas;
     });
@@ -59,6 +57,11 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
   *==================================================
   */
   ctrl.visualizarHerramienta = function(indice){
+    if(ctrl.noMostrarCalificacion){
+      $rootScope.$broadcast('NO-MOSTRAR-CALIFICACION');
+    }else{
+      $rootScope.$broadcast('MOSTRAR-CALIFICACION');
+    }
     switch (ctrl.herramientaEvaluacionLista[indice].tipoHerramientaEvaluacion) {
       case 'Rubrica':
         $state.go('visualizacionAspecto', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});

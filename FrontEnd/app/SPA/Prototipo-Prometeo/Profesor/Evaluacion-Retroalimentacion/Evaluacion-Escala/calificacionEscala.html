@@ -37,11 +37,18 @@
                     <!-- <div class="form-group fg-line p-l-10 p-b-10 label-letra-prometeo" ng-repeat="nivel in criterio.niveles">
                       {{($index+1) + '. ' + nivel.descripcion}}
                       </div> -->
-                      <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala">
+                      <div ng-if="!ctrl.mostrarBox" class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala">
                         <label class="control-label input-letra-prometeo">
                             <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
                             <i class="input-helper"></i>
                             {{criterio.nivelesCriterios[$index].descripcion}} ({{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
+                        </label>
+                      </div>
+
+                      <div ng-if="ctrl.mostrarBox" class="m-b-15" ng-repeat="nivel in ctrl.nivelesEscala">
+                        <label class="control-label input-letra-prometeo">
+                            <input type="number" max="criterio.nivelesCriterios[$index].puntajeSeleccion" ng-model="criterio.puntajeAsignado">
+                            {{criterio.nivelesCriterios[$index].descripcion}} (Máximo: {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
                         </label>
                       </div>
 

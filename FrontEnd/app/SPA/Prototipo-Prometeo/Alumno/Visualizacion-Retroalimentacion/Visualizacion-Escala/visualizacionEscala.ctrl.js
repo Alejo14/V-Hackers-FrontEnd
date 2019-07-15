@@ -1,8 +1,8 @@
-angular.module('vHackersModule').controller('calificacionEscalaCtrl', calificacionEscalaCtrl);
+angular.module('vHackersModule').controller('visualizacionEscalaCtrl', visualizacionEscalaCtrl);
 
-calificacionEscalaCtrl.$inject = ['$scope','$state', '$stateParams','calificacionEscalaService'];
+visualizacionEscalaCtrl.$inject = ['$scope','$state', '$stateParams','visualizacionEscalaService'];
 
-function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaService){
+function visualizacionEscalaCtrl ($scope,$state,$stateParams,visualizacionEscalaService){
   var ctrl = this;
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
@@ -18,13 +18,13 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   })
 
   ctrl.obtenerEvaluacionCriterios = function (){//SE DEBE QUEDAR
-    calificacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){
+    visualizacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){
       ctrl.nivelesEscala = nivelesEscala;
       console.log(ctrl.nivelesEscala);
     });
     console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);
     console.log("Calificacion Herramienta Evaluacion ID",ctrl.calificacionHerramientaEvaluacionId);
-    calificacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
+    visualizacionEscalaService.obtenerEvaluacionEscala(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionEscala){
       ctrl.evaluacionAspecto=evaluacionEscala;//Para guardar la informacion obtenida
       console.log("EVALUACION",evaluacionEscala);
       ctrl.evaluacionEscala = evaluacionEscala[0].criterios;
