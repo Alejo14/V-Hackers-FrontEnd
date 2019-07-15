@@ -10,6 +10,14 @@
             <a href="">{{entregable.nombre}}</a>
           </div>
         </td>
+        <td data-title="'MÉTODO'">
+          <div align="center" ng-if="entregable.metodoTrabajo==0">
+            <a> Indiv. </a>
+          </div>
+          <div align="center" ng-if="entregable.metodoTrabajo==1">
+            <a> Grupal </a>
+          </div>
+        </td>
         <td data-title="'FECHA CREACIÓN'" align="center">
           {{entregable.fechaCreacionStr}}
         </td>
