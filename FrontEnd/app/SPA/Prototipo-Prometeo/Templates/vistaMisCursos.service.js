@@ -40,7 +40,7 @@ function($q, $http, variablesAmbiente) {
     var urlCicloActual = variablesAmbiente.apiUrl + variablesAmbiente.puertoCursos + '/cursos/cicloactual/';
     var $defer = $q.defer();
     $http({
-        method: 'POst',
+        method: 'POST',
         url: urlCicloActual
      }).then(function (respuesta) {
        $defer.resolve(respuesta.data);
