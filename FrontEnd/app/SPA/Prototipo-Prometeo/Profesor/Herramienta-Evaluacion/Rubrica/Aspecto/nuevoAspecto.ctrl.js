@@ -27,7 +27,8 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
           "puntaje_maximo": parametroRetorno.puntaje_maximo
         };
         ctrl.criteriosLista.push(nuevoCriterio);
-        ctrl.aspecto.puntaje_maximo += parametroRetorno.puntaje_maximo;
+        console.log(parametroRetorno.puntaje_maximo);
+        ctrl.aspecto.puntaje_maximo = ctrl.aspecto.puntaje_maximo + parseFloat(parametroRetorno.puntaje_maximo);
       }
     });
   };
@@ -78,6 +79,7 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
       icon: "warning",
       buttons: {
         Cancel: {
+          text: "Cancelar",
           className: "btn btn-lg btn-danger"
         },
         Confirm: {
@@ -86,8 +88,8 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
         }
       },
       closeModal: false
-    }).then(function (eliminarCriterioConfirmado) {
-      if (eliminarCriterioConfirmado == 'Confirm') {
+    }).then(function (respuesta) {
+      if (respuesta === 'Confirm') {
         if($stateParams.estado === 'editar'){
           var data = {
             "criterioID": ctrl.criteriosLista[indiceCriterio].id
@@ -97,6 +99,11 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
             $scope.$apply();
             swal('Éxito', 'El aspecto ha sido eliminado', 'success');
           });
+        } else {
+          // console.log(ctrl.criteriosLista);
+          ctrl.criteriosLista.splice(indiceCriterio,1);
+          $scope.$apply();
+          swal('Éxito', 'El criterio se ha sido eliminado', 'success');
         }
       }
     });
@@ -190,7 +197,8 @@ function($scope, $state, $stateParams, nuevoAspectoRubricaServicio, nuevaRubrica
     ctrl.aspecto = {
       titulo: "",
       descripcion: "",
-      criterios: []
+      criterios: [],
+      puntaje_maximo: 0
     };
     ctrl.rubricaId = $stateParams.id;
     ctrl.criteriosLista = [];
