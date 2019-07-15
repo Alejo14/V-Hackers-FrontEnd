@@ -338,22 +338,22 @@ function ($urlRouterProvider,stateHelperProvider) {
                 },
                 {
                   name: 'visualizacion',
-                  url: '/visualizacion/:avanceEntregableId',
+                  url: '/visualizacion/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable/:avanceEntregableId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/visualizacionEntregable.html'
                 },
                 {
                   name: 'visualizacionEscala',
-                  url: '/visualizacionEscala/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/visualizacionEscala/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Escala/visualizacionEscala.html'
                 },
                 {
                   name: 'visualizacionAspecto',
-                  url: '/visualizacionAspecto/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/visualizacionAspecto/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Aspecto/visualizacionAspectos.html'
                 },
                 {
                   name: 'visualizacionListaCotejo',
-                  url: '/visualizacionListaCotejo/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
+                  url: '/visualizacionListaCotejo/:nombre/:id/:fechaEntrega/:fechaHabilitacion/:descripcion/:ponderacion/:cursoCicloId/:proyectoId/:nombreCurso/:codigoCurso/:horario/:idRolUsuario/:estadoEntregable/:avanceEntregableId/:calificacionHerramientaEvaluacionId/:herramientaEvaluacionId',
                   templateUrl: 'SPA/Prototipo-Prometeo/Alumno/Visualizacion-Retroalimentacion/Visualizacion-Lista/visualizacionListaCotejo.html'
                 }
               ]

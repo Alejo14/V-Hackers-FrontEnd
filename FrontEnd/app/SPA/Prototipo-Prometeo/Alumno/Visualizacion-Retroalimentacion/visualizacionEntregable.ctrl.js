@@ -6,6 +6,7 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
   var ctrl = this;
 
   ctrl.evaluacion = {};
+  ctrl.detalleE = {};
   /*===============================================
   * Servicio para traer Herramienta de Evaluación
   *================================================
@@ -49,7 +50,9 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
       }
     }).then(function (respuesta) {
       if (respuesta == "Confirm") {
-        $state.go('inicioAlumnos');
+        $state.go('detalle-entregable' , {nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+        fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+        nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable}); //Temporal, deberia usar un servicio para traerme esa info
       }
     });
   };
@@ -61,13 +64,19 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
   ctrl.visualizarHerramienta = function(indice){
     switch (ctrl.herramientaEvaluacionLista[indice].tipoHerramientaEvaluacion) {
       case 'Rubrica':
-        $state.go('visualizacionAspecto', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('visualizacionAspecto', {nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+        fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+        nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       case 'Lista de Cotejo':
-        $state.go('visualizacionListaCotejo', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('visualizacionListaCotejo', {nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+        fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+        nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       case 'Escala':
-        $state.go('visualizacionEscala', {avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
+        $state.go('visualizacionEscala', {nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+        fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+        nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: ctrl.avanceEntregableId, calificacionHerramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].calificacionHerramientaEvaluacionId, herramientaEvaluacionId: ctrl.evaluacion.herramientas[indice].herramientaEvaluacionId});
         break;
       default:
         swall('Opss', 'Hubo un error en la creación de la herramienta', 'error');
@@ -77,6 +86,14 @@ function visualizacionCtrl ($rootScope,$scope,$state,$stateParams,NgTableParams,
   }
 
   ctrl.init = function (){
+    ctrl.titulo = $stateParams.nombre;
+    ctrl.detalleE.nombre=$stateParams.nombre;
+    ctrl.detalleE.id=$stateParams.id;
+    ctrl.detalleE.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
+    ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+    ctrl.detalleE.descripcion=$stateParams.descripcion;
+    ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
+    ctrl.idCursoCiclo = $stateParams.cursoCicloId;
     ctrl.habilitarBotones = false;
     ctrl.obtenerEvaluacion();
   };

@@ -256,7 +256,9 @@ ctrl.elminarURL= function (archivo){
 }
 
 ctrl.verHerramientas= function () {
-  $state.go('visualizacion' , {avanceEntregableId: ctrl.idAvanceEntregable.id});
+  $state.go('visualizacion' , {nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+  fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+  nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: ctrl.idAvanceEntregable.id});
 }
 
 

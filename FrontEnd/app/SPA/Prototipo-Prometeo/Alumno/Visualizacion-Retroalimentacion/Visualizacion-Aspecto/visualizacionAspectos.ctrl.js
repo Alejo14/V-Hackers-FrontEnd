@@ -4,6 +4,7 @@ visualizacionAspectoCtrl.$inject = ['$scope','$state', '$stateParams','visualiza
 
 function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspectoServicio){
   var ctrl = this;
+  ctrl.detalleE = {};
 
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
@@ -50,12 +51,22 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
       closeModal: false
     }).then(function(confirmarRegreso){
       if(confirmarRegreso == "Confirm"){
-        $state.go('visualizacion',{avanceEntregableId: $stateParams.avanceEntregableId});
+        $state.go('visualizacion',{nombre: ctrl.detalleE.nombre, id: ctrl.detalleE.id ,fechaEntrega: ctrl.detalleE.fechaEntrega,
+        fechaHabilitacion: ctrl.detalleE.fechaHabilitacion, descripcion: ctrl.detalleE.descripcion, ponderacion: $stateParams.ponderacion, cursoCicloId: ctrl.idCursoCiclo, proyectoId: $stateParams.proyectoId,
+        nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
   }
 
   ctrl.init = function(){
+    ctrl.titulo = $stateParams.nombre;
+    ctrl.detalleE.nombre=$stateParams.nombre;
+    ctrl.detalleE.id=$stateParams.id;
+    ctrl.detalleE.fechaEntrega=new Date(Number($stateParams.fechaEntrega));
+    ctrl.detalleE.fechaHabilitacion=new Date(Number($stateParams.fechaHabilitacion));
+    ctrl.detalleE.descripcion=$stateParams.descripcion;
+    ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
+    ctrl.idCursoCiclo = $stateParams.cursoCicloId;
     ctrl.obtenerEvaluacionAspecto();
   }
 
