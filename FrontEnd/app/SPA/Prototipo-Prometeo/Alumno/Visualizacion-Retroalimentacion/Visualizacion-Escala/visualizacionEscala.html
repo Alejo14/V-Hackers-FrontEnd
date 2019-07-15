@@ -11,7 +11,8 @@
             <div class="col-md-3 float-right">
               <label class="col-sm-4 p-t-10">Puntaje</label>
               <div class="form-group fg-line">
-                <input type="number" min="0" step="any" class="col-sm-8 form-control input-letra-prometeo" ng-model="ctrl.puntajeAsignado" ng-disabled="true" placeholder="No hay puntaje"><br><br>
+                <input ng-if="!ctrl.noMostrarCalificacion" type="number" min="0" step="any" class="col-sm-8 form-control input-letra-prometeo" ng-model="ctrl.puntajeAsignado" ng-disabled="true" placeholder="No hay puntaje">
+                <input ng-if="ctrl.noMostrarCalificacion" type="number" min="0" step="any" class="col-sm-8 form-control input-letra-prometeo" ng-disabled="true" placeholder="0"><br><br>
               </div>
             </div>
           </div>
@@ -32,8 +33,13 @@
                         <textarea class="form-control p-t-10 input-letra-prometeo" placeholder="No hay observaciones del criterio" ng-model="criterio.indicaciones" disabled>
                         </textarea>
                         <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala" ng-disabled="true">
-                          <label class="control-label input-letra-prometeo">
+                          <label ng-if="!ctrl.noMostrarCalificacion" class="control-label input-letra-prometeo">
                               <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-disabled="true" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
+                              <i class="input-helper"></i>
+                              {{criterio.nivelesCriterios[$index].descripcion}} ({{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
+                          </label>
+                          <label ng-if="ctrl.noMostrarCalificacion" class="control-label input-letra-prometeo">
+                              <input type="radio" name="{{criterio.id}}" ng-disabled="true">
                               <i class="input-helper"></i>
                               {{criterio.nivelesCriterios[$index].descripcion}} ({{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
                           </label>
