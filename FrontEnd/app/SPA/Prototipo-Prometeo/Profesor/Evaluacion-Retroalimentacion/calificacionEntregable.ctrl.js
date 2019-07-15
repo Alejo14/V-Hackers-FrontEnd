@@ -43,7 +43,11 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
       }
     })
     var pList = puntajeListas/listas;
-    ctrl.evaluacion.calificacionEvaluacion.puntaje = (puntaje/herramientas)*pList;
+    if(pList!=0){
+      ctrl.evaluacion.calificacionEvaluacion.puntaje = (puntaje/herramientas)*pList;
+    }else{
+      ctrl.evaluacion.calificacionEvaluacion.puntaje = (puntaje/herramientas);
+    }
   }
 
   /*===============================================
