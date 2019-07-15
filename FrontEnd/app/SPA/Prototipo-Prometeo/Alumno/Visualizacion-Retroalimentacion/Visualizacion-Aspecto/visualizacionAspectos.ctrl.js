@@ -11,12 +11,6 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
   ctrl.evaluacionAspecto = {};
   ctrl.evaluacionAspectoEnviar = {};
   ctrl.nivelesRubrica = {};
-  $scope.$on('NO-MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = true;
-  });
-  $scope.$on('MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = false;
-  })
   ctrl.obtenerEvaluacionAspecto = function (){
     visualizacionAspectoServicio.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
       ctrl.nivelesRubrica = nivelesRubrica;
@@ -67,6 +61,7 @@ function visualizacionAspectoCtrl ($scope,$state,$stateParams,visualizacionAspec
     ctrl.detalleE.descripcion=$stateParams.descripcion;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idCursoCiclo = $stateParams.cursoCicloId;
+    ctrl.noMostrarCalificacion = $stateParams.noMostrarCalificacion === "true";
     ctrl.obtenerEvaluacionAspecto();
   }
 
