@@ -11,16 +11,11 @@ function visualizacionEscalaCtrl ($scope,$state,$stateParams,visualizacionEscala
   ctrl.evaluacionAspecto = {};
   ctrl.evaluacionAspectoEnviar = {};
   ctrl.nivelesRubrica = {};
-  $scope.$on('NO-MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = true;
-  });
-  $scope.$on('MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = false;
-  })
-
   ctrl.obtenerEvaluacionCriterios = function (){//SE DEBE QUEDAR
+    ctrl.mostrarBox = false;
     visualizacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){
       ctrl.nivelesEscala = nivelesEscala;
+      if(ctrl.nivelesEscala.length === 1) ctrl.mostrarBox = true;
       console.log(ctrl.nivelesEscala);
     });
     console.log("Herramienta Evaluacion ID",ctrl.herramientaEvaluacionId);
@@ -87,6 +82,7 @@ function visualizacionEscalaCtrl ($scope,$state,$stateParams,visualizacionEscala
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idCursoCiclo = $stateParams.cursoCicloId;
     ctrl.habilitarBotones = false;
+    ctrl.noMostrarCalificacion = $stateParams.noMostrarCalificacion === "true";
     ctrl.obtenerEvaluacionCriterios();
   }
 

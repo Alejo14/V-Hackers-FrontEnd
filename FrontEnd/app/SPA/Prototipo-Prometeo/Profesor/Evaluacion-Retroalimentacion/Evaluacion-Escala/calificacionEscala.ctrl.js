@@ -12,21 +12,6 @@ function calificacionEscalaCtrl ($scope,$state,$stateParams,calificacionEscalaSe
   ctrl.evaluacionAspectoEnviar = {};
   ctrl.nivelesRubrica = {};
 
-  ctrl.obtenerEvaluacionAspecto = function (){//SE DEBE BORRAR Y REEMPLAZAR
-    calificacionEscalaService.obtenerNivelesRubrica(ctrl.herramientaEvaluacionId).then(function(nivelesRubrica){
-      ctrl.nivelesRubrica = nivelesRubrica;
-      console.log(ctrl.nivelesRubrica);
-    });
-    calificacionEscalaService.obtenerEvaluacionAspecto(ctrl.herramientaEvaluacionId, ctrl.calificacionHerramientaEvaluacionId).then(function(evaluacionAspecto){
-      ctrl.evaluacionAspecto = evaluacionAspecto;
-      angular.forEach(ctrl.evaluacionAspecto, function(aspecto,indice){
-        aspecto.accordionOpen = false;
-        aspecto.activarPuntajeManual = false;
-      });
-      console.log(ctrl.evaluacionAspecto);
-    });
-  }
-
   ctrl.obtenerEvaluacionCriterios = function (){//SE DEBE QUEDAR
     ctrl.mostrarBox = false;
     calificacionEscalaService.obtenerNivelesEscala(ctrl.herramientaEvaluacionId).then(function(nivelesEscala){

@@ -9,12 +9,6 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
   ctrl.herramientaEvaluacionId = $stateParams.herramientaEvaluacionId;
   ctrl.calificacionHerramientaEvaluacionId = $stateParams.calificacionHerramientaEvaluacionId;
   ctrl.listaCriterios = {};
-  $scope.$on('NO-MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = true;
-  });
-  $scope.$on('MOSTRAR-CALIFICACION', function () {
-    ctrl.noMostrarCalificacion = false;
-  })
   ctrl.obtenerCalificacionListaCotejo = function (){
     visualizacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
       ctrl.listaCriterios = listaCriteriosData;
@@ -54,6 +48,7 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
     ctrl.detalleE.descripcion=$stateParams.descripcion;
     ctrl.detalleE.idRolUsuario=$stateParams.idRolUsuario;
     ctrl.idCursoCiclo = $stateParams.cursoCicloId;
+    ctrl.noMostrarCalificacion = $stateParams.noMostrarCalificacion === "true";
     console.log(ctrl.herramientaEvaluacionId);
     console.log(ctrl.calificacionHerramientaEvaluacionId);
     ctrl.obtenerCalificacionListaCotejo();

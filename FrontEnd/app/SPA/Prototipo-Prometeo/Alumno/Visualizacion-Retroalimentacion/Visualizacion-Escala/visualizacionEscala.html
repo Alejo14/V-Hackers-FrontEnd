@@ -32,7 +32,7 @@
                       <div class="form-group fg-line">
                         <textarea class="form-control p-t-10 input-letra-prometeo" placeholder="No hay observaciones del criterio" ng-model="criterio.indicaciones" disabled>
                         </textarea>
-                        <div class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala" ng-disabled="true">
+                        <div ng-if="!ctrl.mostrarBox" class="radio m-b-15" ng-repeat="nivel in ctrl.nivelesEscala" ng-disabled="true">
                           <label ng-if="!ctrl.noMostrarCalificacion" class="control-label input-letra-prometeo">
                               <input type="radio" name="{{criterio.id}}" ng-model="criterio.puntajeAsignado" ng-disabled="true" ng-value="criterio.nivelesCriterios[$index].puntajeSeleccion">
                               <i class="input-helper"></i>
@@ -44,7 +44,16 @@
                               {{criterio.nivelesCriterios[$index].descripcion}} ({{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
                           </label>
                         </div>
-                      </div>
+                        <div ng-if="ctrl.mostrarBox" class="m-b-15" ng-repeat="nivel in ctrl.nivelesEscala">
+                          <label ng-if="!ctrl.noMostrarCalificacion" class="control-label input-letra-prometeo">
+                              <input type="number" max="criterio.nivelesCriterios[$index].puntajeSeleccion" ng-model="criterio.puntajeAsignado" disabled>
+                              {{criterio.nivelesCriterios[$index].descripcion}} (Máximo: {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
+                          </label>
+                          <label ng-if="ctrl.noMostrarCalificacion" class="control-label input-letra-prometeo">
+                              <input type="number" min="0" disabled>
+                              {{criterio.nivelesCriterios[$index].descripcion}} (Máximo: {{criterio.nivelesCriterios[$index].puntajeSeleccion}} ptos )
+                          </label>
+                        </div>
                     </div>
                   </div>
                 </div>
