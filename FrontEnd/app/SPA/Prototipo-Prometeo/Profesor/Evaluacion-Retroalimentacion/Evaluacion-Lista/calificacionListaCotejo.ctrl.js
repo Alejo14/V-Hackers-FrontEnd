@@ -13,6 +13,7 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
   ctrl.obtenerCalificacionListaCotejo = function (){
     calificacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
       ctrl.listaCriterios = listaCriteriosData;
+      ctrl.calcularPuntajeCriterio();
       console.log(ctrl.listaCriterios);
     });
   }
@@ -49,6 +50,12 @@ function calificacionListaCtrl ($scope,$state,$stateParams,calificacionListaServ
       if(ctrl.listaCriterios[i].calificacion==1){
         ctrl.puntajeAsignado = ctrl.puntajeAsignado + 1;
       }
+    }
+    if(longitud!=0) {
+      punt = ctrl.puntajeAsignado/longitud;
+      ctrl.puntajeAsignado = 1 * punt.toFixed(2);
+    }else{
+      ctrl.puntajeAsignado = 0;
     }
     console.log(ctrl.puntajeAsignado);
   }

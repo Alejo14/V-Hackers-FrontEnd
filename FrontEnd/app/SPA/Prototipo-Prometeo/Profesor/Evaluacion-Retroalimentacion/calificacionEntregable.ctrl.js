@@ -31,11 +31,19 @@ function calificacionCtrl ($scope,$state,$stateParams,NgTableParams,calificacion
   ctrl.calcularPuntaje = function(){
     var puntaje = 0;
     var herramientas = 0;
+    var listas = 0;
+    var puntajeListas = 0;
     angular.forEach(ctrl.evaluacion.herramientas,function(herramienta,indice) {
-      puntaje += herramienta.puntaje;
-      herramientas++;
+      if(herramienta.tipoHerramientaEvaluacion=="Lista de Cotejo"){
+        puntajeListas += herramienta.puntaje;
+        listas ++;
+      }else{
+        puntaje += herramienta.puntaje;
+        herramientas++;
+      }
     })
-    ctrl.evaluacion.calificacionEvaluacion.puntaje = puntaje/herramientas;
+    var pList = puntajeListas/listas;
+    ctrl.evaluacion.calificacionEvaluacion.puntaje = (puntaje/herramientas)*pList;
   }
 
   /*===============================================

@@ -13,6 +13,7 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
     visualizacionListaService.obtenerCalificacionListaCotejo(ctrl.calificacionHerramientaEvaluacionId, ctrl.herramientaEvaluacionId).then(function(listaCriteriosData){
       ctrl.listaCriterios = listaCriteriosData;
       console.log(ctrl.listaCriterios);
+      ctrl.calcularPuntajeCriterio();
     });
   }
 
@@ -37,6 +38,25 @@ function visualizacionListaCtrl ($scope,$state,$stateParams,visualizacionListaSe
         nombreCurso: $stateParams.nombreCurso,codigoCurso:$stateParams.codigoCurso ,horario: $stateParams.horario,idRolUsuario: ctrl.detalleE.idRolUsuario, estadoEntregable: $stateParams.estadoEntregable, avanceEntregableId: $stateParams.avanceEntregableId});
       }
     });
+  }
+
+  ctrl.calcularPuntajeCriterio = function(){
+    longitud=ctrl.listaCriterios.length;
+    ctrl.puntajeAsignado = 0;
+    console.log(ctrl.listaCriterios);
+    for(let i = 0; i< longitud; i++){
+      console.log(ctrl.listaCriterios[i].calificacion);
+      if(ctrl.listaCriterios[i].calificacion==1){
+        ctrl.puntajeAsignado = ctrl.puntajeAsignado + 1;
+      }
+    }
+    if(longitud!=0) {
+      punt = ctrl.puntajeAsignado/longitud;
+      ctrl.puntajeAsignado = 1 * punt.toFixed(2);
+    }else{
+      ctrl.puntajeAsignado = 0;
+    }
+    console.log(ctrl.puntajeAsignado);
   }
 
   ctrl.init = function(){
